@@ -1,0 +1,14 @@
+%h2 All Players
+
+%table
+  %tr
+    %th
+      Name
+    %th
+      Rating
+  - @players.each do |player|
+    %tr
+      %td
+        = player.name
+      %td
+        = player.rating

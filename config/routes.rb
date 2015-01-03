@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :players
+  resources :games
+
 
   get 'welcome/index'
 

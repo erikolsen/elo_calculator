@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = Player.find_by(params[:id])
+    @player = Player.find(params[:id])
   end
 
   def new
@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
 
     @player.save
-    redirect_to @player
+    redirect_to :root 
   end
 
   private

@@ -1,15 +1,1 @@
-%h1 New Player
-
-= form_for :player, url: players_path do |f|
-  %p
-    = f.label :name
-    %br
-    = f.text_field :name, autofocus: true
-
-  %p
-    = f.number_field :rating, hidden: true, value: 1000
-    
-
-  %p
-    = f.submit
-
+= render 'partials/new_player_form'
