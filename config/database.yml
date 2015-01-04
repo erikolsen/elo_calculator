@@ -1,6 +1,22 @@
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
+  database: ping_pong_development
+  host: localhost
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ping_pong_test
+  host: localhost
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ping_pong_production
+  host: localhost
   pool: 5
 
 development:
