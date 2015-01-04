@@ -1,14 +1,24 @@
-%h2 Add a New Player
-= form_for :player, url: players_path do |f|
-  %p
-    = f.label :name
-    %br
-    = f.text_field :name
+%div{'data-role' => 'header'}
+  %h2 Add a New Player
+%div{'data-role' => 'content'}
+  = form_for :player, url: players_path do |f|
+    %p
+      = f.label :name
+      %br
+      = f.text_field :name
 
-  %p
-    = f.number_field :rating, hidden: true, value: 1000
-    
+    %p.hidden
+      = f.number_field :rating, value: 1000
+      
 
-  %p
-    = f.submit
-
+    %p
+      = f.submit
+%div{"data-role" => "footer", "data-position"=>"fixed"}
+  %div{"data-role"=> "navbar"}
+    %ul
+      %li
+        = link_to "Home", :root
+      %li
+        = link_to "Back"
+:javascript
+  $('.hidden').hide();

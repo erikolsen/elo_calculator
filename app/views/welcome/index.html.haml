@@ -1,5 +1,7 @@
-%h1 Welcome to Ace Ping Pong 
-
-= render 'partials/all_players'
-= render 'games/new_form'
-= render 'partials/new_player_form'
+%div{'data-role' => 'header'}
+  %h1 Welcome to Ace Ping Pong 
+%div{'data-role' => 'content'}
+  = render 'partials/all_players'
+%div{"data-role" => "footer", "data-position"=>"fixed"}
+  = link_to "Add Player", new_player_path, "data-icon" => "plus"
+  = link_to "Update Rating", new_game_path, "data-icon" => "plus"

@@ -2,3 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+
+development:
+  <<: *default
+  database: ace_ping_pong_development

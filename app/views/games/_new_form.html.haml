@@ -1,15 +1,21 @@
-%h2 Enter Results
-= form_for :game, url: games_path do |f|
-  %p
-    = f.label :humble_victor
-    %br
-    = f.text_field :winner_name
+%div{'data-role' => 'header'}
+  %h2 Enter Results
+%div{'data-role' => 'content'}
+  = form_for :game, url: games_path do |f|
+    %p
+      = f.label :humble_victor
+      %br
+      = f.text_field :winner_name
 
-  %p
-    = f.label :graceful_defeated
-    %br
-    = f.text_field :loser_name 
+    %p
+      = f.label :graceful_defeated
+      %br
+      = f.text_field :loser_name 
 
-  %p
-    = f.submit 'Update Rating'
-
+    %p
+      = f.submit 'Update Rating'
+%div{"data-role" => "footer", "data-position"=>"fixed"}
+  %div{"data-role"=> "navbar"}
+    %ul
+      %li
+        = link_to "Home", :root, "data-icon" => "home"
