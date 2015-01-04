@@ -3,5 +3,9 @@
 %div{'data-role' => 'content'}
   = render 'partials/all_players'
 %div{"data-role" => "footer", "data-position"=>"fixed"}
-  = link_to "Add Player", new_player_path, "data-icon" => "plus"
-  = link_to "Update Rating", new_game_path, "data-icon" => "plus"
+  %div{"data-role" => "navbar"}
+    %ul
+      %li
+        = link_to "Add Player", new_player_path, "data-icon" => "plus"
+      %li
+        = link_to "Update Rating", new_game_path, "data-icon" => "star"

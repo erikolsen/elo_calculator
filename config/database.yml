@@ -18,7 +18,3 @@ production:
   database: ping_pong_production
   host: localhost
   pool: 5
-
-development:
-  <<: *default
-  database: ace_ping_pong_development
