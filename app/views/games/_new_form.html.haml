@@ -5,17 +5,20 @@
     %p
       = f.label :humble_victor
       %br
-      = f.text_field :winner_name
+      = f.collection_select :winner, @players, :id, :name 
 
     %p
       = f.label :graceful_defeated
       %br
-      = f.text_field :loser_name 
+      = f.collection_select :loser, @players, :id, :name 
 
     %p
       = f.submit 'Update Ratings'
+
 %div{"data-role" => "footer", "data-position"=>"fixed"}
   %div{"data-role"=> "navbar"}
     %ul
       %li
         = link_to "Home", :root, "data-icon" => "home"
+      %li
+        = link_to "Add Player", new_player_path, "data-icon" => "plus"

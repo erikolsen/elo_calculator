@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   def new
+    @players = Player.all.sort_by(&:name)
   end
 
   def create
