@@ -6,14 +6,18 @@ class GamesController < ApplicationController
   def create
     winner = Player.find(game_params[:winner])
     loser = Player.find(game_params[:loser])
-    update_ratings(winner, loser)
+    if winner == loser
+      redirect_to new_game_path
+    else
+      update_ratings(winner, loser)
 
-    @game = Game.new(winner_name: winner.name,
-                     winner_rating: winner.rating,
-                     loser_name: loser.name,
-                     loser_rating: loser.rating)
-    @game.save 
-    redirect_to :root
+      @game = Game.new(winner_name: winner.name,
+                       winner_rating: winner.rating,
+                       loser_name: loser.name,
+                       loser_rating: loser.rating)
+      @game.save 
+      redirect_to :root
+    end
   end
   
   private

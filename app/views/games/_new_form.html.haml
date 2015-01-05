@@ -5,12 +5,12 @@
     %p
       = f.label :humble_victor
       %br
-      = f.collection_select :winner, @players, :id, :name 
+      = f.collection_select :winner, @players, :id, :name
 
     %p
       = f.label :graceful_defeated
       %br
-      = f.collection_select :loser, @players, :id, :name 
+      = f.collection_select :loser, @players, :id, :name
 
     %p
       = f.submit 'Update Ratings'
