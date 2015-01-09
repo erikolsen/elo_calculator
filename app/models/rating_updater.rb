@@ -24,12 +24,12 @@
       (the_exponenet.to_f + 1.00)
     end
 
-    def loser_percent
+    def winner_percent
       (1.00 / the_denominator.to_f)
     end
 
-    def winner_percent
-      1.00 - loser_percent.to_f
+    def loser_percent
+      1.00 - winner_percent.to_f
     end
 
     def change_in_rating

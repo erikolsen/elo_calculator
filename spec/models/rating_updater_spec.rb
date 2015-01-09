@@ -10,13 +10,13 @@ RSpec.describe RatingUpdater do
     expect(rating_updater.change_in_rating).to eq 25
   end
 
-  context "it calculates correctly when the winner has a lower rating" do 
+  context "it calculates correctly when the winner has a lower unbalanced rating" do 
     let(:winner_rating) { 900 }
     let(:loser_rating) { 1025 }
     let(:rating_updater) { RatingUpdater.new(winner_rating, 
                                              loser_rating) }
     it "does the thing" do 
-      expect(rating_updater.change_in_rating).to eq 17
+      expect(rating_updater.change_in_rating).to eq 34
     end
   end
   
@@ -31,12 +31,12 @@ RSpec.describe RatingUpdater do
   end
 
   context "it calculates correctly when the winner has a lower rating" do 
-    let(:loser_rating) { 1025 }
     let(:winer_rating) { 975 }
+    let(:loser_rating) { 1025 }
     let(:rating_updater) { RatingUpdater.new(winner_rating, 
                                              loser_rating) }
     it "does the thing" do 
-      expect(rating_updater.change_in_rating).to eq 22
+      expect(rating_updater.change_in_rating).to eq 27
     end
   end
 
