@@ -22,9 +22,10 @@ class GamesController < ApplicationController
   
   private
     def update_ratings(winner, loser)
-      new_rating = RatingUpdater.new(winner, loser)
+      new_rating = RatingUpdater.new(winner.rating, 
+                                     loser.rating)
       winner.rating += new_rating.change_in_rating
-      loser.rating -= new_rating.change_in_rating+1
+      loser.rating -= new_rating.change_in_rating
       winner.save
       loser.save
     end

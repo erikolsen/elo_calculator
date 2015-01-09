@@ -20,7 +20,7 @@ RSpec.describe RatingUpdater do
     end
   end
   
-  context "it calculates correctly when the winner has a lower rating" do 
+  context "it calculates correctly when the winner has a higher rating" do 
     let(:winner_rating) { 1025 }
     let(:loser_rating) { 975 }
     let(:rating_updater) { RatingUpdater.new(winner_rating, 
@@ -30,7 +30,7 @@ RSpec.describe RatingUpdater do
     end
   end
 
-  context "it calculates correctly when the winner has a lower higher" do 
+  context "it calculates correctly when the winner has a lower rating" do 
     let(:loser_rating) { 1025 }
     let(:winer_rating) { 975 }
     let(:rating_updater) { RatingUpdater.new(winner_rating, 

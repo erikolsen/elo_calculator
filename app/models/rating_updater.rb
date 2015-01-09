@@ -1,3 +1,4 @@
+#  expected_score_for_a = 1/(1 + pow(10, (score_for_b - score_for_a)/400))
   class RatingUpdater
     attr_reader :winner_rating, :loser_rating
     K_FACTOR = 50.00
@@ -8,7 +9,7 @@
     end
 
     def difference_in_ratings
-      (winner_rating- loser_rating)
+      (loser_rating- winner_rating)
     end
 
     def the_pow
