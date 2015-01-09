@@ -40,6 +40,27 @@ RSpec.describe RatingUpdater do
     end
   end
 
+  context "it calculates correctly when the winner has a lower unbalenced close rating" do 
+    let(:winer_rating) { 997 }
+    let(:loser_rating) { 1003 }
+    let(:rating_updater) { RatingUpdater.new(winner_rating, 
+                                             loser_rating) }
+    it "does the thing" do 
+      expect(rating_updater.change_in_rating).to eq 26 
+    end
+  end
+
+  context "it calculates correctly when the winner has a lower unbalenced close rating" do 
+    let(:winer_rating) { 1003 }
+    let(:loser_rating) { 997 }
+    let(:rating_updater) { RatingUpdater.new(winner_rating, 
+                                             loser_rating) }
+    it "does the thing" do 
+      expect(rating_updater.change_in_rating).to eq 25
+    end
+  end
+
+
 
 
 end
