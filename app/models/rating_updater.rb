@@ -1,14 +1,14 @@
   class RatingUpdater
-    attr_reader :winner, :loser
+    attr_reader :winner_rating, :loser_rating
     K_FACTOR = 50.00
 
-    def initialize(winner, loser)
-      @winner = winner
-      @loser = loser
+    def initialize(winner_rating, loser_rating)
+      @winner_rating = winner_rating
+      @loser_rating = loser_rating
     end
 
     def difference_in_ratings
-      (winner.rating - loser.rating)
+      (winner_rating- loser_rating)
     end
 
     def the_pow
