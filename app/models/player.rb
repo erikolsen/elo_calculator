@@ -1,4 +1,7 @@
 class Player < ActiveRecord::Base
+  has_many :won_games, foreign_key: 'winner_id', class_name: 'Game'
+  has_many :lost_games, foreign_key: 'loser_id', class_name: 'Game'
+
   def rating
     self[:rating].to_i
   end
@@ -8,11 +11,11 @@ class Player < ActiveRecord::Base
   end
 
   def games_won
-    Game.where(:winner_name => self.name).count
+    won_games.count
   end
 
   def games_lost
-    Game.where(:loser_name => self.name).count
+    lost_games.count
   end
 
   def games_played
