@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../../app/models/rating_updater'
 
 RSpec.describe RatingUpdater do 
   let(:rating_updater) { RatingUpdater.new(winner_rating, 

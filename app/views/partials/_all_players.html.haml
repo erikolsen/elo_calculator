@@ -10,6 +10,8 @@
           Name
         %th
           Rating
+        %th
+          Win-Lost
     - @players.each_with_index do |player, index|
       %tr{"align"=>"center"}
         %td
@@ -18,3 +20,5 @@
           = player.name 
         %td
           = player.rating
+        %td
+          = "#{player.games_won}/#{player.games_lost}"
