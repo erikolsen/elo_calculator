@@ -9,5 +9,10 @@
     = csrf_meta_tags
   %body
     %div{"data-role" => "page", "data-url" => request.path}
+      - if flash[:notice]
+        .flash-notice= flash[:notice]
+      - if flash[:alert]
+        .flash-alert= flash[:alert]
+
       %br
         = yield

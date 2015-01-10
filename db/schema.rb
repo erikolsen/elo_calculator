@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110165316) do
+ActiveRecord::Schema.define(version: 20150110190219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: true do |t|
-    t.string   "winner_rating"
-    t.string   "loser_rating"
+    t.integer  "winner_rating"
+    t.integer  "loser_rating"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winner_id"
@@ -30,9 +30,12 @@ ActiveRecord::Schema.define(version: 20150110165316) do
 
   create_table "players", force: true do |t|
     t.string   "name"
-    t.integer  "rating"
+    t.integer  "rating",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "players", ["name"], name: "index_players_on_name", using: :btree
+  add_index "players", ["rating"], name: "index_players_on_rating", using: :btree
 
 end

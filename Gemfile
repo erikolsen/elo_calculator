@@ -44,10 +44,14 @@ gem 'rails_12factor', group: :production
 # Use byebug
  gem 'pry-byebug', group: [:development, :test]
 
-group :test, :development do 
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
+group :test, :development do
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
   gem 'site_prism'
+end
+
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
