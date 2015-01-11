@@ -55,3 +55,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
 end
+
+ruby '2.1.2'
