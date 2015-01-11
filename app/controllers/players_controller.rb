@@ -14,11 +14,12 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
 
     @player.save
-    redirect_to :root 
+    redirect_to :root
   end
 
   private
-    def player_params
-      params.require(:player).permit(:name, :rating)
-    end
+
+  def player_params
+    params.require(:player).permit(:name, :rating)
+  end
 end

@@ -1,36 +1,22 @@
 class GamesController < ApplicationController
   def new
-    @players = Player.all.sort_by(&:name)
+    @game = GameCreator.new
   end
 
   def create
-    winner = Player.find(game_params[:winner])
-    loser = Player.find(game_params[:loser])
-    if winner == loser
-      redirect_to new_game_path
-    else
-      update_ratings(winner, loser)
+    @game = GameCreator.new(game_params[:winner_id], game_params[:loser_id])
 
-      @game = Game.new(winner_name: winner.name,
-                       winner_rating: winner.rating,
-                       loser_name: loser.name,
-                       loser_rating: loser.rating)
-      @game.save 
-      redirect_to :root
+    if @game.save
+      redirect_to :root, notice: 'Game created'
+    else
+      flash.now[:alert] = @game.errors.full_messages.join('. ')
+      render :new
     end
   end
-  
-  private
-    def update_ratings(winner, loser)
-      new_rating = RatingUpdater.new(winner.rating, 
-                                     loser.rating)
-      winner.rating += new_rating.change_in_rating
-      loser.rating -= new_rating.change_in_rating
-      winner.save
-      loser.save
-    end
 
-    def game_params
-      params.require(:game).permit(:winner, :loser)
-    end
+  private
+
+  def game_params
+    params.require(:game).permit(:winner_id, :loser_id)
+  end
 end

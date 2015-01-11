@@ -1,5 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Game, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Game do
+  it { should belong_to(:winner).class_name('Player') }
+  it { should belong_to(:loser).class_name('Player') }
+
+  it { should validate_presence_of(:winner_id) }
+  it { should validate_presence_of(:loser_id) }
+  it { should validate_presence_of(:winner_rating) }
+  it { should validate_presence_of(:loser_rating) }
 end
