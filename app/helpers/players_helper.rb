@@ -27,18 +27,13 @@ module PlayersHelper
   def twenty_minute_color
     '#D6E685'
   end
-  
-  def thirty_minute_color
-    '#EEEEEE'
-  end
 
   def color_based_on_last_game
-    return five_minute_color if last_game.created_at < 5.minutes.ago 
-    return ten_minute_color if last_game.created_at < 10.minutes.ago 
-    return fifteen_minute_color if last_game.created_at < 15.minutes.ago 
-    return twenty_minute_color if last_game.created_at < 20.minutes.ago 
-    return thirty_minute_color if last_game.created_at < 30.minutes.ago 
-    'black' # by default
+    return twenty_minute_color if last_game.created_at < 20.minutes.ago
+    return fifteen_minutes if last_game.created_at < 15.minutes.ago
+    return ten_minute_color if last_game.created_at < 10.minutes.ago
+    return five_minute_color if last_game.created_at < 5.minutes.ago
+    return 'black'
   end
 
 end
