@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe "creating a new game" do
   let!(:player1) { Player.create! name: 'player 1' }
   let!(:player2) { Player.create! name: 'player 2' }
