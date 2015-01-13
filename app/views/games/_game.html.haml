@@ -4,4 +4,4 @@
   %td.loser
     = "#{Player.find(game.loser_id).name + '(' + game.loser_rating.to_s + ')'}"
   %td.date
-    = game.created_at.strftime("%I:%mp %b %d, %Y") 
+    = game.created_at.strftime("%I:%mp %m/%d") 
