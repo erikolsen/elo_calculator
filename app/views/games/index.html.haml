@@ -1,0 +1,18 @@
+%div{'data-role' => 'header'}
+  %h1 Ace Ping Pong
+%div{'data-role' => 'content'}
+  %table.ui-responsive.ui-shadow{"data-role" => "table", "align" => "center", "width" => "100%"}
+    %thead
+      %tr
+        %th
+          Winner(rating)
+        %th
+          Loser(rating)
+        %th
+          Date
+    = render @games
+%div{"data-role" => "footer", "data-position"=>"fixed"}
+  %div{"data-role" => "navbar"}
+    %ul
+      %li
+        = link_to "Home", :root, "data-icon" => "home"
