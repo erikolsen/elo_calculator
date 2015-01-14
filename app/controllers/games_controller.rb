@@ -1,4 +1,8 @@
 class GamesController < ApplicationController
+  def index
+    @games = Game.all.reverse
+  end
+
   def new
     @game = GameCreator.new
   end

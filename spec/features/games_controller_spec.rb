@@ -40,8 +40,8 @@ describe "creating a new game" do
       expect(last_game.winner_id).to eq(player1.id)
       expect(last_game.loser_id).to eq(player2.id)
 
-      expect(last_game.winner_rating).to eq(won_rating)
-      expect(last_game.loser_rating).to eq(lost_rating)
+      expect(last_game.winner_rating).to eq(0)
+      expect(last_game.loser_rating).to eq(0)
     end
   end
 
