@@ -6,6 +6,7 @@ describe "creating a new game" do
 
   let(:won_rating) { 25 }
   let(:lost_rating) { -25 }
+  let(:starting_rating) { 0 }
 
   let(:last_game) { Game.last }
 
@@ -40,8 +41,8 @@ describe "creating a new game" do
       expect(last_game.winner_id).to eq(player1.id)
       expect(last_game.loser_id).to eq(player2.id)
 
-      expect(last_game.winner_rating).to eq(0)
-      expect(last_game.loser_rating).to eq(0)
+      expect(last_game.winner_rating).to eq(starting_rating)
+      expect(last_game.loser_rating).to eq(starting_rating)
     end
   end
 
