@@ -50,4 +50,13 @@ describe GamesController do
       end
     end
   end
+
+  describe '#show' do
+    let(:game) { double 'game' }
+
+    it 'shows the last game create' do
+      get :show, id: game
+      expect(response).to render_template(:show)
+    end
+  end
 end
