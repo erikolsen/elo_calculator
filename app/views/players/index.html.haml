@@ -17,6 +17,8 @@
   %div{"data-role" => "navbar"}
     %ul
       %li
+        = link_to "Past Game Results", games_path, "data-icon" => "arrow-l"
+      %li
         = link_to "Add Player", new_player_path, "data-icon" => "plus"
       %li
         = link_to "Add Game Result", new_game_path, "data-icon" => "star"
