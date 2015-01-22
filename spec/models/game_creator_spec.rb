@@ -30,7 +30,7 @@ describe GameCreator do
 
     context 'valid' do
       it 'creates new game' do
-        expect(subject.save).to eq(true)
+        expect(subject.save).to eq(game)
       end
 
       it 'updates winner rating' do

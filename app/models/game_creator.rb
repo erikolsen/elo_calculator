@@ -17,12 +17,12 @@ class GameCreator
 
     begin
       ActiveRecord::Base.transaction do
-        Game.create!(winner_id: winner.id, loser_id: loser.id, winner_rating: winner.rating, loser_rating: loser.rating)
+        @game = Game.create!(winner_id: winner.id, loser_id: loser.id, winner_rating: winner.rating, loser_rating: loser.rating)
         winner.add_rating!(change_in_rating)
         loser.subtract_rating!(change_in_rating)
       end
 
-      true
+      @game
     rescue ActiveRecord::RecordInvalid => record
       errors.add :base, 'Failed to save game'
       false
