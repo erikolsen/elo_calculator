@@ -8,17 +8,19 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = GameCreator.new(game_params[:winner_id], game_params[:loser_id])
+    creator = GameCreator.new(game_params[:winner_id], game_params[:loser_id])
 
-    if @game.save
-      redirect_to :root, notice: 'Game created'
+    if creator.save
+      @game = creator.game
+      redirect_to @game, notice: 'Game created'
     else
-      flash.now[:alert] = @game.errors.full_messages.join('. ')
+      flash.now[:alert] = creator.errors.full_messages.join('. ')
       render :new
     end
   end
 
   def show
+    @game = Game.find(params[:id])
   end
 
   private
