@@ -1,7 +1,7 @@
 class GameCreator
   include ActiveModel::Model
 
-  attr_accessor :winner_id, :loser_id
+  attr_accessor :winner_id, :loser_id, :game
 
   validate :not_same_player
 
@@ -17,7 +17,7 @@ class GameCreator
 
     begin
       ActiveRecord::Base.transaction do
-        Game.create!(winner_id: winner.id, loser_id: loser.id, winner_rating: winner.rating, loser_rating: loser.rating)
+        create_game
         winner.add_rating!(change_in_rating)
         loser.subtract_rating!(change_in_rating)
       end
@@ -30,6 +30,15 @@ class GameCreator
   end
 
   private
+
+  def create_game
+    @game = Game.create!(
+        winner_id: winner.id, 
+        loser_id: loser.id, 
+        winner_rating: winner.rating, 
+        loser_rating: loser.rating
+        )
+  end
 
   def not_same_player
     errors.add :base, 'Winner and loser cannot be same player' if loser_id == winner_id

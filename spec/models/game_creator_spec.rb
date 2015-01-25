@@ -42,6 +42,11 @@ describe GameCreator do
         expect(loser).to receive(:subtract_rating!).with(change_in_rating)
         subject.save
       end
+
+      it 'gives access to game' do
+        subject.save
+        expect(subject.game).to eq(game) 
+      end
     end
 
     context 'invalid player ids' do

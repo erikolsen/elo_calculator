@@ -22,15 +22,16 @@ describe GamesController do
 
     before do
       allow(GameCreator).to receive(:new).with(winner_id, loser_id) { game_creator }
+      allow(game_creator).to receive(:game){ Game.new }
     end
 
     context 'success' do
       let(:save_success?) { true }
-
+      
       it 'creates new game' do
         post :create, params
         expect(flash[:notice]).to eq('Game created')
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(assigns(:game))
       end
     end
 
@@ -52,10 +53,15 @@ describe GamesController do
   end
 
   describe '#show' do
-    let(:game) { double 'game' }
+    let!(:winner) { Player.create(name: 'Winner', rating: 1000) } 
+    let!(:loser) { Player.create(name: 'Loser', rating: 1000) } 
+    let!(:game) { Game.create(winner_id: winner.id, 
+                              loser_id: loser.id, 
+                              winner_rating: winner.rating, 
+                              loser_rating: loser.rating) }
 
     it 'shows the last game create' do
-      get :show, id: game
+      get :show, id: game.id
       expect(response).to render_template(:show)
     end
   end
