@@ -21,6 +21,12 @@ describe "creating a new game" do
       player2.reload
 
       expect(page).to have_content('Game created')
+      expect(find('h2')).to have_content('Game Summary')
+      within "[data-role='footer']" do
+        expect(find('li:nth-child(1)')).to have_content('Undo')        
+        expect(find('li:nth-child(2)')).to have_content('Home')        
+        expect(find('li:nth-child(3)')).to have_content('Add Result')        
+      end
 
       expect(last_game.winner_id).to eq(player1.id)
       expect(last_game.loser_id).to eq(player2.id)
