@@ -39,7 +39,7 @@ describe "creating a new game" do
 
 #    it 'updates the player index with new ratings' do
 #      visit root_path 
-#      
+#
 #      within "#player-#{player1.id}" do
 #        expect(find('.rank')).to have_content(1)
 #        expect(find('.name')).to have_content('player 1')
