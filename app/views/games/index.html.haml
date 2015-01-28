@@ -1,18 +1,14 @@
-%div{'data-role' => 'header'}
-  %h1 Games
-%div{'data-role' => 'content'}
-  %table.ui-responsive.ui-shadow{"data-role" => "table", "align" => "center", "width" => "100%"}
-    %thead
-      %tr
-        %th
-          Humble Victor
-        %th
-          Graceful Defeated
-        %th
-          Date
+= link_to 'Add Game', new_game_path, class: 'small button right'
+%h3 Games
+
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
     = render @games
-%div{"data-role" => "footer", "data-position"=>"fixed"}
-  %div{"data-role" => "navbar"}
-    %ul
-      %li
-        = link_to "Home", :root, "data-icon" => "home"

@@ -1,7 +1,7 @@
 %tr{id: "game-#{game.id}", align: 'center'}
   %td.winner
-    = "#{Player.find(game.winner_id).name + '(' + game.winner_rating.to_s + ')'}"
+    #{game.winner.name} (#{game.winner.rating})
   %td.loser
-    = "#{Player.find(game.loser_id).name + '(' + game.loser_rating.to_s + ')'}"
+    #{game.loser.name} (#{game.loser.rating})
   %td.date
-    = game.created_at.strftime("%I:%M %p %m/%d") 
+    = game.created_at.strftime("%I:%M %p %m/%d")

@@ -1,10 +1,9 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all.reverse
+    @games = Game.all.includes(:winner, :loser).reverse
   end
 
   def new
-    @game = GameCreator.new
   end
 
   def create
