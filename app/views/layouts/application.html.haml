@@ -3,10 +3,9 @@
   %head
     %title Ace Ping Pong
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-    %link{:href => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css", :rel => "stylesheet"}
-    %script{:src => "http://code.jquery.com/jquery-1.8.2.min.js"}
-    %script{:src => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"}
     = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'vendor/modernizr'
   %body
     %div{"data-role" => "page", "data-url" => request.path}
       - if flash[:notice]
@@ -16,3 +15,5 @@
 
       %br
         = yield
+
+    = javascript_include_tag 'application'
