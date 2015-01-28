@@ -1,14 +1,14 @@
-%h3 New Game
+%h3 Add Game
 
 = form_for :game, url: games_path do |f|
   .row
-    .small-8.columns
+    .small-12.large-6.columns
       = f.label :winner_id do
         Humble Victor
         = f.collection_select :winner_id, all_players, :id, :name
 
   .row
-    .small-8.columns
+    .small-12.large-6.columns
       = f.label :loser_id do
         Gracefully Defeated
         = f.collection_select :loser_id, all_players, :id, :name
