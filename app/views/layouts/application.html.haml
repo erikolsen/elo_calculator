@@ -7,13 +7,84 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'vendor/modernizr'
   %body
-    %div{"data-role" => "page", "data-url" => request.path}
-      - if flash[:notice]
-        .flash-notice= flash[:notice]
-      - if flash[:alert]
-        .flash-alert= flash[:alert]
+    %nav.top-bar{"data-topbar" => ""}
+      %ul.title-area
+        %li.name
+          %h1
+            = link_to "Ace Ping Pong", root_path
+        %li.toggle-topbar.menu-icon
+          %a{:href => "#"}
+            %span menu
+      %section.top-bar-section
+        %ul.right
+          %li.divider
+          %li.has-dropdown
+            %a{:href => "#"} Main Item 1
+            %ul.dropdown
+              %li
+                %label Section Name
+              %li.has-dropdown
+                %a{:href => "#"} Has Dropdown, Level 1
+                %ul.dropdown
+                  %li
+                    %a{:href => "#"} Dropdown Options
+                  %li
+                    %a{:href => "#"} Dropdown Options
+                  %li
+                    %a{:href => "#"} Level 2
+                  %li
+                    %a{:href => "#"} Subdropdown Option
+                  %li
+                    %a{:href => "#"} Subdropdown Option
+                  %li
+                    %a{:href => "#"} Subdropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li.divider
+              %li
+                %label Section Name
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li.divider
+              %li
+                %a{:href => "#"} See all →
+          %li.divider
+          %li
+            %a{:href => "#"} Main Item 2
+          %li.divider
+          %li.has-dropdown
+            %a{:href => "#"} Main Item 3
+            %ul.dropdown
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li
+                %a{:href => "#"} Dropdown Option
+              %li.divider
+              %li
+                %a{:href => "#"} See all →
 
-      %br
+    .row
+      .large-12.columns
+        - if flash[:notice]
+          .flash-notice= flash[:notice]
+        - if flash[:alert]
+          .flash-alert= flash[:alert]
+
         = yield
+
+    %footer.row
+      .large-12.columns
+        %hr
+          .row
+            .large-12.columns
+              %p by Daniel Errante / Erik Olsen
 
     = javascript_include_tag 'application'
