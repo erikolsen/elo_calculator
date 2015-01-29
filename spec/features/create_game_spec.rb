@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe "creating a new game" do
   let!(:player1) { Player.create! name: 'player 1' }
   let!(:player2) { Player.create! name: 'player 2' }
@@ -21,12 +23,7 @@ describe "creating a new game" do
       player2.reload
 
       expect(page).to have_content('Game created')
-      expect(find('h2')).to have_content('Game Summary')
-      within "[data-role='footer']" do
-        expect(find('li:nth-child(1)')).to have_content('Undo')        
-        expect(find('li:nth-child(2)')).to have_content('Home')        
-        expect(find('li:nth-child(3)')).to have_content('Add Result')        
-      end
+      expect(find('h3')).to have_content('Game Summary')
 
       expect(last_game.winner_id).to eq(player1.id)
       expect(last_game.loser_id).to eq(player2.id)
@@ -34,25 +31,6 @@ describe "creating a new game" do
       expect(last_game.winner_rating).to eq(starting_rating)
       expect(last_game.loser_rating).to eq(starting_rating)
     end
-
-#    it 'updates the player index with new ratings' do
-#      visit root_path 
-#
-#      within "#player-#{player1.id}" do
-#        expect(find('.rank')).to have_content(1)
-#        expect(find('.name')).to have_content('player 1')
-#        expect(find('.rating')).to have_content(won_rating)
-#        expect(find('.won-lost')).to have_content("1 / 0")
-#      end
-#
-#      within "#player-#{player2.id}" do
-#        expect(find('.rank')).to have_content(2)
-#        expect(find('.name')).to have_content('player 2')
-#        expect(find('.rating')).to have_content(lost_rating)
-#        expect(find('.won-lost')).to have_content("0 / 1")
-#      end
-#      
-#    end
   end
 
   context 'winner and loser are same' do

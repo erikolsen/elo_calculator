@@ -1,3 +1,5 @@
-LOG:  database system was shut down at 2015-01-09 06:48:09 CST
+bash: $: command not found
+LOG:  database system was shut down at 2015-01-28 13:10:47 CST
 LOG:  autovacuum launcher started
 LOG:  database system is ready to accept connections
+FATAL:  database "ping_pong_development" does not exist
