@@ -16,7 +16,7 @@ end
 
 When(/^I enter a name and submit$/) do
   fill_in 'Name', with: 'Test'
-  click_button 'Save Player'
+  click_button 'Add Player'
 end
 
 Then(/^I have a player with a rating of (\d+)$/) do |rating|
