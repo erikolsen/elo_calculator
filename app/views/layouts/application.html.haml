@@ -40,11 +40,11 @@
 
         = yield
 
-    %footer.row
-      .large-12.columns
-        %hr
-          .row
-            .large-12.columns
-              %p by Daniel Errante / Erik Olsen
+    %footer
+      .icon-bar.sticky_footer#footer
+        = link_to 'Past Games', games_path, class: 'item'
+        = link_to 'Add Game', new_game_path, class: 'item'
+        =# link_to 'Add Player', new_player_path, class: 'item'
+        =# link_to 'Home', root_path, class: 'item'
 
     = javascript_include_tag 'application'

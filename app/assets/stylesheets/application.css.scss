@@ -13,3 +13,15 @@
  *= require_self
  *= require elo
  */
+@import 'foundation-icons';
+#footer {
+
+position: fixed;
+
+bottom: 0;
+
+width: 100%;
+
+height: 100px; /* choose any height */
+
+}
