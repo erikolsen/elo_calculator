@@ -3,16 +3,48 @@
   %head
     %title Ace Ping Pong
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-    %link{:href => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css", :rel => "stylesheet"}
-    %script{:src => "http://code.jquery.com/jquery-1.8.2.min.js"}
-    %script{:src => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"}
     = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'vendor/modernizr'
   %body
-    %div{"data-role" => "page", "data-url" => request.path}
-      - if flash[:notice]
-        .flash-notice= flash[:notice]
-      - if flash[:alert]
-        .flash-alert= flash[:alert]
+    .contain-to-grid
+      %nav.top-bar{"data-topbar" => ""}
+        %ul.title-area
+          %li.name
+            %h1
+              = link_to "Ace Ping Pong", root_path
+          %li.toggle-topbar.menu-icon
+            %a{:href => "#"}
+              %span menu
+        %section.top-bar-section
+          %ul.right
+            %li.divider
+            %li
+              = link_to "Players", players_path
+            %li.divider
+            %li
+              = link_to "Games", games_path
+            %li.divider
 
-      %br
+    .row
+      .large-12.columns
+        - if flash[:notice]
+          .alert-box.success{'data-alert' => nil}
+            = flash[:notice]
+            %a.close{href: "#"} &times;
+
+        - if flash[:alert]
+          .alert-box.alert{'data-alert' => nil}
+            = flash[:alert]
+            %a.close{href: "#"} &times;
+
         = yield
+
+    %footer.row
+      .large-12.columns
+        %hr
+          .row
+            .large-12.columns
+              %p by Daniel Errante / Erik Olsen
+
+    = javascript_include_tag 'application'
