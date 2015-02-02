@@ -23,12 +23,13 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    destroyer = GameDestroyer.new(params[:game_id])
+    bad_game = Game.find(params[:id])
+    destroyer = GameDestroyer.new(bad_game)
 
     if destroyer.undo_game!
       redirect_to new_game_path, notice: 'Game Destroyed'
     else
-      flash.now[:alert] = creator.errors.full_messages.join('. ')
+      flash.now[:alert] = destroyer.errors.full_messages.join('. ')
       render :show
     end
   end
