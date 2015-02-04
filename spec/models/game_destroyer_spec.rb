@@ -1,6 +1,41 @@
-require 'rails_helper'
+#require 'rails_helper'
 
 RSpec.describe GameDestroyer do
+  let(:winner_id) { double 'winner id' }
+  let(:loser_id) { double 'loser id' }
+  let(:game_id) { double 'game id' }
+
+  let(:winner_rating) { double 'winner rating' }
+  let(:loser_rating) { double 'loser rating' }
+
+  let(:winner) { double 'winner', id: winner_id, rating: winner_rating }
+  let(:loser) { double 'loser', id: loser_id, rating: loser_rating }
+  let(:bad_game) { double 'game', id: game_id, winner_rating: winner_rating, loser_rating: loser_rating }
+
+  subject { described_class.new(bad_game) } 
+  
+  describe '#undo!' do
+    
+
+    context 'valid' do
+        
+      it 'rollsback the winner rating' do
+
+      end
+
+      it 'rollsback the loser rating' do
+
+      end
+
+      it 'deletes the game' do
+
+      end
+    end
+    
+  end
+end
+
+__END__
   #add two games
   #check the ratings
   #undo the second game
@@ -39,4 +74,3 @@ RSpec.describe GameDestroyer do
     expect(winner.rating).to be 1025
     expect(loser.rating).to be 975
   end
-end
