@@ -10,7 +10,7 @@
   .row
     .small-12.large-6.columns
       = f.label :loser_id do
-        Gracefully Defeated
+        Graceful Defeated
         = f.collection_select :loser_id, all_players, :id, :name
   %p
     = f.submit 'Update Ratings', class: 'button'
