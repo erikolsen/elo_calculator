@@ -6,8 +6,5 @@
   #{@game.winner.name}'s rating moves from #{@game.winner_rating} to #{@game.winner.rating}
 %p
   #{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}
-
-%p
-  = link_to 'Add Another Game', new_game_path, class: 'small button'
 %p
   = link_to 'Undo Game', @game, method: :delete, class: 'small button'
