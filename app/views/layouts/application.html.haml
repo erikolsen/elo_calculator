@@ -27,10 +27,9 @@
           .alert-box.alert{'data-alert' => nil}
             = flash[:alert]
             %a.close{href: "#"} &times;
+        .container
+          = yield
 
-        = yield
-
-    
     .icon-bar.four-up#footer
       %a.item{href: games_path, "aria-labelledby" => "#itemlabel3"}
         %i.fi-arrow-left
@@ -44,9 +43,5 @@
       %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
         %i.fi-plus
         %label#itemlabel5 New Player
-      =# link_to 'Add Player', new_player_path, class: 'item'
-      =# link_to 'Home', root_path, class: 'item'
-      =# link_to 'Past Games', games_path, class: 'item'
-      =# link_to 'Add Game', new_game_path, class: 'item'
 
     = javascript_include_tag 'application'
