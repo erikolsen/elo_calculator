@@ -16,6 +16,11 @@
           %li.name
             %h1
               = link_to "Ace Ping Pong", root_path
+        %ul.right
+          %li
+            %a.button{href: new_club_path}
+              Add Club
+
     .row
       .large-12.columns
         - if flash[:notice]
