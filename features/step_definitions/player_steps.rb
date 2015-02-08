@@ -6,8 +6,8 @@ Given(/^I visit the new player page$/) do
   visit new_player_path
 end
 
-When(/^I click Add Player$/) do
-  click_link 'Add Player'
+When(/^I click New Player$/) do
+  click_link 'New Player'
 end
 
 Then(/^I am on the new player page$/) do
@@ -16,7 +16,7 @@ end
 
 When(/^I enter a name and submit$/) do
   fill_in 'Name', with: 'Test'
-  click_button 'Save Player'
+  click_button 'Add Player'
 end
 
 Then(/^I have a player with a rating of (\d+)$/) do |rating|

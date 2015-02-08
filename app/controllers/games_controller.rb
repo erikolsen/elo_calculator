@@ -1,10 +1,9 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all.reverse
+    @games = Game.all.includes(:winner, :loser).reverse
   end
 
   def new
-    @game = GameCreator.new
   end
 
   def create
@@ -21,6 +20,18 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+  end
+
+  def destroy
+    bad_game = Game.find(params[:id])
+    destroyer = GameDestroyer.new(bad_game)
+
+    if destroyer.undo_game!
+      redirect_to new_game_path, notice: 'Game Destroyed'
+    else
+      flash.now[:alert] = destroyer.errors.full_messages.join('. ')
+      render :show
+    end
   end
 
   private

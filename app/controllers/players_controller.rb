@@ -8,13 +8,19 @@ class PlayersController < ApplicationController
   end
 
   def new
+    @player = Player.new
   end
 
   def create
     @player = Player.new(player_params)
+    @player.rating = 1000
 
-    @player.save
-    redirect_to :root
+    if @player.save
+      redirect_to root_path, notice: 'Player created'
+    else
+      flash.now[:alert] = 'Player failed to save'
+      render :new
+    end
   end
 
   private

@@ -2,15 +2,9 @@ require 'rails_helper'
 
 describe GamesController do
   describe '#new' do
-    let(:game_creator) { double 'game creator' }
-
-    before do
-      allow(GameCreator).to receive(:new) { game_creator }
-    end
-
     it 'assigns new game' do
       get :new
-      expect(assigns(:game)).to eq(game_creator)
+      expect(response).to render_template(:new)
     end
   end
 
@@ -53,15 +47,16 @@ describe GamesController do
   end
 
   describe '#show' do
-    let!(:winner) { Player.create(name: 'Winner', rating: 1000) } 
-    let!(:loser) { Player.create(name: 'Loser', rating: 1000) } 
-    let!(:game) { Game.create(winner_id: winner.id, 
-                              loser_id: loser.id, 
-                              winner_rating: winner.rating, 
-                              loser_rating: loser.rating) }
+    let(:game_id) { 'some game id' }
+    let(:game) { double 'game', id: game_id }
+
+    before do
+      allow(Game).to receive(:find).with(game_id) { game }
+    end
 
     it 'shows the last game create' do
-      get :show, id: game.id
+      get :show, id: game_id
+      expect(assigns(:game)).to eq(game)
       expect(response).to render_template(:show)
     end
   end

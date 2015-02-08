@@ -1,24 +1,12 @@
-%div{'data-role' => 'header'}
-  %h1 Ace Ping Pong
-%div{'data-role' => 'content'}
-  %table.ui-responsive.ui-shadow{"data-role" => "table", "align" => "center", "width" => "100%"}
-    %thead
-      %tr
-        %th
-          Rank
-        %th
-          Name
-        %th
-          Rating
-        %th
-          Won / Lost
-    = render @players
-%div{"data-role" => "footer", "data-position"=>"fixed"}
-  %div{"data-role" => "navbar"}
-    %ul
-      %li
-        = link_to "Past Results", games_path, "data-icon" => "arrow-l"
-      %li
-        = link_to "Add Player", new_player_path, "data-icon" => "plus"
-      %li
-        = link_to "Add Result", new_game_path, "data-icon" => "arrow-r"
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Rank
+      %th
+        Name
+      %th
+        Rating
+      %th
+        Won / Lost
+  = render @players

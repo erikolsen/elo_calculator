@@ -1,18 +1,13 @@
-%div{'data-role' => 'header'}
-  %h2 Game Summary
-%div{'data-role' => 'content'}
-  %div.ui-responsive.ui-shadow{"align" => "center"}
-    %p
-      = "#{@game.winner.name} defeated #{@game.loser.name}"
-    %p
-      = "#{@game.winner.name}'s rating moves from #{@game.winner_rating} to #{@game.winner.rating}"
-    %p
-      = "#{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}"
+%h3 Game Summary
 
-%div{'data-role' => 'footer', 'data-position'=>'fixed'}
-  %div{"data-role"=> "navbar"}
-    %ul
-      %li
-        = link_to 'Home', :root, 'data-icon' => 'home'
-      %li
-        = link_to "Add Result", new_game_path, "data-icon" => "arrow-r"
+%p
+  #{@game.winner.name} defeated #{@game.loser.name}
+%p
+  #{@game.winner.name}'s rating moves from #{@game.winner_rating} to #{@game.winner.rating}
+%p
+  #{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}
+
+%p
+  = link_to 'Add Another Game', new_game_path, class: 'small button'
+%p
+  = link_to 'Undo Game', @game, method: :delete, class: 'small button'

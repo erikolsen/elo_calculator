@@ -3,16 +3,48 @@
   %head
     %title Ace Ping Pong
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-    %link{:href => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css", :rel => "stylesheet"}
-    %script{:src => "http://code.jquery.com/jquery-1.8.2.min.js"}
-    %script{:src => "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"}
     = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'vendor/modernizr'
   %body
-    %div{"data-role" => "page", "data-url" => request.path}
-      - if flash[:notice]
-        .flash-notice= flash[:notice]
-      - if flash[:alert]
-        .flash-alert= flash[:alert]
+    %div.orange-bar
+    .contain-to-grid
+      %nav.top-bar{"data-topbar" => ""}
+        %ul.title-area
+          %li.name
+            %h1
+              = link_to "Ace Ping Pong", root_path
+    .row
+      .large-12.columns
+        - if flash[:notice]
+          .alert-box.success{'data-alert' => nil}
+            = flash[:notice]
+            %a.close{href: "#"} &times;
 
-      %br
+        - if flash[:alert]
+          .alert-box.alert{'data-alert' => nil}
+            = flash[:alert]
+            %a.close{href: "#"} &times;
+
         = yield
+
+    
+    .icon-bar.four-up#footer
+      %a.item{href: games_path, "aria-labelledby" => "#itemlabel3"}
+        %i.fi-arrow-left
+        %label#itemlabel3 Past Games
+      %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
+        %i.fi-trophy
+        %label#itemlabel2 Add Game
+      %a.item{href: root_path, "aria-labelledby" => "#itemlabel1"}
+        %i.fi-home
+        %label#itemlabel1 Home
+      %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
+        %i.fi-plus
+        %label#itemlabel5 New Player
+      =# link_to 'Add Player', new_player_path, class: 'item'
+      =# link_to 'Home', root_path, class: 'item'
+      =# link_to 'Past Games', games_path, class: 'item'
+      =# link_to 'Add Game', new_game_path, class: 'item'
+
+    = javascript_include_tag 'application'
