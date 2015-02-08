@@ -114,12 +114,14 @@ $tuatara     : #444444;
 $oil         : #333333;
 $jet         : #222222;
 $black       : #000000;
+$headfoot    : #000000;
+$ace-orange  : #E45226;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
-// $success-color: #43AC6A;
+$success-color: $ace-orange;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 
@@ -684,11 +686,11 @@ $black       : #000000;
 
 // We use these to style the icon-bar and items
 // $include-html-icon-bar-classes: $include-html-classes;
-// $icon-bar-bg: $oil;
+$icon-bar-bg: $headfoot;
 // $icon-bar-font-color: $white;
 // $icon-bar-font-color-hover: $icon-bar-font-color;
 // $icon-bar-font-size: 1rem;
-// $icon-bar-hover-color: $primary-color;
+$icon-bar-hover-color: $ace-orange;
 // $icon-bar-icon-color: $white;
 // $icon-bar-icon-color-hover: $icon-bar-icon-color;
 // $icon-bar-icon-size: 1.875rem;
@@ -1364,7 +1366,7 @@ $black       : #000000;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
+$topbar-bg-color: $headfoot;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin

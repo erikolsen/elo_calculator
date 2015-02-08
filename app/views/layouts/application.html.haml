@@ -7,25 +7,13 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'vendor/modernizr'
   %body
+    %div.orange-bar
     .contain-to-grid
       %nav.top-bar{"data-topbar" => ""}
         %ul.title-area
           %li.name
             %h1
               = link_to "Ace Ping Pong", root_path
-          %li.toggle-topbar.menu-icon
-            %a{:href => "#"}
-              %span menu
-        %section.top-bar-section
-          %ul.right
-            %li.divider
-            %li
-              = link_to "Players", players_path
-            %li.divider
-            %li
-              = link_to "Games", games_path
-            %li.divider
-
     .row
       .large-12.columns
         - if flash[:notice]
@@ -40,28 +28,23 @@
 
         = yield
 
-    %footer
-      #footer
-        .icon-bar.four-up{:role => "navigation"}
-          %a.item{href: root_path, "aria-labelledby" => "#itemlabel1"}
-            %p.icon
-              = image_tag("img/fi-home.svg", :style => 'red')
-              %label#itemlabel1 Home
-          %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
-            %p.icon
-              = image_tag("img/fi-bookmark.svg")
-              %label#itemlabel2 Add Game
-          %a.item{href: games_path, "aria-labelledby" => "#itemlabel3"}
-            %p.icon
-              = image_tag("img/fi-info.svg")
-              %label#itemlabel3 Past Games
-          %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
-            %p.icon
-              = image_tag("img/fi-like.svg")
-              %label#itemlabel5 New Player
-        =# link_to 'Add Player', new_player_path, class: 'item'
-        =# link_to 'Home', root_path, class: 'item'
-        =# link_to 'Past Games', games_path, class: 'item'
-        =# link_to 'Add Game', new_game_path, class: 'item'
+    
+    .icon-bar.four-up#footer
+      %a.item{href: games_path, "aria-labelledby" => "#itemlabel3"}
+        %i.fi-arrow-left
+        %label#itemlabel3 Past Games
+      %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
+        %i.fi-trophy
+        %label#itemlabel2 Add Game
+      %a.item{href: root_path, "aria-labelledby" => "#itemlabel1"}
+        %i.fi-home
+        %label#itemlabel1 Home
+      %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
+        %i.fi-plus
+        %label#itemlabel5 New Player
+      =# link_to 'Add Player', new_player_path, class: 'item'
+      =# link_to 'Home', root_path, class: 'item'
+      =# link_to 'Past Games', games_path, class: 'item'
+      =# link_to 'Add Game', new_game_path, class: 'item'
 
     = javascript_include_tag 'application'
