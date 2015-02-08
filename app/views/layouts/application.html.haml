@@ -41,10 +41,27 @@
         = yield
 
     %footer
-      .icon-bar.sticky_footer#footer
-        = link_to 'Past Games', games_path, class: 'item'
-        = link_to 'Add Game', new_game_path, class: 'item'
+      #footer
+        .icon-bar.four-up{:role => "navigation"}
+          %a.item{href: root_path, "aria-labelledby" => "#itemlabel1"}
+            %p.icon
+              = image_tag("img/fi-home.svg", :style => 'red')
+              %label#itemlabel1 Home
+          %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
+            %p.icon
+              = image_tag("img/fi-bookmark.svg")
+              %label#itemlabel2 Add Game
+          %a.item{href: games_path, "aria-labelledby" => "#itemlabel3"}
+            %p.icon
+              = image_tag("img/fi-info.svg")
+              %label#itemlabel3 Past Games
+          %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
+            %p.icon
+              = image_tag("img/fi-like.svg")
+              %label#itemlabel5 New Player
         =# link_to 'Add Player', new_player_path, class: 'item'
         =# link_to 'Home', root_path, class: 'item'
+        =# link_to 'Past Games', games_path, class: 'item'
+        =# link_to 'Add Game', new_game_path, class: 'item'
 
     = javascript_include_tag 'application'
