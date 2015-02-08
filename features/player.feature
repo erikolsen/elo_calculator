@@ -5,7 +5,7 @@ Feature: The Root Path
 
   Scenario: Getting to new Player page
     Given I visit the root page
-    When I click Add Player
+    When I click New Player
     Then I am on the new player page
 
   Scenario: Creating a new player

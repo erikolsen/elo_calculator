@@ -6,8 +6,8 @@ Given(/^I visit the new player page$/) do
   visit new_player_path
 end
 
-When(/^I click Add Player$/) do
-  click_link 'Add Player'
+When(/^I click New Player$/) do
+  click_link 'New Player'
 end
 
 Then(/^I am on the new player page$/) do
