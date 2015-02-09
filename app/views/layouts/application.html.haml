@@ -16,10 +16,19 @@
           %li.name
             %h1
               = link_to "Ace Ping Pong", root_path
-        %ul.right
-          %li
-            %a.button{href: new_club_path}
-              Add Club
+        .top-bar-section
+        %section.top-bar-section
+          %ul.right
+            %li.divider
+            %li
+              = link_to "Past Games", games_path
+            %li.divider
+            %li
+              = link_to "Add Games", new_game_path
+            %li.divider
+            %li
+              = link_to "Add Player", new_player_path
+            %li.divider
 
     .row
       .large-12.columns
@@ -35,7 +44,7 @@
         .container
           = yield
 
-    .icon-bar.four-up#footer
+    .icon-bar.four-up#footer.show-for-small-only
       %a.item{href: games_path, "aria-labelledby" => "#itemlabel1"}
         %i.fi-arrow-left
         %label#itemlabel1 Past Games
