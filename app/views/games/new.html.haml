@@ -2,15 +2,20 @@
 
 = form_for :game, url: games_path do |f|
   .row
-    .small-12.large-6.columns
+    .small-2.large-1.columns
+      %label.winner-trophy
+    .small-10.large-5.columns.row-centered
       = f.label :winner_id do
         Humble Victor
         = f.collection_select :winner_id, all_players, :id, :name
 
   .row
-    .small-12.large-6.columns
+    .small-2.large-1.columns
+      %label.loser-trophy
+    .small-10.large-5.columns.row-centered
       = f.label :loser_id do
-        Graceful Defeated
+        Gracefully Defeated
         = f.collection_select :loser_id, all_players, :id, :name
-  %p
-    = f.submit 'Update Ratings', class: 'button'
+  .row
+    .small-12.large-6.columns.text-center
+      = f.submit 'Update Ratings', class: 'button'
