@@ -4,7 +4,7 @@ Feature: The Club Path
   I want to create my o wn club
 
   Background:
-
+    @wip
     Scenario: Getting to new club page
       Given I visit the game index page
       When I click Add Club
