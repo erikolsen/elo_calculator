@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all.includes(:winner, :loser).reverse
+    @games = Game.includes(:winner, :loser).most_recent
   end
 
   def new
