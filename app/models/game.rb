@@ -4,6 +4,8 @@ class Game < ActiveRecord::Base
 
   validates_presence_of :winner_id, :loser_id, :winner_rating, :loser_rating
 
+  scope :most_recent, -> { order(id: :desc) }
+
   def can_undo?
     self == Game.last
   end

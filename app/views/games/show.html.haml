@@ -6,6 +6,7 @@
   #{@game.winner.name}'s rating moves from #{@game.winner_rating} to #{@game.winner.rating}
 %p
   #{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}
+
 - if @game.can_undo?
   %p
     = link_to 'Undo Game', @game, method: :delete, class: 'small button'

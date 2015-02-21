@@ -37,13 +37,15 @@ describe Player do
 
   describe '#games' do
     let(:games) { double 'games' }
+    let(:ordered_games) { double 'ordered games' }
 
     before do
       allow(Game).to receive(:for_player).with(id) { games }
+      allow(games).to receive(:most_recent) { ordered_games }
     end
 
     it 'should know its played games' do
-      expect(subject.games).to eq(games)
+      expect(subject.games).to eq(ordered_games)
     end
   end
 end

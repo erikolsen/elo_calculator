@@ -7,7 +7,7 @@ class Player < ActiveRecord::Base
   scope :by_name, -> { order(:name) }
 
   def games
-    Game.for_player(self.id)
+    Game.for_player(self.id).most_recent
   end
 
   def games_won_count
