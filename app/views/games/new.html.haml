@@ -12,5 +12,6 @@
       = f.label :loser_id do
         Graceful Defeated
         = f.collection_select :loser_id, all_players, :id, :name
-  %p.text-center
-    = f.submit 'Update Ratings', class: 'button'
+  .row
+    .small-12.large-3.columns
+      = f.submit 'Update Ratings', class: 'button expand'
