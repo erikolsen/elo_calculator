@@ -20,7 +20,7 @@ describe 'Player Profile' do
     end
 
     it 'shows players past games' do
-      expect(page).to have_content("Humble Victor")
+      expect(page).to have_content("Games Played (2)")
 
       within "#game-#{game1.id}" do
         expect(find('.winner')).to have_content(player1.name)
