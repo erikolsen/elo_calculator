@@ -7,5 +7,8 @@ class Game < ActiveRecord::Base
   def can_undo?
     self == Game.last
   end
-end
 
+  def self.for_player(player_id)
+    where("winner_id = #{player_id} or loser_id = #{player_id}")
+  end
+end
