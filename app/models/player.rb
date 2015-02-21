@@ -6,6 +6,10 @@ class Player < ActiveRecord::Base
 
   scope :by_name, -> { order(:name) }
 
+  def games
+    Game.for_player(self.id)
+  end
+
   def games_won_count
     won_games.count
   end

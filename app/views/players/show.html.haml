@@ -1,3 +1,5 @@
+%h3 Profile
+
 %p
   %strong
     Name:
@@ -7,3 +9,16 @@
     Rating:
   = @player.rating
 
+%h3 Games Played
+
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
+    = render @player.games
