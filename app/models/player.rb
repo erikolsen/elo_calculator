@@ -19,7 +19,7 @@ class Player < ActiveRecord::Base
   end
 
   def games_played_count
-    games_won + games_lost
+    games.count
   end
 
   def add_rating!(change_in_rating)
