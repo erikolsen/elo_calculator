@@ -8,7 +8,11 @@ class Player < ActiveRecord::Base
   scope :by_rating, -> { order(rating: :desc) }
 
   def self.for_homepage
-    by_rating
+    played_in_last_week.by_rating
+  end
+
+  def self.played_in_last_week
+    uniq.joins('join games on games.winner_id = players.id or games.loser_id = players.id').where('games.created_at >= ?', Time.now - 7.days)
   end
 
   def games
