@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   def index
-    @players = Player.all.sort_by(&:rating).reverse
+    @players = Player.by_rating
   end
 
   def show

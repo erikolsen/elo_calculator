@@ -5,6 +5,7 @@ class Player < ActiveRecord::Base
   validates_presence_of :name, :rating
 
   scope :by_name, -> { order(:name) }
+  scope :by_rating, -> { order(rating: :desc) }
 
   def games
     Game.for_player(self.id).most_recent
