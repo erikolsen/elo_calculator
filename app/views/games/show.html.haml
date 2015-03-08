@@ -7,6 +7,9 @@
 %p
   #{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}
 
-- if @game.can_undo?
-  %p
-    = link_to 'Undo Game', @game, method: :delete, class: 'small button'
+.row
+  .small-6.columns
+    = link_to 'Past Games', games_path, class: 'button'
+  .small-6.columns
+    - if @game.can_undo?
+      = link_to 'Undo Game', @game, method: :delete, class: 'button alert'

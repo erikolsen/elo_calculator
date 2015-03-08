@@ -5,6 +5,6 @@
     .small-12.large-6.columns
       = f.label :name do
         Name
-        = f.text_field :name
+        = f.text_field :name, placeholder: 'Player Name'
   %p
     = f.submit 'Add Player', class: 'button'

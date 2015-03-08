@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.includes(:winner, :loser).most_recent
+    @games = Game.includes(:winner, :loser).most_recent.page params[:page]
   end
 
   def new
