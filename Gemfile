@@ -35,6 +35,8 @@ gem 'rails_12factor', group: :production
 # Use unicorn as the app server
  gem 'unicorn'
 
+ gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -44,6 +46,7 @@ gem 'rails_12factor', group: :production
 group :test, :development do
   gem 'rspec-rails'
   gem 'site_prism'
+  gem 'faker'
 end
 
 group :test do
