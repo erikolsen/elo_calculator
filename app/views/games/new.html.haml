@@ -5,13 +5,13 @@
     .small-12.large-6.columns
       = f.label :winner_id do
         Humble Victor
-        = f.collection_select :winner_id, all_players, :id, :name
+        = f.collection_select :winner_id, all_players, :id, :name, prompt: 'Select Person'
 
   .row
     .small-12.large-6.columns
       = f.label :loser_id do
         Graceful Defeated
-        = f.collection_select :loser_id, all_players, :id, :name
+        = f.collection_select :loser_id, all_players, :id, :name, prompt: 'Select Person'
   .row
     .small-12.large-3.columns
       = f.submit 'Update Ratings', class: 'button expand'

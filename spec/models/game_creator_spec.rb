@@ -20,8 +20,8 @@ describe GameCreator do
 
     before do
       allow(Game).to receive(:create!).with(winner_id: winner_id, loser_id: loser_id, winner_rating: winner_rating, loser_rating: loser_rating) { game }
-      allow(Player).to receive(:find).with(winner_id) { winner }
-      allow(Player).to receive(:find).with(loser_id) { loser }
+      allow(Player).to receive(:where).with(id: winner_id) { [ winner ] }
+      allow(Player).to receive(:where).with(id: loser_id) { [ loser ] }
       allow(RatingUpdater).to receive(:new).with(winner_rating, loser_rating) { rating_updater }
 
       allow(winner).to receive(:add_rating!)
@@ -45,7 +45,7 @@ describe GameCreator do
 
       it 'gives access to game' do
         subject.save
-        expect(subject.game).to eq(game) 
+        expect(subject.game).to eq(game)
       end
     end
 
@@ -60,6 +60,34 @@ describe GameCreator do
         expect(subject.save).to eq(false)
 
         expect(subject.errors.full_messages).to eq([ 'Winner and loser cannot be same player' ])
+      end
+    end
+
+    context 'loser does not exist' do
+      let(:loser) { nil }
+
+      it 'does not create new game' do
+        expect(game).to_not receive(:create!)
+        expect(winner).to_not receive(:add_rating!)
+        expect(loser).to_not receive(:subtract_rating!)
+
+        expect(subject.save).to eq(false)
+
+        expect(subject.errors.full_messages).to eq([ 'Loser does not exist' ])
+      end
+    end
+
+    context 'winner does not exist' do
+      let(:winner) { nil }
+
+      it 'does not create new game' do
+        expect(game).to_not receive(:create!)
+        expect(winner).to_not receive(:add_rating!)
+        expect(loser).to_not receive(:subtract_rating!)
+
+        expect(subject.save).to eq(false)
+
+        expect(subject.errors.full_messages).to eq([ 'Winner does not exist' ])
       end
     end
 
