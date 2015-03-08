@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :clubs, only: [:new]
 
-  root 'players#index'
+  root 'homepage#show'
 end

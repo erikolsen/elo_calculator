@@ -7,6 +7,10 @@ class Player < ActiveRecord::Base
   scope :by_name, -> { order(:name) }
   scope :by_rating, -> { order(rating: :desc) }
 
+  def self.for_homepage
+    by_rating
+  end
+
   def games
     Game.for_player(self.id).most_recent
   end
