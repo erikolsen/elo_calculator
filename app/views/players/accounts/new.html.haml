@@ -1,0 +1,19 @@
+= form_for [ @player, @account ] do |f|
+  .row
+    .small-12.large-6.columns
+      = f.label :email do
+        Email
+        = f.text_field :email, placeholder: 'Email'
+  .row
+    .small-12.large-6.columns
+      = f.label :password do
+        Password
+        = f.text_field :password, placeholder: 'Password'
+  .row
+    .small-12.large-6.columns
+      = f.label :password_confirmation do
+        Confirm password
+        = f.text_field :password_confirmation, placeholder: 'Password'
+  %p
+    = f.submit 'Claim Account', class: 'button'
+

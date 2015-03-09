@@ -34,5 +34,12 @@ describe 'Player Profile' do
 
       expect(page).to_not have_content(player3.name)
     end
+
+    it 'lets you update your personal information' do
+      expect(page).to have_link('Claim your account')
+      click_link 'Claim your account'
+      expect(page.current_path).to eq(new_player_account_path(player_id: player1.id))
+    end
   end
+
 end
