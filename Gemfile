@@ -36,12 +36,10 @@ gem 'rails_12factor', group: :production
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use byebug
- gem 'pry-byebug', group: [:development, :test]
-
 group :test, :development do
   gem 'rspec-rails'
   gem 'site_prism'
+  gem 'pry-byebug'
 end
 
 group :test do
