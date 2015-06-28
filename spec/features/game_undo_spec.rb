@@ -5,11 +5,10 @@ describe 'undoing a game' do
   let!(:loser) { Player.create! name: 'loser', rating: 1000 }
   it 'lets you undo a game if it was incorrectly entered' do
     visit new_game_path
-    select winner.name, from: :game_winner_id
-    select loser.name, from: :game_loser_id
+    select winner.name, match: :first, from: :game_winner_id
+    select loser.name, match: :first, from: :game_loser_id
 
     click_button 'Update Ratings'
-    first_game = Game.last
 
     winner.reload
     loser.reload
@@ -18,10 +17,9 @@ describe 'undoing a game' do
     expect(find('h3')).to have_content('Game Summary')
 
     visit new_game_path
-    select winner.name, from: :game_winner_id
-    select loser.name, from: :game_loser_id
+    select winner.name, match: :first, from: :game_winner_id
+    select loser.name, match: :first, from: :game_loser_id
     click_button 'Update Ratings'
-    bad_game = Game.last
 
     winner.reload
     loser.reload
