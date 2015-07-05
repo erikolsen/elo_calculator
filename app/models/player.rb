@@ -6,6 +6,14 @@ class Player < ActiveRecord::Base
 
   scope :by_name, -> { order(:name) }
 
+  def self.last_winner
+    Game.last.winner
+  end
+
+  def self.last_loser
+    Game.last.loser
+  end
+
   def games
     Game.for_player(self.id).most_recent
   end

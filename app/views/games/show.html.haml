@@ -1,12 +1,11 @@
-%h3 Game Summary
-
-%p
-  #{@game.winner.name} defeated #{@game.loser.name}
-%p
-  #{@game.winner.name}'s rating moves from #{@game.winner_rating} to #{@game.winner.rating}
-%p
-  #{@game.loser.name}'s rating moves from #{@game.loser_rating} to #{@game.loser.rating}
-
 - if @game.can_undo?
   %p
-    = link_to 'Undo Game', @game, method: :delete, class: 'small button'
+    = link_to 'Undo Game', @game, method: :delete, class: 'tiny alert button right'
+%h3 #{@game.winner.name} defeats #{@game.loser.name}
+%p
+  #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
+%p
+  #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
+
+%h3 Add Another Game
+= render 'new_game_form'
