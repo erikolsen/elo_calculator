@@ -11,7 +11,7 @@ class GamesController < ApplicationController
 
     if creator.save
       @game = creator.game
-      redirect_to @game, notice: 'Game created'
+      redirect_to @game
     else
       flash.now[:alert] = creator.errors.full_messages.join('. ')
       render :new
