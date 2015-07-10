@@ -3,8 +3,12 @@ module GamesHelper
     Player.by_name
   end
 
-  def all_players_last_winner_default
-    optimized_player_list = all_players.unshift(Game.last.winner).push(Game.last.loser)
-    Game.last ? optimized_player_list : all_players
+  def last_winner_id
+    Game.last.winner_id if Game.last
+  end
+
+  def optimized_player_list
+    list = all_players.push Player.last_loser
+    Game.last ? list : all_players
   end
 end

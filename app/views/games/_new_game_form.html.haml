@@ -3,13 +3,13 @@
     .small-12.large-6.columns
       = f.label :winner_id do
         Humble Victor
-        = f.collection_select :winner_id, all_players_last_winner_default, :id, :name
+        = f.collection_select :winner_id, optimized_player_list, :id, :name, selected: last_winner_id
 
   .row
     .small-12.large-6.columns
       = f.label :loser_id do
         Graceful Defeated
-        = f.collection_select :loser_id, all_players_last_winner_default, :id, :name
+        = f.collection_select :loser_id, optimized_player_list, :id, :name, selected: last_winner_id
   .row
     .small-12.large-3.columns
       = f.submit 'Update Ratings', class: 'button expand'
