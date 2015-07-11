@@ -1,4 +1,18 @@
-%h3 Add Game
+.large-6.columns
+  %h3 Add Game
+  = render 'new_game_form'
 
-= render 'new_game_form'
+.large-6.columns.show-for-large-only
+  %h3 Last Ten Games
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th
+          Humble Victor
+        %th
+          Graceful Defeated
+        %th
+          Date
+    %tbody
+      = render last_ten_games
 
