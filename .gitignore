@@ -18,3 +18,4 @@ logfile
 /tmp
 *.swp
 .env
+/public/assets/*
