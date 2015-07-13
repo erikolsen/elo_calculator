@@ -1,4 +1,3 @@
-= javascript_include_tag 'facebook_api'
 %h3 Add Player
 
 = form_for @player do |f|
@@ -9,4 +8,3 @@
         = f.text_field :name
   %p
     = f.submit 'Add Player', class: 'button'
-    = render 'facebook/login'
