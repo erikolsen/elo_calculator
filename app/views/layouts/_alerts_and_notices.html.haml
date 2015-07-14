@@ -1,0 +1,9 @@
+- if flash[:notice]
+  .alert-box.success{'data-alert' => true}
+    = flash[:notice]
+    %a.close{href: "#"} &times;
+
+- if flash[:alert]
+  .alert-box.alert{'data-alert' => true}
+    = flash[:alert]
+    %a.close{href: "#"} &times;

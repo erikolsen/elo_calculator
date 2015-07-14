@@ -13,53 +13,12 @@
     = render 'layouts/apple_icon_links'
     = javascript_include_tag 'vendor/modernizr'
   %body
-    %div.orange-bar
-    .contain-to-grid
-      %nav.top-bar{"data-topbar" => ""}
-        %ul.title-area
-          %li.name
-            %h1
-              = link_to ELO_APP_NAME, root_path
-        .top-bar-section
-        %section.top-bar-section
-          %ul.right
-            %li.divider
-            %li
-              = link_to "Past Games", games_path
-            %li.divider
-            %li
-              = link_to "Add Games", new_game_path
-            %li.divider
-            %li
-              = link_to "Add Player", new_player_path
-            %li.divider
-
+    = render 'layouts/topbar'
     .row
       .large-12.columns
-        - if flash[:notice]
-          .alert-box.success{'data-alert' => true}
-            = flash[:notice]
-            %a.close{href: "#"} &times;
-
-        - if flash[:alert]
-          .alert-box.alert{'data-alert' => true}
-            = flash[:alert]
-            %a.close{href: "#"} &times;
+        = render 'layouts/alerts_and_notices'
         .container
           = yield
 
-    .icon-bar.four-up#footer.show-for-small-only
-      %a.item{href: games_path, "aria-labelledby" => "#itemlabel1"}
-        %i.fi-arrow-left
-        %label#itemlabel1 Past Games
-      %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
-        %i.fi-trophy
-        %label#itemlabel2 Add Game
-      %a.item{href: root_path, "aria-labelledby" => "#itemlabel3"}
-        %i.fi-home
-        %label#itemlabel3 Home
-      %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel4"}
-        %i.fi-plus
-        %label#itemlabel5 New Player
-
+    = render 'layouts/icon_bar'
     = javascript_include_tag 'application'
