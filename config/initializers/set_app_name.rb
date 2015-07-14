@@ -1,0 +1,1 @@
+ELO_APP_NAME = ENV['ELO_APP_NAME'] || 'My ELO App'
