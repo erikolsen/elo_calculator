@@ -3,11 +3,12 @@
     .gameDetails
       - if @game.can_undo?
         = link_to 'Undo Game', @game, method: :delete, class: 'tiny alert button right'
-      %h3 #{@game.winner.name} defeats #{@game.loser.name}
       %p
         #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
       %p
         #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
+      %h3 #{@game.winner.name} defeats #{@game.loser.name}
+
     %h3 Add Another Game
     = render 'new_game_form'
   .large-6.columns.show-for-large-up
