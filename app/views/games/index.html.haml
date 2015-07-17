@@ -1,13 +1,16 @@
-%h3 Games
+.main-content
+  %h3 Games
 
-%table{width: '100%'}
-  %thead
-    %tr
-      %th
-        Humble Victor
-      %th
-        Graceful Defeated
-      %th
-        Date
-  %tbody
-    = render @games
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th
+          Humble Victor
+        %th
+          Graceful Defeated
+        %th
+          Date
+    %tbody
+      = render @games
+.new-game.hide
+  = render 'games/new_game_form'
