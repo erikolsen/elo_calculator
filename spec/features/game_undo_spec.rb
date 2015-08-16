@@ -13,8 +13,7 @@ describe 'undoing a game' do
     winner.reload
     loser.reload
 
-    expect(page).to have_content('Game created')
-    expect(find('h3')).to have_content('Game Summary')
+    expect(find('h3')).to have_content('winner defeats loser')
 
     visit new_game_path
     select winner.name, match: :first, from: :game_winner_id
@@ -25,7 +24,7 @@ describe 'undoing a game' do
     loser.reload
     expect(winner.rating).to eq 1047
     expect(loser.rating).to eq 953
-    
+
     click_link 'Undo'
     expect(page.current_path).to eq "/games/new"
 
@@ -34,7 +33,7 @@ describe 'undoing a game' do
     expect(winner.rating).to be 1025
     expect(loser.rating).to be 975
 
-    
-    
+
+
   end
 end

@@ -14,16 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require google_analytics
+//= require turbolinks
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-
-function showAddGame(){
-  $('.new-game').show();
-  $('.main-content').hide();
-}
-
-function showMainContent(){
-  $('.gameDetails').show();
-  $('.main-content').hide();
-}
