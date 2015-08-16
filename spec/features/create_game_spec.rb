@@ -22,8 +22,7 @@ describe "creating a new game" do
       player1.reload
       player2.reload
 
-      expect(page).to have_content('Game created')
-      expect(find('h3')).to have_content('Game Summary')
+      expect(find('h3')).to have_content("#{player1.name} defeats #{player2.name}")
 
       expect(last_game.winner_id).to eq(player1.id)
       expect(last_game.loser_id).to eq(player2.id)

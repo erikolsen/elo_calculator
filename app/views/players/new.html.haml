@@ -1,13 +1,10 @@
-.main-content
-  %h3 Add Player
+%h3 Add Player
 
-  = form_for @player do |f|
-    .row
-      .small-12.large-6.columns
-        = f.label :name do
-          Name
-          = f.text_field :name
-    %p
-      = f.submit 'Add Player', class: 'button'
-.new-game.hide
-  = render 'games/new_game_form'
+= form_for @player do |f|
+  .row
+    .small-12.large-6.columns
+      = f.label :name do
+        Name
+        = f.text_field :name
+  %p
+    = f.submit 'Add Player', class: 'button'

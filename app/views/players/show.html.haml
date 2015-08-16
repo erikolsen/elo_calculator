@@ -1,27 +1,28 @@
-.main-content
-  %h4 Profile
+%h4 Profile
 
-  %p
-    %strong
-      Name:
-    = @player.name
-  %p
-    %strong
-      Rating:
-    = @player.rating
+%p
+  %strong
+    Name:
+  = @player.name
+%p
+  %strong
+    Rating:
+  = @player.rating
+%p
+  %strong
+    Highest Rating Achieved:
+  = @player.highest_rating_achieved
 
-  %h4 Games Played (#{@player.games_played_count})
+%h4 Games Played (#{@player.games_played_count})
 
-  %table{width: '100%'}
-    %thead
-      %tr
-        %th
-          Humble Victor
-        %th
-          Graceful Defeated
-        %th
-          Date
-    %tbody
-      = render @player.games
-.new-game.hide
-  = render 'games/new_game_form'
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
+    = render @player.games

@@ -1,28 +1,25 @@
-.main-content
-  .row
-    .large-6.columns
-      .gameDetails
-        %h3
-          #{@game.winner.name} defeats #{@game.loser.name}
-        %p
-          #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
-        %p
-          #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
-      %br
-      - if @game.can_undo?
-        = link_to 'Undo Game', @game, method: :delete, class: 'alert button right'
-    .large-6.columns.show-for-large-up
-      %table{width: '100%'}
-        %thead
-          %tr
-            %th
-              Rank
-            %th
-              Name
-            %th
-              Rating
-            %th
-              Won / Lost
-        = render top_ten_players
-.new-game.hide
-  = render 'games/new_game_form'
+.row
+  .large-6.columns
+    .gameDetails
+      %h3
+        #{@game.winner.name} defeats #{@game.loser.name}
+      %p
+        #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
+      %p
+        #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
+    %br
+    - if @game.can_undo?
+      = link_to 'Undo Game', @game, method: :delete, class: 'alert button right'
+  .large-6.columns.show-for-large-up
+    %table{width: '100%'}
+      %thead
+        %tr
+          %th
+            Rank
+          %th
+            Name
+          %th
+            Rating
+          %th
+            Won / Lost
+      = render top_ten_players

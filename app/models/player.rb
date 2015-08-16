@@ -18,6 +18,10 @@ class Player < ActiveRecord::Base
     Game.for_player(self.id).most_recent
   end
 
+  def highest_rating_achieved
+    won_games.pluck(:winner_rating).max
+  end
+
   def games_won_count
     won_games.count
   end

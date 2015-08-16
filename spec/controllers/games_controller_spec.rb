@@ -21,10 +21,9 @@ describe GamesController do
 
     context 'success' do
       let(:save_success?) { true }
-      
+
       it 'creates new game' do
         post :create, params
-        expect(flash[:notice]).to eq('Game created')
         expect(response).to redirect_to(assigns(:game))
       end
     end
