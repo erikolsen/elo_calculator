@@ -20,7 +20,7 @@ describe 'Player Profile' do
     end
 
     it 'shows player name and highest rating achieved' do
-      expect(page).to have_content(player1.highest_rating)
+      expect(page).to have_content(player1.highest_rating_achieved)
     end
 
     it 'shows players past games' do

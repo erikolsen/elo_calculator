@@ -12,7 +12,6 @@ module GamesHelper
   end
 
   def optimized_player_list
-    list = all_players.push Player.last_loser
-    Game.last ? list : all_players
+    Game.last ? all_players.push(Player.last_loser) : all_players
   end
 end
