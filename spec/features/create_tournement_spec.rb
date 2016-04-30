@@ -12,14 +12,20 @@ describe 'creating a new tournament' do
       fill_in 'Name', with: tournament_name
       click_button 'Create Tournament'
       expect(find('h3')).to have_content(tournament_name)
-
-
-
-      #expect(last_game.winner_id).to eq(player1.id)
-      #expect(last_game.loser_id).to eq(player2.id)
-
-      #expect(last_game.winner_rating).to eq(starting_rating)
-      #expect(last_game.loser_rating).to eq(starting_rating)
     end
+  end
+
+  context 'joining a tournament' do
+    let(:tournament_name) { 'Some Name' }
+    let!(:new_tournament) { Tournament.create name: tournament_name }
+    let(:player_1) { Player.create(name: 'Player 1') }
+    let(:player_2) { Player.create(name: 'Player 2') }
+
+    it 'lets players join tournament' do
+      visit tournament_path(new_tournament)
+      expect(find('h3')).to have_content(tournament_name)
+      expect(page).to have_content(player_1.name)
+    end
+
   end
 end

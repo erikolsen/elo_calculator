@@ -5,5 +5,9 @@
     .small-12.large-6.columns
       = f.label :name, 'Enter Tournament Name'
       = f.text_field :name, autofocus: true
+      = hidden_field_tag 'tournament[players][]'
+      - all_players.each do |player|
+        = check_box_tag('tournament[players][]', player.id)
+        = label_tag(:player, player.name)
   %p
     = f.submit 'Create Tournament', class: 'button'
