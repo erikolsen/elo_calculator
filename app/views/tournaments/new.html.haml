@@ -1,0 +1,9 @@
+%h3 Setup a New Tournament
+
+= form_for @tournament do |f|
+  .row
+    .small-12.large-6.columns
+      = f.label :name, 'Enter Tournament Name'
+      = f.text_field :name
+  %p
+    = f.submit 'Create Tournament', class: 'button'
