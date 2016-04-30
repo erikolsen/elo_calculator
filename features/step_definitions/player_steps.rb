@@ -11,7 +11,7 @@ When(/^I click New Player$/) do
 end
 
 Then(/^I am on the new player page$/) do
-  expect(page.current_path).to eq new_player_path 
+  expect(page.current_path).to eq new_player_path
 end
 
 When(/^I enter a name and submit$/) do
