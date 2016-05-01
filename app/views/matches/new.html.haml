@@ -1,0 +1,8 @@
+%h3
+  = @tournament.name
+= form_for([:tournament, @match]) do |f|
+  - 5.times do
+    - @players.each do |player|
+      = f.label :winner
+      = f.radio_button :winner, player.name
+  = f.submit 'Submit'

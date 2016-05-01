@@ -13,14 +13,14 @@
           = player.name
 
     %tbody
-      - @tournament.players.each_with_index do |player, i|
+      - @tournament.players.each do |row|
         %tr
           %td
-            = player.name
-          - @tournament.players.count.times do |x|
-            - if x == i
+            = row.name
+          - @tournament.players.each do |col|
+            - if row == col
               %td
                 X
             - else
               %td
-                = link_to 'Play'
+                = link_to 'Play', new_tournament_match_path(@tournament, {players: [row, col] })
