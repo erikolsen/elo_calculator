@@ -3,9 +3,9 @@ class TournamentCreator
 
   attr_accessor :players, :name, :tournament
 
-  validate :not_same_player
+  validate :no_duplicate_players
 
-  def initialize(name = nil, players = [])
+  def initialize(name, players)
     @name = name
     @players = players.map{|id| Player.find(id) }
   end
@@ -13,42 +13,14 @@ class TournamentCreator
   def save
     return false unless valid?
 
-    change_in_rating = RatingUpdater.new(winner.rating, loser.rating).change_in_rating
-
-    begin
-      ActiveRecord::Base.transaction do
-        create_game
-        winner.add_rating!(change_in_rating)
-        loser.subtract_rating!(change_in_rating)
-      end
-
-      true
-    rescue ActiveRecord::RecordInvalid => record
-      errors.add :base, 'Failed to save game'
-      false
-    end
+    @tournament = Tournament.create(name: name)
+    @tournament.players = players
+    return @tournament
   end
 
   private
 
-  def create_game
-    @game = Game.create!(
-        winner_id: winner.id,
-        loser_id: loser.id,
-        winner_rating: winner.rating,
-        loser_rating: loser.rating
-        )
-  end
-
-  def not_same_player
-    errors.add :base, 'Winner and loser cannot be same player' if loser_id == winner_id
-  end
-
-  def winner
-    Player.find(@winner_id)
-  end
-
-  def loser
-    Player.find(@loser_id)
+  def no_duplicate_players
+    errors.add :base, 'Cannot have duplicate players' if players.count != players.uniq.count
   end
 end
