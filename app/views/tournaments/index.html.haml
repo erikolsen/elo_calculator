@@ -1,2 +1,14 @@
-%h2
-  = link_to 'Setup Tournament', new_tournament_path
+.small-12.large-6.columns
+  %h2
+    = link_to 'Setup Tournament', new_tournament_path, { class: 'button' }
+
+.small-12.large-6.columns
+  %h2
+    Current Tournaments
+  - @tournaments.each do |tournament|
+    %p
+      = link_to tournament.name, tournament_path(tournament)
+      entries:
+      = tournament.players.count
+
+

@@ -15,7 +15,6 @@ class TournamentCreator
 
     @tournament = Tournament.create(name: name)
     @tournament.players = players
-    return @tournament
   end
 
   private

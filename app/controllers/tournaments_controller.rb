@@ -1,5 +1,6 @@
 class TournamentsController < ApplicationController
   def index
+    @tournaments = Tournament.all
   end
 
   def new
@@ -7,8 +8,9 @@ class TournamentsController < ApplicationController
   end
 
   def create
-    @tournament = Tournament.new tournament_params
-    if @tournament.save
+    creator = TournamentCreator.new(tournament_params[:name], tournament_params[:players])
+    if creator.save
+      @tournament = creator.tournament
       redirect_to @tournament, notice: 'Tournament created'
     else
       flash.now[:alert] = 'Tournament failed to save'

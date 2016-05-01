@@ -1,3 +1,26 @@
 %h3
+  Tournament Name:
   = @tournament.name
 
+%h3 Players:
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Player
+      - @tournament.players.each do |player|
+        %th
+          = player.name
+
+    %tbody
+      - @tournament.players.each_with_index do |player, i|
+        %tr
+          %td
+            = player.name
+          - @tournament.players.count.times do |x|
+            - if x == i
+              %td
+                X
+            - else
+              %td
+                = link_to 'Play'
