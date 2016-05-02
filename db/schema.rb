@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501005929) do
+ActiveRecord::Schema.define(version: 20160502155809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,24 @@ ActiveRecord::Schema.define(version: 20160501005929) do
   add_index "games", ["loser_id"], name: "index_games_on_loser_id", using: :btree
   add_index "games", ["winner_id"], name: "index_games_on_winner_id", using: :btree
 
-  create_table "matches", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "matchups", force: :cascade do |t|
+    t.integer  "primary"
+    t.integer  "secondary"
+    t.integer  "winner"
+    t.integer  "tournament_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "matchups", ["tournament_id"], name: "index_matchups_on_tournament_id", using: :btree
+
+  create_table "matchups_games", force: :cascade do |t|
+    t.integer "matchup_id"
+    t.integer "game_id"
+  end
+
+  add_index "matchups_games", ["game_id"], name: "index_matchups_games_on_game_id", using: :btree
+  add_index "matchups_games", ["matchup_id"], name: "index_matchups_games_on_matchup_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"

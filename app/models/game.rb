@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
   belongs_to :winner, class_name: 'Player'
   belongs_to :loser, class_name: 'Player'
+  has_and_belongs_to_many :matchups
 
   validates_presence_of :winner_id, :loser_id, :winner_rating, :loser_rating
 

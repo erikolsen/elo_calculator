@@ -1,8 +1,6 @@
 %h3
-  Tournament Name:
   = @tournament.name
 
-%h3 Players:
 %table{width: '100%'}
   %thead
     %tr
@@ -13,14 +11,14 @@
           = player.name
 
     %tbody
-      - @tournament.players.each do |row|
+      - @tournament.players.each do |primary|
         %tr
           %td
-            = row.name
-          - @tournament.players.each do |col|
-            - if row == col
+            = primary.name
+          - @tournament.players.each do |secondary|
+            - if primary == secondary
               %td
                 X
             - else
               %td
-                = link_to 'Play', new_tournament_match_path(@tournament, {players: [row, col] })
+                = link_to 'Play', new_tournament_match_path(@tournament, {players: [primary, secondary] })

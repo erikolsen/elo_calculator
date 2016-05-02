@@ -1,8 +1,15 @@
 %h3
   = @tournament.name
-= form_for([:tournament, @match]) do |f|
-  - 5.times do
-    - @players.each do |player|
-      = f.label :winner
-      = f.radio_button :winner, player.name
-  = f.submit 'Submit'
+%p
+  Best of Five. Please mark winner of each game in order.
+= form_tag(url: "tournaments/#{@tournament.id}/matchups", params: { primary_id: @players.first.id, secondary_id: @players.last.id} ) do
+  - 1.upto(5) do |i|
+    .row
+      .small-12.large-6.columns
+        %p
+          = "Round #{i} winner: " 
+          %br
+            - @players.each do |player|
+              = radio_button("tournament_matchups", "game_#{i}", player.id)
+              = label_tag "tournament_matchups_game_#{i}_#{player.id}", player.name
+  = submit_tag 'Submit', class: 'button'
