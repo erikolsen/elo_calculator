@@ -43,6 +43,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'site_prism'
   gem 'pry-byebug'
+  gem 'faker'
 end
 
 group :test do
@@ -53,4 +54,4 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-ruby '2.2.3'
+ruby '2.2.2'

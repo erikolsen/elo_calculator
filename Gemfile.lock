@@ -80,6 +80,8 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    faker (1.6.3)
+      i18n (~> 0.5)
     ffi (1.9.6)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
@@ -234,6 +236,7 @@ DEPENDENCIES
   capybara-webkit
   cucumber-rails
   database_cleaner
+  faker
   foundation-icons-sass-rails
   foundation-rails (= 5.5.2.1)
   haml-rails
@@ -254,4 +257,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.10.2
+   1.10.5

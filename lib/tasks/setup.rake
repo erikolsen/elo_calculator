@@ -1,3 +1,5 @@
+require 'faker'
+
 namespace :setup do
   NUM_OF_PLAYERS = 30
   PLAYER_RANGE = (1..NUM_OF_PLAYERS).to_a
@@ -20,7 +22,7 @@ namespace :setup do
   desc "Create Players"
     task :create_players => :environment do
       PLAYER_RANGE.each do |num|
-        Player.create(name: "Player_#{num}", rating: DEFAULT_RATING)
+        Player.create(name: Faker::StarWars.character, rating: DEFAULT_RATING)
       end
   end
 
