@@ -6,19 +6,24 @@
     %tr
       %th
         Player
-      - @tournament.players.each do |player|
+      - @players.each do |player|
         %th
           = player.name
 
     %tbody
-      - @tournament.players.each do |primary|
+      - @players.each do |primary|
         %tr
           %td
             = primary.name
-          - @tournament.players.each do |secondary|
+            = "(#{primary.rating})"
+          - @players.each do |secondary|
             - if primary == secondary
               %td
                 X
             - else
               %td
-                = link_to 'Play', new_tournament_match_path(@tournament, {players: [primary, secondary] })
+                - @matchup = Matchup.where(tournament_id: @tournament.id, primary: [primary.id, secondary.id], secondary: [primary.id, secondary.id]).first
+                - if @matchup && @matchup.winner
+                  = @matchup.winner == primary.id ? '1' : '0'
+                - else
+                  = link_to 'Play', new_tournament_matchup_path(@tournament, {players: [primary, secondary] })

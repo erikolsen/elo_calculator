@@ -19,16 +19,18 @@ class MatchupCreator
       ActiveRecord::Base.transaction do
         matchups.values.each do |winner_id|
           return false unless create_game(winner_id)
-        end 
+        end
       end
       true
     rescue
       errors.add :base, 'Failed to save match'
       false
     end
-    tournament.matchups << Matchup.create(primary: primary_id,
-                                         secondary: secondary_id,
-                                         winner: winner_id)
+    matchup = Matchup.where(tournament_id: tournament_id,
+                            primary: [primary_id, secondary_id],
+                            secondary: [primary_id, secondary_id]).first
+    matchup.winner = winner_id
+    matchup.save
   end
 
   def create_game(winner_id)
@@ -57,7 +59,7 @@ class MatchupCreator
     return false if primary_wins == secondary_wins
     matchups.count <= 5
   end
-  
+
   def tournament
     @tournament ||= Tournament.find tournament_id
   end
