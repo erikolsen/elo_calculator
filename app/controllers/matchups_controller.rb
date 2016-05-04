@@ -6,10 +6,13 @@ class MatchupsController < ApplicationController
 
   def create
     creator = MatchupCreator.new params
+    @tournament = Tournament.find creator.tournament_id
+    @players = [params[:primary_id], params[:secondary_id]].map{|id| Player.find(id)}
     if creator.save
-      redirect_to Tournament.find creator.tournament_id
+      redirect_to @tournament
     else
-      redirect_to :new
+      flash.now[:alert] = 'Matches failed to save'
+      render :new
     end
   end
 

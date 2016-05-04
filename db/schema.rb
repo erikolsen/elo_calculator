@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 20160502155809) do
     t.datetime "updated_at"
     t.integer  "winner_id"
     t.integer  "loser_id"
+    t.integer  "matchup_id"
   end
 
   add_index "games", ["loser_id"], name: "index_games_on_loser_id", using: :btree
+  add_index "games", ["matchup_id"], name: "index_games_on_matchup_id", using: :btree
   add_index "games", ["winner_id"], name: "index_games_on_winner_id", using: :btree
 
   create_table "matchups", force: :cascade do |t|
@@ -48,14 +50,6 @@ ActiveRecord::Schema.define(version: 20160502155809) do
   end
 
   add_index "matchups", ["tournament_id"], name: "index_matchups_on_tournament_id", using: :btree
-
-  create_table "matchups_games", force: :cascade do |t|
-    t.integer "matchup_id"
-    t.integer "game_id"
-  end
-
-  add_index "matchups_games", ["game_id"], name: "index_matchups_games_on_game_id", using: :btree
-  add_index "matchups_games", ["matchup_id"], name: "index_matchups_games_on_matchup_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"

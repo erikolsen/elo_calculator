@@ -22,7 +22,8 @@
                 X
             - else
               %td
-                - @matchup = Matchup.where(tournament_id: @tournament.id, primary: [primary.id, secondary.id], secondary: [primary.id, secondary.id]).first
+                - @matchup = @tournament.matchups.for_players(primary, secondary)
+                - byebug
                 - if @matchup && @matchup.winner
                   = @matchup.winner == primary.id ? '1' : '0'
                 - else
