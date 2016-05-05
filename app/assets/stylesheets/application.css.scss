@@ -24,6 +24,9 @@ $ace-orange : #E45226;
 #footer a {
   padding: 3% 0 3% 0;
 }
+.container {
+  margin-bottom: 30%;
+}
 
 @media only screen and (min-width: 40.063em) {
   .container {
@@ -42,4 +45,16 @@ $ace-orange : #E45226;
   border: 1px solid #5FDD5F;
   padding: .35em;
   background: #D8F9D8;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio]:checked + label {
+  background-color: darkgrey;
+}
+
+.text-center {
+  text-align: center;
 }

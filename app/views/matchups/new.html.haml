@@ -1,15 +1,21 @@
-%h3
-  = @tournament.name
-%p
-  Best of Five. Please mark winner of each game in order.
-= form_tag(url: "tournaments/#{@tournament.id}/matchups", params: { primary_id: @players.first.id, secondary_id: @players.last.id} ) do
-  - 1.upto(5) do |i|
-    .row
-      .small-12.large-6.columns
-        %p
-          = "Round #{i} winner: " 
-          %br
-            - @players.each do |player|
-              = radio_button("tournament_matchups", "game_#{i}", player.id)
-              = label_tag "tournament_matchups_game_#{i}_#{player.id}", player.name
-  = submit_tag 'Submit', class: 'button'
+.row
+  .small-12.large-12.columns
+    %h3.text-center
+      = @tournament.name
+.row
+  .small-12.large-12.columns
+    %p.text-center
+      Please mark winner of each game in order. Best of Five.
+    = form_tag(url: "tournaments/#{@tournament.id}/matchups", params: { primary_id: @players.first.id, secondary_id: @players.last.id} ) do |f|
+      - 1.upto(5) do |i|
+        .row
+          %p.small-1.columns
+            = i
+          - @players.each do |player|
+            .small-5.large-4.columns
+              = radio_button("tournament_matchups", "game_#{i}", player.id )
+              = label_tag "tournament_matchups_game_#{i}_#{player.id}", player.name, {class: 'button secondary expand'}
+      %br
+        .row
+          .small-12.large-12.columns
+            = submit_tag 'Submit', class: 'button expand'

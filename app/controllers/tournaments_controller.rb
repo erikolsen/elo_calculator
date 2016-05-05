@@ -20,7 +20,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @players = @tournament.players.sort_by(&:rating)
+    @players = @tournament.players.sort_by(&:name)
   end
 
   private
