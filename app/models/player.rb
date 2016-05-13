@@ -5,6 +5,7 @@ class Player < ActiveRecord::Base
   has_many :tournaments, through: :entries
 
   validates_presence_of :name, :rating
+  validates_uniqueness_of :name
 
   scope :by_name, -> { order(:name) }
 

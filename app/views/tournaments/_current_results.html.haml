@@ -1,0 +1,20 @@
+%table
+  %caption
+    Current Results
+  %thead
+    %tr
+      %th
+        Player
+      %th
+        Rating
+      %th
+        Points
+  %tbody
+  - @players.each do |player|
+    %tr
+      %td
+        = player.name
+      %td
+        = player.rating
+      %td
+        = @tournament.match_points_for player

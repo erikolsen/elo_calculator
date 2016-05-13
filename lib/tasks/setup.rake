@@ -29,8 +29,8 @@ namespace :setup do
   desc "Create Games"
     task :create_games => :environment do
       100.times do
-        winner_id = PLAYER_RANGE.sample
-        loser_id = (PLAYER_RANGE-[winner_id]).sample
+        winner_id = Player.ids.sample
+        loser_id = (Player.ids-[winner_id]).sample
         GameCreator.new(winner_id, loser_id).save
       end
   end

@@ -15,9 +15,9 @@
           - @players.each_with_index do |primary, index|
             %tr
               %td
-                = index+1
                 = primary.name
-                = "(#{primary.rating})"
+                %span.right
+                = index+1
               - @players.each do |secondary|
                 - if primary == secondary
                   %td
@@ -30,22 +30,7 @@
                     - else
                       = link_to 'Play', new_tournament_matchup_path(@tournament, {players: [primary, secondary] })
 .row
-  .small-12.large-6.columns
-    %table
-      %caption
-        Current Results
-      %thead
-        %tr
-          %th
-            Player
-          %th
-            Points
-      %tbody
-      - @players.each do |player|
-        %tr
-          %td
-            = player.name
-          %td
-            = @tournament.match_points_for player
-
-
+  .small-6.large-3.columns
+    = render 'current_results'
+  .small-6.large-3.columns
+    = render 'add_player'

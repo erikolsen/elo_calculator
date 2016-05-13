@@ -7,6 +7,18 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new
   end
 
+  def edit
+    @tournament = Tournament.find(params[:id])
+    @players = @tournament.players.sort_by(&:name)
+  end
+
+  def update
+    new_player = Player.find tournament_params[:players]
+    @tournament = Tournament.find(params[:id])
+    @tournament.add_player new_player
+    redirect_to @tournament
+  end
+
   def create
     creator = TournamentCreator.new(tournament_params[:name], tournament_params[:players])
     if creator.save
@@ -21,11 +33,12 @@ class TournamentsController < ApplicationController
   def show
     @tournament = Tournament.find(params[:id])
     @players = @tournament.players.sort_by(&:name)
+    @potential_players = Player.by_name - @players
   end
 
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, { players: [] })
+    params.require(:tournament).permit(:name, { players: [] }, :players)
   end
 end
