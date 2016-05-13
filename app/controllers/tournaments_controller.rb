@@ -20,7 +20,8 @@ class TournamentsController < ApplicationController
       @tournament = creator.tournament
       redirect_to @tournament, notice: 'Tournament created'
     else
-      flash.now[:alert] = 'Tournament failed to save'
+      @tournament = Tournament.new
+      flash.now[:alert] = creator.errors.full_messages.join('. ')
       render :new
     end
   end

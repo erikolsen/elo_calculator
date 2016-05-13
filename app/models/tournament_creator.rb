@@ -3,12 +3,12 @@ class TournamentCreator
 
   attr_accessor :players, :name, :tournament, :player_ids
 
-  validate :no_duplicate_players
+  validate :no_duplicate_players, :must_have_two_players
 
   def initialize(name, players)
     @name = name
     @player_ids = players
-    @players = players.map{|id| Player.find(id) }
+    @players = Player.where(id: players)
   end
 
   def save
@@ -25,6 +25,10 @@ class TournamentCreator
     player_ids.combination(2).each do |tuple|
       tournament.matchups << Matchup.create(primary: tuple.first, secondary: tuple.second)
     end
+  end
+
+  def must_have_two_players
+    errors.add :base, 'Must have at least two players' if players.count < 2
   end
 
   def no_duplicate_players

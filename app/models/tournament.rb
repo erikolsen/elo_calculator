@@ -9,6 +9,14 @@ class Tournament < ActiveRecord::Base
 
   def add_player(player)
     players << player
-    matchups << players.map { |current_player| Matchup.create primary: player, secondary: current_player }
+    build_matchups_for player
    end
+
+  private
+
+  def build_matchups_for(player)
+    players.each do |current_player|
+      matchups << Matchup.create(primary: player, secondary: current_player)
+    end
+  end
 end
