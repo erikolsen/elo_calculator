@@ -1,6 +1,6 @@
 .row
   .small-12.large-6.columns
-    %table{ 'width' => '100%' }
+    %table{ 'width' => '100%', 'border' => '1' }
       %caption
         = @tournament.name
       %thead
@@ -17,7 +17,7 @@
               %td
                 = primary.name
                 %span.right
-                = index+1
+                  = index+1
               - @players.each do |secondary|
                 - if primary == secondary
                   %td

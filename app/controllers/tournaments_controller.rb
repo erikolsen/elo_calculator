@@ -7,11 +7,6 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new
   end
 
-  def edit
-    @tournament = Tournament.find(params[:id])
-    @players = @tournament.players.sort_by(&:name)
-  end
-
   def update
     new_player = Player.find tournament_params[:players]
     @tournament = Tournament.find(params[:id])
