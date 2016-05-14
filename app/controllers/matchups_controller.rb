@@ -1,24 +1,17 @@
 class MatchupsController < ApplicationController
-  def new
-    @players = players
+  def edit
+    @matchup = Matchup.find(params[:id])
     @tournament = Tournament.find(params[:tournament_id])
+    @players = @matchup.players
   end
 
-  def create
-    creator = MatchupCreator.new params
-    @tournament = Tournament.find creator.tournament_id
-    @players = [params[:primary_id], params[:secondary_id]].map{|id| Player.find(id)}
-    if creator.save
+  def update
+    @tournament = Tournament.find params[:tournament_id]
+    if @tournament.add_game_results(params[:id], params[:games])
       redirect_to @tournament
     else
       flash.now[:alert] = 'Matches failed to save'
       render :new
     end
-  end
-
-  private
-
-  def players
-    params[:players].map{ |id| Player.find(id) }
   end
 end

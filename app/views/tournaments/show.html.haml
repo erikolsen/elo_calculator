@@ -28,7 +28,7 @@
                     - if @matchup && @matchup.winner
                       = @matchup.winner == primary.id ? '1' : '0'
                     - else
-                      = link_to 'Play', new_tournament_matchup_path(@tournament, {players: [primary, secondary] })
+                      = link_to 'Play', edit_tournament_matchup_path(@tournament, @matchup)
 .row
   .small-6.large-3.columns
     = render 'current_results'

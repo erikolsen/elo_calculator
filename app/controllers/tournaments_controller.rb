@@ -11,7 +11,7 @@ class TournamentsController < ApplicationController
     new_player = Player.find tournament_params[:players]
     @tournament = Tournament.find(params[:id])
     @tournament.add_player new_player
-    redirect_to @tournament
+    redirect_to @tournament.reload
   end
 
   def create

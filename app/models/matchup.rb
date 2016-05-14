@@ -4,4 +4,8 @@ class Matchup < ActiveRecord::Base
   def self.for_players(*players)
     where(primary: players, secondary: players).first
   end
+
+  def players
+    Player.find [primary, secondary]
+  end
 end
