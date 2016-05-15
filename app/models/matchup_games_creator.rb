@@ -1,4 +1,4 @@
-class MatchupCreator
+class MatchupGamesCreator
   include ActiveModel::Model
 
   attr_reader :game_results, :matchup, :primary_wins, :secondary_wins
@@ -11,20 +11,18 @@ class MatchupCreator
   end
 
   def save
-    game_results.each{ |winner_id| tally_win(winner_id) }
     return false unless valid_number_of_games
 
-    game_results.values.each do |winner|
-      create_game(winner)
+    game_results.values.each do |winner_id|
+      create_game(winner_id)
+      matchup.update winner: winner_id
     end
-    matchup.update winner_id: winner_id
   end
 
-  def create_game(winner)
-    loser = opponent_of(winner)
-    creator = GameCreator.new(winner, loser)
+  def create_game(winner_id)
+    loser_id = opponent_of(winner_id)
+    creator = GameCreator.new(winner_id, loser_id)
     creator.save
-    matchup.games << creator.game
   end
 
   def winner_id
@@ -39,11 +37,11 @@ class MatchupCreator
   private
 
   def primary_id
-    matchup.primary_id
+    matchup.primary
   end
 
   def secondary_id
-    matchup.secondary_id
+    matchup.secondary
   end
 
   def tally_win(winner_id)
@@ -51,6 +49,7 @@ class MatchupCreator
   end
 
   def valid_number_of_games
+    game_results.values.each{ |winner_id| tally_win(winner_id) }
     return false if primary_wins == secondary_wins
     return false unless primary_wins == 3 || secondary_wins == 3
     game_results.count <= 5 && game_results.count >= 3

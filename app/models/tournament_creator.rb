@@ -20,8 +20,8 @@ class TournamentCreator
 
   def create_matchups
     players.combination(2).each do |combo|
-      tournament.matchups << Matchup.create(primary: combo.first,
-                                            secondary: combo.second)
+      tournament.matchups << Matchup.create(primary_id: combo.first,
+                                            secondary_id: combo.second)
     end
   end
 

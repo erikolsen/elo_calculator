@@ -16,16 +16,6 @@ ActiveRecord::Schema.define(version: 20160502155809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "entries", force: :cascade do |t|
-    t.integer  "tournament_id"
-    t.integer  "player_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "entries", ["player_id"], name: "index_entries_on_player_id", using: :btree
-  add_index "entries", ["tournament_id"], name: "index_entries_on_tournament_id", using: :btree
-
   create_table "games", force: :cascade do |t|
     t.integer  "winner_rating"
     t.integer  "loser_rating"
@@ -41,9 +31,9 @@ ActiveRecord::Schema.define(version: 20160502155809) do
   add_index "games", ["winner_id"], name: "index_games_on_winner_id", using: :btree
 
   create_table "matchups", force: :cascade do |t|
-    t.integer  "primary"
-    t.integer  "secondary"
-    t.integer  "winner"
+    t.integer  "primary_id"
+    t.integer  "secondary_id"
+    t.integer  "winner_id"
     t.integer  "tournament_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

@@ -1,17 +1,18 @@
-.row
-  .small-12.large-12.columns
-    %h3.text-center
-      = @tournament.name
+- if @matchup.tournament
+  .row
+    .small-12.large-12.columns
+      %h3.text-center
+        = @matchup.tournament.name
 .row
   .small-12.large-12.columns
     %p.text-center
       Please mark winner of each game in order. Best of Five.
-    = form_tag([@tournament,@matchup], method: "put") do |f|
+    = form_tag(@matchup, method: "put") do |f|
       - 1.upto(5) do |game_number|
         .row
           %p.small-1.columns
             = game_number
-          - @players.each do |player|
+          - @matchup.players.each do |player|
             .small-5.large-4.columns
               = radio_button("games", game_number, player.id )
               = label_tag "games_#{game_number}_#{player.id}", player.name, {class: 'button secondary expand'}

@@ -6,22 +6,18 @@ class Tournament < ActiveRecord::Base
   end
 
   def players
-    Player.where id: matchups.pluck(:primary, :secondary).flatten.compact
+    Player.where id: matchups.pluck(:primary_id, :secondary_id).flatten.compact
   end
 
   def add_player(player)
     build_matchups_for player
   end
 
-  def add_game_results(matchup, game_results)
-     MatchupCreator.new(matchup: matchup, game_results: game_results).save
-  end
-
   private
 
   def build_matchups_for(player)
     players.each do |current_player|
-      matchups << Matchup.create(primary: player.id, secondary: current_player.id)
+      matchups << Matchup.create(primary_id: player.id, secondary_id: current_player.id)
     end
   end
 end
