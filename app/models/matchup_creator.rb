@@ -4,17 +4,15 @@ class MatchupCreator
   attr_reader :game_results, :matchup, :primary_wins, :secondary_wins
 
   def initialize(params)
-    @game_results = params[:game_results]
+    @game_results = params[:game_results].values
     @matchup = Matchup.find params[:matchup]
-    @primary_wins = 0
-    @secondary_wins = 0
+    calculate_wins
   end
 
   def save
-    game_results.each{ |winner_id| tally_win(winner_id) }
     return false unless valid_number_of_games
 
-    game_results.values.each do |winner|
+    game_results.each do |winner|
       create_game(winner)
     end
     matchup.update winner_id: winner_id
@@ -28,7 +26,7 @@ class MatchupCreator
   end
 
   def winner_id
-    return false if primary_wins == secondary_wins
+    return false unless valid_number_of_games
     primary_wins > secondary_wins ? primary_id : secondary_id
   end
 
@@ -44,6 +42,12 @@ class MatchupCreator
 
   def secondary_id
     matchup.secondary_id
+  end
+
+  def calculate_wins
+    @primary_wins = 0
+    @secondary_wins = 0
+    game_results.each{ |winner_id| tally_win(winner_id) }
   end
 
   def tally_win(winner_id)
