@@ -46,6 +46,13 @@ $ace-orange : #E45226;
   padding: .35em;
   background: #D8F9D8;
 }
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox]:checked + label {
+  background-color: darkgrey;
+}
 
 input[type=radio] {
   display: none;

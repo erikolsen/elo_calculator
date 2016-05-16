@@ -8,13 +8,18 @@ describe TournamentCreator do
     let(:tournament_name) { 'Some Name' }
 
     context 'valid tournament' do
-      let!(:new_tournament)  { TournamentCreator.new(tournament_name, players_ids).save }
+      subject { TournamentCreator.new(tournament_name, players_ids)}
+
+      before do
+        subject.save
+      end
+
       it 'returns the tournament with the correct number of entries' do
-        expect(new_tournament.entries.count).to be 2
+        expect(subject.tournament.players.count).to be 2
       end
 
       it 'sets the tournaments name' do
-        expect(new_tournament.name).to eq tournament_name
+        expect(subject.tournament.name).to eq tournament_name
       end
     end
   end
