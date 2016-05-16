@@ -12,6 +12,15 @@
   %strong
     Highest Rating Achieved:
   = @player.highest_rating_achieved
+-if @player.tournaments
+  - @player.tournaments.each do |tournament|
+    %h3
+      Remaining Matches in #{tournament.name}
+    %h4
+      Points #{tournament.match_points_for @player}
+    - tournament.matchups_for(@player).each do |matchup|
+      - unless matchup.winner
+        = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'
 
 %h4 Games Played (#{@player.games_played_count})
 

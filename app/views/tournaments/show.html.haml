@@ -1,0 +1,37 @@
+.row
+  .small-12.large-12.columns.show-for-medium-up
+    %table{ 'width' => '100%', 'border' => '1' }
+      %caption
+        = @tournament.name
+      %thead
+        %tr
+          %th
+            Player
+          - 1.upto(@players.size) do |n|
+            %th
+              = n
+
+        %tbody
+          - @players.each_with_index do |primary, index|
+            %tr
+              %td
+                = primary.name
+                %span.right
+                  = index+1
+              - @players.each do |secondary|
+                - if primary == secondary
+                  %td
+                    X
+                - else
+                  %td
+                    - matchup = @tournament.matchups.for_players(primary, secondary)
+                    - if matchup && matchup.winner
+                      = matchup.winner  == primary ? '1' : '0'
+                    - else
+                      = link_to 'Play', edit_matchup_path(matchup)
+
+.row
+  .small-12.columns
+    = render 'current_results'
+  .small-12.columns
+    = render 'add_player'

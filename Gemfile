@@ -43,6 +43,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'site_prism'
   gem 'pry-byebug'
+  gem 'faker'
 end
 
 group :test do

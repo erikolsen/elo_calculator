@@ -5,7 +5,6 @@
       %li.name
         %h1
           = link_to ELO_APP_NAME, root_path
-    .top-bar-section
     %section.top-bar-section
       %ul.right
         %li.divider
@@ -14,6 +13,9 @@
         %li.divider
         %li
           = link_to "Add Games", new_game_path
+        %li.divider
+        %li
+          = link_to "Tournaments", tournaments_path
         %li.divider
         %li
           = link_to "Add Player", new_player_path

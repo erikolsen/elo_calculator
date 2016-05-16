@@ -1,3 +1,5 @@
+require 'faker'
+
 namespace :setup do
   NUM_OF_PLAYERS = 30
   PLAYER_RANGE = (1..NUM_OF_PLAYERS).to_a
@@ -20,15 +22,15 @@ namespace :setup do
   desc "Create Players"
     task :create_players => :environment do
       PLAYER_RANGE.each do |num|
-        Player.create(name: "Player_#{num}", rating: DEFAULT_RATING)
+        Player.create(name: Faker::StarWars.character, rating: DEFAULT_RATING)
       end
   end
 
   desc "Create Games"
     task :create_games => :environment do
       100.times do
-        winner_id = PLAYER_RANGE.sample
-        loser_id = (PLAYER_RANGE-[winner_id]).sample
+        winner_id = Player.ids.sample
+        loser_id = (Player.ids-[winner_id]).sample
         GameCreator.new(winner_id, loser_id).save
       end
   end

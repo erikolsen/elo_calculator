@@ -11,24 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110190219) do
+ActiveRecord::Schema.define(version: 20160516112255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "games", force: true do |t|
+  create_table "entries", force: :cascade do |t|
+    t.integer  "tournament_id"
+    t.integer  "player_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "entries", ["player_id"], name: "index_entries_on_player_id", using: :btree
+  add_index "entries", ["tournament_id"], name: "index_entries_on_tournament_id", using: :btree
+
+  create_table "games", force: :cascade do |t|
     t.integer  "winner_rating"
     t.integer  "loser_rating"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winner_id"
     t.integer  "loser_id"
+    t.integer  "matchup_id"
   end
 
   add_index "games", ["loser_id"], name: "index_games_on_loser_id", using: :btree
+  add_index "games", ["matchup_id"], name: "index_games_on_matchup_id", using: :btree
   add_index "games", ["winner_id"], name: "index_games_on_winner_id", using: :btree
 
-  create_table "players", force: true do |t|
+  create_table "matchups", force: :cascade do |t|
+    t.integer  "primary_id"
+    t.integer  "secondary_id"
+    t.integer  "winner_id"
+    t.integer  "tournament_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "matchups", ["tournament_id"], name: "index_matchups_on_tournament_id", using: :btree
+
+  create_table "players", force: :cascade do |t|
     t.string   "name"
     t.integer  "rating",     default: 0, null: false
     t.datetime "created_at"
@@ -37,5 +60,11 @@ ActiveRecord::Schema.define(version: 20150110190219) do
 
   add_index "players", ["name"], name: "index_players_on_name", using: :btree
   add_index "players", ["rating"], name: "index_players_on_rating", using: :btree
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
