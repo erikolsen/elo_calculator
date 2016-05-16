@@ -1,15 +1,18 @@
 class Tournament < ActiveRecord::Base
+  has_many :entries
+  has_many :players, through: :entries
   has_many :matchups
 
   def match_points_for(player)
     matchups.where(winner: player).count
   end
 
-  def players
-    Player.where id: matchups.pluck(:primary_id, :secondary_id).flatten.compact
+  def matchups_for(player)
+    matchups.where("primary_id = #{player.id} or secondary_id = #{player.id}")
   end
 
   def add_player(player)
+    players << player
     build_matchups_for player
   end
 

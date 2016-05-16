@@ -13,6 +13,7 @@ class TournamentCreator
   def save
     return false unless valid?
     @tournament = Tournament.create(name: name)
+    @tournament.players << Player.find(players)
     create_matchups
   end
 

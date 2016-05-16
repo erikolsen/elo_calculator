@@ -2,12 +2,8 @@
   .small-12.columns
     %h2
       Current Tournaments
-    %ul
-      - @tournaments.each do |tournament|
-        %li
-          = link_to tournament.name, tournament_path(tournament)
-          entries:
-          = tournament.players.count
+    - @tournaments.each do |tournament|
+      = link_to tournament.name, tournament_path(tournament), class: 'button secondary expand'
 .row
   .small-12.columns
     %h2

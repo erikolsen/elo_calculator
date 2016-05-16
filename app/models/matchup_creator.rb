@@ -51,7 +51,7 @@ class MatchupCreator
   end
 
   def tally_win(winner_id)
-    (winner_id == primary_id) ? (@primary_wins+=1) : (@secondary_wins+=1)
+    (winner_id.to_i == primary_id) ? (@primary_wins+=1) : (@secondary_wins+=1)
   end
 
   def valid_number_of_games

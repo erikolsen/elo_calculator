@@ -31,14 +31,7 @@
                       = link_to 'Play', edit_matchup_path(matchup)
 
 .row
-  .small-12.large-2.columns
+  .small-12.columns
     = render 'current_results'
-  .small-12.large-5.columns
+  .small-12.columns
     = render 'add_player'
-.row
-  .small-12.columns.show-for-small-only
-    %h3
-      Remaining Tournament Matches
-    - @tournament.matchups.each do |matchup|
-      - unless matchup.winner
-        = link_to "#{matchup.primary.name} vs #{matchup.secondary.name}", edit_matchup_path(matchup), class: 'button expand'

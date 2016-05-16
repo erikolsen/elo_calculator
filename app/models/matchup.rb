@@ -13,6 +13,10 @@ class Matchup < ActiveRecord::Base
     MatchupCreator.new(matchup: self, game_results: game_results).save
   end
 
+  def opponent_of(challenger)
+    challenger == primary ? secondary : primary
+  end
+
   def players
     [primary, secondary]
   end
