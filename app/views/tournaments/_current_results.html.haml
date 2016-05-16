@@ -15,7 +15,7 @@
   - @players.each do |player|
     %tr
       %td
-        = link_to player.name, player_path(player), class: 'button secondary expand'
+        = link_to player.name, player_path(player)
       %td
         = player.rating
       %td
