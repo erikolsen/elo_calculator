@@ -8,10 +8,16 @@ class TournamentsController < ApplicationController
   end
 
   def update
-    new_player = Player.find tournament_params[:players]
     @tournament = Tournament.find(params[:id])
-    @tournament.add_player new_player
-    redirect_to @tournament
+    if tournament_params[:players].present?
+      new_player = Player.find tournament_params[:players]
+      @tournament.add_player new_player
+      redirect_to @tournament
+    else
+      flash.now[:alert] = 'Failed to add player'
+      flash.keep
+      redirect_to @tournament
+    end
   end
 
   def create

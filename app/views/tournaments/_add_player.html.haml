@@ -2,7 +2,7 @@
   .row
     .small-12.large-6.columns
       = f.label :name, 'Not to late to join!'
-      = f.collection_select(:players, @potential_players, :id, :name)
+      = f.collection_select(:players, @potential_players, :id, :name, { include_blank: 'Add a player' })
   %p
     = f.submit 'Join', class: ' expand button'
 
