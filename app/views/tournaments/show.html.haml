@@ -7,23 +7,20 @@
         %tr
           %th
             Player
-          - 1.upto(@players.size) do |n|
+          - @players.each do |player|
             %th
-              = n
+              = player.name
 
         %tbody
           - @players.each_with_index do |primary, index|
             %tr
               %td
-                = primary.name
-                %span.right
-                  = index+1
+                = link_to primary.name, player_path(primary)
               - @players.each do |secondary|
                 - if primary == secondary
-                  %td
-                    X
+                  %td.empty-table-data
                 - else
-                  %td
+                  %td.text-center
                     - matchup = @tournament.matchups.for_players(primary, secondary)
                     - if matchup && matchup.winner
                       = matchup.winner  == primary ? '1' : '0'
