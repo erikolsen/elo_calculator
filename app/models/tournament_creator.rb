@@ -15,6 +15,7 @@ class TournamentCreator
     @tournament = Tournament.create(name: name)
     @tournament.players << Player.find(players)
     create_matchups
+    true
   end
 
   private

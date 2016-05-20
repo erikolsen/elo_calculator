@@ -12,8 +12,8 @@ class Tournament < ActiveRecord::Base
   end
 
   def add_player(player)
-    players << player
     build_matchups_for player
+    players << player
   end
 
   private
