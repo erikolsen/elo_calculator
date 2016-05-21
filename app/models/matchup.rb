@@ -10,6 +10,7 @@ class Matchup < ActiveRecord::Base
   end
 
   def add_game_results(game_results)
+    return false if game_results.nil? || game_results.count < 3
     MatchupCreator.new(matchup: self, game_results: game_results).save
   end
 

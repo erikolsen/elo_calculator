@@ -1,0 +1,18 @@
+.large-6.columns
+  %h3 Play Best of Five Match
+  = form_for @matchup, url: matchups_path do |f|
+    .row
+      .small-12.large-12.columns
+        = f.label :primary_id do
+          Player One
+          = f.collection_select :primary_id, optimized_player_list, :id, :name, selected: last_winner_id
+
+    .row
+      .small-12.large-12.columns
+        = f.label :secondary_id do
+          Player Two
+          = f.collection_select :secondary_id, optimized_player_list, :id, :name, selected: last_winner_id
+    .row
+      .small-6.large-6.columns
+        = f.submit 'Create Match', class: 'button expand'
+

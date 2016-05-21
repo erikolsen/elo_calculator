@@ -1,12 +1,16 @@
-- if @matchup.tournament
-  .row
-    .small-12.large-12.columns
-      %h3.text-center
-        = @matchup.tournament.name
 .row
   .small-12.large-12.columns
-    %p.text-center
+    %h3.text-center
+      - if @matchup.tournament
+        = @matchup.tournament.name
+      - else
+        = "#{@matchup.primary.name}(#{@matchup.primary.rating}) vs #{@matchup.secondary.name}(#{@matchup.secondary.rating})"
+.row
+  .small-12.large-12.columns
+    %h4.text-center
       Please mark winner of each game in order. Best of Five.
+.row
+  .small-12.large-12.columns
     = form_tag(@matchup, method: "put") do |f|
       - 1.upto(5) do |game_number|
         .row

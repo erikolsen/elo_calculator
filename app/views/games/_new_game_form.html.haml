@@ -1,4 +1,4 @@
-%h3 Add Game
+%h3 Add Game or Play Best of Five
 = form_for :game, url: games_path do |f|
   .row
     .small-12.large-12.columns
@@ -12,5 +12,8 @@
         Graceful Defeated
         = f.collection_select :loser_id, optimized_player_list, :id, :name, selected: last_winner_id
   .row
-    .small-12.large-12.columns
+    .small-6.large-6.columns
       = f.submit 'Update Ratings', class: 'button expand'
+    .small-6.large-6.columns
+      = f.submit 'Best of Five', name: 'match', class: 'button expand'
+

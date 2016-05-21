@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_filter :enter_as_match?
+
   def index
     @games = Game.includes(:winner, :loser).most_recent
   end
@@ -35,6 +37,17 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def enter_as_match?
+    if params[:match] && different_players
+      matchup = Matchup.create(primary_id: game_params[:winner_id], secondary_id: game_params[:loser_id])
+      redirect_to edit_matchup_path(matchup)
+    end
+  end
+
+  def different_players
+    game_params[:winner_id] != game_params[:loser_id]
+  end
 
   def game_params
     params.require(:game).permit(:winner_id, :loser_id)
