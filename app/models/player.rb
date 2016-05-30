@@ -4,6 +4,9 @@ class Player < ActiveRecord::Base
   has_many :entries
   has_many :tournaments, through: :entries
 
+  has_many :memberships
+  has_many :clubs, through: :memberships
+
   validates_presence_of :name, :rating
   validates_uniqueness_of :name
 

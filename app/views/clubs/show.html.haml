@@ -1,0 +1,18 @@
+%h3
+  = @club.name
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Rank
+      %th
+        Name
+      %th
+        Rating
+      %th
+        Won / Lost
+  = render @club.players
+
+
+%p
+  = link_to 'Join Club', new_club_membership_path(@club)

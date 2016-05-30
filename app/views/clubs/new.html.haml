@@ -1,0 +1,10 @@
+%h3 Add Club
+
+= form_for @club do |f|
+  .row
+    .small-12.large-6.columns
+      = f.label :name do
+        Name
+        = f.text_field :name
+  %p
+    = f.submit 'Add Club', class: 'button'
