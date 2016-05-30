@@ -39,6 +39,10 @@ gem 'rails_12factor', group: :production
 
 gem 'turbolinks'
 
+group :development do
+  gem 'quiet_assets'
+end
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'site_prism'
