@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'home page' do
+describe 'players page' do
   let!(:player1) { Player.create! name: 'player 1', rating: 500 }
   let!(:player2) { Player.create! name: 'player 2', rating: 600 }
 
@@ -8,7 +8,7 @@ describe 'home page' do
   let!(:game2) { Game.create! winner_id: player2.id, loser_id: player1.id, winner_rating: 500, loser_rating: 400 }
 
   it 'shows player ratings' do
-    visit root_path
+    visit players_path
 
     within "#player-#{player1.id}" do
       expect(find('.rank')).to have_content(2)
@@ -30,7 +30,7 @@ describe 'home page' do
 
     describe 'visiting player profile' do
       it 'allows players to see their profile' do
-        visit root_path
+        visit players_path
         click_link player.name
         expect(page.current_path).to eq(player_path(player.id))
       end

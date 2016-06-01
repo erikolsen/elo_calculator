@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe MembershipsController, :type => :controller do
+RSpec.describe Clubs::MembershipsController, :type => :controller do
 
 end
