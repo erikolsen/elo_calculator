@@ -25,6 +25,32 @@ describe Player do
       end
     end
 
+    describe '#highest_rating_achieved' do
+      let(:default_rating) { 1000 }
+      let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
+      subject { described_class.create(name: name, rating: default_rating) }
+
+      context 'highest rating was a game you won' do
+        before do
+          GameCreator.new(subject.id, player_2.id).save
+        end
+
+        it 'returns the current rating' do
+          expect(subject.reload.highest_rating_achieved).to eq 1025
+        end
+      end
+
+      context 'highest rating was a game you lost' do
+        before do
+          GameCreator.new(player_2.id, subject.id).save
+        end
+
+        it 'returns the rating when you played the game' do
+          expect(subject.reload.highest_rating_achieved).to eq 1000
+        end
+      end
+    end
+
     describe '#subtract_rating!' do
       let(:new_rating) { rating - change_in_rating }
 
