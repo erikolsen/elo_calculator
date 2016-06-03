@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
   end
 
   def highest_rating_achieved
-    games.pluck(:winner_rating, :loser_rating).flatten.push(rating).max
+    (won_games.pluck(:winner_rating) + lost_games.pluck(:loser_rating).push(rating)).max
   end
 
   def games_won_count
