@@ -34,4 +34,6 @@
       %th
         Date
   %tbody
-    = render @player.games
+    = render @games
+
+= paginate @games

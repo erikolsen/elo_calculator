@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
+    @games = @player.games.page(params[:page]).per(10)
   end
 
   def new

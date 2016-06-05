@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_filter :enter_as_match?
 
   def index
-    @games = Game.includes(:winner, :loser).most_recent
+    @games = Game.includes(:winner, :loser).most_recent.page(params[:page]).per(10)
   end
 
   def new
