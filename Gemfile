@@ -38,6 +38,7 @@ gem 'rails_12factor', group: :production
 # gem 'capistrano-rails', group: :development
 
 gem 'turbolinks'
+gem 'kaminari'
 
 group :development do
   gem 'quiet_assets'
