@@ -14,6 +14,9 @@
  *= require elo
  */
 $ace-orange : #E45226;
+$table-blue-light: #03C4EF;
+$table-blue-dark: #003170;
+
 @import 'foundation-icons';
 #footer {
   position: fixed;
@@ -75,39 +78,33 @@ input[type=radio]:checked + label {
 }
 
 .grid {
-  background-image: url('table-tennis-net-blue.jpg');
-  background-size: 100% 100%;
+  display: block;
+  background-color: lightblue;
   height: 25vh;
   border-radius: 5px;
-  box-shadow: 3px 3px 1.5px #888888;
   margin-bottom: 1em;
   padding: 1em;
+  border: 5px solid $table-blue-dark;
+  //
+  color: $table-blue-dark;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .start-club {
-  background-image: url('table-tennis-net-blue.jpg');
+  display: block;
+  background-color: lightgrey;
+  border: 5px solid black;
   height: 25vh;
   border-radius: 5px;
-  box-shadow: 3px 3px 1.5px #888888;
-  margin-bottom: 1em;
-  padding: 1em;
-}
-.start-club a:hover, .grid a:hover {
- color: lightgrey;
-}
-
-.start-club a {
-  line-height: 15vh;
-  color: white;
+  //
+  line-height: 20vh;
+  color: black;
   font-weight: bold;
-  font-size: 2em;
-  text-shadow: 3px 3px 1px black;
+  font-size: 2.2em;
 }
 
-.grid a {
-  color: white;
-  font-weight: bold;
-  font-size: 1.5em;
-  text-shadow: 3px 3px 1px black;
+.start-club:hover, .grid:hover{
+  color: black;
+  background-color: $table-blue-light;
 }
-
