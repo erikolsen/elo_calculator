@@ -1,15 +1,12 @@
 %div.orange-bar
 .contain-to-grid
-  %nav.top-bar{"data-topbar" => ""}
+  %nav.top-bar.no-margin-bottom{"data-topbar" => ""}
     %ul.title-area
       %li.name
         %h1
           = link_to ELO_APP_NAME, root_path
-    %section.top-bar-section
+    %section.top-bar-section.show-for-medium-up
       %ul.right
-        %li.divider
-        %li
-          = link_to "Past Games", games_path
         %li.divider
         %li
           = link_to "Add Games", new_game_path
@@ -19,7 +16,4 @@
         %li.divider
         %li
           = link_to "Add Player", new_player_path
-        %li.divider
-        %li
-          = link_to "Add Club", new_club_path
         %li.divider

@@ -1,15 +1,25 @@
-.row
-  .column.small-12
-    %h1.text-center
-      Welcome to
-      = ELO_APP_NAME
-.row
-  .column.small-12
-    %p.text-center
-      Start or join a club to get an ELO rating! Play in internal or league tournaments! Enter game results to track your improvement over time!
-.row
-  .column.small-12.medium-4.large-4
-    = link_to 'Start a Club', new_club_path, class: 'start-club text-center'
-  - @clubs.each do |club|
-    .column.small-12.medium-4.large-4.left
-      = link_to club.name, club, class: 'grid text-center'
+.club-page
+  .club-intro
+    .row
+      .column.small-12
+        %h1
+          Welcome to
+          = ELO_APP_NAME
+        %p
+          Enter game results to track your improvement over time!
+        %p
+          Start or join a club to get an ELO rating!
+        %p
+          Play in internal or league tournaments!
+    .row
+      .column.small-12
+        %br
+    .row
+      .column.small-12
+        = link_to 'Start a Club', new_club_path, class: 'start-club text-center'
+  .row
+    .column.small-12.medium-4.large-4
+      = link_to 'All Players', players_path , class: 'grid text-center'
+    - @clubs.each do |club|
+      .column.small-12.medium-4.large-4.left
+        = link_to club.name, club, class: 'grid text-center'
