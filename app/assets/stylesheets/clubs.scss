@@ -50,7 +50,7 @@
   padding-left: 0.3em;
   background-color: white;
   border: 0.2em solid black;
-  border-radius: 50px;
+  border-radius: 5px;
   padding: 0.5em;
   box-shadow: 0.1em 0.1em 0.1em grey;
   //
@@ -59,7 +59,12 @@
   font-size: 1em;
 }
 
-.start-club:hover, .grid:hover{
+.start-club:hover {
+  color: black;
+  background-color: lightblue;
+}
+
+.grid:hover{
   color: black;
   background-color: $table-blue-light;
 }
