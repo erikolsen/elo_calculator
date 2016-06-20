@@ -15,6 +15,10 @@
 //= require foundation
 //= require google_analytics
 //= require turbolinks
+//= require tournaments
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+$(document).on('page:change', function () {
+  $('.datepicker').datepicker();
+});
