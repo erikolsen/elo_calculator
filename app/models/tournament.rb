@@ -16,6 +16,10 @@ class Tournament < ActiveRecord::Base
     players << player
   end
 
+  def expired?
+    end_date < Date.today if end_date
+  end
+
   private
 
   def build_matchups_for(player)

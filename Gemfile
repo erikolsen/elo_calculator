@@ -17,6 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'foundation-rails', '5.5.2.1'
 gem 'foundation-icons-sass-rails'
 

@@ -1,24 +1,29 @@
 class TournamentCreator
   include ActiveModel::Model
 
-  attr_accessor :players, :name, :tournament
+  attr_accessor :players, :name, :tournament, :end_date
 
-  validate :no_duplicate_players, :must_have_two_players
+  validate :no_duplicate_players, :must_have_two_players, :has_future_date
 
-  def initialize(name, players)
-    @name = name
-    @players = players
+  def initialize(params)
+    @name = params[:name]
+    @players = params[:players]
+    @end_date = format_date params[:end_date]
   end
 
   def save
     return false unless valid?
-    @tournament = Tournament.create(name: name)
+    @tournament = Tournament.create(name: name, end_date: end_date)
     @tournament.players << Player.find(players)
     create_matchups
     true
   end
 
   private
+
+  def format_date(date)
+    Date.strptime(date, '%m/%d/%Y')
+  end
 
   def create_matchups
     players.combination(2).each do |combo|
@@ -29,6 +34,10 @@ class TournamentCreator
 
   def must_have_two_players
     errors.add :base, 'Must have at least two players' if players.count < 2
+  end
+
+  def has_future_date
+    errors.add :base, 'End date must be in the future' if end_date.to_date < Date.today
   end
 
   def no_duplicate_players

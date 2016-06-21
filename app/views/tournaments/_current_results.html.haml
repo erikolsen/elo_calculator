@@ -3,6 +3,14 @@
     Current Results
     %p
       Click name to see remaining matches
+    - if @tournament.expired?
+      %p
+        Tournament ended on
+        = @tournament.end_date.strftime('%m/%d/%Y')
+    - else
+      %p
+        Tournament runs until
+        = @tournament.end_date.strftime('%m/%d/%Y')
   %thead
     %tr
       %th

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require foundation
 //= require google_analytics
 //= require turbolinks
@@ -19,6 +20,3 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-$(document).on('page:change', function () {
-  $('.datepicker').datepicker();
-});
