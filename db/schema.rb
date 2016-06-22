@@ -18,9 +18,12 @@ ActiveRecord::Schema.define(version: 20160530181405) do
 
   create_table "clubs", force: :cascade do |t|
     t.string   "name"
+    t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "clubs", ["slug"], name: "index_clubs_on_slug", using: :btree
 
   create_table "entries", force: :cascade do |t|
     t.integer  "tournament_id"

@@ -9,7 +9,7 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @club = Club.find_by(name:  club_name)
+    @club = Club.find_by(slug:  club_name)
   end
 
   def create
@@ -26,7 +26,7 @@ class ClubsController < ApplicationController
   private
 
   def club_name
-    params[:id].titleize
+    params[:slug]
   end
 
   def club_params
