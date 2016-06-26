@@ -38,7 +38,7 @@ RSpec.describe Tournament, :type => :model do
     end
 
     it 'returns a list of players ranked by how many points they won' do
-      expect( @tournament.rank_for(player1) ).to eq 1
+      expect( @tournament.rank_for(player1) ).to eq '1st'
     end
   end
 

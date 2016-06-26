@@ -10,7 +10,7 @@ class Tournament < ActiveRecord::Base
   end
 
   def rank_for(player)
-    players_by_points.find_index(player) + 1
+    (players_by_points.find_index(player) + 1).ordinalize
   end
 
   def match_points_for(player)

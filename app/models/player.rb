@@ -37,6 +37,10 @@ class Player < ActiveRecord::Base
     games.count
   end
 
+  def tournaments_played_count
+    tournaments.count
+  end
+
   def add_rating!(change_in_rating)
     update_attributes!(rating: rating + change_in_rating)
   end
