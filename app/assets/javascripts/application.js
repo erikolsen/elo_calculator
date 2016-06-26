@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/datepicker
+//= require jquery-ui/tabs
 //= require foundation
 //= require google_analytics
 //= require turbolinks
@@ -20,3 +21,6 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+$(document).on('page:change', function () {
+  $("#tabs").tabs({active: 0});
+});

@@ -1,16 +1,17 @@
-%h4 Profile
-
-%p
-  %strong
-    Name:
-  = @player.name
-%p
-  %strong
-    Rating:
-  = @player.rating
-%p
-  %strong
-    Highest Rating Achieved:
-  = @player.highest_rating_achieved
-= render 'game_info'
-= render 'tournament_info'
+.div{id: 'tabs'}
+  %ul
+    %li
+      %a{href: '#player-info'}
+        Profile
+    %li
+      %a{href: '#game-info'}
+        Games
+    %li
+      %a{href: '#tournament-info'}
+        Tournaments
+  .div{id: 'player-info'}
+    = render 'player_info'
+  .div{id: 'game-info'}
+    = render 'game_info'
+  .div{id: 'tournament-info'}
+    = render 'tournament_info'

@@ -30,5 +30,6 @@
           = tournament.match_points_for(@player)
         %td
           = tournament.expired? ? tournament.rank_for(@player) : 'In Progress'
-
+-else
+  = link_to 'Join a Tournament', tournament_path, class: 'button expand'
 = paginate @tournaments, param_name: 'tournaments_page'
