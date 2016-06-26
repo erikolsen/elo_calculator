@@ -8,7 +8,7 @@ class TournamentCreator
   def initialize(params)
     @name = params[:name]
     @players = params[:players]
-    @end_date = format_date params[:end_date]
+    @end_date = params[:end_date].to_date
   end
 
   def save
@@ -20,10 +20,6 @@ class TournamentCreator
   end
 
   private
-
-  def format_date(date)
-    Date.strptime(date, '%m/%d/%Y')
-  end
 
   def create_matchups
     players.combination(2).each do |combo|
@@ -37,7 +33,7 @@ class TournamentCreator
   end
 
   def has_future_date
-    errors.add :base, 'End date must be in the future' if end_date.to_date < Date.today
+    errors.add :base, 'End date must be in the future' if end_date < Date.today
   end
 
   def no_duplicate_players
