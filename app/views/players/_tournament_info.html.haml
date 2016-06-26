@@ -1,0 +1,34 @@
+-if @player.tournaments
+  - @player.tournaments.each do |tournament|
+    - if tournament.expired?
+      %h4 Tournaments Played (#{@player.tournaments.count})
+      %table{width: '100%'}
+        %thead
+          %tr
+            %th
+              Tournament
+            %th
+              Total Matches
+            %th
+              Matches Won
+            %th
+              Final Rank
+        %tbody
+          %tr
+            %td
+              = tournament.name
+            %td
+              = tournament.matchups_for(@player).count
+            %td
+              = tournament.match_points_for(@player)
+            %td
+              = tournament.rank_for(@player).ordinalize
+
+    - else
+      %h3
+        Remaining Matches in #{tournament.name}
+      %h4
+        Points #{tournament.match_points_for @player}
+      - tournament.matchups_for(@player).each do |matchup|
+        - unless matchup.winner
+          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'

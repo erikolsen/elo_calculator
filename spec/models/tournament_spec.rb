@@ -2,12 +2,44 @@ require 'rails_helper'
 
 RSpec.describe Tournament, :type => :model do
   let(:name) { 'Some Name' }
+  let(:end_date) { 1.week.from_now.to_s }
   let(:players) { Array.new(5) { Player.create(name: Faker::Name.first_name) } }
+  let(:params) { { name: name, players: players, end_date: end_date } }
 
   before do
-    creator = TournamentCreator.new(name, players)
+    creator = TournamentCreator.new(params)
     creator.save
     @tournament = creator.tournament
+  end
+
+  describe '#players_by_points' do
+    let(:player1) { players.first }
+    let(:player2) { players.second }
+    let(:player1_matchups) { @tournament.matchups_for player1 }
+    subject { @tournament.players_by_points }
+
+    before do
+      player1_matchups.each { |match| match.winner_id = player1.id }
+    end
+
+    it 'returns a list of players ranked by how many points they won' do
+      expect(subject.first).to eq player1
+    end
+  end
+
+  describe '#rank_for player' do
+    let(:player1) { players.first }
+    let(:player2) { players.second }
+    let(:player1_matchups) { @tournament.matchups_for player1 }
+    subject { @tournament.rank_for(player1) }
+
+    before do
+      player1_matchups.each { |match| match.winner_id = player1.id }
+    end
+
+    it 'returns a list of players ranked by how many points they won' do
+      expect( @tournament.rank_for(player1) ).to eq 1
+    end
   end
 
   describe '#add_player' do
