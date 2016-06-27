@@ -18,9 +18,7 @@
 //= require google_analytics
 //= require turbolinks
 //= require tournaments
+//= require player_profile
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-$(document).on('page:change', function () {
-  $("#tabs").tabs({active: 0});
-});
