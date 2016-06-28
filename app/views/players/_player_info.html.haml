@@ -1,21 +1,27 @@
-%p
-  %strong
-    Name:
-  = @player.name
-%p
-  %strong
-    Rating:
-  = @player.rating
-%p
-  %strong
-    Highest Rating Achieved:
-  = @player.highest_rating_achieved
-%p
-  %strong
-    Current Win Percent:
-  = number_to_percentage @player.win_percentage, precision: 0
-%p
-  %strong
-    Play a Rematch
-- @player.top_five_opponents.each do |opp|
-  = link_to "#{@player.name} vs #{opp.name}", matchups_path(matchup: { primary_id: @player.id, secondary_id: opp.id}), method: 'post', class: 'button expand'
+.row
+  .column.small-6
+    %p
+      %strong
+        Name:
+      = @player.name
+    %p
+      %strong
+        Highest Rating Achieved:
+      = @player.highest_rating_achieved
+  .column.small-6
+    %p
+      %strong
+        Current Rating:
+      = @player.rating
+    %p
+      %strong
+        Current Win Percent:
+      = number_to_percentage @player.win_percentage, precision: 0
+%hr
+.row
+  .column
+    %p
+      %strong
+        Play a Rematch
+    - @player.top_five_opponents.each do |opp|
+      = link_to "#{@player.name} vs #{opp.name}", matchups_path(matchup: { primary_id: @player.id, secondary_id: opp.id}), method: 'post', class: 'button expand'
