@@ -13,23 +13,23 @@
     %thead
       %tr
         %th
-          Tournament
+          Name
         %th
           Total Matches
         %th
-          Matches Won
+          Points
         %th
           Final Rank
     - @tournaments.each do |tournament|
       %tr
         %td
-          = tournament.name
+          = link_to tournament.name, tournament_path(tournament)
         %td
           = tournament.matchups_for(@player).count
         %td
           = tournament.match_points_for(@player)
         %td
-          = tournament.expired? ? tournament.rank_for(@player) : 'In Progress'
+          = tournament.expired? ? tournament.rank_for(@player) : 'Playing'
 -else
   = link_to 'Join a Tournament', tournament_path, class: 'button expand'
 = paginate @tournaments, param_name: 'tournaments_page'
