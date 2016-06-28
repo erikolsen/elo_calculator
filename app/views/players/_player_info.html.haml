@@ -10,3 +10,12 @@
   %strong
     Highest Rating Achieved:
   = @player.highest_rating_achieved
+%p
+  %strong
+    Current Win Percent:
+  = number_to_percentage @player.win_percentage, precision: 0
+%p
+  %strong
+    Play a Rematch
+- @player.top_five_opponents.each do |opp|
+  = link_to "#{@player.name} vs #{opp.name}", matchups_path(matchup: { primary_id: @player.id, secondary_id: opp.id}), method: 'post', class: 'button expand'

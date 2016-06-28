@@ -61,6 +61,80 @@ describe Player do
     end
   end
 
+  describe '#win_percentage' do
+    let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
+    let(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
+    let(:default_rating) { 1000 }
+
+    context 'have not won games' do
+      it 'returns 0' do
+        expect(player_1.win_percentage).to eq 0
+      end
+    end
+
+    context 'have played games' do
+      before do
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_1.id, player_2.id).save
+      end
+      it 'returns the percent of games you win' do
+        expect(player_1.win_percentage).to eq 33
+        expect(player_2.win_percentage).to eq 67
+      end
+    end
+  end
+
+  describe '#opponents_by_games_played' do
+    let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
+    let(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
+    let(:player_3) { described_class.create(name: 'Player 3', rating: default_rating) }
+    let(:player_4) { described_class.create(name: 'Player 4', rating: default_rating) }
+    let(:default_rating) { 1000 }
+
+    context 'have played no games' do
+      it 'returns empty collection' do
+        expect(player_1.opponents).to eq []
+      end
+    end
+
+    context 'have played games' do
+      before do
+        GameCreator.new(player_1.id, player_2.id).save
+        GameCreator.new(player_1.id, player_3.id).save
+        GameCreator.new(player_1.id, player_4.id).save
+        GameCreator.new(player_1.id, player_4.id).save
+        GameCreator.new(player_2.id, player_3.id).save
+      end
+
+      let(:expected_results) { [player_4,player_3,player_2] }
+      it 'returns the id and number of games played' do
+        expect(player_1.opponents_by_games_played).to eq expected_results
+      end
+    end
+  end
+
+  describe '#most_frequent_opponent' do
+    let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
+    let(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
+    let(:default_rating) { 1000 }
+
+    context 'have played games' do
+      before do
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_1.id, player_2.id).save
+      end
+      it 'returns the player you played the most' do
+        expect(player_1.win_percentage).to eq 33
+        expect(player_2.win_percentage).to eq 67
+      end
+    end
+  end
+
+
+
+
   describe '#games' do
     let(:games) { double 'games' }
     let(:ordered_games) { double 'ordered games' }
