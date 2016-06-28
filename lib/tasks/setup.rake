@@ -3,13 +3,16 @@ if Rails.env == 'development'
 
   namespace :setup do
     NUM_OF_PLAYERS = 30
+    NUM_OF_TOURNAMENTS = 15
     PLAYER_RANGE = (1..NUM_OF_PLAYERS).to_a
+    TOURNAMENT_RANGE = (1..NUM_OF_TOURNAMENTS).to_a
     DEFAULT_RATING = 1000
 
     desc "Setup Player and Games"
       task :all => :environment do
         Rake::Task['setup:create_players'].execute
         Rake::Task['setup:create_games'].execute
+        Rake::Task['setup:create_tournaments'].execute
     end
 
     desc "db:drop, db:create, db:migrate, setup"
@@ -22,13 +25,25 @@ if Rails.env == 'development'
 
     desc "Create Players"
       task :create_players => :environment do
+        puts "Creating Players"
         PLAYER_RANGE.each do |num|
           Player.create(name: Faker::StarWars.character, rating: DEFAULT_RATING)
         end
     end
 
+    desc "Create Tournaments"
+      task :create_tournaments => :environment do
+        puts "Creating Tournaments"
+        TOURNAMENT_RANGE.each do |num|
+          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6))
+          creator.save
+          creator.tournament.update_column('end_date', 1.week.ago)
+        end
+    end
+
     desc "Create Games"
       task :create_games => :environment do
+        puts "Creating Games"
         100.times do
           winner_id = Player.ids.sample
           loser_id = (Player.ids-[winner_id]).sample

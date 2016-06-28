@@ -6,9 +6,13 @@ describe TournamentCreator do
     let!(:player_2) { Player.create name: 'Player 2' }
     let(:players_ids) { [player_1.id, player_2.id] }
     let(:tournament_name) { 'Some Name' }
+    let(:end_date) { 1.week.from_now }
+    let(:params) { { name: tournament_name,
+                     players: players_ids,
+                     end_date: end_date }}
 
     context 'valid tournament' do
-      subject { TournamentCreator.new(tournament_name, players_ids)}
+      subject { TournamentCreator.new(params)}
 
       before do
         subject.save

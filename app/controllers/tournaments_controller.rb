@@ -21,7 +21,7 @@ class TournamentsController < ApplicationController
   end
 
   def create
-    creator = TournamentCreator.new(tournament_params[:name], tournament_params[:players])
+    creator = TournamentCreator.new(tournament_params)
     if creator.save
       @tournament = creator.tournament
       redirect_to @tournament, notice: 'Tournament created'
@@ -41,6 +41,6 @@ class TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, { players: [] }, :players)
+    params.require(:tournament).permit(:name, :end_date, { players: [] }, :players)
   end
 end

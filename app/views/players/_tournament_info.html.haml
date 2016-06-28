@@ -1,0 +1,35 @@
+-if @tournaments.present?
+  - @tournaments.each do |tournament|
+    -if !tournament.expired?
+      %h3
+        Remaining Matches in #{tournament.name}
+      %h4
+        Points #{tournament.match_points_for @player}
+      - tournament.matchups_for(@player).each do |matchup|
+        - unless matchup.winner
+          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'
+  %h4 Tournaments Played (#{@player.tournaments_played_count})
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th
+          Tournament
+        %th
+          Total Matches
+        %th
+          Matches Won
+        %th
+          Final Rank
+    - @tournaments.each do |tournament|
+      %tr
+        %td
+          = tournament.name
+        %td
+          = tournament.matchups_for(@player).count
+        %td
+          = tournament.match_points_for(@player)
+        %td
+          = tournament.expired? ? tournament.rank_for(@player) : 'In Progress'
+-else
+  = link_to 'Join a Tournament', tournament_path, class: 'button expand'
+= paginate @tournaments, param_name: 'tournaments_page'

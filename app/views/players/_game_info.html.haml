@@ -1,0 +1,15 @@
+%h4 Games Played (#{@player.games_played_count})
+
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
+    = render @games
+
+= paginate @games, param_name: 'games_page'

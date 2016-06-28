@@ -1,39 +1,17 @@
-%h4 Profile
-
-%p
-  %strong
-    Name:
-  = @player.name
-%p
-  %strong
-    Rating:
-  = @player.rating
-%p
-  %strong
-    Highest Rating Achieved:
-  = @player.highest_rating_achieved
--if @player.tournaments
-  - @player.tournaments.each do |tournament|
-    %h3
-      Remaining Matches in #{tournament.name}
-    %h4
-      Points #{tournament.match_points_for @player}
-    - tournament.matchups_for(@player).each do |matchup|
-      - unless matchup.winner
-        = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'
-
-%h4 Games Played (#{@player.games_played_count})
-
-%table{width: '100%'}
-  %thead
-    %tr
-      %th
-        Humble Victor
-      %th
-        Graceful Defeated
-      %th
-        Date
-  %tbody
-    = render @games
-
-= paginate @games
+.div{id: 'tabs'}
+  %ul
+    %li{'data-tab-index'=>'0'}
+      %a{href: '#player-info'}
+        Profile
+    %li{'data-tab-index'=>'1'}
+      %a{href: '#game-info'}
+        Games
+    %li{'data-tab-index'=>'2'}
+      %a{href: '#tournament-info'}
+        Tournaments
+  .div{id: 'player-info'}
+    = render 'player_info'
+  .div{id: 'game-info'}
+    = render 'game_info'
+  .div{id: 'tournament-info'}
+    = render 'tournament_info'

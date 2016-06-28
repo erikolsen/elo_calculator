@@ -14,4 +14,8 @@ class Game < ActiveRecord::Base
   def self.for_player(player_id)
     where("winner_id = #{player_id} or loser_id = #{player_id}")
   end
+
+  def opponent_of(player)
+    winner_id == player.id ? loser : winner
+  end
 end

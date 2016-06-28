@@ -25,6 +25,25 @@ class Player < ActiveRecord::Base
     lost_games.pluck(:loser_rating).push(rating).max
   end
 
+  def opponents
+    games.map { |game| game.opponent_of self }
+  end
+
+  def top_five_opponents
+    opponents_by_games_played.take(5)
+  end
+
+  def opponents_by_games_played
+    frequencies = Hash.new(0)
+    opponents.each { |player| frequencies[player] +=1 }
+    return frequencies.sort_by{|_key, value| value}.reverse.to_h.keys
+  end
+
+  def win_percentage
+    return 0 if games_won_count.zero?
+    (games_won_count.to_f / games_played_count.to_f).round(2) * 100.0
+  end
+
   def games_won_count
     won_games.count
   end
@@ -35,6 +54,10 @@ class Player < ActiveRecord::Base
 
   def games_played_count
     games.count
+  end
+
+  def tournaments_played_count
+    tournaments.count
   end
 
   def add_rating!(change_in_rating)

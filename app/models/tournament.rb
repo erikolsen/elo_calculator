@@ -3,6 +3,16 @@ class Tournament < ActiveRecord::Base
   has_many :players, through: :entries
   has_many :matchups
 
+  def players_by_points
+    players.sort do |x,y|
+      match_points_for(x) <=> match_points_for(y)
+    end
+  end
+
+  def rank_for(player)
+    (players_by_points.find_index(player) + 1).ordinalize
+  end
+
   def match_points_for(player)
     matchups.where(winner: player).count
   end
@@ -14,6 +24,10 @@ class Tournament < ActiveRecord::Base
   def add_player(player)
     build_matchups_for player
     players << player
+  end
+
+  def expired?
+    end_date < Date.today if end_date
   end
 
   private
