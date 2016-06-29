@@ -5,7 +5,7 @@ class Tournament < ActiveRecord::Base
 
   def players_by_points
     players.sort do |x,y|
-      match_points_for(x) <=> match_points_for(y)
+      match_points_for(y) <=> match_points_for(x)
     end
   end
 

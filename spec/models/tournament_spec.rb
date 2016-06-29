@@ -4,7 +4,7 @@ RSpec.describe Tournament, :type => :model do
   let(:name) { 'Some Name' }
   let(:end_date) { 1.week.from_now.to_s }
   let(:players) { Array.new(5) { Player.create(name: Faker::Name.first_name) } }
-  let(:params) { { name: name, players: players, end_date: end_date } }
+  let(:params) { { name: name, players: players.map(&:id), end_date: end_date } }
 
   before do
     creator = TournamentCreator.new(params)
@@ -15,15 +15,14 @@ RSpec.describe Tournament, :type => :model do
   describe '#players_by_points' do
     let(:player1) { players.first }
     let(:player2) { players.second }
-    let(:player1_matchups) { @tournament.matchups_for player1 }
-    subject { @tournament.players_by_points }
+    let(:player2_matchups) { @tournament.matchups_for player2 }
 
     before do
-      player1_matchups.each { |match| match.winner_id = player1.id }
+      player2_matchups.each { |match| match.update_column('winner_id', player2.id) }
     end
 
     it 'returns a list of players ranked by how many points they won' do
-      expect(subject.first).to eq player1
+      expect(@tournament.players_by_points.first).to eq player2
     end
   end
 
