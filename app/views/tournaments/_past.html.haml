@@ -1,0 +1,22 @@
+%h4 Tournaments Played (#{@expired_tournaments.count})
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Total Matches
+      %th
+        Points
+      %th
+        Final Rank
+  - @expired_tournaments.each do |tournament|
+    %tr
+      %td
+        = link_to tournament.name, tournament_path(tournament)
+      %td
+        = tournament.matchups_for(@player).count
+      %td
+        = tournament.match_points_for(@player)
+      %td
+        = tournament.expired? ? tournament.rank_for(@player) : 'Playing'

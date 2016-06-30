@@ -1,0 +1,2 @@
+- @active_tournaments.each do |tournament|
+  = link_to tournament.name, tournament_path(tournament), class: 'button secondary expand'
