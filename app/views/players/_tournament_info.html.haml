@@ -31,5 +31,5 @@
         %td
           = tournament.expired? ? tournament.rank_for(@player) : 'Playing'
 -else
-  = link_to 'Join a Tournament', tournament_path, class: 'button expand'
+  = link_to 'Join a Tournament', tournaments_path, class: 'button expand'
 = paginate @tournaments, param_name: 'tournaments_page'
