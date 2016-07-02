@@ -21,7 +21,7 @@
       %th
         Points
   %tbody
-  - @players.each do |player|
+  - @tournament.players.each do |player|
     %tr
       %td
         = link_to player.name, player_path(player)

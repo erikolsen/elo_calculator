@@ -35,8 +35,6 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @players = @tournament.players.sort_by(&:name)
-    @potential_players = Player.by_name - @players
   end
 
   private
