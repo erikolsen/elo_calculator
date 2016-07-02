@@ -4,12 +4,12 @@
       %a{href: '#active-tournaments'}
         Active
     %li
-      %a{href: '#past-tournaments'}
+      %a{href: '#expired-tournaments'}
         History
   .div{id: 'active-tournaments'}
-    = render 'active'
-  .div{id: 'past-tournaments'}
-    = render 'past'
+    = render partial: 'tournament_data', locals: { tournaments: @active_tournaments }
+  .div{id: 'expired-tournaments'}
+    = render partial: 'tournament_data', locals: { tournaments: @expired_tournaments }
 
 .row
   .small-12.columns

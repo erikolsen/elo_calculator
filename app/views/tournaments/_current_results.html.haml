@@ -1,13 +1,13 @@
 %table{width: '100%'}
   %caption
-    Current Results
-    %p
-      Click name to see remaining matches
+    Tournament Results
     - if @tournament.expired?
       %p
         Tournament ended on
         = @tournament.end_date.strftime('%m/%d/%Y')
     - else
+      %p
+        Click name to see remaining matches
       %p
         Tournament runs until
         = @tournament.end_date.strftime('%m/%d/%Y')
