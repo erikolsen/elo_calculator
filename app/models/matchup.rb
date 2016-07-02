@@ -9,6 +9,10 @@ class Matchup < ActiveRecord::Base
     where(primary_id: players, secondary_id: players).first
   end
 
+  def can_undo?
+    games.last.can_undo?
+  end
+
   def add_game_results(game_results)
     return false if game_results.nil? || game_results.count < 3
     MatchupCreator.new(matchup: self, game_results: game_results).save
