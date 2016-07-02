@@ -85,7 +85,7 @@ describe Player do
     end
   end
 
-  describe '#opponents_by_games_played' do
+  describe '#top_five_opponents' do
     let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
     let(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
     let(:player_3) { described_class.create(name: 'Player 3', rating: default_rating) }
@@ -94,7 +94,7 @@ describe Player do
 
     context 'have played no games' do
       it 'returns empty collection' do
-        expect(player_1.opponents).to eq []
+        expect(player_1.top_five_opponents).to eq []
       end
     end
 
@@ -109,12 +109,12 @@ describe Player do
 
       let(:expected_results) { [player_4,player_3,player_2] }
       it 'returns the id and number of games played' do
-        expect(player_1.opponents_by_games_played).to eq expected_results
+        expect(player_1.top_five_opponents).to eq expected_results
       end
     end
   end
 
-  describe '#most_frequent_opponent' do
+  describe '#win_percentage' do
     let(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
     let(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
     let(:default_rating) { 1000 }
@@ -131,9 +131,6 @@ describe Player do
       end
     end
   end
-
-
-
 
   describe '#games' do
     let(:games) { double 'games' }

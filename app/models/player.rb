@@ -26,17 +26,15 @@ class Player < ActiveRecord::Base
   end
 
   def opponents
-    games.map { |game| game.opponent_of self }
+    games.pluck(:winner_id, :loser_id).flatten - [id]
   end
 
   def top_five_opponents
-    opponents_by_games_played.take(5)
+    opponents_by_games_played.take(5).map{ |id| Player.find id }
   end
 
   def opponents_by_games_played
-    frequencies = Hash.new(0)
-    opponents.each { |player| frequencies[player] +=1 }
-    return frequencies.sort_by{|_key, value| value}.reverse.to_h.keys
+    opponents.inject(Hash.new(0)){|h, p| h[p] +=1;h }.sort_by{|_, v| v}.reverse.to_h.keys
   end
 
   def win_percentage
