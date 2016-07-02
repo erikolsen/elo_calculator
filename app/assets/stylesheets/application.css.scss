@@ -50,6 +50,25 @@ $ace-orange : #E45226;
   padding: .35em;
   background: #D8F9D8;
 }
+
+.gameDetails p {
+  margin: 0;
+}
+
+.rating-change-up {
+  // use icon fi-arrow-up
+  font-weight: bold;
+  color: #5FDD5F;
+}
+
+.rating-change-down {
+  // use icon fi-arrow-down
+  font-weight: bold;
+  color: red;
+}
+
+
+
 input[type=checkbox] {
   display: none;
 }
