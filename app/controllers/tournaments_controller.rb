@@ -1,6 +1,7 @@
 class TournamentsController < ApplicationController
   def index
-    @tournaments = Tournament.all
+    @active_tournaments = Tournament.active
+    @expired_tournaments = Tournament.expired
   end
 
   def new
@@ -34,8 +35,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @players = @tournament.players.sort_by(&:name)
-    @potential_players = Player.by_name - @players
+    @player = Player.find(params[:player]) if params[:player]
   end
 
   private

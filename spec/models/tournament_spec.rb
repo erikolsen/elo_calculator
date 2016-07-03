@@ -12,13 +12,29 @@ RSpec.describe Tournament, :type => :model do
     @tournament = creator.tournament
   end
 
+  describe '#complete?' do
+    context 'incomplete tournament' do
+      it 'returns false if there are unplayed matchups' do
+        expect(@tournament.complete?).to be false
+      end
+    end
+    context 'completed tournament' do
+      before do
+        @tournament.matchups.update_all(winner_id: 1)
+      end
+      it 'returns true when all matchups have been played' do
+        expect(@tournament.complete?).to be true
+      end
+    end
+  end
+
   describe '#players_by_points' do
     let(:player1) { players.first }
     let(:player2) { players.second }
     let(:player2_matchups) { @tournament.matchups_for player2 }
 
     before do
-      player2_matchups.each { |match| match.update_column('winner_id', player2.id) }
+      player2_matchups.update_all(winner_id: player2.id)
     end
 
     it 'returns a list of players ranked by how many points they won' do

@@ -1,15 +1,30 @@
 .row
   .small-12.large-12.columns
-    .gameDetails
-      %h2
+    %table{width: '100%'}
+      %caption.gameDetails
         = "#{@matchup.winner.name} won!"
-      %h3
-        #{@matchup.primary.name}: rating is #{@matchup.primary.rating}
-      %h3
-        #{@matchup.secondary.name}: rating is #{@matchup.secondary.rating}
-      - @matchup.games.each_with_index do |game, index|
         %p
-          Game #{index + 1} winner: #{game.winner.name}
+          #{@matchup.primary.name}'s new rating is #{@matchup.primary.rating}
+        %p
+          #{@matchup.secondary.name}'s new rating is #{@matchup.secondary.rating}
+      %thead
+        %tr
+          %th
+            Game
+          %th
+            Humble Victor
+          %th
+            Graceful Defeated
+      - @matchup.games.each_with_index do |game, index|
+        %tr
+          %td
+            = index + 1
+          %td
+            = game.winner.name
+            = "(#{game.winner_rating})"
+          %td
+            = game.loser.name
+            = "(#{game.loser_rating})"
 .row
   .small-6.large-6.columns
     - if @matchup.tournament
@@ -18,6 +33,7 @@
     - else
       %h3.text-center
         = link_to 'Rematch', matchups_path(matchup: { primary_id: @matchup.primary_id, secondary_id: @matchup.secondary_id}), method: 'post', class: 'button expand'
-  .small-6.large-6.columns
-    %h3.text-center
-      = link_to 'Undo Match', @matchup, method: :delete, class: 'alert button expand'
+  - if @matchup.can_undo?
+    .small-6.large-6.columns
+      %h3.text-center
+        = link_to 'Undo Match', @matchup, method: :delete, class: 'alert button expand'

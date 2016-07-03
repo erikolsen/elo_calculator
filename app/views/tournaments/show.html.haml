@@ -1,36 +1,16 @@
 .row
   .small-12.columns
     = render 'current_results'
-- if !@tournament.expired?
+- if @tournament.expired? && @player
+  .row
+    .small-12.large-12.columns
+      = render partial: 'matchups_for_player', locals: { tournament: @tournament, player: @player }
+- else
   .row
     .small-12.large-12.columns.show-for-medium-up
-      %table{ 'width' => '100%', 'border' => '1' }
-        %caption
-          = @tournament.name
-        %thead
-          %tr
-            %th
-              Player
-            - @players.each do |player|
-              %th
-                = player.name
+      = render partial: 'round_robin_table', locals: { tournament: @tournament, players: @tournament.players }
 
-          %tbody
-            - @players.each_with_index do |primary, index|
-              %tr
-                %td
-                  = link_to primary.name, player_path(primary)
-                - @players.each do |secondary|
-                  - if primary == secondary
-                    %td.empty-table-data
-                  - else
-                    %td.text-center
-                      - matchup = @tournament.matchups.for_players(primary, secondary)
-                      - if matchup && matchup.winner
-                        = matchup.winner  == primary ? '1' : '0'
-                      - else
-                        = link_to 'Play', edit_matchup_path(matchup)
-
-.row
-  .columns
-    = render 'add_player'
+- unless @tournament.expired?
+  .row
+    .columns
+      = render 'add_player'

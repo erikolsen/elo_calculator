@@ -3,10 +3,11 @@ class Tournament < ActiveRecord::Base
   has_many :players, through: :entries
   has_many :matchups
 
+  scope :active, -> { where('end_date >= ?', Date.today).order(end_date: :desc) }
+  scope :expired, -> { where('end_date < ?', Date.today).order(end_date: :desc) }
+
   def players_by_points
-    players.sort do |x,y|
-      match_points_for(y) <=> match_points_for(x)
-    end
+    players.sort { |x,y|  match_points_for(y) <=> match_points_for(x) }
   end
 
   def rank_for(player)
@@ -24,6 +25,10 @@ class Tournament < ActiveRecord::Base
   def add_player(player)
     build_matchups_for player
     players << player
+  end
+
+  def complete?
+    matchups.where(winner_id: nil).empty?
   end
 
   def expired?

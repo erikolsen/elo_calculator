@@ -1,10 +1,11 @@
-= form_for @tournament do |f|
-  .row
-    .small-12.large-6.columns
-      = f.label :name, 'Not to late to join!'
-      = f.collection_select(:players, @potential_players, :id, :name, { include_blank: 'Add a player' })
-  .row
-    .small-12.large-6.columns
-      %p
-        = f.submit 'Join', class: 'button expand'
+.join-tournament
+  = form_for @tournament do |f|
+    .row
+      .small-12.large-6.columns
+        = f.label :name, 'Not to late to join!'
+        = f.collection_select(:players, all_players_exclude(@tournament.players), :id, :name, { include_blank: 'Select your Name'})
+    .row
+      .small-12.large-6.columns
+        %p
+          = f.submit 'Add Player', class: 'button expand secondary'
 
