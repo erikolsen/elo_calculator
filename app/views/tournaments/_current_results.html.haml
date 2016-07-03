@@ -1,8 +1,17 @@
 %table{width: '100%'}
   %caption
-    Current Results
-    %p
-      Click name to see remaining matches
+    Tournament Results
+    .tournament-subcaption
+      - if @tournament.expired?
+        %p
+          Tournament ended on
+          = @tournament.end_date.strftime('%m/%d/%Y')
+      - else
+        %p
+          Click name to see remaining matches
+        %p
+          Tournament runs until
+          = @tournament.end_date.strftime('%m/%d/%Y')
   %thead
     %tr
       %th
@@ -12,7 +21,7 @@
       %th
         Points
   %tbody
-  - @players.each do |player|
+  - @tournament.players.each do |player|
     %tr
       %td
         = link_to player.name, player_path(player)

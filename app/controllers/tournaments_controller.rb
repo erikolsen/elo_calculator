@@ -1,6 +1,7 @@
 class TournamentsController < ApplicationController
   def index
-    @tournaments = Tournament.all
+    @active_tournaments = Tournament.active
+    @expired_tournaments = Tournament.expired
   end
 
   def new
@@ -21,7 +22,7 @@ class TournamentsController < ApplicationController
   end
 
   def create
-    creator = TournamentCreator.new(tournament_params[:name], tournament_params[:players])
+    creator = TournamentCreator.new(tournament_params)
     if creator.save
       @tournament = creator.tournament
       redirect_to @tournament, notice: 'Tournament created'
@@ -34,13 +35,12 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    @players = @tournament.players.sort_by(&:name)
-    @potential_players = Player.by_name - @players
+    @player = Player.find(params[:player]) if params[:player]
   end
 
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, { players: [] }, :players)
+    params.require(:tournament).permit(:name, :end_date, { players: [] }, :players)
   end
 end

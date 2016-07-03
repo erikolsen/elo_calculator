@@ -16,4 +16,8 @@ module PlayersHelper
     last_game.loser_id || 1
   end
 
+  def all_players_exclude(players)
+    Player.by_name - players
+  end
+
 end

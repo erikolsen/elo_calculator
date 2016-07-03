@@ -11,15 +11,16 @@
  * file per style scope.
  *
  *= require_self
+ *= require jquery-ui/datepicker
+ *= require jquery-ui/tabs
+ *= require elo
+ *= require tournaments
  */
 
 @import 'constants';
 @import 'elo';
 @import 'clubs';
 @import 'foundation-icons';
-.no-margin-bottom {
-  margin-bottom: 0px !important;
-}
 #footer {
   position: fixed;
   bottom: 0;
@@ -51,6 +52,25 @@
   padding: .35em;
   background: #D8F9D8;
 }
+
+.gameDetails p {
+  margin: 0;
+}
+
+.rating-change-up {
+  // use icon fi-arrow-up
+  font-weight: bold;
+  color: #5FDD5F;
+}
+
+.rating-change-down {
+  // use icon fi-arrow-down
+  font-weight: bold;
+  color: red;
+}
+
+
+
 input[type=checkbox] {
   display: none;
 }

@@ -1,13 +1,17 @@
-.row
-  .small-12.columns
-    %h2
-      Current Tournaments
-    - @tournaments.each do |tournament|
-      = link_to tournament.name, tournament_path(tournament), class: 'button secondary expand'
+.div{id: 'tabs'}
+  %ul
+    %li
+      %a{href: '#active-tournaments'}
+        Active
+    %li
+      %a{href: '#expired-tournaments'}
+        History
+  .div{id: 'active-tournaments'}
+    = render partial: 'tournament_data', locals: { tournaments: @active_tournaments }
+  .div{id: 'expired-tournaments'}
+    = render partial: 'tournament_data', locals: { tournaments: @expired_tournaments }
+
 .row
   .small-12.columns
     %h2
       = link_to 'Setup Tournament', new_tournament_path, { class: 'button expand' }
-
-
-

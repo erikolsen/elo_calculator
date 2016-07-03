@@ -12,9 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
+//= require jquery-ui/tabs
 //= require foundation
 //= require google_analytics
 //= require turbolinks
+//= require tournaments
+//= require player_profile
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

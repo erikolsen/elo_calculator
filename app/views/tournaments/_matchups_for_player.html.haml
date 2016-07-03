@@ -1,0 +1,31 @@
+%h4
+  Tournament Results for
+  = player.name
+%table{width: '100%'}
+  %thead
+    %tr
+      %th
+        Match
+      %th
+        Winner
+      %th
+        1
+      %th
+        2
+      %th
+        3
+      %th
+        4
+      %th
+        5
+  %tbody
+    - tournament.matchups_for(player).each do |matchup|
+      - if matchup.winner
+        %tr
+          %td
+            = link_to "#{player.name} vs. #{matchup.opponent_of(player).name}", matchup
+          %td
+            = matchup.winner.name
+          - matchup.games.each do |game|
+            %td
+              = game.winner == player ? '1' : '0'

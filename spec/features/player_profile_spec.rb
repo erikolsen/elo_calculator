@@ -10,9 +10,41 @@ describe 'Player Profile' do
   let!(:game3) { Game.create! winner_id: player3.id, loser_id: player2.id, winner_rating: 5000, loser_rating: 6000 }
 
   describe 'visiting player profile' do
+    describe 'tournaments' do
+      let(:tournament_name) { 'Some Tournament' }
+      let(:end_date) { 1.week.from_now.to_s }
+      let(:tournament_params) { { name: tournament_name,
+                                  players: [player1.id, player2.id],
+                                  end_date: end_date } }
+
+      before do
+        creator = TournamentCreator.new(tournament_params)
+        creator.save
+        @tournament = creator.tournament
+      end
+
+      context 'active tournaments' do
+        it 'shows the matchups for the player' do
+          visit player_path(player1.id)
+          expect(page).to have_content("#{player1.name} vs #{player2.name}")
+        end
+      end
+
+      context 'completed tournaments' do
+        let(:past_date) { 1.week.ago.to_s }
+
+        it 'shows the players results' do
+          @tournament.update_column('end_date', past_date)
+          visit player_path(player1.id)
+          expect(page).to have_content('Final Rank')
+        end
+      end
+    end
+
     before do
       visit player_path(player1.id)
     end
+
 
     it 'shows player name and rating' do
       expect(page).to have_content(player1.name)

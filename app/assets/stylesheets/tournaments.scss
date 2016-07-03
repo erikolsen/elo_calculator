@@ -1,3 +1,16 @@
 // Place all the styles related to the Tournaments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.join-tournament label{
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.join-tournament select{
+  font-weight: bold;
+  border: 3px solid black;
+}
+
+.tournament-subcaption p {
+  margin: 0;
+}
+
