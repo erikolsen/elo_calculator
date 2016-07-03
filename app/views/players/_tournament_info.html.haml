@@ -23,7 +23,10 @@
     - @tournaments.each do |tournament|
       %tr
         %td
-          = link_to tournament.name, tournament_path(tournament)
+          - if tournament.expired?
+            = link_to tournament.name, tournament_path(tournament, player: @player.id)
+          - else
+            = link_to tournament.name, tournament_path(tournament)
         %td
           = tournament.matchups_for(@player).count
         %td

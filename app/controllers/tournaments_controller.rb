@@ -35,6 +35,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
+    @player = Player.find(params[:player]) if params[:player]
   end
 
   private
