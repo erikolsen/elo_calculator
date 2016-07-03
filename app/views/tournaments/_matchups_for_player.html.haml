@@ -20,11 +20,12 @@
         5
   %tbody
     - tournament.matchups_for(player).each do |matchup|
-      %tr
-        %td
-          = link_to "#{player.name} vs. #{matchup.opponent_of(player).name}", matchup
-        %td
-          = matchup.winner.name
-        - matchup.games.each do |game|
+      - if matchup.winner
+        %tr
           %td
-            = game.winner == player ? '1' : '0'
+            = link_to "#{player.name} vs. #{matchup.opponent_of(player).name}", matchup
+          %td
+            = matchup.winner.name
+          - matchup.games.each do |game|
+            %td
+              = game.winner == player ? '1' : '0'
