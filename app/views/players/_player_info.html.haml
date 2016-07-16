@@ -10,8 +10,10 @@
       = @player.highest_rating_achieved
     %p
       %strong
-        Rating change today
-      = @player.daily_rating_change
+        Rating change today:
+      %span.daily-rating-change
+        = @player.daily_rating_change
+        %i.rating-arrow
   .column.small-6
     %p
       %strong
