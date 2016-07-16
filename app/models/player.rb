@@ -21,6 +21,23 @@ class Player < ActiveRecord::Base
     Game.for_player(self.id).most_recent
   end
 
+  def daily_rating_change
+    return 0 unless games.played_on(Date.today).present?
+    rating - start_rating_on(Date.today)
+  end
+
+  def next_rating_from(day)
+    next_game_from(day).rating_for_player(id) ||  rating
+  end
+
+  def next_game_from(day)
+    games.played_on(day).last.next_game_for self
+  end
+
+  def start_rating_on(day)
+    games.played_on(day).first.rating_for_player self
+  end
+
   def highest_rating_achieved
     lost_games.pluck(:loser_rating).push(rating).max
   end

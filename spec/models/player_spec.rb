@@ -132,6 +132,25 @@ describe Player do
     end
   end
 
+  describe '#daily_rating_change' do
+    let!(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
+    let!(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
+    let(:default_rating) { 1000 }
+
+    context 'have played games' do
+      before do
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_2.id, player_1.id).save
+        GameCreator.new(player_2.id, player_1.id).save
+      end
+
+      it 'returns rating movment from first game to rating after last game' do
+        expect(player_2.reload.daily_rating_change).to eq 66
+        expect(player_1.reload.daily_rating_change).to eq -66
+      end
+    end
+  end
+
   describe '#games' do
     let(:games) { double 'games' }
     let(:ordered_games) { double 'ordered games' }

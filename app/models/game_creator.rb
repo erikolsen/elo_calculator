@@ -33,9 +33,9 @@ class GameCreator
 
   def create_game
     @game = Game.create!(
-        winner_id: winner.id, 
-        loser_id: loser.id, 
-        winner_rating: winner.rating, 
+        winner_id: winner.id,
+        loser_id: loser.id,
+        winner_rating: winner.rating,
         loser_rating: loser.rating
         )
   end

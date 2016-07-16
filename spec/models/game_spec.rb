@@ -9,10 +9,26 @@ describe Game do
   it { should validate_presence_of(:winner_rating) }
   it { should validate_presence_of(:loser_rating) }
 
-  describe '#opponent_of player' do
-    let(:player_1) { Player.create(name: 'Player 1', rating: 1000) }
-    let(:player_2) { Player.create(name: 'Player 2', rating: 1000) }
+  let(:player_1) { Player.create(name: 'Player 1', rating: 1000) }
+  let(:player_2) { Player.create(name: 'Player 2', rating: 1000) }
+  let(:player_3) { Player.create(name: 'Player 3', rating: 1000) }
 
+  describe '#next_game_for(player)' do
+    before do
+      creator = GameCreator.new(player_1.id, player_2.id)
+      creator.save
+      @game1 = creator.game
+      GameCreator.new(player_2.id, player_3.id)
+      creator = GameCreator.new(player_1.id, player_2.id)
+      creator.save
+      @game2 = creator.game
+    end
+    it 'returns the next game played for a given player' do
+      expect(@game1.next_game_for(player_1)).to eq @game2
+    end
+  end
+
+  describe '#opponent_of player' do
     before do
       creator = GameCreator.new(player_1.id, player_2.id)
       creator.save
