@@ -3,6 +3,10 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.includes(:winner, :loser).most_recent.page(params[:page]).per(10)
+    respond_to do |format|
+      format.html
+      format.csv { send_data Game.to_csv }
+    end
   end
 
   def new
