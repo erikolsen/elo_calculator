@@ -82,4 +82,10 @@ class Player < ActiveRecord::Base
   def subtract_rating!(change_in_rating)
     update_attributes!(rating: rating - change_in_rating)
   end
+
+  def ratings_over_time
+    games.map do |game|
+      game.winner_id == self.id ? game.winner_rating : game.loser_rating
+    end
+  end
 end
