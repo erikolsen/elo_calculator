@@ -19,6 +19,7 @@
 //= require turbolinks
 //= require tournaments
 //= require player_profile
+//= require Chart
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

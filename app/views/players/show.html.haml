@@ -9,9 +9,14 @@
     %li{'data-tab-index'=>'2'}
       %a{href: '#tournament-info'}
         Tournaments
+    %li{'data-tab-index'=>'3'}
+      %a{href: '#rating-over-time'}
+        Rating Over Time
   .div{id: 'player-info'}
     = render 'player_info'
   .div{id: 'game-info'}
     = render 'game_info'
   .div{id: 'tournament-info'}
     = render 'tournament_info'
+  .div{id: 'rating-over-time'}
+    = render 'rating_over_time'
