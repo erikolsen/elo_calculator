@@ -173,9 +173,28 @@ describe Player do
     let(:rating2) { 456 }
     let(:rating3) { 789 }
 
-    let(:game1) { double 'game', winner_id: player1_id, loser_id: player2_id, winner_rating: rating1, loser_rating: 0 }
-    let(:game2) { double 'game', winner_id: player1_id, loser_id: player2_id, winner_rating: rating2, loser_rating: 0 }
-    let(:game3) { double 'game', winner_id: player2_id, loser_id: player1_id, winner_rating: 0, loser_rating: rating3 }
+    let(:date1) { 'date 1' }
+    let(:date2) { 'date 2' }
+    let(:date3) { 'date 3' }
+
+    let(:game1) { double 'game', 
+                  winner_id: player1_id,
+                  loser_id: player2_id,
+                  winner_rating: rating1,
+                  loser_rating: 0,
+                  created_at: date1 }
+    let(:game2) { double 'game',
+                  winner_id: player1_id,
+                  loser_id: player2_id,
+                  winner_rating: rating2,
+                  loser_rating: 0,
+                  created_at: date2 }
+    let(:game3) { double 'game',
+                  winner_id: player2_id,
+                  loser_id: player1_id,
+                  winner_rating: 0,
+                  loser_rating: rating3,
+                  created_at: date3 }
     let(:games) { [game1, game2, game3] }
 
     before do
@@ -184,7 +203,12 @@ describe Player do
     end
 
     it 'should return back an array of all ratings for user regardless of win or loss' do
-      expect(subject.ratings_over_time).to eq([ rating1, rating2, rating3 ])
+      expected_data = [ 
+        {x: date1, y: rating1},
+        {x: date2, y: rating2},
+        {x: date3, y: rating3} 
+      ]
+      expect(subject.ratings_over_time).to eq(expected_data)
     end
   end
 end

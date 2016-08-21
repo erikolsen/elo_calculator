@@ -85,7 +85,7 @@ class Player < ActiveRecord::Base
 
   def ratings_over_time
     games.map do |game|
-      game.winner_id == self.id ? game.winner_rating : game.loser_rating
+      { x: game.created_at, y: game.winner_id == self.id ? game.winner_rating : game.loser_rating }
     end
   end
 end
