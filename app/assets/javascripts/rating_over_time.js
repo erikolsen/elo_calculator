@@ -14,7 +14,14 @@ $(function() {
             {
               label: 'Rating',
               lineTension: 0,
-              data: yAxisData(data)
+              data: yAxisData(data),
+              backgroundColor: [
+                'rgba(0, 153, 255, 0.2)'
+              ],
+              borderColor: [
+                'rgba(0, 153, 255, 1)'
+              ],
+              borderWidth: 1
             }
           ]
         },
