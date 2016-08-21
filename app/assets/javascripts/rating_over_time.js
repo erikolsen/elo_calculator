@@ -39,13 +39,13 @@ $(function() {
     }
 
     function xAxisData(data) {
-      return data.map(function(datum) {
+      return $.map(data, function(datum) {
         return formatDate(datum.x);
       });
     }
 
     function yAxisData(data) {
-      return data.map(function(datum) {
+      return $.map(data, function(datum) {
         return datum.y;
       });
     }
