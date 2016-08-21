@@ -9,14 +9,44 @@ $(function() {
       var chart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Player'],
+          labels: xAxisData(data),
           datasets: [
             {
               label: 'Rating',
-              data: data
+              lineTension: 0,
+              data: yAxisData(data)
             }
           ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            xAxis: [{
+              type: 'time',
+              time: {
+                unit: 'll'
+              }
+            }]
+          }
         }
       });
     });
+
+    function formatDate(s) {
+      var date = new Date(s);
+      return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
+    }
+
+    function xAxisData(data) {
+      return data.map(function(datum) {
+        return formatDate(datum.x);
+      });
+    }
+
+    function yAxisData(data) {
+      return data.map(function(datum) {
+        return datum.y;
+      });
+    }
 });
