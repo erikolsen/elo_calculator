@@ -21,25 +21,43 @@ class Player < ActiveRecord::Base
     Game.for_player(self.id).most_recent
   end
 
+  def days_played
+    games.pluck(:created_at).map{|t| t.to_date }.uniq
+  end
+
+  def average_rating_change
+    ratings = days_played.map { |day| rating_change_on day }
+    ratings.present? ? ratings.sum / ratings.count : 0
+  end
+
+  def rating_change_on(day)
+    next_rating_from(day) - start_rating_on(day)
+  end
+
   def chronological_games
     Game.for_player(self.id).chronologically
   end
 
   def daily_rating_change
-    return 0 unless games.played_on(Date.today).present?
-    rating - start_rating_on(Date.today)
+    rating_change_on Date.today
   end
 
   def next_rating_from(day)
-    next_game_from(day).rating_for_player(id) ||  rating
+    game = next_game_from(day)
+    return rating if game.nil?
+    game.rating_for_player self
   end
 
   def next_game_from(day)
-    games.played_on(day).last.next_game_for self
+    played_games = games.played_on(day)
+    return nil if played_games.empty?
+    played_games.last.next_game_for self
   end
 
   def start_rating_on(day)
-    games.played_on(day).first.rating_for_player self
+    game = games.played_on(day).first || next_game_from(day)
+    return rating unless game
+    game.rating_for_player self
   end
 
   def highest_rating_achieved
@@ -88,8 +106,8 @@ class Player < ActiveRecord::Base
   end
 
   def ratings_over_time
-    chronological_games.map do |game|
-      { x: game.created_at, y: game.winner_id == self.id ? game.winner_rating : game.loser_rating }
+    days_played.reverse.map do |day|
+      { x: day, y: start_rating_on(day)}
     end
   end
 end

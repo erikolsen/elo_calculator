@@ -23,7 +23,10 @@
       %strong
         Current Win Percent:
       = number_to_percentage @player.win_percentage, precision: 0
-%hr
+    %p
+      %strong
+        Average Rating Change:
+      = @player.average_rating_change
 .row
   .column
     %p

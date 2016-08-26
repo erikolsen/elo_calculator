@@ -13,6 +13,22 @@ describe Player do
 
   subject { described_class.new(id: id, name: name, rating: rating) }
 
+  describe '#days_played' do
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
+    let(:expected_days) { [1.day.ago, 1.week.ago, 1.month.ago ].map(&:to_date) }
+
+    before do
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
+    end
+
+    it 'returns an array of uniq days' do
+      expect(player_1.days_played).to eq expected_days
+    end
+  end
+
   describe 'updating rating methods' do
     let(:change_in_rating) { 25 }
 
@@ -132,6 +148,45 @@ describe Player do
     end
   end
 
+  describe '#rating_change_on(day)' do
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
+
+    context 'have played games on day' do
+      context 'have played games since' do
+        let!(:day) { 1.week.ago }
+        let(:expected_difference) { 100 }
+        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: day } }
+        let!(:newer_games) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + expected_difference }
+
+        it 'returns the difference between rating in first game and first game after requested day' do
+          expect(player_1.rating_change_on(day)).to be expected_difference
+        end
+      end
+
+      context 'have not played games since' do
+        let!(:player_1) { FactoryGirl.create :player, rating: 1050 }
+        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id } }
+        let!(:day) { Date.today }
+
+        it 'returns the difference between rating in first game and current rating' do
+          expect(player_1.rating_change_on(day)).to be 50
+        end
+      end
+    end
+
+    context 'have not played games on day' do
+      let!(:day) { 1.week.ago }
+      let(:expected_difference) { 0 }
+      let!(:prior_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      let!(:later_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + 100 }
+
+      it 'returns zero' do
+        expect(player_1.rating_change_on(day)).to be expected_difference
+      end
+    end
+  end
+
   describe '#daily_rating_change' do
     let!(:player_2) { described_class.create(name: 'Player 2', rating: default_rating) }
     let!(:player_1) { described_class.create(name: 'Player 1', rating: default_rating) }
@@ -166,49 +221,20 @@ describe Player do
   end
 
   describe '#ratings_over_time' do
-    let(:player1_id) { 9948 }
-    let(:player2_id) { 4827 }
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
 
-    let(:rating1) { 123 }
-    let(:rating2) { 456 }
-    let(:rating3) { 789 }
+    let(:game1) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+    let(:game2) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
+    let(:game3) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
 
-    let(:date1) { 'date 1' }
-    let(:date2) { 'date 2' }
-    let(:date3) { 'date 3' }
-
-    let(:game1) { double 'game',
-                  winner_id: player1_id,
-                  loser_id: player2_id,
-                  winner_rating: rating1,
-                  loser_rating: 0,
-                  created_at: date1 }
-    let(:game2) { double 'game',
-                  winner_id: player1_id,
-                  loser_id: player2_id,
-                  winner_rating: rating2,
-                  loser_rating: 0,
-                  created_at: date2 }
-    let(:game3) { double 'game',
-                  winner_id: player2_id,
-                  loser_id: player1_id,
-                  winner_rating: 0,
-                  loser_rating: rating3,
-                  created_at: date3 }
-    let(:games) { [game3, game2, game1] }
-
-    before do
-      allow(subject).to receive(:id) { player1_id }
-      allow(subject).to receive(:chronological_games) { games }
-    end
-
-    it 'should return back an array of all ratings for user regardless of win or loss' do
+    it 'should return back an array of all start ratings for user on the days they played games' do
       expected_data = [
-        {x: date3, y: rating3},
-        {x: date2, y: rating2},
-        {x: date1, y: rating1}
+        {x: game1.created_at.to_date, y: game1.winner_rating},
+        {x: game2.created_at.to_date, y: game2.winner_rating},
+        {x: game3.created_at.to_date, y: game3.winner_rating}
       ]
-      expect(subject.ratings_over_time).to eq(expected_data)
+      expect(player_1.ratings_over_time).to eq(expected_data)
     end
   end
 end

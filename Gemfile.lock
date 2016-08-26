@@ -89,6 +89,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
     ffi (1.9.6)
@@ -258,6 +263,7 @@ DEPENDENCIES
   chart-js-rails (~> 0.1.0)
   cucumber-rails
   database_cleaner
+  factory_girl_rails
   faker
   foundation-icons-sass-rails
   foundation-rails (= 5.5.2.1)
