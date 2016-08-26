@@ -13,6 +13,22 @@ describe Player do
 
   subject { described_class.new(id: id, name: name, rating: rating) }
 
+  describe '#days_played' do
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
+    let(:expected_days) { [1.day.ago, 1.week.ago, 1.month.ago ].map(&:to_date) }
+
+    before do
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
+      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
+    end
+
+    it 'returns an array of uniq days' do
+      expect(player_1.days_played).to eq expected_days
+    end
+  end
+
   describe 'updating rating methods' do
     let(:change_in_rating) { 25 }
 
@@ -128,6 +144,45 @@ describe Player do
       it 'returns the player you played the most' do
         expect(player_1.win_percentage).to eq 33
         expect(player_2.win_percentage).to eq 67
+      end
+    end
+  end
+
+  describe '#rating_change_on(day)' do
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
+
+    context 'have played games on day' do
+      context 'have played games since' do
+        let!(:day) { 1.week.ago }
+        let(:expected_difference) { 100 }
+        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: day } }
+        let!(:newer_games) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + expected_difference }
+
+        it 'returns the difference between rating in first game and first game after requested day' do
+          expect(player_1.rating_change_on(day)).to be expected_difference
+        end
+      end
+
+      context 'have not played games since' do
+        let!(:player_1) { FactoryGirl.create :player, rating: 1050 }
+        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id } }
+        let!(:day) { Date.today }
+
+        it 'returns the difference between rating in first game and current rating' do
+          expect(player_1.rating_change_on(day)).to be 50
+        end
+      end
+    end
+
+    context 'have not played games on day' do
+      let!(:day) { 1.week.ago }
+      let(:expected_difference) { 0 }
+      let!(:prior_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      let!(:later_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + 100 }
+
+      it 'returns zero' do
+        expect(player_1.rating_change_on(day)).to be expected_difference
       end
     end
   end

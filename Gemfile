@@ -52,6 +52,7 @@ group :test, :development do
   gem 'site_prism'
   gem 'pry-byebug'
   gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :test do
