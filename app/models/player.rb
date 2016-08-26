@@ -106,8 +106,8 @@ class Player < ActiveRecord::Base
   end
 
   def ratings_over_time
-    chronological_games.map do |game|
-      { x: game.created_at, y: game.winner_id == self.id ? game.winner_rating : game.loser_rating }
+    days_played.reverse.map do |day|
+      { x: day, y: start_rating_on(day)}
     end
   end
 end
