@@ -42,7 +42,7 @@ $(function() {
 
     function formatDate(s) {
       var date = new Date(s);
-      return (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear()
     }
 
     function xAxisData(data) {
