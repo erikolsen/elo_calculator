@@ -34,6 +34,10 @@ class Player < ActiveRecord::Base
     next_rating_from(day) - start_rating_on(day)
   end
 
+  def chronological_games
+    Game.for_player(self.id).chronologically
+  end
+
   def daily_rating_change
     rating_change_on Date.today
   end
@@ -99,5 +103,11 @@ class Player < ActiveRecord::Base
 
   def subtract_rating!(change_in_rating)
     update_attributes!(rating: rating - change_in_rating)
+  end
+
+  def ratings_over_time
+    chronological_games.map do |game|
+      { x: game.created_at, y: game.winner_id == self.id ? game.winner_rating : game.loser_rating }
+    end
   end
 end

@@ -219,4 +219,51 @@ describe Player do
       expect(subject.games).to eq(ordered_games)
     end
   end
+
+  describe '#ratings_over_time' do
+    let(:player1_id) { 9948 }
+    let(:player2_id) { 4827 }
+
+    let(:rating1) { 123 }
+    let(:rating2) { 456 }
+    let(:rating3) { 789 }
+
+    let(:date1) { 'date 1' }
+    let(:date2) { 'date 2' }
+    let(:date3) { 'date 3' }
+
+    let(:game1) { double 'game',
+                  winner_id: player1_id,
+                  loser_id: player2_id,
+                  winner_rating: rating1,
+                  loser_rating: 0,
+                  created_at: date1 }
+    let(:game2) { double 'game',
+                  winner_id: player1_id,
+                  loser_id: player2_id,
+                  winner_rating: rating2,
+                  loser_rating: 0,
+                  created_at: date2 }
+    let(:game3) { double 'game',
+                  winner_id: player2_id,
+                  loser_id: player1_id,
+                  winner_rating: 0,
+                  loser_rating: rating3,
+                  created_at: date3 }
+    let(:games) { [game3, game2, game1] }
+
+    before do
+      allow(subject).to receive(:id) { player1_id }
+      allow(subject).to receive(:chronological_games) { games }
+    end
+
+    it 'should return back an array of all ratings for user regardless of win or loss' do
+      expected_data = [
+        {x: date3, y: rating3},
+        {x: date2, y: rating2},
+        {x: date1, y: rating1}
+      ]
+      expect(subject.ratings_over_time).to eq(expected_data)
+    end
+  end
 end

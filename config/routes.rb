@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :tournaments, only: [:index, :new, :update, :create, :show]
 
+  resources :player_stats, only: [:show]
+
   root 'players#index'
 end

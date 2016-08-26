@@ -10,6 +10,8 @@ class Game < ActiveRecord::Base
   scope :most_recent, -> { order(id: :desc) }
   scope :played_on, ->(date) { where(created_at: (date.beginning_of_day..date.end_of_day)).reverse_order }
   scope :prior_to, ->(date) { where('created_at < ?', date) }
+  scope :chronologically, -> { order(id: :asc) }
+  scope :played_on, ->(date) { where(created_at: (date.beginning_of_day.utc .. date.end_of_day.utc)).reverse_order }
 
   def self.to_csv
     attributes = %w(winner_rating loser_rating created_at updated_at winner_id loser_id)
