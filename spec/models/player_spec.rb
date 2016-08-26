@@ -177,7 +177,7 @@ describe Player do
     let(:date2) { 'date 2' }
     let(:date3) { 'date 3' }
 
-    let(:game1) { double 'game', 
+    let(:game1) { double 'game',
                   winner_id: player1_id,
                   loser_id: player2_id,
                   winner_rating: rating1,
@@ -195,18 +195,18 @@ describe Player do
                   winner_rating: 0,
                   loser_rating: rating3,
                   created_at: date3 }
-    let(:games) { [game1, game2, game3] }
+    let(:games) { [game3, game2, game1] }
 
     before do
       allow(subject).to receive(:id) { player1_id }
-      allow(subject).to receive(:games) { games }
+      allow(subject).to receive(:chronological_games) { games }
     end
 
     it 'should return back an array of all ratings for user regardless of win or loss' do
-      expected_data = [ 
-        {x: date1, y: rating1},
+      expected_data = [
+        {x: date3, y: rating3},
         {x: date2, y: rating2},
-        {x: date3, y: rating3} 
+        {x: date1, y: rating1}
       ]
       expect(subject.ratings_over_time).to eq(expected_data)
     end

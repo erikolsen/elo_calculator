@@ -21,6 +21,10 @@ class Player < ActiveRecord::Base
     Game.for_player(self.id).most_recent
   end
 
+  def chronological_games
+    Game.for_player(self.id).chronologically
+  end
+
   def daily_rating_change
     return 0 unless games.played_on(Date.today).present?
     rating - start_rating_on(Date.today)
@@ -84,7 +88,7 @@ class Player < ActiveRecord::Base
   end
 
   def ratings_over_time
-    games.map do |game|
+    chronological_games.map do |game|
       { x: game.created_at, y: game.winner_id == self.id ? game.winner_rating : game.loser_rating }
     end
   end
