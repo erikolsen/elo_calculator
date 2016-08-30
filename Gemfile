@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'foundation-rails', '5.5.2.1'
 gem 'foundation-icons-sass-rails'
+gem 'chart-js-rails', '~> 0.1.0'
 
 gem 'haml-rails'
 
@@ -44,7 +45,7 @@ gem 'kaminari'
 group :development do
   gem 'quiet_assets'
   gem 'better_errors'
-  gem "binding_of_caller"
+  gem 'binding_of_caller'
 end
 
 group :test, :development do
@@ -52,6 +53,7 @@ group :test, :development do
   gem 'site_prism'
   gem 'pry-byebug'
   gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :test do

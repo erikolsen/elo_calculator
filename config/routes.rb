@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :clubs, only: :show, param: :slug
+  resources :player_stats, only: [:show]
 
   root 'clubs#index'
 end

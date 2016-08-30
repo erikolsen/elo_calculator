@@ -8,6 +8,12 @@
       %strong
         Highest Rating Achieved:
       = @player.highest_rating_achieved
+    %p
+      %strong
+        Rating change today:
+      %span.daily-rating-change
+        = @player.daily_rating_change
+        %i.rating-arrow
   .column.small-6
     %p
       %strong
@@ -17,7 +23,10 @@
       %strong
         Current Win Percent:
       = number_to_percentage @player.win_percentage, precision: 0
-%hr
+    %p
+      %strong
+        Average Rating Change:
+      = @player.average_rating_change
 .row
   .column
     %p

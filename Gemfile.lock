@@ -58,6 +58,8 @@ GEM
     capybara-webkit (1.4.1)
       capybara (>= 2.3.0, < 2.5.0)
       json
+    chart-js-rails (0.1.0)
+      railties (> 3.1)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
@@ -87,6 +89,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
     ffi (1.9.6)
@@ -253,8 +260,10 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capybara-webkit
+  chart-js-rails (~> 0.1.0)
   cucumber-rails
   database_cleaner
+  factory_girl_rails
   faker
   foundation-icons-sass-rails
   foundation-rails (= 5.5.2.1)

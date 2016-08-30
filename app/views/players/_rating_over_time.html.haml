@@ -1,0 +1,4 @@
+%h4 Rating Over Time (Days played: #{@player.days_played.count})
+
+%canvas#rating-over-time-graph{:width => '400', :height => '300', 'data-player-id' => @player.id}
+
