@@ -167,7 +167,7 @@ describe Player do
       context 'have not played games since' do
         let!(:player_1) { FactoryGirl.create :player, rating: 1050 }
         let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id } }
-        let!(:day) { Date.today }
+        let!(:day) { Date.current }
 
         it 'returns the difference between rating in first game and current rating' do
           expect(player_1.rating_change_on(day)).to be 50

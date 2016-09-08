@@ -3,8 +3,8 @@ class Tournament < ActiveRecord::Base
   has_many :players, through: :entries
   has_many :matchups
 
-  scope :active, -> { where('end_date >= ?', Date.today).order(end_date: :desc) }
-  scope :expired, -> { where('end_date < ?', Date.today).order(end_date: :desc) }
+  scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }
+  scope :expired, -> { where('end_date < ?', Date.current).order(end_date: :desc) }
 
   def players_by_points
     players.sort { |x,y|  match_points_for(y) <=> match_points_for(x) }
@@ -32,7 +32,7 @@ class Tournament < ActiveRecord::Base
   end
 
   def expired?
-    end_date < Date.today if end_date
+    end_date < Date.current if end_date
   end
 
   private

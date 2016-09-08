@@ -39,7 +39,7 @@ class Player < ActiveRecord::Base
   end
 
   def daily_rating_change
-    rating_change_on Date.today
+    rating_change_on Date.current
   end
 
   def next_rating_from(day)
