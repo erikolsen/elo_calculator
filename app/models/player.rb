@@ -25,6 +25,11 @@ class Player < ActiveRecord::Base
     games.pluck(:created_at).map{|t| t.to_date }.uniq
   end
 
+  def average_rating
+    return 0 if days_played.empty?
+    days_played.map{|day| next_rating_from day }.sum / days_played.count
+  end
+
   def average_rating_change
     ratings = days_played.map { |day| rating_change_on day }
     ratings.present? ? ratings.sum / ratings.count : 0

@@ -220,6 +220,38 @@ describe Player do
     end
   end
 
+  describe '#average_rating' do
+    let(:player_1) { FactoryGirl.create :player }
+    let(:player_2) { FactoryGirl.create :player }
+
+    context 'with no days played' do
+      it 'should return zero' do
+        expect(player_1.average_rating).to eq 0
+      end
+    end
+
+    context 'with 1 day played' do
+      before do
+        FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id
+      end
+
+      it 'should return current rating' do
+        expect(player_1.average_rating).to eq player_1.rating
+      end
+    end
+
+    context 'with more than 1 day played' do
+      before do
+        FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 2.day.ago
+        FactoryGirl.create :game, winner_id: player_1.id, winner_rating: 2000, loser_id: player_2.id, created_at: 1.day.ago
+      end
+
+      it 'should return the average rating for the two days' do
+        expect(player_1.average_rating).to eq 1500
+      end
+    end
+  end
+
   describe '#ratings_over_time' do
     let(:player_1) { FactoryGirl.create :player }
     let(:player_2) { FactoryGirl.create :player }

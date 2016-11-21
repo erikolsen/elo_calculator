@@ -6,8 +6,8 @@
       = @player.name
     %p
       %strong
-        Highest Rating Achieved:
-      = @player.highest_rating_achieved
+        Current Win Percent:
+      = number_to_percentage @player.win_percentage, precision: 0
     %p
       %strong
         Rating change today:
@@ -17,16 +17,16 @@
   .column.small-6
     %p
       %strong
+        Highest Rating:
+      = @player.highest_rating_achieved
+    %p
+      %strong
         Current Rating:
       = @player.rating
     %p
       %strong
-        Current Win Percent:
-      = number_to_percentage @player.win_percentage, precision: 0
-    %p
-      %strong
-        Average Rating Change:
-      = @player.average_rating_change
+        Average Rating:
+      = @player.average_rating
 .row
   .column
     %p
