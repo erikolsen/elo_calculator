@@ -1,9 +1,10 @@
 $(function() {
   var playerId = $('#rating-over-time-graph').data('player-id');
-  $.getJSON('/player_stats/' + playerId)
-    .error(function() {
-      console.log('could not get player stats for: ' + playerId);
-    })
+  if(playerId) {
+    $.getJSON('/player_stats/' + playerId)
+      .error(function() {
+        console.log('could not get player stats for: ' + playerId);
+      })
     .done(function(data) {
       var ctx = $('#rating-over-time-graph');
       var chart = new Chart(ctx, {
@@ -11,18 +12,18 @@ $(function() {
         data: {
           labels: xAxisData(data),
           datasets: [
-            {
-              label: 'Rating',
-              lineTension: 0,
-              data: yAxisData(data),
-              backgroundColor: [
-                'rgba(0, 153, 255, 0.2)'
-              ],
-              borderColor: [
-                'rgba(0, 153, 255, 1)'
-              ],
-              borderWidth: 1
-            }
+          {
+            label: 'Rating',
+            lineTension: 0,
+            data: yAxisData(data),
+            backgroundColor: [
+              'rgba(0, 153, 255, 0.2)'
+            ],
+            borderColor: [
+              'rgba(0, 153, 255, 1)'
+            ],
+            borderWidth: 1
+          }
           ]
         },
         options: {
@@ -56,4 +57,5 @@ $(function() {
         return datum.y;
       });
     }
+  }
 });
