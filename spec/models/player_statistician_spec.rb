@@ -182,7 +182,7 @@ describe PlayerStatistician do
     context 'with no days played' do
       it 'should return zero' do
         statistician =  described_class.new(player_1)
-        expect(statistician.average_rating).to eq 0
+        expect(statistician.average_rating).to eq 1000
       end
     end
 

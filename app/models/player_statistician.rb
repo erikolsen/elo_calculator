@@ -11,7 +11,7 @@ class PlayerStatistician
   end
 
   def daily_rating_change
-    rating_change_on Date.current
+    rating - start_rating_on(Date.current)
   end
 
   def highest_rating_achieved
@@ -23,8 +23,8 @@ class PlayerStatistician
   end
 
   def average_rating
-    return 0 if days_played.empty?
-    days_played.map{|day| next_rating_from day }.sum / days_played.count
+    return 1000 if games.empty?
+    games.map{|game| game.rating_for_player player }.sum / games.count
   end
 
   def ratings_over_time
@@ -83,10 +83,10 @@ class PlayerStatistician
   end
 
   def games_won
-    games.where(winner_id: @player.id)
+    player.won_games
   end
 
   def lost_games
-    games.where(loser_id: @player.id)
+    player.lost_games
   end
 end
