@@ -52,7 +52,8 @@ describe 'Player Profile' do
     end
 
     it 'shows player name and highest rating achieved' do
-      expect(page).to have_content(player1.highest_rating_achieved)
+      statistician =  PlayerStatistician.new(player1)
+      expect(page).to have_content(statistician.highest_rating_achieved)
     end
 
     it 'shows players past games' do
