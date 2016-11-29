@@ -7,18 +7,18 @@
     %p
       %strong
         Current Win Percent:
-      = number_to_percentage @player.win_percentage, precision: 0
+      = number_to_percentage @stats.win_percentage, precision: 0
     %p
       %strong
         Rating change today:
       %span.daily-rating-change
-        = @player.daily_rating_change
+        = @stats.daily_rating_change
         %i.rating-arrow
   .column.small-6
     %p
       %strong
         Highest Rating:
-      = @player.highest_rating_achieved
+      = @stats.highest_rating_achieved
     %p
       %strong
         Current Rating:
@@ -26,11 +26,11 @@
     %p
       %strong
         Average Rating:
-      = @player.average_rating
+      = @stats.average_rating
 .row
   .column
     %p
       %strong
         Play a Rematch
-    - @player.top_five_opponents.each do |opp|
+    - @stats.top_five_opponents.each do |opp|
       = link_to "#{@player.name} vs #{opp.name}", matchups_path(matchup: { primary_id: @player.id, secondary_id: opp.id}), method: 'post', class: 'button expand'

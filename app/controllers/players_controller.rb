@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
+    @stats = PlayerStatistician.new(@player)
     @games = @player.games.page(params[:games_page]).per(10)
     @tournaments = @player.tournaments.page(params[:tournaments_page]).per(10)
   end
