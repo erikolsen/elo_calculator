@@ -1,5 +1,5 @@
 class PlayerStatistician
-  attr_reader :games, :player
+  attr_reader :player
 
   def initialize(player)
     @player = player
