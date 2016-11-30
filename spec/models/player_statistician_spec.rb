@@ -29,7 +29,7 @@ describe PlayerStatistician do
       end
 
       it 'returns the current rating' do
-        statistician =  described_class.new(player_1)
+        statistician = described_class.new(player_1)
         expect(statistician.highest_rating_achieved).to eq 1025
       end
     end
@@ -69,7 +69,7 @@ describe PlayerStatistician do
       end
 
       it 'returns the percent of games you win' do
-        statistician =  described_class.new(player_1)
+        statistician = described_class.new(player_1)
         expect(statistician.win_percentage).to eq 33
       end
 
@@ -181,31 +181,31 @@ describe PlayerStatistician do
 
     context 'with no days played' do
       it 'should return zero' do
-        statistician =  described_class.new(player_1)
+        statistician = described_class.new(player_1)
         expect(statistician.average_rating).to eq 1000
       end
     end
 
     context 'with 1 day played' do
       before do
-        FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id
+        GameCreator.new(player_1.id, player_2.id).save
       end
 
       it 'should return current rating' do
-        statistician =  described_class.new(player_1)
-        expect(statistician.average_rating).to eq player_1.rating
+        statistician = described_class.new(player_1.reload)
+        expect(statistician.average_rating).to eq 1012
       end
     end
 
     context 'with more than 1 day played' do
       before do
-        FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 2.day.ago
-        FactoryGirl.create :game, winner_id: player_1.id, winner_rating: 2000, loser_id: player_2.id, created_at: 1.day.ago
+        GameCreator.new(player_1.id, player_2.id).save
+        GameCreator.new(player_1.id, player_2.id).save
       end
 
       it 'should return the average rating for the two days' do
-        statistician =  described_class.new(player_1)
-        expect(statistician.average_rating).to eq 1500
+        statistician = described_class.new(player_1.reload)
+        expect(statistician.average_rating).to eq 1024
       end
     end
   end

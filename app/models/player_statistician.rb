@@ -6,8 +6,8 @@ class PlayerStatistician
   end
 
   def win_percentage
-    return 0 if games_won.count.zero?
-    (games_won.count.to_f / games.count.to_f).round(2) * 100.0
+    return 0 if games_won_count.zero?
+    (games_won_count.to_f / games.count.to_f).round(2) * 100.0
   end
 
   def daily_rating_change
@@ -24,7 +24,7 @@ class PlayerStatistician
 
   def average_rating
     return 1000 if games.empty?
-    games.map{|game| game.rating_for_player player }.sum / games.count
+    (games.map{|game| game.rating_for_player player }.sum + rating) / (games.count + 1)
   end
 
   def ratings_over_time
@@ -45,11 +45,11 @@ class PlayerStatistician
     next_rating_from(day) - start_rating_on(day)
   end
 
+  private
+
   def games
     @games ||= player.games
   end
-
-  private
 
   def opponents
     games.pluck(:winner_id, :loser_id).flatten - [player.id]
@@ -82,8 +82,8 @@ class PlayerStatistician
     game.rating_for_player player
   end
 
-  def games_won
-    player.won_games
+  def games_won_count
+    @games_won_count ||= player.won_games.count
   end
 
   def lost_games
