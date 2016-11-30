@@ -24,7 +24,7 @@ class PlayerStatistician
 
   def average_rating
     return 1000 if games.empty?
-    (games.map{|game| game.rating_for_player player }.sum + rating) / (games.count + 1)
+    games.inject(rating){ |sum, game| sum += game.rating_for(player) } / (games.count + 1)
   end
 
   def ratings_over_time
@@ -67,7 +67,7 @@ class PlayerStatistician
   def start_rating_on(day)
     game = games.played_on(day).first || next_game_from(day)
     return rating unless game
-    game.rating_for_player player
+    game.rating_for player
   end
 
   def next_game_from(day)
@@ -79,7 +79,7 @@ class PlayerStatistician
   def next_rating_from(day)
     game = next_game_from(day)
     return rating if game.nil?
-    game.rating_for_player player
+    game.rating_for player
   end
 
   def games_won_count

@@ -39,7 +39,7 @@ class Game < ActiveRecord::Base
     Game.for_player(player.id).where('created_at > ?', created_at).first
   end
 
-  def rating_for_player(player)
+  def rating_for(player)
     winner_id == player.id ? winner_rating : loser_rating
   end
 
