@@ -33,4 +33,4 @@
       %strong
         Play a Rematch
     - @stats.top_five_opponents.each do |opp|
-      = link_to "#{@player.name} vs #{opp.name}", matchups_path(matchup: { primary_id: @player.id, secondary_id: opp.id}), method: 'post', class: 'button expand'
+      = player_and_opponent_link(@player, opp)
