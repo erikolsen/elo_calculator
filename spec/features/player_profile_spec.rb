@@ -19,7 +19,7 @@ describe 'Player Profile' do
         within '.rematchLink' do
           expect(page).to have_content('50%')
           expect(page).to have_content('Player 1 vs. Player 2')
-          expect(page).to have_content('1 / 2')
+          expect(page).to have_content('1 / 1')
         end
       end
     end
