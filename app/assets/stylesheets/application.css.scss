@@ -21,6 +21,11 @@
 @import 'elo';
 @import 'clubs';
 @import 'foundation-icons';
+
+.no-margin-bottom {
+  margin-bottom: 0px !important;
+}
+
 #footer {
   position: fixed;
   bottom: 0;
