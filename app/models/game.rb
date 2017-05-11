@@ -27,6 +27,10 @@ class Game < ActiveRecord::Base
     self == Game.last
   end
 
+  def self.for_players(player1, player2)
+    where("winner_id = #{player1.id} and loser_id = #{player2.id} or winner_id = #{player2.id} and loser_id = #{player1.id}").includes(:winner, :loser)
+  end
+
   def self.for_player(player_id)
     where("winner_id = #{player_id} or loser_id = #{player_id}")
   end
@@ -39,7 +43,7 @@ class Game < ActiveRecord::Base
     Game.for_player(player.id).where('created_at > ?', created_at).first
   end
 
-  def rating_for_player(player)
+  def rating_for(player)
     winner_id == player.id ? winner_rating : loser_rating
   end
 

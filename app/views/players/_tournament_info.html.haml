@@ -8,7 +8,7 @@
       - tournament.matchups_for(@player).each do |matchup|
         - unless matchup.winner
           = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'
-  %h4 Tournaments Played (#{@player.tournaments_played_count})
+  %h4 Tournaments Played (#{@player.tournaments.count})
   %table{width: '100%'}
     %thead
       %tr

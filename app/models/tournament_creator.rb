@@ -33,7 +33,7 @@ class TournamentCreator
   end
 
   def has_future_date
-    errors.add :base, 'End date must be in the future' if end_date < Date.today
+    errors.add :base, 'End date must be in the future' if end_date < Date.current
   end
 
   def no_duplicate_players

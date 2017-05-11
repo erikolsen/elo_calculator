@@ -13,6 +13,19 @@ describe Game do
   let(:player_2) { Player.create(name: 'Player 2', rating: 1000) }
   let(:player_3) { Player.create(name: 'Player 3', rating: 1000) }
 
+  describe '.for_players' do
+    before do
+      GameCreator.new(player_3.id, player_2.id).save
+      creator = GameCreator.new(player_1.id, player_2.id)
+      creator.save
+      @game = creator.game
+    end
+
+    it 'returns the games for two players' do
+      expect(Game.for_players(player_1, player_2)).to eq [@game]
+    end
+  end
+
   describe '#next_game_for(player)' do
     before do
       creator = GameCreator.new(player_1.id, player_2.id)

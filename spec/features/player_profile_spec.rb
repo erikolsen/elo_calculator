@@ -10,6 +10,20 @@ describe 'Player Profile' do
   let!(:game3) { Game.create! winner_id: player3.id, loser_id: player2.id, winner_rating: 5000, loser_rating: 6000 }
 
   describe 'visiting player profile' do
+    context 'rematch links' do
+      before do
+        visit player_path(player1)
+      end
+
+      it 'shows percent won, top played player, game results' do
+        within '.rematchLink' do
+          expect(page).to have_content('50%')
+          expect(page).to have_content('Player 1 vs. Player 2')
+          expect(page).to have_content('1 / 1')
+        end
+      end
+    end
+
     describe 'tournaments' do
       let(:tournament_name) { 'Some Tournament' }
       let(:end_date) { 1.week.from_now.to_s }
@@ -52,7 +66,13 @@ describe 'Player Profile' do
     end
 
     it 'shows player name and highest rating achieved' do
-      expect(page).to have_content(player1.highest_rating_achieved)
+      statistician =  PlayerStatistician.new(player1)
+      expect(page).to have_content(statistician.highest_rating_achieved)
+    end
+
+    it 'shows average rating' do
+      statistician =  PlayerStatistician.new(player1)
+      expect(page).to have_content(statistician.average_rating)
     end
 
     it 'shows players past games' do
