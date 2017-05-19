@@ -6,6 +6,7 @@ describe 'homepage' do
 
     it 'adds the club link to the homepage' do
       visit root_path
+      click_link 'Join a Club'
       click_link 'Start a Club'
       fill_in :club_name, with: club_name
       click_button 'Add Club'
@@ -24,7 +25,6 @@ describe 'homepage' do
 
     it 'shows player ratings' do
       visit root_path
-      click_link 'All Players'
 
       within "#player-#{player1.id}" do
         expect(find('.rank')).to have_content(2)

@@ -17,7 +17,7 @@ class ClubsController < ApplicationController
     @club = Club.new(club_params)
 
     if @club.save
-      redirect_to root_path, notice: 'Club created'
+      redirect_to clubs_path
     else
       flash.now[:alert] = 'Club failed to save'
       render :new

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :tournaments, only: [:index, :new, :update, :create, :show]
-  resources :clubs, only: [:new, :create] do
+  resources :clubs, only: [:new, :create, :index] do
     scope module: :clubs do
       resources :memberships, only: [:new, :create]
     end
@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :clubs, only: :show, param: :slug
   resources :player_stats, only: [:show]
 
-  root 'clubs#index'
+  root 'players#index'
 end
