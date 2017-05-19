@@ -16,6 +16,15 @@ ActiveRecord::Schema.define(version: 20160619225544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "clubs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "clubs", ["slug"], name: "index_clubs_on_slug", using: :btree
+
   create_table "entries", force: :cascade do |t|
     t.integer  "tournament_id"
     t.integer  "player_id"
@@ -51,6 +60,16 @@ ActiveRecord::Schema.define(version: 20160619225544) do
 
   add_index "matchups", ["tournament_id"], name: "index_matchups_on_tournament_id", using: :btree
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "memberships", ["club_id"], name: "index_memberships_on_club_id", using: :btree
+  add_index "memberships", ["player_id"], name: "index_memberships_on_player_id", using: :btree
+
   create_table "players", force: :cascade do |t|
     t.string   "name"
     t.integer  "rating",     default: 0, null: false
@@ -68,4 +87,6 @@ ActiveRecord::Schema.define(version: 20160619225544) do
     t.datetime "end_date"
   end
 
+  add_foreign_key "memberships", "clubs"
+  add_foreign_key "memberships", "players"
 end

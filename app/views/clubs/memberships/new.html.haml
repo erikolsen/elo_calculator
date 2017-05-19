@@ -1,0 +1,12 @@
+%h3
+  Select Your Name to Join #{@club.name}
+
+= form_for [@club, @membership] do |f|
+  .row
+    .small-12.large-6.columns
+      = f.hidden_field :club_id, value: @club.id
+      = f.label :player_id do
+        Player
+        = f.collection_select(:player_id, all_players_exclude(@club.players), :id, :name, { include_blank: 'Select your Name'})
+  %p
+    = f.submit 'Join', class: 'button'

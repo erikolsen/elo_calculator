@@ -17,8 +17,15 @@
  *= require tournaments
  *= require player_profile
  */
-$ace-orange : #E45226;
+
+@import 'constants';
+@import 'elo';
+@import 'clubs';
 @import 'foundation-icons';
+
+.no-margin-bottom {
+  margin-bottom: 0px !important;
+}
 
 #footer {
   position: fixed;
@@ -93,4 +100,3 @@ input[type=radio]:checked + label {
 .empty-table-data {
   background-color: lightgrey;
 }
-
