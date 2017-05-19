@@ -1,5 +1,8 @@
-%h3
-  = @club.name
+%h2
+  %strong
+    = @club.name
+    = link_to 'Join', new_club_membership_path(@club.id), class: 'button right'
+
 %table{width: '100%'}
   %thead
     %tr
@@ -11,8 +14,4 @@
         Rating
       %th
         Won / Lost
-  = render @club.players
-
-
-%p
-  = link_to 'Join Club', new_club_membership_path(@club.id), class: 'button expand'
+  = render @club.players_by_rating

@@ -5,8 +5,14 @@ class Club < ActiveRecord::Base
   validates :name, uniqueness: true
   after_save :save_slug
 
+  scope :by_name, -> { order(:name) }
+
   def to_param
     slug
+  end
+
+  def players_by_rating
+    players.sort_by(&:rating).reverse
   end
 
   private
