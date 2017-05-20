@@ -37,8 +37,8 @@ class PlayerStatistician
     games.pluck(:created_at).map{|t| t.to_date }.uniq
   end
 
-  def top_five_opponents
-    opponents_by_games_played.take(5).map{ |id| Player.find id }
+  def top_ten_opponents
+    opponents_by_games_played.take(10).map{ |id| Player.find id }
   end
 
   def rating_change_on(day)

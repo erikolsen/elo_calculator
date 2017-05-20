@@ -80,7 +80,7 @@ describe PlayerStatistician do
     end
   end
 
-  describe '#top_five_opponents' do
+  describe '#top_ten_opponents' do
     let(:player_2) { FactoryGirl.create :player }
     let(:player_1) { FactoryGirl.create :player }
     let(:player_3) { FactoryGirl.create :player }
@@ -89,7 +89,7 @@ describe PlayerStatistician do
     context 'have played no games' do
       it 'returns empty collection' do
         statistician =  described_class.new(player_1)
-        expect(statistician.top_five_opponents).to eq []
+        expect(statistician.top_ten_opponents).to eq []
       end
     end
 
@@ -105,7 +105,7 @@ describe PlayerStatistician do
       let(:expected_results) { [player_4,player_3,player_2] }
       it 'returns the id and number of games played' do
         statistician =  described_class.new(player_1)
-        expect(statistician.top_five_opponents).to eq expected_results
+        expect(statistician.top_ten_opponents).to eq expected_results
       end
     end
   end

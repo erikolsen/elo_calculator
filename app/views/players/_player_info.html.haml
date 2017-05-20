@@ -32,5 +32,5 @@
     %p
       %strong
         Play a Rematch
-    - @stats.top_five_opponents.each do |opp|
+    - @stats.top_ten_opponents.each do |opp|
       = player_and_opponent_link(@player, opp)
