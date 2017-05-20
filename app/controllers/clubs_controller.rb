@@ -2,7 +2,6 @@ class ClubsController < ApplicationController
   def index
     @clubs = Club.all
     @player_count = Player.count
-    render layout: '_without_container'
   end
 
   def new
