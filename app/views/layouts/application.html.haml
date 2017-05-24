@@ -12,11 +12,9 @@
     = render 'layouts/apple_icon_links'
   %body
     = render 'layouts/topbar'
-    .row
-      .large-12.columns
-        = render 'layouts/alerts_and_notices'
-        .container
-          = yield
+    = render 'layouts/alerts_and_notices'
+    .container
+      = yield
 
     = render 'layouts/icon_bar'
     = javascript_include_tag 'application'

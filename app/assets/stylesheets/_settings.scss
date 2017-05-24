@@ -51,7 +51,7 @@ $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #1779ba,
-  //secondary: #767676,
+  //secondary: #767676, OVERRIDE
   secondary: #e6e6e6,
   success: #3adb76,
   warning: #ffae00,
@@ -474,7 +474,8 @@ $pagination-item-background-current: $primary-color;
 $pagination-item-color-current: $white;
 $pagination-item-color-disabled: $medium-gray;
 $pagination-ellipsis-color: $black;
-$pagination-mobile-items: false;
+//$pagination-mobile-items: false; OVERRIDE
+$pagination-mobile-items: true;
 $pagination-mobile-current-item: false;
 $pagination-arrows: true;
 
@@ -548,7 +549,8 @@ $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
 $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
-$table-is-striped: true;
+//$table-is-striped: true; OVERRIDE
+$table-is-striped: false;
 $table-striped-background: smart-scale($table-background, $table-color-scale);
 $table-stripe: even;
 $table-head-background: smart-scale($table-background, $table-color-scale / 2);

@@ -24,10 +24,6 @@
 @import 'clubs';
 @import 'foundation-icons';
 
-.no-margin-bottom {
-  margin-bottom: 0px !important;
-}
-
 .top-bar {
   color: white;
 }
@@ -63,7 +59,8 @@
 }
 
 .container {
-  margin-bottom: 30%;
+  // to account for the footer
+  margin-bottom: 20%;
 }
 
 .orange-bar{
