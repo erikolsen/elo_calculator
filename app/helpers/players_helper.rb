@@ -1,5 +1,9 @@
 module PlayersHelper
 
+  def link_for(player)
+    link_to player.name, player
+  end
+
   def player_and_opponent_link(player, opponent)
     games_played = Game.for_players(player, opponent)
     player_wins = games_played.where(winner_id: player.id).count

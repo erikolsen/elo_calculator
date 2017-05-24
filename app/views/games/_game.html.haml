@@ -1,7 +1,9 @@
 %tr{id: "game-#{game.id}", align: 'center'}
   %td.winner
-    #{game.winner.name} (#{game.winner_rating})
+    = link_for game.winner
+    (#{game.winner_rating})
   %td.loser
-    #{game.loser.name} (#{game.loser_rating})
+    = link_for game.loser
+    (#{game.loser_rating})
   %td.date
     = game.created_at.strftime("%I:%M %p %m/%d/%y")
