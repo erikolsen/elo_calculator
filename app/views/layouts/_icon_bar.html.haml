@@ -1,16 +1,17 @@
-.icon-bar.five-up#footer.show-for-small-only
-  %a.item{href: games_path, "aria-labelledby" => "#itemlabel1"}
-    %i.fi-arrow-left
-    %label#itemlabel1 Past Games
-  %a.item{href: new_game_path, "aria-labelledby" => "#itemlabel2"}
-    %i.fi-trophy
-    %label#itemlabel2 Add Game
-  %a.item{href: root_path, "aria-labelledby" => "#itemlabel3"}
-    %i.fi-home
-    %label#itemlabel3 Home
-  %a.item{href: tournaments_path, "aria-labelledby" => "#itemlabel4"}
-    %i.fi-torsos-all
-    %label#itemlabel4 Tournaments
-  %a.item{href: new_player_path, "aria-labelledby" => "#itemlabel5"}
-    %i.fi-plus
-    %label#itemlabel5 New Player
+%ul.menu.expanded.icon-top#footer.show-for-small-only{"data-sticky-container" => ""}
+  %li
+    %a{href: games_path}
+      %i.fi-clock
+      %span Past Games
+  %li
+    %a{href: new_game_path}
+      %i.fi-trophy
+      %span Add Game
+  %li
+    %a{href: root_path}
+      %i.fi-home
+      %span Home
+  %li
+    %a{href: clubs_path}
+      %i.fi-torsos-all
+      %span Clubs
