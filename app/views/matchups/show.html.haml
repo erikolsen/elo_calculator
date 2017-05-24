@@ -29,11 +29,11 @@
   .small-6.large-6.columns
     - if @matchup.tournament
       %h3.text-center
-        = link_to 'Back to Tournament',  @matchup.tournament,{class: 'button expand'}
+        = link_to 'Back to Tournament',  @matchup.tournament,{class: 'button expanded'}
     - else
       %h3.text-center
-        = link_to 'Rematch', matchups_path(matchup: { primary_id: @matchup.primary_id, secondary_id: @matchup.secondary_id}), method: 'post', class: 'button expand'
+        = link_to 'Rematch', matchups_path(matchup: { primary_id: @matchup.primary_id, secondary_id: @matchup.secondary_id}), method: 'post', class: 'button expanded'
   - if @matchup.can_undo?
     .small-6.large-6.columns
       %h3.text-center
-        = link_to 'Undo Match', @matchup, method: :delete, class: 'alert button expand'
+        = link_to 'Undo Match', @matchup, method: :delete, class: 'alert button expanded'
