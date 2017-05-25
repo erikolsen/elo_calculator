@@ -11,9 +11,9 @@ module PlayersHelper
     percent = (player_wins.to_f / games_played.count.to_f).round(2) * 100.0
     link_title = "#{player.name} vs. #{opponent.name}"
     link_to matchups_path(matchup: { primary_id: player.id, secondary_id: opponent.id}), method: 'post', class: 'button expanded rematchLink' do
-      link = content_tag(:span, number_to_percentage(percent, precision: 0), class: 'left')
+      link = content_tag(:span, number_to_percentage(percent, precision: 0), class: 'float-left')
       link += content_tag(:span, link_title, class: 'center')
-      link += content_tag(:span, "#{player_wins} / #{loser_wins}", class: 'right')
+      link += content_tag(:span, "#{player_wins} / #{loser_wins}", class: 'float-right')
       link
     end
   end

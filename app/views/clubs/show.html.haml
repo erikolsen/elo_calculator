@@ -1,7 +1,8 @@
-%h2
-  %strong
-    = @club.name
-    = link_to 'Join', new_club_membership_path(@club.id), class: 'button right'
+.club-top-row
+  %h2
+    %strong
+      = @club.name
+      = link_to 'Join', new_club_membership_path(@club.id), class: 'button float-right'
 
 %table{width: '100%'}
   %thead
