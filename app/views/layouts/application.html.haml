@@ -5,20 +5,16 @@
       = ELO_APP_NAME
     = csrf_meta_tags
     = stylesheet_link_tag 'application'
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css", :rel => "stylesheet"}
     %link{:href => image_path("manifest.json"), :rel => "manifest"}
     %meta{:content => "initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width", :name => "viewport"}
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
     %meta{:content => "yes", :name => "mobile-web-app-capable"}
     = render 'layouts/apple_icon_links'
-    = javascript_include_tag 'vendor/modernizr'
   %body
     = render 'layouts/topbar'
-    .row
-      .large-12.columns
-        = render 'layouts/alerts_and_notices'
-        .container
-          = yield
+    = render 'layouts/alerts_and_notices'
+    .container
+      = yield
 
     = render 'layouts/icon_bar'
     = javascript_include_tag 'application'

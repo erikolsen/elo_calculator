@@ -6,13 +6,14 @@ describe 'homepage' do
 
     it 'adds the club link to the homepage' do
       visit root_path
-      click_link 'Join a Club'
-      click_link 'Start a Club'
+      within '.hamburger-menu' do
+        click_link 'New Club'
+      end
       fill_in :club_name, with: club_name
       click_button 'Add Club'
 
       expect(page).to have_content(club_name)
-      expect(page).to have_content('Start a Club')
+      expect(page).to have_content('Members: 0')
     end
   end
 

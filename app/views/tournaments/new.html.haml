@@ -9,8 +9,8 @@
       = f.datetime_field :end_date, class: 'datepicker'
       - all_players.each_with_index do |player, index|
         = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"
-        = label_tag "tournament_players_#{index}", player.name, class: "button secondary expand"
+        = label_tag "tournament_players_#{index}", player.name, class: "button secondary expanded"
   %br
     .row
       .small-12.large-6.columns
-        = f.submit 'Create Tournament', class: 'button expand'
+        = f.submit 'Create Tournament', class: 'button expanded'

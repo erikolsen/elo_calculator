@@ -1,9 +1,9 @@
 - if flash[:notice]
-  .alert-box.success{'data-alert' => true}
+  .callout.success{'data-closeable' => ''}
     = flash[:notice]
-    %a.close{href: "#"} &times;
+    %button.close-button{href: "#", "data-close" => ""} &times;
 
 - if flash[:alert]
-  .alert-box.alert{'data-alert' => true}
+  .callout.warning{'data-closable' => ''}
     = flash[:alert]
-    %a.close{href: "#"} &times;
+    %button.close-button{href: "#", "data-close" => ""} &times;

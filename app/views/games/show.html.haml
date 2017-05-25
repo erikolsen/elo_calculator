@@ -2,15 +2,17 @@
   .large-6.columns
     .gameDetails
       %h3
-        #{@game.winner.name} defeats #{@game.loser.name}
+        = link_for @game.winner
+        defeats
+        = link_for @game.loser
       %p
         #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
       %p
         #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
     %br
     - if @game.can_undo?
-      = link_to 'Undo Game', @game, method: :delete, class: 'alert button right'
-  .large-6.columns.show-for-large-up
+      = link_to 'Undo Game', @game, method: :delete, class: 'alert button float-right'
+  .large-6.columns.show-for-large
     %table{width: '100%'}
       %thead
         %tr

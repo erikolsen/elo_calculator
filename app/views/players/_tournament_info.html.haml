@@ -7,7 +7,7 @@
         Points #{tournament.match_points_for @player}
       - tournament.matchups_for(@player).each do |matchup|
         - unless matchup.winner
-          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expand'
+          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
   %h4 Tournaments Played (#{@player.tournaments.count})
   %table{width: '100%'}
     %thead
@@ -34,5 +34,5 @@
         %td
           = tournament.expired? ? tournament.rank_for(@player) : 'Playing'
 -else
-  = link_to 'Join a Tournament', tournaments_path, class: 'button expand'
+  = link_to 'Join a Tournament', tournaments_path, class: 'button expanded'
 = paginate @tournaments, param_name: 'tournaments_page'

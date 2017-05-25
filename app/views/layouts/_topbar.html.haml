@@ -1,22 +1,36 @@
-%div.orange-bar
-.contain-to-grid
-  %nav.top-bar.no-margin-bottom{"data-topbar" => ""}
-    %ul.title-area
-      %li.name
-        %h1
-          = link_to ELO_APP_NAME, root_path
-    %section.top-bar-section.show-for-medium-up
-      %ul.right
-        %li.divider
+.orange-bar
+.top-bar
+  .top-bar-title
+    %span{"data-responsive-toggle" => "responsive-menu"}
+      %button.menu-icon{"data-toggle" => "", :type => "button"}
+    %strong
+      = link_to ELO_APP_NAME, root_path
+  #responsive-menu
+    .show-for-small-only
+      .hamburger-menu.top-bar-left
+        %ul.menu.vertical{"data-dropdown-menu" => ""}
+          %li
+            = link_to "New Club", new_club_path
+          %li
+            = link_to "New Player", new_player_path
+    .show-for-medium.top-bar-right
+      %ul.dropdown.menu{"data-dropdown-menu" => ""}
         %li
-          = link_to "All Clubs", clubs_path
-        %li.divider
+          = link_to "Games", "#"
+          %ul.menu.vertical
+            %li
+              = link_to "Past Games", games_path
+            %li
+              = link_to "New Game", new_game_path
         %li
-          = link_to "Add Games", new_game_path
-        %li.divider
+          = link_to "Clubs", "#"
+          %ul.menu.vertical
+            %li
+              = link_to "All Clubs", clubs_path
+            %li
+              = link_to "New Club", new_club_path
+        %li
+          = link_to "New Player", new_player_path
         %li
           = link_to "Tournaments", tournaments_path
-        %li.divider
-        %li
-          = link_to "Add Player", new_player_path
-        %li.divider
+

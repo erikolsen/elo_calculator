@@ -1,11 +1,4 @@
 .row
-  .column.small-12
-    %h2
-      = ELO_APP_NAME
-      Club's
-    %p
-      Click on a Club to join or start your own!
-    = link_to 'Start a Club', new_club_path, class: 'button expand'
   .row
     - @clubs.each do |club|
       .column.small-12.medium-4.large-4.left

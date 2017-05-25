@@ -18,42 +18,66 @@
  *= require player_profile
  */
 
+@import "foundation_and_overrides";
 @import 'constants';
 @import 'elo';
 @import 'clubs';
 @import 'foundation-icons';
 
-.no-margin-bottom {
-  margin-bottom: 0px !important;
+.top-bar {
+  color: white;
+}
+.top-bar a {
+  color: white;
+}
+.top-bar a:hover {
+  color: grey;
+}
+
+.top-bar-title  {
+  color: white;
+}
+
+td {
+  border-bottom: 1px solid lightgrey;
+  text-align: left;
 }
 
 #footer {
+  background-color: black;
   position: fixed;
   bottom: 0;
   width: 100%;
   min-height: 10%;
 }
 #footer a {
+  color: white;
   padding: 3% 0 3% 0;
 }
-.container {
-  margin-bottom: 30%;
+
+#footer i {
+  font-size: 2em;
 }
 
-@media only screen and (min-width: 40.063em) {
-  .container {
-    margin-top: 60px;
-  }
+#footer span {
+  font-size: 0.75em;
+}
+
+.container {
+  margin-top: 1%;
+  margin-bottom: 20%;
 }
 
 .orange-bar{
   top: 0;
   background-color: $ace-orange;
   width: 100%;
-  height: 1%;
+  height: .5em;
+  z-index: 1;
 }
 
 .gameDetails {
+  margin-top: 1em;
   border: 1px solid #5FDD5F;
   padding: .35em;
   background: #D8F9D8;

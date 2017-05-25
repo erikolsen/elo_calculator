@@ -1,4 +1,6 @@
-%h3 Add Player
+.row
+  .small-12.large-6.columns
+    %h3 Add Player
 
 = form_for @player do |f|
   .row
@@ -6,5 +8,6 @@
       = f.label :name do
         Name
         = f.text_field :name
-  %p
-    = f.submit 'Add Player', class: 'button'
+  .row
+    .small-12.large-6.columns
+      = f.submit 'Add Player', class: 'button expanded'
