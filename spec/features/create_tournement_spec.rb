@@ -8,7 +8,7 @@ describe 'creating a new tournament' do
     it 'creates new game' do
       visit root_path
 
-      within '.top-bar' do
+      within '.hamburger-menu' do
         click_link 'Tournaments'
       end
       click_link 'Setup Tournament'

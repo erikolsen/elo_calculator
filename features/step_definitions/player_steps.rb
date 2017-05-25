@@ -7,7 +7,9 @@ Given(/^I visit the new player page$/) do
 end
 
 When(/^I click New Player$/) do
-  click_link 'New Player'
+  within '.hamburger-menu' do
+    click_link 'New Player'
+  end
 end
 
 Then(/^I am on the new player page$/) do
