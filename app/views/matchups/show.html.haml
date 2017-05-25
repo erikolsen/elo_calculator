@@ -20,10 +20,10 @@
           %td
             = index + 1
           %td
-            = game.winner.name
+            = link_for game.winner
             = "(#{game.winner_rating})"
           %td
-            = game.loser.name
+            = link_for game.loser
             = "(#{game.loser_rating})"
 .row
   .small-6.large-6.columns
