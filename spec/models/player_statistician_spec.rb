@@ -95,7 +95,9 @@ describe PlayerStatistician do
 
     context 'have played games' do
       before do
+        GameCreator.new(player_1.id, player_4.id).save
         GameCreator.new(player_1.id, player_2.id).save
+        GameCreator.new(player_1.id, player_3.id).save
         GameCreator.new(player_1.id, player_3.id).save
         GameCreator.new(player_1.id, player_4.id).save
         GameCreator.new(player_1.id, player_4.id).save
