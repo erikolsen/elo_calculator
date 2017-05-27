@@ -1,22 +1,23 @@
-.div{id: 'tabs'}
-  %ul
-    %li{'data-tab-index'=>'0'}
+.div
+  %ul.horizontal.tabs#player_tabs{'data-tabs' => ''}
+    %li.tabs-title.is-active
       %a{href: '#player-info'}
         Profile
-    %li{'data-tab-index'=>'1'}
+    %li.tabs-title
       %a{href: '#game-info'}
         Games
-    %li{'data-tab-index'=>'2'}
+    %li.tabs-title
       %a{href: '#tournament-info'}
         Tournaments
-    %li{'data-tab-index'=>'3'}
+    %li.tabs-title
       %a{href: '#rating-over-time'}
         Stats
-  .div{id: 'player-info'}
-    = render 'player_info'
-  .div{id: 'game-info'}
-    = render 'game_info'
-  .div{id: 'tournament-info'}
-    = render 'tournament_info'
-  .div{id: 'rating-over-time'}
-    = render 'rating_over_time'
+  .tabs-content{'data-tabs-content' => 'player_tabs'}
+    .tabs-panel{id: 'player-info'}
+      = render 'player_info'
+    .tabs-panel{id: 'game-info'}
+      = render 'game_info'
+    .tabs-panel{id: 'tournament-info'}
+      = render 'tournament_info'
+    .tabs-panel{id: 'rating-over-time'}
+      = render 'rating_over_time'

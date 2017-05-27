@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/datepicker
-//= require jquery-ui/tabs
+//= require jquery-ui/widgets/datepicker
 //= require foundation
 //= require google_analytics
 //= require turbolinks
