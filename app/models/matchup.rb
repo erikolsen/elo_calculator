@@ -1,4 +1,4 @@
-class Matchup < ActiveRecord::Base
+class Matchup < ApplicationRecord
   belongs_to :tournament
   belongs_to :winner, class_name: 'Player'
   belongs_to :primary, class_name: 'Player'
