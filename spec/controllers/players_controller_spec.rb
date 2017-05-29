@@ -21,7 +21,7 @@ describe PlayersController do
     end
 
     it 'assigns the player' do
-      get :show, params
+      get :show, params: params
       expect(assigns(:player)).to eq(player)
       expect(assigns(:stats)).to eq(statistician)
     end

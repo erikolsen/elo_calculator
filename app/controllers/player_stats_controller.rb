@@ -1,5 +1,5 @@
 class PlayerStatsController < ApplicationController
-  before_filter :player_must_exist
+  before_action :player_must_exist
 
   def show
     render json: PlayerStatistician.new(player).ratings_over_time
@@ -8,7 +8,7 @@ class PlayerStatsController < ApplicationController
   private
 
   def player_must_exist
-    render nothing: true, status: :not_found unless player
+    head :not_found unless player
   end
 
   def player

@@ -23,7 +23,7 @@ describe GamesController do
       let(:save_success?) { true }
 
       it 'creates new game' do
-        post :create, params
+        post :create, params: params
         expect(response).to redirect_to(assigns(:game))
       end
     end
@@ -38,7 +38,7 @@ describe GamesController do
       end
 
       it 'creates new game' do
-        post :create, params
+        post :create, params: params
         expect(flash[:alert]).to eq(full_messages.join('. '))
         expect(response).to render_template(:new)
       end
@@ -54,7 +54,7 @@ describe GamesController do
     end
 
     it 'shows the last game create' do
-      get :show, id: game_id
+      get :show, params: { id: game_id }
       expect(assigns(:game)).to eq(game)
       expect(response).to render_template(:show)
     end
