@@ -5,7 +5,7 @@ class MatchupCreator
 
   def initialize(params)
     @game_results = params[:game_results].values
-    @matchup = Matchup.find params[:matchup]
+    @matchup = Matchup.find params[:matchup_id]
     calculate_wins
   end
 

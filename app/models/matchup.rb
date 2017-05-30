@@ -15,7 +15,7 @@ class Matchup < ApplicationRecord
 
   def add_game_results(game_results)
     return false if game_results.nil? || game_results.count < 3
-    MatchupCreator.new(matchup: self, game_results: game_results).save
+    MatchupCreator.new(matchup_id: id, game_results: game_results).save
   end
 
   def opponent_of(challenger)
