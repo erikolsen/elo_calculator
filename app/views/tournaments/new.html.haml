@@ -6,7 +6,7 @@
       = f.label :name, 'Enter Tournament Name'
       = f.text_field :name, autofocus: true
       = f.label :end_date, 'Tournament End Date'
-      = f.datetime_field :end_date, class: 'datepicker'
+      = f.date_field :end_date, id: 'datepicker'
       - all_players.each_with_index do |player, index|
         = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"
         = label_tag "tournament_players_#{index}", player.name, class: "button secondary expanded"
