@@ -10,7 +10,7 @@ class Matchup < ApplicationRecord
   end
 
   def can_undo?
-    games.last.can_undo?
+    games.include? Game.last
   end
 
   def add_game_results(game_results)
