@@ -19,3 +19,4 @@ logfile
 *.swp
 .env
 /public/assets/*
+.byebug_history
