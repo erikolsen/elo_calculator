@@ -27,7 +27,7 @@ class MatchupsController < ApplicationController
 
   def update
     @matchup = Matchup.find(params[:id])
-    if @matchup.add_game_results(params[:games])
+    if @matchup.add_game_results(games_params)
       redirect_to @matchup
     else
       flash.now[:alert] = 'Matches failed to create'
@@ -45,6 +45,10 @@ class MatchupsController < ApplicationController
   end
 
   private
+
+  def games_params
+    params.require(:games).permit!.to_h
+  end
 
   def primary_id
     params[:matchup][:primary_id]
