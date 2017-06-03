@@ -1,0 +1,36 @@
+.row
+  .column.small-6
+    %p
+      %strong
+        Name:
+      = @player.name
+    %p
+      %strong
+        Current Win Percent:
+      = number_to_percentage @stats.win_percentage, precision: 0
+    %p
+      %strong
+        Rating change today:
+      %span.daily-rating-change
+        = @stats.daily_rating_change
+        %i.rating-arrow
+  .column.small-6
+    %p
+      %strong
+        Highest Rating:
+      = @stats.highest_rating_achieved
+    %p
+      %strong
+        Current Rating:
+      = @player.rating
+    %p
+      %strong
+        Average Rating:
+      = @stats.average_rating
+.row
+  .column
+    %p
+      %strong
+        Play a Rematch
+    - @stats.top_ten_opponents.each do |opp|
+      = player_and_opponent_link(@player, opp)

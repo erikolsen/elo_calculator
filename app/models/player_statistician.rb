@@ -27,10 +27,11 @@ class PlayerStatistician
     games.inject(rating){ |sum, game| sum += game.rating_for(player) } / (games.count + 1)
   end
 
-  def ratings_over_time
+  def ratings_over_time(limit=nil)
+    sessions = limit.to_i || 999999
     days_played.reverse.map do |day|
       { x: day, y: start_rating_on(day)}
-    end
+    end.last(sessions)
   end
 
   def days_played
@@ -44,6 +45,27 @@ class PlayerStatistician
   def rating_change_on(day)
     next_rating_from(day) - start_rating_on(day)
   end
+
+  def todays_games
+    @games.where('created_at >= ?', Date.today.beginning_of_day)
+  end
+
+  def games_won_today
+    todays_games.where(winner_id: player.id)
+  end
+
+  def todays_opponents
+    Player.find (todays_games.pluck(:winner_id, :loser_id).flatten - [player.id])
+  end
+
+  def games_played_today_against(opponent)
+    todays_games.where("winner_id = #{opponent.id} or loser_id = #{opponent.id}")
+  end
+
+  def games_won_today_against(opponent)
+    todays_games.where(winner_id: player.id, loser_id: opponent.id)
+  end
+
 
   private
 

@@ -2,7 +2,7 @@ class PlayerStatsController < ApplicationController
   before_action :player_must_exist
 
   def show
-    render json: PlayerStatistician.new(player).ratings_over_time
+    render json: PlayerStatistician.new(player).ratings_over_time(params[:limit])
   end
 
   private

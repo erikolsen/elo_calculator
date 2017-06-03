@@ -22,6 +22,85 @@
 @import 'elo';
 @import 'clubs';
 @import 'foundation-icons';
+@include foundation-progress-element;
+
+@media screen and (min-width: 320px) {
+  // IPhone 5
+  .center-of-circle {
+    line-height: 2.5;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  // IPhone 6
+  .center-of-circle {
+    line-height: 3;
+  }
+}
+
+@media screen and (min-width: 414px) {
+  // IPhone 6 Plus
+  .center-of-circle {
+    line-height: 3.3;
+  }
+}
+
+.foo {
+  padding-left: 3em;
+}
+
+#hidden {
+  display: none;
+}
+
+.shade-background {
+  background-color: lightgrey;
+}
+
+.profile-circles{
+  margin-top: 1em;
+}
+
+.with-border {
+  border: solid lightgrey 1px;
+}
+
+.profile-link-text {
+  padding: .5em;
+  text-align: center;
+  margin: 0;
+  font-size: 0.7em;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.rating-over-time {
+  border: solid lightgrey 1px;
+}
+
+.big-circle {
+  height: 12vh;
+  width: 12vh;
+  background-color: #FAFBFC;
+  border: solid $primary-color 3px;
+  text-align: center;
+  -moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.little-circle {
+  height: 8vh;
+  width: 8vh;
+  background-color: #FAFBFC;
+  border: solid $primary-color 3px;
+  text-align: center;
+  -moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
 
 caption {
   text-align: left;
