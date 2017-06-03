@@ -27,7 +27,17 @@
 @media screen and (min-width: 320px) {
   // IPhone 5
   .center-of-circle {
-    line-height: 2.5;
+    line-height: 2.8;
+  }
+
+  .big-circle {
+    height: 77px;
+    width: 77px;
+  }
+
+  .little-circle {
+    height: 52px;
+    width: 52px;
   }
 }
 
@@ -36,6 +46,17 @@
   .center-of-circle {
     line-height: 3;
   }
+
+  .big-circle {
+    height: 80px;
+    width: 80px;
+  }
+
+  .little-circle {
+    height: 55px;
+    width: 55px;
+  }
+
 }
 
 @media screen and (min-width: 414px) {
@@ -43,6 +64,25 @@
   .center-of-circle {
     line-height: 3.3;
   }
+
+  .big-circle {
+    height: 85px;
+    width: 85px;
+  }
+
+  .little-circle {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.circle {
+  background-color: #FAFBFC;
+  border: solid $primary-color 3px;
+  text-align: center;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .foo {
@@ -78,28 +118,6 @@
 
 .rating-over-time {
   border: solid lightgrey 1px;
-}
-
-.big-circle {
-  height: 12vh;
-  width: 12vh;
-  background-color: #FAFBFC;
-  border: solid $primary-color 3px;
-  text-align: center;
-  -moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-}
-
-.little-circle {
-  height: 8vh;
-  width: 8vh;
-  background-color: #FAFBFC;
-  border: solid $primary-color 3px;
-  text-align: center;
-  -moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
 }
 
 caption {

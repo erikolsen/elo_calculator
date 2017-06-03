@@ -25,7 +25,7 @@
 
   .row.profile-circles
     .column.small-12
-      .big-circle.float-center
+      .circle.big-circle.float-center
         %h1.center-of-circle
           = @player.rating
       %h1.text-center
@@ -33,24 +33,24 @@
 
   .row
     .column.small-3
-      .little-circle.float-center
+      .circle.little-circle.float-center
         %p.center-of-circle
           = @stats.average_rating
       %p.text-center Average
     .column.small-3
-      .little-circle.float-center
+      .circle.little-circle.float-center
         %p.center-of-circle
           = @stats.highest_rating_achieved
       %p.text-center High
     .column.small-3
-      .little-circle.float-center
+      .circle.little-circle.float-center
         %p.text-center.center-of-circle
           %span.daily-rating-change
             = @stats.daily_rating_change
             %i.rating-arrow
       %p.text-center Today
     .column.small-3
-      .little-circle.float-center
+      .circle.little-circle.float-center
         %p.center-of-circle
           = number_to_percentage @stats.win_percentage, precision: 0
       %p.text-center Percent
