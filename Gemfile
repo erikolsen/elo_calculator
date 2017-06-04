@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '= 5.1.1'
+gem 'rails', '~> 5.1.1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -23,9 +23,6 @@ gem 'foundation-icons-sass-rails'
 gem 'chart-js-rails', '~> 0.1.0'
 
 gem 'haml-rails'
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
 
 # For heroku
 gem 'rails_12factor', group: :production
@@ -53,6 +50,12 @@ group :development do
   gem 'flamegraph'
   gem 'stackprof'     # For Ruby MRI 2.1+
   gem 'fast_stack'    # For Ruby MRI 2.0
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test, :development do
@@ -67,8 +70,8 @@ end
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  #gem 'capybara-webkit'
-  #gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
 end
 
