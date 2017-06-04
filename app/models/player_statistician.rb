@@ -28,10 +28,10 @@ class PlayerStatistician
   end
 
   def ratings_over_time(limit=nil)
-    sessions = limit.to_i || 999999
+    sessions = limit || 999999
     days_played.reverse.map do |day|
       { x: day, y: start_rating_on(day)}
-    end.last(sessions)
+    end.last(sessions.to_i)
   end
 
   def days_played
