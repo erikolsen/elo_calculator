@@ -1,5 +1,6 @@
 %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 99999}}
-.slider{'data-slider' => '', 'data-initial-start' => 10, 'data-end' => 100}
+= link_to "Back to #{@player.name}'s profile", player_path(@player), {class: 'button expanded'}
+.slider{'data-slider' => '', 'data-initial-start' => 10, 'data-end' => 100, style: 'display: none'}
   %span.slider-handle{'data-slider-handle' => '', 'role' => 'slider', 'tabindex' => '1'}
   %span.slider-fill{'data-slider-fill' => ''}
   %input{'type' => 'hidden'}
