@@ -1,0 +1,64 @@
+.profile-top-bar
+  .row
+    = link_to player_path(@player) do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Profile
+    = link_to player_games_path(@player) do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Games
+    - if @player.clubs.empty?
+      = link_to clubs_path do
+        .column.small-3.with-border.shade-background
+          %p.profile-link-text
+            Join a Club
+    - else
+      = link_to player_clubs_path(@player) do
+        .column.small-3.with-border.shade-background
+          %p.profile-link-text
+            Clubs
+    = link_to player_tournaments_path(@player) do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Tournaments
+
+- if @player.clubs.count > 1
+  .row
+    - Club.all.each do |club|
+      .column.small-12.medium-4.large-4.left
+        = link_to club, class: 'grid text-center' do
+          %p.club-name
+            = club.name
+          %p.member-count
+            Members:
+            = club.players.count
+    .column.small-12.medium-4.large-4
+      = link_to players_path , class: 'grid text-center' do
+        %p.club-name
+          All Players
+        %p.member-count
+          Members:
+          = @player_count
+
+
+- else
+  .row
+    .column.small-12
+      .club-top-row
+        %h2
+          %strong
+            = @player.clubs.first.name
+
+      %table{width: '100%'}
+        %thead
+          %tr
+            %th
+              Rank
+            %th
+              Name
+            %th
+              Rating
+            %th
+              Won / Lost
+        = render @player.clubs.first.players_by_rating

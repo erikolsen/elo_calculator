@@ -1,4 +1,4 @@
-.show-for-small-only
+.show-for-medium-up
   .profile-top-bar
     .row
       = link_to player_path(@player) do
@@ -13,9 +13,9 @@
         = link_to clubs_path do
           .column.small-3.with-border
             %p.profile-link-text
-              Clubs
+              Join a Club
       - else
-        = link_to club_path(@player.clubs.first) do
+        = link_to player_clubs_path(@player) do
           .column.small-3.with-border
             %p.profile-link-text
               Clubs
@@ -27,9 +27,9 @@
   .row.profile-circles
     .column.small-12
       .circle.big-circle.float-center
-        %h1.center-of-circle
+        %p.center-of-circle
           = @player.rating
-      %h1.text-center
+      %p.text-center.player-name
         = @player.name
 
   .row

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :players, only: [:index, :show, :create, :new] do
     scope module: :players do
+      resources :clubs, only: [:index]
       resources :games, only: [:index]
       resources :ratings, only: [:index]
       resources :tournaments, only: [:index]
