@@ -32,8 +32,5 @@ describe 'undoing a game' do
     loser.reload
     expect(winner.rating).to be 1025
     expect(loser.rating).to be 975
-
-
-
   end
 end

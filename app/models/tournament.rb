@@ -1,4 +1,4 @@
-class Tournament < ActiveRecord::Base
+class Tournament < ApplicationRecord
   has_many :entries
   has_many :players, through: :entries
   has_many :matchups

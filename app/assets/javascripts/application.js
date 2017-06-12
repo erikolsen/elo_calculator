@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/datepicker
-//= require jquery-ui/tabs
+//= require jquery-ui/widgets/datepicker
 //= require foundation
 //= require google_analytics
 //= require turbolinks
@@ -23,3 +22,7 @@
 //= require_tree .
 
 $(document).foundation();
+
+// This is to avoid a flash of unstyled content when
+// foundation is initialized
+$('ul').removeClass('hamburger-hidden');

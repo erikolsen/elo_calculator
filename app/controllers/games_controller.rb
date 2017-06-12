@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_filter :enter_as_match?
+  before_action :enter_as_match?
 
   def index
     @games = Game.includes(:winner, :loser).most_recent.page(params[:page]).per(10)

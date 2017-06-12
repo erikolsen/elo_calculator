@@ -1,4 +1,4 @@
-class Matchup < ActiveRecord::Base
+class Matchup < ApplicationRecord
   belongs_to :tournament
   belongs_to :winner, class_name: 'Player'
   belongs_to :primary, class_name: 'Player'
@@ -10,12 +10,12 @@ class Matchup < ActiveRecord::Base
   end
 
   def can_undo?
-    games.last.can_undo?
+    games.include? Game.last
   end
 
   def add_game_results(game_results)
     return false if game_results.nil? || game_results.count < 3
-    MatchupCreator.new(matchup: self, game_results: game_results).save
+    MatchupCreator.new(matchup_id: id, game_results: game_results).save
   end
 
   def opponent_of(challenger)

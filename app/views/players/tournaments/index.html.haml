@@ -1,0 +1,63 @@
+.row
+  = link_to player_path(@player) do
+    .column.small-3.with-border
+      %p.profile-link-text
+        Profile
+  = link_to player_games_path(@player) do
+    .column.small-3.with-border
+      %p.profile-link-text
+        Games
+  - if @player.clubs.empty?
+    = link_to clubs_path do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Clubs
+  - else
+    = link_to player_clubs_path(@player) do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Clubs
+  = link_to player_tournaments_path(@player) do
+    .column.small-3.with-border.shade-background
+      %p.profile-link-text
+        Tournaments
+
+-if @tournaments.present?
+  - @tournaments.each do |tournament|
+    -if !tournament.expired?
+      %h3
+        Remaining Matches in #{tournament.name}
+      %h4
+        Points #{tournament.match_points_for @player}
+      - tournament.matchups_for(@player).each do |matchup|
+        - unless matchup.winner
+          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
+  %table{width: '100%'}
+    %caption
+      Tournaments Played (#{@player.tournaments.count})
+    %thead
+      %tr
+        %th
+          Name
+        %th
+          Total Matches
+        %th
+          Points
+        %th
+          Final Rank
+    - @tournaments.each do |tournament|
+      %tr
+        %td
+          - if tournament.expired?
+            = link_to tournament.name, tournament_path(tournament, player: @player.id)
+          - else
+            = link_to tournament.name, tournament_path(tournament)
+        %td
+          = tournament.matchups_for(@player).count
+        %td
+          = tournament.match_points_for(@player)
+        %td
+          = tournament.expired? ? tournament.rank_for(@player) : 'Playing'
+-else
+  = link_to 'Join a Tournament', tournaments_path, class: 'button expanded'
+= paginate @tournaments, param_name: 'tournaments_page'

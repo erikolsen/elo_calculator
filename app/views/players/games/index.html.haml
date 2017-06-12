@@ -1,0 +1,39 @@
+.row
+  = link_to player_path(@player) do
+    .column.small-3.with-border
+      %p.profile-link-text
+        Profile
+  = link_to player_games_path(@player) do
+    .column.small-3.with-border.shade-background
+      %p.profile-link-text
+        Games
+  - if @player.clubs.empty?
+    = link_to clubs_path do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Clubs
+  - else
+    = link_to player_clubs_path(@player) do
+      .column.small-3.with-border
+        %p.profile-link-text
+          Clubs
+  = link_to player_tournaments_path(@player) do
+    .column.small-3.with-border
+      %p.profile-link-text
+        Tournaments
+
+%table{width: '100%'}
+  %caption
+    Games Played (#{@player.games.count})
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
+    = render @games
+
+= paginate @games, param_name: 'games_page'

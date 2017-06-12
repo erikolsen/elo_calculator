@@ -50,6 +50,9 @@ describe 'Player Profile' do
         it 'shows the players results' do
           @tournament.update_column('end_date', past_date)
           visit player_path(player1.id)
+          within '.profile-top-bar' do
+            click_link 'Tournaments'
+          end
           expect(page).to have_content('Final Rank')
         end
       end
@@ -76,6 +79,9 @@ describe 'Player Profile' do
     end
 
     it 'shows players past games' do
+      within '.profile-top-bar' do
+        click_link 'Games'
+      end
       expect(page).to have_content("Games Played (2)")
 
       within "#game-#{game1.id}" do

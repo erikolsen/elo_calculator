@@ -12,7 +12,7 @@ describe PlayerStatsController do
 
   describe '#show' do
     before do
-      get :show, id: player.id
+      get :show, params: { id: player.id }
     end
 
     it 'should return ratings over time' do

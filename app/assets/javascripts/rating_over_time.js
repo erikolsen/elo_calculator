@@ -1,7 +1,8 @@
 $(function() {
   var playerId = $('#rating-over-time-graph').data('player-id');
+  var limit = $('#rating-over-time-graph').data('limit');
   if(playerId) {
-    $.getJSON('/player_stats/' + playerId)
+    $.getJSON('/player_stats/' + playerId+'?limit='+limit)
       .error(function() {
         console.log('could not get player stats for: ' + playerId);
       })
@@ -13,7 +14,7 @@ $(function() {
           labels: xAxisData(data),
           datasets: [
           {
-            label: 'Rating',
+            label: 'Rating Over Time',
             lineTension: 0,
             data: yAxisData(data),
             backgroundColor: [

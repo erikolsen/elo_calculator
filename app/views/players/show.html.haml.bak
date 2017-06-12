@@ -1,0 +1,23 @@
+.div
+  %ul.horizontal.tabs#player_tabs{'data-tabs' => ''}
+    %li.tabs-title.is-active
+      %a{href: '#player-info'}
+        Profile
+    %li.tabs-title
+      %a{href: '#game-info'}
+        Games
+    %li.tabs-title
+      %a{href: '#tournament-info'}
+        Tournaments
+    %li.tabs-title
+      %a{href: '#rating-over-time'}
+        Stats
+  .tabs-content{'data-tabs-content' => 'player_tabs'}
+    .tabs-panel{id: 'player-info'}
+      = render 'player_info'
+    .tabs-panel{id: 'game-info'}
+      = render 'game_info'
+    .tabs-panel{id: 'tournament-info'}
+      = render 'tournament_info'
+    .tabs-panel{id: 'rating-over-time'}
+      = render 'rating_over_time'

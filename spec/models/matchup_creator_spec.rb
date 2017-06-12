@@ -7,7 +7,7 @@ describe MatchupCreator do
   let!(:matchup) { Matchup.create primary_id: primary_id, secondary_id: secondary_id }
   let(:game_results){ { '1' => secondary_id, '2' => secondary_id, '3' => primary_id, '4' => primary_id, '5' => primary_id } }
 
-  let(:params) { { game_results: game_results, matchup: matchup.id } }
+  let(:params) { { game_results: game_results, matchup_id: matchup.id } }
 
   subject { described_class.new params }
 
@@ -53,7 +53,7 @@ describe MatchupCreator do
     context 'invalid matchup' do
       context 'too many games in matchup' do
         let(:too_many_games_matchups){ {  '1' => '2', "2" => secondary_id,  "3" => secondary_id,  "4" => primary_id,  "5" => primary_id, "6" => primary_id } }
-        let(:bad_params) { { game_results: too_many_games_matchups, matchup: matchup.id  } }
+        let(:bad_params) { { game_results: too_many_games_matchups, matchup_id: matchup.id  } }
         subject { described_class.new bad_params }
 
         it 'does not save any games' do
@@ -64,7 +64,7 @@ describe MatchupCreator do
 
       context 'too many games in matchup' do
         let(:no_winner_matchups){ {  "1" => secondary_id,  "2" => secondary_id,  "3" => primary_id,  "4" => primary_id} }
-        let(:bad_params) { { game_results: no_winner_matchups, matchup: matchup.id  } }
+        let(:bad_params) { { game_results: no_winner_matchups, matchup_id: matchup.id  } }
         subject { described_class.new bad_params }
 
         it 'does not save any games' do

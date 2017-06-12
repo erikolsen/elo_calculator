@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :players, only: [:index, :show, :create, :new]
+  resources :players, only: [:index, :show, :create, :new] do
+    scope module: :players do
+      resources :clubs, only: [:index]
+      resources :games, only: [:index]
+      resources :ratings, only: [:index]
+      resources :tournaments, only: [:index]
+    end
+  end
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :tournaments, only: [:index, :new, :update, :create, :show]

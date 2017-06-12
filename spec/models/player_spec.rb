@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Player do
-  it { should have_many(:won_games).with_foreign_key('winner_id').class_name('Game') }
-  it { should have_many(:lost_games).with_foreign_key('loser_id').class_name('Game') }
+  #it { should have_many(:won_games).with_foreign_key('winner_id').class_name('Game') }
+  #it { should have_many(:lost_games).with_foreign_key('loser_id').class_name('Game') }
 
-  it { should validate_presence_of :name }
-  it { should validate_presence_of :rating }
+  #it { should validate_presence_of :name }
+  #it { should validate_presence_of :rating }
 
   let(:id) { 1 }
   let(:name) { 'player name' }
