@@ -57,11 +57,16 @@
       %p.text-center Win Rate
   - if @stats.todays_games.count > 0
     .row
-      .columns.small-12.with-border
-        = render 'daily_games', stats: @stats
-    .row
       .column.small-12
-        %ul.accordion{"data-accordion" => "", "data-allow-all-closed" => "true"}
+        %ul.accordion{"data-accordion" => ""}
+          %li.accordion-item.is-active{"data-accordion-item" => ""}
+            %a.accordion-title{:href => "#"}
+              Today's wins
+              = @stats.games_won_today.count
+              of
+              = @stats.todays_games.count
+            .accordion-content{"data-tab-content" => ""}
+              = render 'daily_games', stats: @stats
           %li.accordion-item{"data-accordion-item" => ""}
             %a.accordion-title{:href => "#"} Rating Over Time
             .accordion-content{"data-tab-content" => ""}

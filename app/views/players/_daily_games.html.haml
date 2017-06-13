@@ -1,8 +1,3 @@
-%p.text-right.no-margin
-  Today's wins
-  = stats.games_won_today.count
-  of
-  = stats.todays_games.count
 - stats.todays_opponents.each do |opponent|
   - games_won = stats.games_won_today_against(opponent).count
   - games_played = stats.games_played_today_against(opponent).count
