@@ -92,6 +92,10 @@
 }
 
 @media screen and (min-width: 640px) {
+  .player-index {
+    max-width: 71%;
+  }
+
   .player-name {
     font-size: 1.5em;
   }
