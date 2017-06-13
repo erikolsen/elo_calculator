@@ -47,7 +47,7 @@ class PlayerStatistician
   end
 
   def todays_games
-    @games.where('created_at >= ?', Date.today.beginning_of_day)
+    @games.where('created_at >= ?', Date.current.beginning_of_day)
   end
 
   def games_won_today
