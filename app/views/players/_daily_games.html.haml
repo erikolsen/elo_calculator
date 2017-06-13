@@ -2,9 +2,10 @@
   - games_won = stats.games_won_today_against(opponent).count
   - games_played = stats.games_played_today_against(opponent).count
   %p.no-margin
-    = stats.player.name
-    vs
-    = opponent.name
+    %span
+      = stats.player.name
+    %span.float-right
+      = opponent.name
   .progress{"aria-valuemax" => "#{games_played}", "aria-valuemin" => "0", "aria-valuenow" => "#{games_won}", "aria-valuetext" => "#{games_won}", :role => "progressbar", :tabindex => "0"}
     %span.progress-meter{:style => "width: #{games_won.to_f/games_played.to_f * 100}%"}
       - if games_won > 0
