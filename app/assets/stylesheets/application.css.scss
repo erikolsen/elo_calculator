@@ -7,114 +7,24 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new * file per style scope.
  *
  *= require_self
  *= require jquery-ui/datepicker
- *= require elo
- *= require tournaments
- *= require player_profile
  */
 
-@import "foundation_and_overrides";
 @import 'constants';
-@import 'elo';
 @import 'clubs';
+@import 'footer';
+@import "foundation_and_overrides";
+@import 'match';
+@import 'media_styles';
+@import 'player_profile';
+@import 'topbar';
+@import 'tournaments';
+
 @import 'foundation-icons';
 @include foundation-progress-element;
-
-@media screen and (min-width: 320px) {
-  // IPhone 5
-  .player-name {
-    font-size: 1.5em;
-  }
-
-  .center-of-circle {
-    line-height: 2.8;
-  }
-
-  .big-circle {
-    font-size: 1.5em;
-    height: 77px;
-    width: 77px;
-  }
-
-  .little-circle {
-    height: 52px;
-    width: 52px;
-  }
-}
-
-@media screen and (min-width: 375px) {
-  // IPhone 6
-  .player-name {
-    font-size: 1.5em;
-  }
-
-  .center-of-circle {
-    line-height: 3;
-  }
-
-  .big-circle {
-    font-size: 1.5em;
-    height: 80px;
-    width: 80px;
-  }
-
-  .little-circle {
-    height: 55px;
-    width: 55px;
-  }
-
-}
-
-@media screen and (min-width: 414px) {
-  // IPhone 6 Plus
-  .player-name {
-    font-size: 1.5em;
-  }
-
-  .center-of-circle {
-    line-height: 3.3;
-  }
-
-  .big-circle {
-    font-size: 1.5em;
-    height: 85px;
-    width: 85px;
-  }
-
-  .little-circle {
-    height: 60px;
-    width: 60px;
-  }
-}
-
-@media screen and (min-width: 640px) {
-  .player-index {
-    max-width: 71%;
-  }
-
-  .player-name {
-    font-size: 1.5em;
-  }
-
-  .center-of-circle {
-    line-height: 3.3;
-  }
-
-  .big-circle {
-    font-size: 1.5em;
-    height: 85px;
-    width: 85px;
-  }
-
-  .little-circle {
-    height: 60px;
-    width: 60px;
-  }
-}
 
 .circle {
   background-color: #FAFBFC;
@@ -137,10 +47,6 @@
   background-color: lightgrey;
 }
 
-.profile-circles{
-  margin-top: 1em;
-}
-
 .with-border {
   border: solid lightgrey 1px;
 }
@@ -156,26 +62,8 @@
   margin: 0;
 }
 
-.rating-over-time {
-  border: solid lightgrey 1px;
-}
-
 caption {
   text-align: left;
-}
-
-.top-bar {
-  color: white;
-}
-.top-bar a {
-  color: white;
-}
-.top-bar a:hover {
-  color: grey;
-}
-
-.top-bar-title  {
-  color: white;
 }
 
 td {
@@ -183,78 +71,9 @@ td {
   text-align: left;
 }
 
-#footer {
-  background-color: black;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  min-height: 10%;
-}
-#footer a {
-  color: white;
-  padding: 3% 0 3% 0;
-}
-
-#footer i {
-  font-size: 2em;
-}
-
-#footer span {
-  font-size: 0.75em;
-}
-
 .container {
   margin-top: 1%;
   margin-bottom: 20%;
-}
-
-.orange-bar{
-  top: 0;
-  background-color: $ace-orange;
-  width: 100%;
-  height: .5em;
-  z-index: 1;
-}
-
-.gameDetails {
-  margin-top: 1em;
-  border: 1px solid #5FDD5F;
-  padding: .35em;
-  background: #D8F9D8;
-}
-
-.gameDetails p {
-  margin: 0;
-}
-
-.rating-change-up {
-  // use icon fi-arrow-up
-  font-weight: bold;
-  color: #219371;
-}
-
-.rating-change-down {
-  // use icon fi-arrow-down
-  font-weight: bold;
-  color: red;
-}
-
-
-
-input[type=checkbox] {
-  display: none;
-}
-
-input[type=checkbox]:checked + label {
-  background-color: darkgrey;
-}
-
-input[type=radio] {
-  display: none;
-}
-
-input[type=radio]:checked + label {
-  background-color: darkgrey;
 }
 
 .text-center {

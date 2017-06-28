@@ -2,3 +2,24 @@
   padding-left: 1em !important;
   padding-right: 1em !important;
 }
+
+.rating-change-up {
+  // use icon fi-arrow-up
+  font-weight: bold;
+  color: #219371;
+}
+
+.rating-change-down {
+  // use icon fi-arrow-down
+  font-weight: bold;
+  color: red;
+}
+
+.rating-over-time {
+  border: solid lightgrey 1px;
+}
+
+.profile-circles{
+  margin-top: 1em;
+}
+

@@ -1,0 +1,21 @@
+.orange-bar{
+  top: 0;
+  background-color: $ace-orange;
+  width: 100%;
+  height: .5em;
+  z-index: 1;
+}
+
+.top-bar {
+  color: white;
+}
+.top-bar a {
+  color: white;
+}
+.top-bar a:hover {
+  color: grey;
+}
+
+.top-bar-title  {
+  color: white;
+}
