@@ -1,31 +1,7 @@
-.profile-top-bar
-  .row
-    = link_to player_path(@player) do
-      .column.small-3.with-border
-        %p.profile-link-text
-          Profile
-    = link_to player_games_path(@player) do
-      .column.small-3.with-border
-        %p.profile-link-text
-          Games
-    - if @player.clubs.empty?
-      = link_to clubs_path do
-        .column.small-3.with-border.shade-background
-          %p.profile-link-text
-            Join a Club
-    - else
-      = link_to player_clubs_path(@player) do
-        .column.small-3.with-border.shade-background
-          %p.profile-link-text
-            Clubs
-    = link_to player_tournaments_path(@player) do
-      .column.small-3.with-border
-        %p.profile-link-text
-          Tournaments
-
+= render partial: 'players/profile_topbar'
 - if @player.clubs.count > 1
   .row
-    - Club.all.each do |club|
+    - @player.clubs.each do |club|
       .column.small-12.medium-4.large-4.left
         = link_to club, class: 'grid text-center' do
           %p.club-name
@@ -33,14 +9,6 @@
           %p.member-count
             Members:
             = club.players.count
-    .column.small-12.medium-4.large-4
-      = link_to players_path , class: 'grid text-center' do
-        %p.club-name
-          All Players
-        %p.member-count
-          Members:
-          = @player_count
-
 
 - else
   .row
