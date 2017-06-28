@@ -23,3 +23,23 @@
   margin-top: 1em;
 }
 
+.profile-link-text {
+  padding: .5em;
+  text-align: center;
+  margin: 0;
+  font-size: 0.7em;
+}
+
+.shade-background {
+  background-color: lightgrey;
+}
+
+.circle {
+  background-color: #FAFBFC;
+  border: solid $primary-color 3px;
+  text-align: center;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+

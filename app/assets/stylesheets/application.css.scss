@@ -26,15 +26,6 @@
 @import 'foundation-icons';
 @include foundation-progress-element;
 
-.circle {
-  background-color: #FAFBFC;
-  border: solid $primary-color 3px;
-  text-align: center;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-
 .with_padding {
   padding-left: 3em;
 }
@@ -43,19 +34,8 @@
   display: none;
 }
 
-.shade-background {
-  background-color: lightgrey;
-}
-
 .with-border {
   border: solid lightgrey 1px;
-}
-
-.profile-link-text {
-  padding: .5em;
-  text-align: center;
-  margin: 0;
-  font-size: 0.7em;
 }
 
 .no-margin {
@@ -73,13 +53,10 @@ td {
 
 .container {
   margin-top: 1%;
-  margin-bottom: 20%;
+  margin-bottom: 25%;
 }
 
 .text-center {
   text-align: center;
 }
 
-.empty-table-data {
-  background-color: lightgrey;
-}
