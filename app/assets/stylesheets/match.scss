@@ -1,0 +1,27 @@
+.gameDetails {
+  margin-top: 1em;
+  border: 1px solid #5FDD5F;
+  padding: .35em;
+  background: #D8F9D8;
+}
+
+.gameDetails p {
+  margin: 0;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox]:checked + label {
+  background-color: darkgrey;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio]:checked + label {
+  background-color: darkgrey;
+}
+

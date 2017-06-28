@@ -40,7 +40,7 @@ describe 'Player Profile' do
       context 'active tournaments' do
         it 'shows the matchups for the player' do
           visit player_path(player1.id)
-          expect(page).to have_content("#{player1.name} vs #{player2.name}")
+          expect(page).to have_content("#{player1.name} vs. #{player2.name}")
         end
       end
 

@@ -1,0 +1,92 @@
+@media screen and (min-width: 320px) {
+  // IPhone 5
+  .player-name {
+    font-size: 1.5em;
+  }
+
+  .center-of-circle {
+    line-height: 2.8;
+  }
+
+  .big-circle {
+    font-size: 1.5em;
+    height: 77px;
+    width: 77px;
+  }
+
+  .little-circle {
+    height: 52px;
+    width: 52px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  // IPhone 6
+  .player-name {
+    font-size: 1.5em;
+  }
+
+  .center-of-circle {
+    line-height: 3;
+  }
+
+  .big-circle {
+    font-size: 1.5em;
+    height: 80px;
+    width: 80px;
+  }
+
+  .little-circle {
+    height: 55px;
+    width: 55px;
+  }
+
+}
+
+@media screen and (min-width: 414px) {
+  // IPhone 6 Plus
+  .player-name {
+    font-size: 1.5em;
+  }
+
+  .center-of-circle {
+    line-height: 3.3;
+  }
+
+  .big-circle {
+    font-size: 1.5em;
+    height: 85px;
+    width: 85px;
+  }
+
+  .little-circle {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .player-index {
+    max-width: 71%;
+  }
+
+  .player-name {
+    font-size: 1.5em;
+  }
+
+  .center-of-circle {
+    line-height: 3.3;
+  }
+
+  .big-circle {
+    font-size: 1.5em;
+    height: 85px;
+    width: 85px;
+  }
+
+  .little-circle {
+    height: 60px;
+    width: 60px;
+  }
+}
+
