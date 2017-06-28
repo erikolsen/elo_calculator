@@ -1,1 +1,65 @@
-= render 'player_info'
+= render partial: 'players/profile_topbar'
+.row.profile-circles
+  .column.small-12
+    .circle.big-circle.float-center
+      %p.center-of-circle
+        = @player.rating
+    %p.text-center.player-name
+      = @player.name
+
+.row
+  .column.small-3
+    .circle.little-circle.float-center
+      %p.center-of-circle
+        = @stats.average_rating
+    %p.text-center Average
+  .column.small-3
+    .circle.little-circle.float-center
+      %p.center-of-circle
+        = @stats.highest_rating_achieved
+    %p.text-center High
+  .column.small-3
+    .circle.little-circle.float-center
+      %p.text-center.center-of-circle
+        %span.daily-rating-change
+          = @stats.daily_rating_change
+          %i.rating-arrow
+    %p.text-center Today
+  .column.small-3
+    .circle.little-circle.float-center
+      %p.center-of-circle
+        = number_to_percentage @stats.win_percentage, precision: 0
+    %p.text-center Win Rate
+
+- if @stats.todays_games.count > 0
+  .row
+    .column.small-12
+      %ul.accordion{"data-accordion" => "", "data-slide-speed" => '0', "data-allow-all-closed" => "true"}
+        %li.accordion-item.is-active{"data-accordion-item" => ""}
+          %a.accordion-title{:href => "#"}
+            Today's wins
+            = @stats.games_won_today.count
+            of
+            = @stats.todays_games.count
+          .accordion-content{"data-tab-content" => ""}
+            = render 'daily_games', stats: @stats
+        %li.accordion-item{"data-accordion-item" => ""}
+          %a.accordion-title{:href => "#"} Rating Over Time
+          .accordion-content{"data-tab-content" => ""}
+            = link_to player_ratings_path(@player) do
+              .rating-over-time
+                %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 10 }
+- else
+  .row
+    .column.small-12
+      = link_to player_ratings_path(@player) do
+        .rating-over-time
+          %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 10 }
+
+.row
+  .column
+    %p
+      %strong
+        Play a Rematch
+    - @stats.top_ten_opponents.each do |opp|
+      = player_and_opponent_link(@player, opp)
