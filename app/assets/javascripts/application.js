@@ -15,7 +15,6 @@
 //= require jquery-ui/widgets/datepicker
 //= require foundation
 //= require google_analytics
-//= require turbolinks
 //= require tournaments
 //= require player_profile
 //= require Chart
