@@ -8,7 +8,7 @@ describe 'creating a new tournament' do
       let!(:player1) { Player.create! name: 'player 1' }
       let!(:player2) { Player.create! name: 'player 2' }
 
-      it 'creates new game' do
+      it 'creates new tournament' do
         visit root_path
 
         within '.icon-bar' do
