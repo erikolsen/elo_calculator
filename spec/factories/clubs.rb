@@ -24,5 +24,12 @@ FactoryGirl.define do
     name { Faker::StarWars.planet }
     created_at Date.current
     updated_at Date.current
+
+    after(:create) do |club|
+      16.times do
+        club.players << FactoryGirl.create(:player)
+      end
+    end
+
   end
 end
