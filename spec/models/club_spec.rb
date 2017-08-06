@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: clubs
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  slug       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_clubs_on_slug  (slug)
+#
+
 require 'rails_helper'
 
 RSpec.describe Club, :type => :model do

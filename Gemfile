@@ -38,6 +38,9 @@ gem 'rails_12factor', group: :production
 
 gem 'kaminari'
 
+# Adds table information to top of model files
+gem 'annotate'
+
 group :development do
   #gem 'quiet_assets'
   gem 'better_errors'

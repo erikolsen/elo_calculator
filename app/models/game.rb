@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id            :integer          not null, primary key
+#  winner_rating :integer
+#  loser_rating  :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  winner_id     :integer
+#  loser_id      :integer
+#  matchup_id    :integer
+#
+# Indexes
+#
+#  index_games_on_loser_id    (loser_id)
+#  index_games_on_matchup_id  (matchup_id)
+#  index_games_on_winner_id   (winner_id)
+#
+
 require 'csv'
 
 class Game < ApplicationRecord

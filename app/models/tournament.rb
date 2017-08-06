@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#  end_date        :datetime
+#  tournament_type :string
+#
+
 class Tournament < ApplicationRecord
   TYPES = %w( round_robin )
   has_many :entries
