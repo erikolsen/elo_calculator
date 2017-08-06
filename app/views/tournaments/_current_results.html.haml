@@ -1,6 +1,8 @@
 %table{width: '100%'}
   %caption
-    Tournament Results
+    = @tournament.name
+    = "(#{@tournament.tournament_type.titleize})"
+    Results
     .tournament-subcaption
       - if @tournament.expired?
         %p
