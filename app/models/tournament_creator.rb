@@ -4,6 +4,7 @@ class TournamentCreator
   attr_accessor :players, :name, :tournament, :end_date, :tournament_type
 
   validate :no_duplicate_players, :must_have_two_players, :has_future_date, :has_tournament_type
+  TOURNAMENT_TYPES = {'round_robin' => RoundRobin }
 
   def initialize(params)
     @name = params[:name]
@@ -14,20 +15,15 @@ class TournamentCreator
 
   def save
     return false unless valid?
-    @tournament = Tournament.create(name: name, end_date: end_date, tournament_type: tournament_type)
-    @tournament.players << Player.find(players)
-    create_matchups
-    true
+    ActiveRecord::Base.transaction do
+      @tournament = Tournament.create(name: name, end_date: end_date, tournament_type: tournament_type)
+      @tournament.players << Player.find(players)
+      TOURNAMENT_TYPES[@tournament_type].build_matchups_for @tournament
+      true
+    end
   end
 
   private
-
-  def create_matchups
-    players.combination(2).each do |combo|
-      tournament.matchups << Matchup.create(primary_id: combo.first,
-                                            secondary_id: combo.second)
-    end
-  end
 
   def has_tournament_type
     errors.add :base, 'Please select valid type' unless Tournament::TYPES.include? @tournament_type

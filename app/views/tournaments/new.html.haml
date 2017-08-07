@@ -9,7 +9,7 @@
       = f.date_field :end_date, id: 'datepicker'
       = f.label :tournament_type, 'Tournament Type'
       - Tournament::TYPES.each_with_index do |type, index|
-        = check_box_tag type, type, false, name: "tournament[tournament_type]"
+        = check_box_tag "tournament_#{type}", type, false, name: "tournament[tournament_type]"
         = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded"
       %br
       - all_players.each_with_index do |player, index|

@@ -19,7 +19,7 @@ class Tournament < ApplicationRecord
   scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }
   scope :expired, -> { where('end_date < ?', Date.current).order(end_date: :desc) }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :end_date, presence: true
   validates :tournament_type, presence: true
 

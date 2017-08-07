@@ -17,7 +17,7 @@ describe 'creating a new tournament' do
         expect(page).to have_content('Setup a New Tournament')
         fill_in 'Name', with: tournament_name
         fill_in 'tournament[end_date]', with: '9999-10-10'
-        find(:css, "##{type}").set true
+        find(:css, "#tournament_#{type}").set true
         find(:css, "#tournament_players_0").set true
         find(:css, "#tournament_players_1").set true
         click_button 'Create Tournament'
