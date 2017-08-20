@@ -1,4 +1,4 @@
-class CreateMatchups < ActiveRecord::Migration
+class CreateMatchups < ActiveRecord::Migration[4.2]
   def change
     create_table :matchups do |t|
       t.integer :primary_id

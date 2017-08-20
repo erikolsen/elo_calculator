@@ -1,4 +1,4 @@
-class AddEndDateToTournament < ActiveRecord::Migration
+class AddEndDateToTournament < ActiveRecord::Migration[4.2]
   def up
     add_column :tournaments, :end_date, :datetime
   end
