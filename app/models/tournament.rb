@@ -11,10 +11,11 @@
 #
 
 class Tournament < ApplicationRecord
-  TYPES = %w( round_robin )
+  TYPES = %w( round_robin single_elimination )
   has_many :entries
   has_many :players, through: :entries
   has_many :matchups
+  has_many :bracket_matchups, -> { order 'tournament_sequence asc' }
 
   scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }
   scope :expired, -> { where('end_date < ?', Date.current).order(end_date: :desc) }

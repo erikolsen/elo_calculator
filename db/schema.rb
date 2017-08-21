@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806173627) do
+ActiveRecord::Schema.define(version: 20170820214659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 20170806173627) do
   create_table "bracket_matchups", force: :cascade do |t|
     t.bigint "tournament_id"
     t.bigint "matchup_id"
-    t.string "bracket"
-    t.integer "primary_player_id"
-    t.integer "secondary_player_id"
-    t.integer "primary_child"
-    t.integer "secondary_child"
-    t.integer "winner_id"
+    t.string "primary"
+    t.string "secondary"
+    t.integer "primary_parent"
+    t.integer "secondary_parent"
+    t.integer "tournament_sequence"
+    t.integer "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["matchup_id"], name: "index_bracket_matchups_on_matchup_id"

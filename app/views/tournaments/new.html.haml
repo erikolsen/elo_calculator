@@ -10,7 +10,7 @@
       = f.label :tournament_type, 'Tournament Type'
       - Tournament::TYPES.each_with_index do |type, index|
         = check_box_tag "tournament_#{type}", type, false, name: "tournament[tournament_type]"
-        = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded"
+        = label_tag "tournament_#{type}", type.titleize, class: "button secondary"
       %br
       - all_players.each_with_index do |player, index|
         = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"

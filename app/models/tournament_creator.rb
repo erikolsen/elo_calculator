@@ -4,7 +4,8 @@ class TournamentCreator
   attr_accessor :players, :name, :tournament, :end_date, :tournament_type
 
   validate :no_duplicate_players, :must_have_two_players, :has_future_date, :has_tournament_type
-  TOURNAMENT_TYPES = {'round_robin' => RoundRobin }
+  TOURNAMENT_TYPES = {'round_robin' => RoundRobin,
+                      'single_elimination' => SingleElimination }
 
   def initialize(params)
     @name = params[:name]
