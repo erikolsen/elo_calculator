@@ -35,9 +35,8 @@ if Rails.env == 'development'
       task :create_tournaments => :environment do
         puts "Creating Tournaments"
         TOURNAMENT_RANGE.each do |num|
-          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6))
-          creator.save
-          creator.tournament.update_column('end_date', 1.week.ago)
+          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6), tournament_type: 'round_robin')
+          raise 'Failed to create tournament' unless creator.save
         end
     end
 
