@@ -24,6 +24,10 @@ class Tournament < ApplicationRecord
   validates :end_date, presence: true
   validates :tournament_type, presence: true
 
+  def single_bracket_by_round
+    SingleEliminationPresenter.present bracket_matchups
+  end
+
   def players_by_points
     players.sort { |x,y|  match_points_for(y) <=> match_points_for(x) }
   end

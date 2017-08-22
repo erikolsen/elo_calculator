@@ -26,4 +26,6 @@
 #
 
 class BracketMatchup < ApplicationRecord
+  belongs_to :tournament
+  belongs_to :matchup
 end

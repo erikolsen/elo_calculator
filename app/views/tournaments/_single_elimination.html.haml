@@ -1,2 +1,17 @@
 %h1
-  Hi
+  = @tournament.name
+  = @tournament.bracket_matchups.count
+%main#tournament
+  - @tournament.single_bracket_by_round.each do |round|
+    %ul.round
+      %li.spacer  
+      - round.each do |match|
+        %li.game.game-top
+          = primary_foo(match)
+        %li.game.game-spacer  
+        %li.game.game-bottom
+          = secondary_foo(match)
+        %li.spacer  
+  %ul.round
+    %li.game.game-top
+

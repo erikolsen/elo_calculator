@@ -4,7 +4,8 @@ module SingleElimination
     gen.first_round.each_with_index do |match, index|
       tournament.bracket_matchups.create primary: match.first,
                                          secondary: match.last,
-                                         tournament_sequence: index + 1
+                                         tournament_sequence: index + 1,
+                                         winner: (match.first if match.include? "BYE")
     end
     next_rounds = (gen.total_matches - gen.first_round.count) * 2
     (1..next_rounds).each_slice(2).each do |round|
