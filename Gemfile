@@ -22,7 +22,7 @@ gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 gem 'chart-js-rails', '= 0.1.2'
 
-gem 'haml-rails'
+gem 'hamlit'
 
 # For heroku
 gem 'rails_12factor', group: :production
