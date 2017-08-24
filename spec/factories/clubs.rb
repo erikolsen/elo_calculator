@@ -25,8 +25,12 @@ FactoryGirl.define do
     created_at Date.current
     updated_at Date.current
 
-    after(:create) do |club|
-      16.times do
+    transient do
+      member_count 16
+    end
+
+    after(:create) do |club, evaluator|
+      evaluator.member_count.times do
         club.players << FactoryGirl.create(:player)
       end
     end
