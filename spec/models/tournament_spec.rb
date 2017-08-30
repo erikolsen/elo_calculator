@@ -15,12 +15,11 @@ require 'rails_helper'
 RSpec.describe Tournament, :type => :model do
   let(:name) { 'Some Name' }
   let(:end_date) { 1.week.from_now.to_s }
-  let(:tournament_type) { Tournament::TYPES.sample }
   let(:players) { Array.new(5) { Player.create(name: Faker::Name.first_name) } }
   let(:params) { { name: name,
                    players: players.map(&:id),
                    end_date: end_date,
-                   tournament_type: tournament_type }
+                   tournament_type: 'round_robin' }
   }
 
   before do
