@@ -5,14 +5,36 @@ module SingleElimination
       tournament.bracket_matchups.create primary: match.first,
                                          secondary: match.last,
                                          tournament_sequence: index + 1,
-                                         winner: (match.first if match.include? "BYE")
+                                         matchup_id: matchup_for(tournament, match.first, match.last),
+                                         winner: (match.first if match.include? 0)
     end
     next_rounds = (gen.total_matches - gen.first_round.count) * 2
     (1..next_rounds).each_slice(2).each do |round|
-      tournament.bracket_matchups.create primary_parent: round.first,
-                                         secondary_parent: round.last,
+      primary = try_winner(round.first, tournament)
+      secondary = try_winner(round.last, tournament)
+      tournament.bracket_matchups.create primary: primary,
+                                         secondary: secondary,
+                                         matchup_id: matchup_for(tournament, primary, secondary),
                                          tournament_sequence: tournament.bracket_matchups.count + 1
     end
+    counter = gen.first_round.count
+    tournament.bracket_matchups.each_slice(2) do |matches|
+      break if matches.one?
+      counter +=1
+      matches.first.winner_child = counter
+      matches.last.winner_child = counter
+      matches.each(&:save)
+    end
+  end
+
+  def self.matchup_for(tournament, primary, secondary)
+    return nil if [primary, secondary].include? 0
+    matchup = tournament.matchups.create primary_id: primary, secondary_id: secondary
+    return matchup.id if matchup
+  end
+
+  def self.try_winner(seq, tournament)
+    tournament.bracket_matchups.where(tournament_sequence: seq).first&.winner
   end
 end
 
@@ -51,7 +73,7 @@ class BracketGenerator
   end
 
   def first_byes
-    players.first(byes).zip Array.new(byes, 'BYE')
+    players.first(byes).zip Array.new(byes, 0)
   end
 
   def balance_point

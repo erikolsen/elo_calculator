@@ -5,10 +5,10 @@
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
-#  primary             :string
-#  secondary           :string
-#  primary_parent      :integer
-#  secondary_parent    :integer
+#  primary             :integer
+#  secondary           :integer
+#  winner_child        :integer
+#  loser_child         :integer
 #  tournament_sequence :integer
 #  winner              :integer
 #  created_at          :datetime         not null
@@ -28,4 +28,15 @@
 class BracketMatchup < ApplicationRecord
   belongs_to :tournament
   belongs_to :matchup
+
+  def siblings
+    tournament.bracket_matchups
+  end
+
+  def update_children!
+    ordinal = tournament_sequence.odd? ? :primary= : :secondary=
+    child = siblings.where(tournament_sequence: winner_child).first
+    child.send(ordinal, winner)
+    child.save
+  end
 end

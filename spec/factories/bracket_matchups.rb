@@ -5,10 +5,10 @@
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
-#  primary             :string
-#  secondary           :string
-#  primary_parent      :integer
-#  secondary_parent    :integer
+#  primary             :integer
+#  secondary           :integer
+#  winner_child        :integer
+#  loser_child         :integer
 #  tournament_sequence :integer
 #  winner              :integer
 #  created_at          :datetime         not null
