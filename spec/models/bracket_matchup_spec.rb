@@ -50,6 +50,12 @@ RSpec.describe BracketMatchup, type: :model do
 
         @first_match.update_children!
         @second_match.update_children!
+
+        @last_match = @tournament.bracket_matchups[6]
+      end
+
+      it 'does nothing if no children' do
+        expect(@last_match.update_children!).to be nil
       end
 
       it 'sets the primary of its child' do
@@ -58,6 +64,14 @@ RSpec.describe BracketMatchup, type: :model do
 
       it 'sets the secondary of its child' do
         expect(@second_match.winner).to eq @fifth_match.reload.secondary
+      end
+
+      it 'sets the primary of its child matchup' do
+        expect(@first_match.winner).to eq @fifth_match.matchup.primary.id
+      end
+
+      it 'sets the secondary of its child matchup' do
+        expect(@second_match.winner).to eq @fifth_match.matchup.secondary.id
       end
     end
 

@@ -3,20 +3,24 @@
     %h3
       = @tournament.name
       = "(#{@tournament.tournament_type.titleize})"
-      = @tournament.bracket_matchups.count
+      = @tournament.players.count
+      Players
 .row
   .large-12.columns
-    %main#tournament
-      - @tournament.single_bracket_by_round.each do |round|
-        %ul.round
-          %li.spacer  
-          - round.each do |match|
-            %li.game.game-top
-              = primary_foo(match)
-            %li.game.game-spacer  
-            %li.game.game-bottom
-              = secondary_foo(match)
+    .bracket-single
+      %main#tournament
+        - @tournament.single_bracket_by_round.each do |round|
+          %ul.round
             %li.spacer  
-      %ul.round
-        %li.game.game-top
+            - round.each do |match|
+              %li.game.game-top
+                = show_primary(match)
+              %li.game.game-spacer  
+              %li.game.game-bottom
+                = show_secondary(match)
+              %li.spacer  
+        %ul.round
+          %li.game.game-top
+            .winner
+              = final_round_link(@tournament)
 

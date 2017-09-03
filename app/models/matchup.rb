@@ -26,6 +26,10 @@ class Matchup < ApplicationRecord
     where(primary_id: players, secondary_id: players).first
   end
 
+  def bracket_matchup
+    BracketMatchup.where(matchup_id: id).first
+  end
+
   def can_undo?
     games.include? Game.last
   end

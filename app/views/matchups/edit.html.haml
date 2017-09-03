@@ -19,7 +19,7 @@
           - @matchup.players.each do |player|
             .small-5.large-4.columns
               = radio_button("games", game_number, player.id )
-              = label_tag "games_#{game_number}_#{player.id}", player.name, {class: 'button secondary expanded'}
+              = label_tag "games_#{game_number}_#{player.id}", player.name, {class: 'button secondary expanded', id: "label_games_#{game_number}_#{player.id}"}
       %br
         .row
           .small-12.large-12.columns

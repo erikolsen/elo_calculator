@@ -1,15 +1,17 @@
-/*
- *  Flex Layout Specifics
-*/
+.bracket-single {
+  overflow-y: auto;
+}
+
 main{
   display:flex;
   flex-direction:row;
 }
 .round{
+  margin: 0px;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  width:200px;
+  min-width: 175px;
   list-style:none;
   padding:0;
 }
@@ -21,13 +23,9 @@ main{
     flex-grow:1;
   }
 
-/*
- *  General Styles
-*/
 #tournament{
   font-family:sans-serif;
   font-size:small;
-  padding:10px;
   line-height:1.4em;
 }
 
@@ -47,7 +45,7 @@ li.game{
 
   li.game-spacer{
     border-right:1px solid #aaa;
-    min-height:40px;
+    min-height:6em;
   }
 
   li.game-bottom{
