@@ -2,12 +2,15 @@ module SingleElimination
   def self.build_matchups_for(tournament)
     gen = BracketGenerator.new(tournament.players)
     gen.first_round.each_with_index do |match, index|
-      tournament.bracket_matchups.create primary: match.first,
-                                         secondary: match.last,
-                                         tournament_sequence: index + 1,
-                                         matchup_id: matchup_for(tournament, match.first, match.last),
-                                         winner: (match.first if match.include? 0)
+      primary = match.first
+      secondary = match.last
+      tournament.bracket_matchups.create primary: primary,
+                                         secondary: secondary,
+                                         matchup_id: matchup_for(tournament, primary, secondary),
+                                         winner_id: (match.first if match.include? 0),
+                                         tournament_sequence: index + 1
     end
+
     next_rounds = (gen.total_matches - gen.first_round.count) * 2
     (1..next_rounds).each_slice(2).each do |round|
       primary = try_winner(round.first, tournament)
@@ -17,13 +20,13 @@ module SingleElimination
                                          matchup_id: matchup_for(tournament, primary, secondary),
                                          tournament_sequence: tournament.bracket_matchups.count + 1
     end
+
     counter = gen.first_round.count
     tournament.bracket_matchups.each_slice(2) do |matches|
       break if matches.one?
       counter +=1
-      matches.first.winner_child = counter
-      matches.last.winner_child = counter
-      matches.each(&:save)
+      matches.first.update_column(:winner_child, counter)
+      matches.last.update_column(:winner_child, counter)
     end
   end
 
@@ -34,7 +37,7 @@ module SingleElimination
   end
 
   def self.try_winner(seq, tournament)
-    tournament.bracket_matchups.where(tournament_sequence: seq).first&.winner
+    tournament.bracket_matchups.where(tournament_sequence: seq).first&.winner_id
   end
 end
 

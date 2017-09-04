@@ -17,7 +17,7 @@ class MatchupCreator
     end
     matchup.update winner_id: winner_id
     if matchup.bracket_matchup
-      matchup.bracket_matchup.update winner: winner_id
+      matchup.bracket_matchup.update winner_id: winner_id
       matchup.bracket_matchup.update_children!
     end
     true

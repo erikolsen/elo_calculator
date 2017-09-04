@@ -30,7 +30,7 @@ module TournamentsHelper
 
   def final_round_link(tournament)
     last = tournament.bracket_matchups.last
-    return Player.where(id: last.winner).first.name if last.winner
+    return last.winner.name if last.winner
     p = Player.where(id: last.primary).first&.name
     s = Player.where(id: last.secondary).first&.name
     link_to "#{p} vs. #{s}", edit_matchup_path(last.matchup)

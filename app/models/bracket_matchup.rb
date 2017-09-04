@@ -10,7 +10,7 @@
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
-#  winner              :integer
+#  winner_id           :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
@@ -28,6 +28,7 @@
 class BracketMatchup < ApplicationRecord
   belongs_to :tournament
   belongs_to :matchup
+  belongs_to :winner, class_name: 'Player'
 
   def siblings
     tournament.bracket_matchups
@@ -37,8 +38,8 @@ class BracketMatchup < ApplicationRecord
     ordinal = tournament_sequence.odd? ? :primary : :secondary
     child = siblings.where(tournament_sequence: winner_child).first
     if child
-      child.update_column(ordinal, winner)
-      child.matchup.update_column(ordinal.to_s + '_id', winner)
+      child.update_column(ordinal, winner_id)
+      child.matchup.update_column(ordinal.to_s + '_id', winner_id)
     end
   end
 end

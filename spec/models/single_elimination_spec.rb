@@ -26,7 +26,7 @@ RSpec.describe SingleElimination do
       it 'tournament sequence 1' do
         expect(subject[0].tournament_sequence).to eq 1
         expect(subject[0].primary).to eq player_1.id
-        expect(subject[0].winner).to eq player_1.id
+        expect(subject[0].winner).to eq player_1
         expect(subject[0].winner_child).to eq 5
         expect(subject[0].loser_child).to eq nil
         expect(subject[0].secondary).to eq 0

@@ -10,7 +10,7 @@
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
-#  winner              :integer
+#  winner_id           :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

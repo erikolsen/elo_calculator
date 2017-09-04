@@ -10,7 +10,7 @@
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
-#  winner              :integer
+#  winner_id           :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
@@ -41,37 +41,37 @@ RSpec.describe BracketMatchup, type: :model do
         creator.save
         @tournament = creator.tournament
 
-        @first_match = @tournament.bracket_matchups[0]
-        @second_match = @tournament.bracket_matchups[1]
-        @fifth_match = @tournament.bracket_matchups[4]
+        @first_bracket_matchup = @tournament.bracket_matchups[0]
+        @second_bracket_matchup = @tournament.bracket_matchups[1]
+        @fifth_bracket_matchup = @tournament.bracket_matchups[4]
 
-        @first_match.winner = @first_match.primary
-        @second_match.winner = @second_match.primary
+        @first_bracket_matchup.winner_id = @first_bracket_matchup.primary
+        @second_bracket_matchup.winner_id = @second_bracket_matchup.primary
 
-        @first_match.update_children!
-        @second_match.update_children!
+        @first_bracket_matchup.update_children!
+        @second_bracket_matchup.update_children!
 
-        @last_match = @tournament.bracket_matchups[6]
+        @last_bracket_matchup = @tournament.bracket_matchups[6]
       end
 
       it 'does nothing if no children' do
-        expect(@last_match.update_children!).to be nil
+        expect(@last_bracket_matchup.update_children!).to be nil
       end
 
       it 'sets the primary of its child' do
-        expect(@first_match.winner).to eq @fifth_match.reload.primary
+        expect(@first_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.primary
       end
 
       it 'sets the secondary of its child' do
-        expect(@second_match.winner).to eq @fifth_match.reload.secondary
+        expect(@second_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.secondary
       end
 
       it 'sets the primary of its child matchup' do
-        expect(@first_match.winner).to eq @fifth_match.matchup.primary.id
+        expect(@first_bracket_matchup.winner).to eq @fifth_bracket_matchup.matchup.primary
       end
 
       it 'sets the secondary of its child matchup' do
-        expect(@second_match.winner).to eq @fifth_match.matchup.secondary.id
+        expect(@second_bracket_matchup.winner).to eq @fifth_bracket_matchup.matchup.secondary
       end
     end
 

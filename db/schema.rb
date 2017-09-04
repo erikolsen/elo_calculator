@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.integer "winner_child"
     t.integer "loser_child"
     t.integer "tournament_sequence"
-    t.integer "winner"
+    t.integer "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["matchup_id"], name: "index_bracket_matchups_on_matchup_id"

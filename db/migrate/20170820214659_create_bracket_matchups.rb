@@ -8,7 +8,7 @@ class CreateBracketMatchups < ActiveRecord::Migration[5.1]
       t.integer :winner_child
       t.integer :loser_child
       t.integer :tournament_sequence
-      t.integer :winner
+      t.integer :winner_id
 
       t.timestamps
     end
