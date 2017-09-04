@@ -1,38 +1,33 @@
 module TournamentsHelper
   def show_primary(match)
-    return link_for_primary(match) if !match.primary
-    Player.find(match.primary).name
+    match.primary ? player_for(match.primary) : link_for_primary(match)
   end
 
   def show_secondary(match)
     return "BYE" if match.secondary == 0
-    return link_for_secondary(match) if !match.secondary
-    Player.find(match.secondary).name
-  end
-
-  def player_for(id)
-    Player.where(id: id).first&.name
+    match.secondary ? player_for(match.secondary) : link_for_secondary(match)
   end
 
   def link_for_primary(match)
-    last = match.tournament.bracket_matchups.where(winner_child: match.tournament_sequence).first
-    p = Player.where(id: last.primary).first&.name
-    s = Player.where(id: last.secondary).first&.name
-    link_to "#{p} vs. #{s}", edit_matchup_path(last.matchup)
+    bracket_matchup = match.siblings.where(winner_child: match.tournament_sequence).first
+    link_for_bracket_matchup bracket_matchup
   end
 
   def link_for_secondary(match)
-    last = match.tournament.bracket_matchups.where(winner_child: match.tournament_sequence).last
-    p = Player.where(id: last.primary).first&.name
-    s = Player.where(id: last.secondary).first&.name
-    link_to "#{p} vs. #{s}", edit_matchup_path(last.matchup)
+    bracket_matchup = match.siblings.where(winner_child: match.tournament_sequence).last
+    link_for_bracket_matchup bracket_matchup
   end
 
   def final_round_link(tournament)
     last = tournament.bracket_matchups.last
-    return last.winner.name if last.winner
-    p = Player.where(id: last.primary).first&.name
-    s = Player.where(id: last.secondary).first&.name
-    link_to "#{p} vs. #{s}", edit_matchup_path(last.matchup)
+    last.winner ? last.winner.name : link_for_bracket_matchup(last)
+  end
+
+  def link_for_bracket_matchup(bracket_matchup)
+    link_to "#{player_for bracket_matchup.primary} vs. #{player_for bracket_matchup.secondary}", edit_matchup_path(bracket_matchup.matchup)
+  end
+
+  def player_for(id)
+    Player.find_by(id: id)&.name
   end
 end
