@@ -1,23 +1,18 @@
 module SingleElimination
   def self.build_matchups_for(tournament)
     gen = BracketGenerator.new(tournament.players)
-    gen.first_round.each_with_index do |match, index|
+    gen.first_round.each do |match|
       primary = match.first
       secondary = match.last
       tournament.bracket_matchups.create primary: primary,
                                          secondary: secondary,
                                          matchup_id: matchup_for(tournament, primary, secondary),
                                          winner_id: (match.first if match.include? 0),
-                                         tournament_sequence: index + 1
+                                         tournament_sequence: tournament.bracket_matchups.count + 1
     end
 
-    next_rounds = (gen.total_matches - gen.first_round.count) * 2
-    (1..next_rounds).each_slice(2).each do |round|
-      primary = try_winner(round.first, tournament)
-      secondary = try_winner(round.last, tournament)
-      tournament.bracket_matchups.create primary: primary,
-                                         secondary: secondary,
-                                         matchup_id: matchup_for(tournament, primary, secondary),
+    gen.remaining_matches.times do
+      tournament.bracket_matchups.create matchup_id: tournament.matchups.create.id,
                                          tournament_sequence: tournament.bracket_matchups.count + 1
     end
 
@@ -28,6 +23,8 @@ module SingleElimination
       matches.first.update_column(:winner_child, counter)
       matches.last.update_column(:winner_child, counter)
     end
+
+    tournament.bracket_matchups.each(&:update_children!)
   end
 
   def self.matchup_for(tournament, primary, secondary)
@@ -48,16 +45,20 @@ class BracketGenerator
     @players = players.sort_by(&:rating).reverse.map(&:id)
   end
 
+  def remaining_matches
+    total_matches - first_round.count
+  end
+
+  def first_round
+    @first_round ||= recursive_order_matches(first_byes + first_matches)
+  end
+
   def number_of_rounds
     Math.log(balance_point, 2)
   end
 
   def total_matches
     balance_point - 1
-  end
-
-  def first_round
-    @first_round ||= recursive_order_matches(first_byes + first_matches)
   end
 
   def first_matches

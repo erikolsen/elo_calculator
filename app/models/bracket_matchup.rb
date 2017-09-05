@@ -35,6 +35,7 @@ class BracketMatchup < ApplicationRecord
   end
 
   def update_children!
+    return nil unless winner
     ordinal = tournament_sequence.odd? ? :primary : :secondary
     child = siblings.where(tournament_sequence: winner_child).first
     if child

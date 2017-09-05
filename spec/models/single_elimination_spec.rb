@@ -14,6 +14,7 @@ RSpec.describe SingleElimination do
     before do
       tournament.players << Player.all
       SingleElimination.build_matchups_for tournament
+      tournament.reload
     end
 
     describe 'bracket matchups' do
