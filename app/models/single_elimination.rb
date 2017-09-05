@@ -1,40 +1,30 @@
 module SingleElimination
   def self.build_matchups_for(tournament)
     gen = BracketGenerator.new(tournament.players)
-    gen.first_round.each do |match|
-      primary = match.first
-      secondary = match.last
-      tournament.bracket_matchups.create primary: primary,
-                                         secondary: secondary,
-                                         matchup_id: matchup_for(tournament, primary, secondary),
-                                         winner_id: (match.first if match.include? 0),
-                                         tournament_sequence: tournament.bracket_matchups.count + 1
-    end
-
-    gen.remaining_matches.times do
-      tournament.bracket_matchups.create matchup_id: tournament.matchups.create.id,
-                                         tournament_sequence: tournament.bracket_matchups.count + 1
-    end
-
     counter = gen.first_round.count
-    tournament.bracket_matchups.each_slice(2) do |matches|
-      break if matches.one?
-      counter +=1
-      matches.first.update_column(:winner_child, counter)
-      matches.last.update_column(:winner_child, counter)
+    gen.matches.each do |match|
+      seq = tournament.bracket_matchups.count + 1
+      counter+=1 if seq.odd?
+      if match
+        primary = match.first
+        secondary = match.last
+        match_id = match.include?(0) ? nil : tournament.matchups.create(primary_id: primary,
+                                                                        secondary_id: secondary).id
+        tournament.bracket_matchups.create primary: primary,
+                                           secondary: secondary,
+                                           matchup_id: match_id,
+                                           winner_id: (match.first if match.include? 0),
+                                           winner_child: counter,
+                                           tournament_sequence: seq
+      else
+        winner_child = counter == gen.balance_point ? nil : counter
+        tournament.bracket_matchups.create matchup_id: tournament.matchups.create.id,
+                                           tournament_sequence: seq,
+                                           winner_child: winner_child
+      end
     end
 
     tournament.bracket_matchups.each(&:update_children!)
-  end
-
-  def self.matchup_for(tournament, primary, secondary)
-    return nil if [primary, secondary].include? 0
-    matchup = tournament.matchups.create primary_id: primary, secondary_id: secondary
-    return matchup.id if matchup
-  end
-
-  def self.try_winner(seq, tournament)
-    tournament.bracket_matchups.where(tournament_sequence: seq).first&.winner_id
   end
 end
 
@@ -43,6 +33,10 @@ class BracketGenerator
   def initialize(players)
     raise 'No Players' if players.nil?
     @players = players.sort_by(&:rating).reverse.map(&:id)
+  end
+
+  def matches
+    first_round + Array.new(remaining_matches, nil)
   end
 
   def remaining_matches
