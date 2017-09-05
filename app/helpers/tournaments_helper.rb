@@ -24,7 +24,10 @@ module TournamentsHelper
   end
 
   def link_for_bracket_matchup(bracket_matchup)
-    link_to "#{player_for bracket_matchup.primary} vs. #{player_for bracket_matchup.secondary}", edit_matchup_path(bracket_matchup.matchup)
+    primary = bracket_matchup.primary
+    secondary = bracket_matchup.secondary
+    return nil unless primary && secondary
+    link_to "#{player_for primary} vs. #{player_for secondary}", edit_matchup_path(bracket_matchup.matchup)
   end
 
   def player_for(id)
