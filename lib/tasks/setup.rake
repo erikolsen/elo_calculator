@@ -3,7 +3,7 @@ if Rails.env == 'development'
 
   namespace :setup do
     NUM_OF_PLAYERS = 30
-    NUM_OF_TOURNAMENTS = 15
+    NUM_OF_TOURNAMENTS = 2
     PLAYER_RANGE = (1..NUM_OF_PLAYERS).to_a
     TOURNAMENT_RANGE = (1..NUM_OF_TOURNAMENTS).to_a
     DEFAULT_RATING = 1000

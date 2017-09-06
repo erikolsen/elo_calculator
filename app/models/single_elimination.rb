@@ -14,7 +14,7 @@ module SingleElimination
         winner_id = match.first
       else
         match_id = tournament.matchups.create(primary_id: primary,
-                                             secondary_id: secondary).id
+                                              secondary_id: secondary).id
       end
 
       tournament.bracket_matchups.create primary: primary,
