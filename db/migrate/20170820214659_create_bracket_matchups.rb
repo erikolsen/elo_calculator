@@ -3,6 +3,7 @@ class CreateBracketMatchups < ActiveRecord::Migration[5.1]
     create_table :bracket_matchups do |t|
       t.belongs_to :tournament, index: true, foreign_key: true
       t.belongs_to :matchup, index: true, foreign_key: true
+      t.string  :bracket_type
       t.integer :primary
       t.integer :secondary
       t.integer :winner_child

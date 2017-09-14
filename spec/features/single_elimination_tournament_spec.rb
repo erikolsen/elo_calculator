@@ -52,6 +52,13 @@ describe 'Single Elimination Tournament' do
       find(:css, "input[type='submit']").click
       click_link 'Back to Tournament'
       winner = find(:css, '.winner').text
+      # losers
+      click_link("#{player_4.name} vs. #{player_2.name}")
+      find(:css, "#label_games_1_#{player_4.id}").click
+      find(:css, "#label_games_2_#{player_4.id}").click
+      find(:css, "#label_games_3_#{player_4.id}").click
+      find(:css, "input[type='submit']").click
+      click_link 'Back to Tournament'
       expect(winner).to eql player_3.name
     end
   end

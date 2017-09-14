@@ -25,7 +25,11 @@ class Tournament < ApplicationRecord
   validates :tournament_type, presence: true
 
   def single_bracket_by_round
-    SingleEliminationPresenter.present bracket_matchups
+    SingleEliminationPresenter.present bracket_matchups.where(bracket_type: 'winners')
+  end
+
+  def losers
+    bracket_matchups.where(bracket_type: 'losers').first
   end
 
   def players_by_points

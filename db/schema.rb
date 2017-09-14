@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
   create_table "bracket_matchups", force: :cascade do |t|
     t.bigint "tournament_id"
     t.bigint "matchup_id"
+    t.string "bracket_type"
     t.integer "primary"
     t.integer "secondary"
     t.integer "winner_child"

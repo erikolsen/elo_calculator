@@ -19,7 +19,7 @@ module TournamentsHelper
   end
 
   def final_round_link(tournament)
-    last = tournament.bracket_matchups.last
+    last = tournament.bracket_matchups.where(bracket_type: 'winners').last
     last.winner ? last.winner.name : link_for_bracket_matchup(last)
   end
 

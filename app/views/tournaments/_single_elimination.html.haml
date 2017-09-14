@@ -5,6 +5,13 @@
       = "(#{@tournament.tournament_type.titleize})"
       = @tournament.players.count
       Players
+    %p.first
+      first
+    %p.second
+      second
+    %p.third
+      = link_for_bracket_matchup(@tournament.losers)
+    %p.fouth
 .row
   .large-12.columns
     .bracket-single

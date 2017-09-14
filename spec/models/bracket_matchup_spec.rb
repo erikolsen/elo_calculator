@@ -5,6 +5,7 @@
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
+#  bracket_type        :string
 #  primary             :integer
 #  secondary           :integer
 #  winner_child        :integer

@@ -8,7 +8,8 @@ module SingleElimination
       secondary = match.last
 
       counter +=1 if seq.odd?
-      winner_child = counter if counter != gen.balance_point
+      winner_child = counter if counter < gen.balance_point
+      loser_child  = gen.total_matches if gen.semis.include?(seq)
 
       if match.include?(0)
         winner_id = match.first
@@ -17,12 +18,16 @@ module SingleElimination
                                               secondary_id: secondary).id
       end
 
+      bracket_type = seq == gen.total_matches ? 'losers' : 'winners'
+
       tournament.bracket_matchups.create primary: primary,
                                          secondary: secondary,
                                          matchup_id: match_id,
                                          winner_id: winner_id,
                                          winner_child: winner_child,
-                                         tournament_sequence: seq
+                                         loser_child: loser_child,
+                                         tournament_sequence: seq,
+                                         bracket_type: bracket_type
     end
 
     tournament.bracket_matchups.each(&:update_children!)
@@ -40,6 +45,10 @@ class BracketGenerator
     first_round + Array.new(remaining_matches, [nil, nil])
   end
 
+  def semis
+    (1..matches.count).to_a[-4..-3]
+  end
+
   def remaining_matches
     total_matches - first_round.count
   end
@@ -53,7 +62,7 @@ class BracketGenerator
   end
 
   def total_matches
-    balance_point - 1
+    balance_point
   end
 
   def first_matches
