@@ -51,7 +51,6 @@ describe 'Single Elimination Tournament' do
       find(:css, "#label_games_3_#{player_3.id}").click
       find(:css, "input[type='submit']").click
       click_link 'Back to Tournament'
-      winner = find(:css, '.winner').text
       # losers
       click_link("#{player_4.name} vs. #{player_2.name}")
       find(:css, "#label_games_1_#{player_4.id}").click
@@ -59,7 +58,17 @@ describe 'Single Elimination Tournament' do
       find(:css, "#label_games_3_#{player_4.id}").click
       find(:css, "input[type='submit']").click
       click_link 'Back to Tournament'
+      winner = find(:css, '.winner').text
+      first  = find(:css, '.first').text
+      second = find(:css, '.second').text
+      third = find(:css, '.third').text
+      fourth  = find(:css, '.fourth').text
       expect(winner).to eql player_3.name
+
+      expect(first).to include player_3.name
+      expect(second).to include player_1.name
+      expect(third).to include player_4.name
+      expect(fourth).to include player_2.name
     end
   end
 end
