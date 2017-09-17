@@ -31,6 +31,14 @@ class BracketMatchup < ApplicationRecord
   belongs_to :matchup
   belongs_to :winner, class_name: 'Player'
 
+  def loser
+    matchup.opponent_of winner
+  end
+
+  def ready?
+    (primary && secondary) && !winner
+  end
+
   def siblings
     tournament.bracket_matchups
   end

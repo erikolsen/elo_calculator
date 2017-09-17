@@ -28,6 +28,10 @@ class Tournament < ApplicationRecord
     SingleEliminationPresenter.present bracket_matchups.where(bracket_type: 'winners')
   end
 
+  def winners_bracket
+    bracket_matchups.where(bracket_type: 'winners')
+  end
+
   def losers
     bracket_matchups.where(bracket_type: 'losers').first
   end
