@@ -5,25 +5,52 @@
       = "(#{@tournament.tournament_type.titleize})"
       = @tournament.players.count
       Players
-    - if @tournament.winners_bracket.last.winner
-      %p.first
-        1st place:
-        = single_elim_winner(@tournament)
-      %p.second
-        2nd place:
-        = single_elim_runner_up(@tournament)
-    - if @tournament.losers.winner
-      %p.third
-        3rd place:
-        = @tournament.losers.winner&.name
-      %p.fourth
-        4th place:
-        = @tournament.losers.loser&.name
-    - else
-      %strong
-        Third Place Playoff
-      %p
-        = link_for_bracket_matchup(@tournament.losers)
+    %table{width: '100%'}
+      %thead
+        %tr
+          %th
+            Rank
+          %th
+            Player
+          %th
+            Rating
+      %tbody
+        - if @tournament.winners_bracket.last.winner
+          - player1 = single_elim_winner(@tournament)
+          %tr
+            %td
+              = 1.ordinalize
+            %td.first
+              = link_for player1
+            %td
+              = player1.rating
+          %tr
+            %td
+              = 2.ordinalize
+            %td.second
+              = link_for single_elim_runner_up(@tournament)
+            %td
+              = single_elim_runner_up(@tournament).rating
+        - if @tournament.losers.winner
+          %tr
+            %td
+              = 3.ordinalize
+            %td.third
+              = link_for @tournament.losers.winner
+            %td
+              = @tournament.losers.winner.rating
+          %tr
+            %td
+              = 4.ordinalize
+            %td.fourth
+              = link_for @tournament.losers.loser
+            %td
+              = @tournament.losers.loser.rating
+        - elsif @tournament.losers.ready?
+          %strong
+            Third Place Playoff
+          %p
+            = link_for_bracket_matchup(@tournament.losers)
 .row
   .large-12.columns
     .bracket-single

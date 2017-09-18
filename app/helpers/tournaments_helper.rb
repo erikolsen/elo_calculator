@@ -1,12 +1,12 @@
 module TournamentsHelper
   def single_elim_winner(tournament)
     last = tournament.winners_bracket.last
-    last.winner.name if last.winner
+    last.winner if last.winner
   end
 
   def single_elim_runner_up(tournament)
     last = tournament.winners_bracket.last
-    last.loser.name if last.loser
+    last.loser if last.loser
   end
 
   def show_primary(match)
