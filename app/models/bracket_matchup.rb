@@ -6,8 +6,8 @@
 #  tournament_id       :integer
 #  matchup_id          :integer
 #  bracket_type        :string
-#  primary             :integer
-#  secondary           :integer
+#  primary_id          :integer
+#  secondary_id        :integer
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
@@ -36,7 +36,7 @@ class BracketMatchup < ApplicationRecord
   end
 
   def ready?
-    (primary && secondary) && !winner
+    (primary_id && secondary_id) && !winner
   end
 
   def siblings
@@ -45,17 +45,17 @@ class BracketMatchup < ApplicationRecord
 
   def update_children!
     return nil unless winner
-    ordinal = tournament_sequence.odd? ? :primary : :secondary
+    ordinal = tournament_sequence.odd? ? :primary_id : :secondary_id
     w = siblings.where(tournament_sequence: winner_child).first
     l = siblings.where(tournament_sequence: loser_child).first
     if l
       loser_id = matchup.opponent_of(winner).id
       l.update_column(ordinal, loser_id)
-      l.matchup.update_column(ordinal.to_s + '_id', loser_id)
+      l.matchup.update_column(ordinal, loser_id)
     end
     if w
       w.update_column(ordinal, winner_id)
-      w.matchup.update_column(ordinal.to_s + '_id', winner_id)
+      w.matchup.update_column(ordinal, winner_id)
     end
   end
 end

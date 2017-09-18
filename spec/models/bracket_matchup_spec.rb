@@ -6,8 +6,8 @@
 #  tournament_id       :integer
 #  matchup_id          :integer
 #  bracket_type        :string
-#  primary             :integer
-#  secondary           :integer
+#  primary_id          :integer
+#  secondary_id        :integer
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
@@ -46,8 +46,8 @@ RSpec.describe BracketMatchup, type: :model do
         @second_bracket_matchup = @tournament.bracket_matchups[1]
         @fifth_bracket_matchup = @tournament.bracket_matchups[4]
 
-        @first_bracket_matchup.winner_id = @first_bracket_matchup.primary
-        @second_bracket_matchup.winner_id = @second_bracket_matchup.primary
+        @first_bracket_matchup.winner_id = @first_bracket_matchup.primary_id
+        @second_bracket_matchup.winner_id = @second_bracket_matchup.primary_id
 
         @first_bracket_matchup.update_children!
         @second_bracket_matchup.update_children!
@@ -60,11 +60,11 @@ RSpec.describe BracketMatchup, type: :model do
       end
 
       it 'sets the primary of its child' do
-        expect(@first_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.primary
+        expect(@first_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.primary_id
       end
 
       it 'sets the secondary of its child' do
-        expect(@second_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.secondary
+        expect(@second_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.secondary_id
       end
 
       it 'sets the primary of its child matchup' do

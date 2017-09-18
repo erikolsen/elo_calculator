@@ -6,8 +6,8 @@
 #  tournament_id       :integer
 #  matchup_id          :integer
 #  bracket_type        :string
-#  primary             :integer
-#  secondary           :integer
+#  primary_id          :integer
+#  secondary_id        :integer
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer

@@ -20,8 +20,8 @@ module SingleElimination
 
       bracket_type = seq == gen.total_matches ? 'losers' : 'winners'
 
-      tournament.bracket_matchups.create primary: primary,
-                                         secondary: secondary,
+      tournament.bracket_matchups.create primary_id: primary,
+                                         secondary_id: secondary,
                                          matchup_id: match_id,
                                          winner_id: winner_id,
                                          winner_child: winner_child,
