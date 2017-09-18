@@ -5,16 +5,18 @@
       = "(#{@tournament.tournament_type.titleize})"
       = @tournament.players.count
       Players
-    %table{width: '100%'}
-      %thead
-        %tr
-          %th
-            Rank
-          %th
-            Player
-          %th
-            Rating
-      %tbody
+
+    - if @tournament.winners_bracket.last.winner || @tournament.losers.winner
+      %table{width: '100%'}
+        %thead
+          %tr
+            %th
+              Rank
+            %th
+              Player
+            %th
+              Rating
+        %tbody
         - if @tournament.winners_bracket.last.winner
           - player1 = single_elim_winner(@tournament)
           %tr
@@ -46,11 +48,12 @@
               = link_for @tournament.losers.loser
             %td
               = @tournament.losers.loser.rating
-        - elsif @tournament.losers.ready?
-          %strong
-            Third Place Playoff
-          %p
-            = link_for_bracket_matchup(@tournament.losers)
+    - if @tournament.losers.ready?
+      %strong
+        Third Place Playoff
+      %p
+        = link_for_bracket_matchup(@tournament.losers)
+
 .row
   .large-12.columns
     .bracket-single
