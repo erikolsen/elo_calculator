@@ -46,14 +46,11 @@ class BracketMatchup < ApplicationRecord
   def update_children!
     return nil unless winner
     ordinal = tournament_sequence.odd? ? :primary_id : :secondary_id
-    w = siblings.where(tournament_sequence: winner_child).first
-    l = siblings.where(tournament_sequence: loser_child).first
-    if l
-      loser_id = matchup.opponent_of(winner).id
-      l.update_column(ordinal, loser_id)
-      l.matchup.update_column(ordinal, loser_id)
+    if l= siblings.where(tournament_sequence: loser_child).first
+      l.update_column(ordinal, loser.id)
+      l.matchup.update_column(ordinal, loser.id)
     end
-    if w
+    if w = siblings.where(tournament_sequence: winner_child).first
       w.update_column(ordinal, winner_id)
       w.matchup.update_column(ordinal, winner_id)
     end
