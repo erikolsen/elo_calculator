@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: bracket_matchups
+# Table name: brackets
 #
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
+#  is_bye              :boolean          default(FALSE)
 #  bracket_type        :string
-#  primary_id          :integer
-#  secondary_id        :integer
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
@@ -17,8 +16,8 @@
 #
 # Indexes
 #
-#  index_bracket_matchups_on_matchup_id     (matchup_id)
-#  index_bracket_matchups_on_tournament_id  (tournament_id)
+#  index_brackets_on_matchup_id     (matchup_id)
+#  index_brackets_on_tournament_id  (tournament_id)
 #
 # Foreign Keys
 #
@@ -27,7 +26,7 @@
 #
 
 FactoryGirl.define do
-  factory :bracket_matchup do
-    
+  factory :bracket do
+
   end
 end

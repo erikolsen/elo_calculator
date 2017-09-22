@@ -27,7 +27,7 @@ class Matchup < ApplicationRecord
   end
 
   def bracket_matchup
-    BracketMatchup.where(matchup_id: id).first
+    Bracket.where(matchup_id: id).first
   end
 
   def can_undo?

@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: bracket_matchups
+# Table name: brackets
 #
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
+#  is_bye              :boolean          default(FALSE)
 #  bracket_type        :string
-#  primary_id          :integer
-#  secondary_id        :integer
 #  winner_child        :integer
 #  loser_child         :integer
 #  tournament_sequence :integer
@@ -17,8 +16,8 @@
 #
 # Indexes
 #
-#  index_bracket_matchups_on_matchup_id     (matchup_id)
-#  index_bracket_matchups_on_tournament_id  (tournament_id)
+#  index_brackets_on_matchup_id     (matchup_id)
+#  index_brackets_on_tournament_id  (tournament_id)
 #
 # Foreign Keys
 #
@@ -28,7 +27,7 @@
 
 require 'rails_helper'
 
-RSpec.describe BracketMatchup, type: :model do
+RSpec.describe Bracket, type: :model do
   describe '#update_child' do
     let(:club) { FactoryGirl.create :club, member_count: 8 }
     let(:tournament_params) { { name: 'Some Tourney',
@@ -42,37 +41,37 @@ RSpec.describe BracketMatchup, type: :model do
         creator.save
         @tournament = creator.tournament
 
-        @first_bracket_matchup = @tournament.bracket_matchups[0]
-        @second_bracket_matchup = @tournament.bracket_matchups[1]
-        @fifth_bracket_matchup = @tournament.bracket_matchups[4]
+        @first_bracket = @tournament.brackets[0]
+        @second_bracket = @tournament.brackets[1]
+        @fifth_bracket = @tournament.brackets[4]
 
-        @first_bracket_matchup.winner_id = @first_bracket_matchup.primary_id
-        @second_bracket_matchup.winner_id = @second_bracket_matchup.primary_id
+        @first_bracket.winner_id = @first_bracket.matchup.primary_id
+        @second_bracket.winner_id = @second_bracket.matchup.primary_id
 
-        @first_bracket_matchup.update_children!
-        @second_bracket_matchup.update_children!
+        @first_bracket.update_children!
+        @second_bracket.update_children!
 
-        @last_bracket_matchup = @tournament.bracket_matchups[6]
+        @last_bracket = @tournament.brackets[6]
       end
 
       it 'does nothing if no children' do
-        expect(@last_bracket_matchup.update_children!).to be nil
+        expect(@last_bracket.update_children!).to be nil
       end
 
       it 'sets the primary of its child' do
-        expect(@first_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.primary_id
+        expect(@first_bracket.winner_id).to eq @fifth_bracket.matchup.primary_id
       end
 
       it 'sets the secondary of its child' do
-        expect(@second_bracket_matchup.winner_id).to eq @fifth_bracket_matchup.reload.secondary_id
+        expect(@second_bracket.winner_id).to eq @fifth_bracket.matchup.secondary_id
       end
 
       it 'sets the primary of its child matchup' do
-        expect(@first_bracket_matchup.winner).to eq @fifth_bracket_matchup.matchup.primary
+        expect(@first_bracket.winner).to eq @fifth_bracket.matchup.primary
       end
 
       it 'sets the secondary of its child matchup' do
-        expect(@second_bracket_matchup.winner).to eq @fifth_bracket_matchup.matchup.secondary
+        expect(@second_bracket.winner).to eq @fifth_bracket.matchup.secondary
       end
     end
 

@@ -15,7 +15,7 @@ class Tournament < ApplicationRecord
   has_many :entries
   has_many :players, through: :entries
   has_many :matchups
-  has_many :bracket_matchups, -> { order 'tournament_sequence asc' }
+  has_many :brackets, -> { order 'tournament_sequence asc' }
 
   scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }
   scope :expired, -> { where('end_date < ?', Date.current).order(end_date: :desc) }
@@ -25,15 +25,15 @@ class Tournament < ApplicationRecord
   validates :tournament_type, presence: true
 
   def single_bracket_by_round
-    SingleEliminationPresenter.present bracket_matchups.where(bracket_type: 'winners')
+    SingleEliminationPresenter.present brackets.where(bracket_type: 'winners')
   end
 
   def winners_bracket
-    bracket_matchups.where(bracket_type: 'winners')
+    brackets.where(bracket_type: 'winners')
   end
 
   def losers
-    bracket_matchups.where(bracket_type: 'losers').first
+    brackets.where(bracket_type: 'losers').first
   end
 
   def players_by_points

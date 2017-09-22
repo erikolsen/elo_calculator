@@ -15,20 +15,19 @@ ActiveRecord::Schema.define(version: 20170820214659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bracket_matchups", force: :cascade do |t|
+  create_table "brackets", force: :cascade do |t|
     t.bigint "tournament_id"
     t.bigint "matchup_id"
+    t.boolean "is_bye", default: false
     t.string "bracket_type"
-    t.integer "primary_id"
-    t.integer "secondary_id"
     t.integer "winner_child"
     t.integer "loser_child"
     t.integer "tournament_sequence"
     t.integer "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["matchup_id"], name: "index_bracket_matchups_on_matchup_id"
-    t.index ["tournament_id"], name: "index_bracket_matchups_on_tournament_id"
+    t.index ["matchup_id"], name: "index_brackets_on_matchup_id"
+    t.index ["tournament_id"], name: "index_brackets_on_tournament_id"
   end
 
   create_table "clubs", id: :serial, force: :cascade do |t|
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.string "tournament_type"
   end
 
-  add_foreign_key "bracket_matchups", "matchups"
-  add_foreign_key "bracket_matchups", "tournaments"
+  add_foreign_key "brackets", "matchups"
+  add_foreign_key "brackets", "tournaments"
   add_foreign_key "memberships", "clubs"
   add_foreign_key "memberships", "players"
 end

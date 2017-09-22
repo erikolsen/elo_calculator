@@ -12,6 +12,7 @@ module SingleElimination
       loser_child  = gen.total_matches if gen.semis.include?(seq)
 
       if match.include?(0)
+        is_bye = true
         winner_id = match.first
       else
         match_id = tournament.matchups.create(primary_id: primary,
@@ -20,17 +21,16 @@ module SingleElimination
 
       bracket_type = seq == gen.total_matches ? 'losers' : 'winners'
 
-      tournament.bracket_matchups.create primary_id: primary,
-                                         secondary_id: secondary,
-                                         matchup_id: match_id,
-                                         winner_id: winner_id,
-                                         winner_child: winner_child,
-                                         loser_child: loser_child,
-                                         tournament_sequence: seq,
-                                         bracket_type: bracket_type
+      tournament.brackets.create matchup_id: match_id,
+                                 winner_id: winner_id,
+                                 winner_child: winner_child,
+                                 loser_child: loser_child,
+                                 tournament_sequence: seq,
+                                 bracket_type: bracket_type,
+                                 is_bye: is_bye
     end
 
-    tournament.bracket_matchups.each(&:update_children!)
+    tournament.brackets.each(&:update_children!)
   end
 end
 
