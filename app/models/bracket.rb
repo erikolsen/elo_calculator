@@ -33,25 +33,30 @@ class Bracket < ApplicationRecord
   delegate :primary, :secondary, to: :matchup
 
   def loser
+    return nil if bye
     matchup.opponent_of winner
   end
 
   def ready?
-    (matchup.primary_id && matchup.secondary_id) && !winner
+    (primary && secondary) && !winner
   end
 
   def siblings
     tournament.brackets
   end
 
+  def loser_child_bracket
+    siblings.where(tournament_sequence: loser_child).first
+  end
+
+  def winner_child_bracket
+    siblings.where(tournament_sequence: winner_child).first
+  end
+
   def update_children!
     return nil unless winner
     ordinal = tournament_sequence.odd? ? :primary_id : :secondary_id
-    if l= siblings.where(tournament_sequence: loser_child).first
-      l.matchup.update_column(ordinal, loser.id)
-    end
-    if w = siblings.where(tournament_sequence: winner_child).first
-      w.matchup.update_column(ordinal, winner_id)
-    end
+    loser_child_bracket&.matchup&.update_column(ordinal, loser.id) if loser
+    winner_child_bracket&.matchup&.update_column(ordinal, winner_id)
   end
 end
