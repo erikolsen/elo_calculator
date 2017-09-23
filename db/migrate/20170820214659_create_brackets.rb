@@ -7,7 +7,7 @@ class CreateBrackets < ActiveRecord::Migration[5.1]
       t.string  :bracket_type
       t.integer :winner_child
       t.integer :loser_child
-      t.integer :tournament_sequence
+      t.integer :tournament_sequence, index: true
       t.integer :winner_id
 
       t.timestamps

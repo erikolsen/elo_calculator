@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.datetime "updated_at", null: false
     t.index ["matchup_id"], name: "index_brackets_on_matchup_id"
     t.index ["tournament_id"], name: "index_brackets_on_tournament_id"
+    t.index ["tournament_sequence"], name: "index_brackets_on_tournament_sequence"
   end
 
   create_table "clubs", id: :serial, force: :cascade do |t|

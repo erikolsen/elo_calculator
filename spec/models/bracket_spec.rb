@@ -16,8 +16,9 @@
 #
 # Indexes
 #
-#  index_brackets_on_matchup_id     (matchup_id)
-#  index_brackets_on_tournament_id  (tournament_id)
+#  index_brackets_on_matchup_id           (matchup_id)
+#  index_brackets_on_tournament_id        (tournament_id)
+#  index_brackets_on_tournament_sequence  (tournament_sequence)
 #
 # Foreign Keys
 #
