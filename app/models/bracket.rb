@@ -46,6 +46,14 @@ class Bracket < ApplicationRecord
     tournament.brackets
   end
 
+  def secondary_parent
+    siblings.where(winner_child: tournament_sequence).last
+  end
+
+  def primary_parent
+    siblings.where(winner_child: tournament_sequence).first
+  end
+
   def loser_child_bracket
     siblings.where(tournament_sequence: loser_child).first
   end

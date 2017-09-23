@@ -11,30 +11,20 @@ module TournamentsHelper
 
   def show_primary(bracket)
     return bracket.winner.name if bracket.bye
-    bracket.primary ? bracket.primary.name : link_for_primary(bracket)
+    bracket.primary ? bracket.primary.name : link_for_bracket(bracket.primary_parent)
   end
 
   def show_secondary(bracket)
     return "BYE" if bracket.bye
-    bracket.secondary ? bracket.secondary.name : link_for_secondary(bracket)
-  end
-
-  def link_for_primary(bracket)
-    bracket_child = bracket.siblings.where(winner_child: bracket.tournament_sequence).first
-    link_for_bracket_child bracket_child
-  end
-
-  def link_for_secondary(bracket)
-    bracket_child = bracket.siblings.where(winner_child: bracket.tournament_sequence).last
-    link_for_bracket_child bracket_child
+    bracket.secondary ? bracket.secondary.name : link_for_bracket(bracket.secondary_parent)
   end
 
   def final_round_link(tournament)
     last = tournament.winners_bracket.last
-    last.winner ? last.winner.name : link_for_bracket_child(last)
+    last.winner ? last.winner.name : link_for_bracket(last)
   end
 
-  def link_for_bracket_child(bracket)
+  def link_for_bracket(bracket)
     return nil unless bracket.primary && bracket.secondary
     link_to "#{bracket.primary.name} vs. #{bracket.secondary.name}", edit_matchup_path(bracket.matchup)
   end
