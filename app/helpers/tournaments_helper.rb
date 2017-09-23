@@ -38,8 +38,4 @@ module TournamentsHelper
     return nil unless bracket.primary && bracket.secondary
     link_to "#{bracket.primary.name} vs. #{bracket.secondary.name}", edit_matchup_path(bracket.matchup)
   end
-
-  def player_for(id)
-    Player.find_by(id: id)&.name
-  end
 end
