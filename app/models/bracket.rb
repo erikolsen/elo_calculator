@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  tournament_id       :integer
 #  matchup_id          :integer
-#  is_bye              :boolean          default(FALSE)
+#  bye                 :boolean          default(FALSE)
 #  bracket_type        :string
 #  winner_child        :integer
 #  loser_child         :integer
@@ -29,6 +29,8 @@ class Bracket < ApplicationRecord
   belongs_to :tournament
   belongs_to :matchup
   belongs_to :winner, class_name: 'Player'
+
+  delegate :primary, :secondary, to: :matchup
 
   def loser
     matchup.opponent_of winner

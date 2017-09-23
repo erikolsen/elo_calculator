@@ -10,13 +10,13 @@ module TournamentsHelper
   end
 
   def show_primary(bracket)
-    return bracket.winner.name if bracket.is_bye
-    bracket.matchup.primary_id ? player_for(bracket.matchup.primary_id) : link_for_primary(bracket)
+    return bracket.winner.name if bracket.bye
+    bracket.primary ? bracket.primary.name : link_for_primary(bracket)
   end
 
   def show_secondary(bracket)
-    return "BYE" if bracket.is_bye
-    bracket.matchup.secondary_id ? player_for(bracket.matchup.secondary_id) : link_for_secondary(bracket)
+    return "BYE" if bracket.bye
+    bracket.secondary ? bracket.secondary.name : link_for_secondary(bracket)
   end
 
   def link_for_primary(bracket)
@@ -35,10 +35,8 @@ module TournamentsHelper
   end
 
   def link_for_bracket_child(bracket)
-    primary = bracket.matchup.primary_id
-    secondary = bracket.matchup.secondary_id
-    return nil unless primary && secondary
-    link_to "#{player_for primary} vs. #{player_for secondary}", edit_matchup_path(bracket.matchup)
+    return nil unless bracket.primary && bracket.secondary
+    link_to "#{bracket.primary.name} vs. #{bracket.secondary.name}", edit_matchup_path(bracket.matchup)
   end
 
   def player_for(id)

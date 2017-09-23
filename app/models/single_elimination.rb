@@ -12,7 +12,7 @@ module SingleElimination
       loser_child  = gen.total_matches if gen.semis.include?(seq)
 
       if match.include?(0)
-        is_bye = true
+        bye = true
         winner_id = match.first
       else
         match_id = tournament.matchups.create(primary_id: primary,
@@ -27,7 +27,7 @@ module SingleElimination
                                  loser_child: loser_child,
                                  tournament_sequence: seq,
                                  bracket_type: bracket_type,
-                                 is_bye: is_bye
+                                 bye: bye
     end
 
     tournament.brackets.each(&:update_children!)

@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
   create_table "brackets", force: :cascade do |t|
     t.bigint "tournament_id"
     t.bigint "matchup_id"
-    t.boolean "is_bye", default: false
+    t.boolean "bye", default: false
     t.string "bracket_type"
     t.integer "winner_child"
     t.integer "loser_child"
