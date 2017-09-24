@@ -6,16 +6,16 @@ describe TournamentCreator do
   let(:players_ids) { [player_1.id, player_2.id] }
   let(:tournament_name) { 'Some Name' }
   let(:end_date) { 1.week.from_now }
-  let(:tournament_type) { 'round_robin' }
+  let(:type) { 'RoundRobin' }
   let(:params) { { name: tournament_name,
                    players: players_ids,
-                   tournament_type: tournament_type,
+                   type: type,
                    end_date: end_date }}
 
 
   describe '#valid?' do
-    context '#has_tournament_type' do
-      let(:tournament_type) { nil }
+    context '#has_type' do
+      let(:type) { nil }
       subject { TournamentCreator.new(params)}
 
       it 'returns false if tournament has no type' do
@@ -41,7 +41,7 @@ describe TournamentCreator do
       end
 
       it 'sets the tournaments type' do
-        expect(subject.tournament.tournament_type).to eq tournament_type
+        expect(subject.tournament.type).to eq type
       end
     end
   end

@@ -7,9 +7,9 @@
       = f.text_field :name, autofocus: true
       = f.label :end_date, 'Tournament End Date'
       = f.date_field :end_date, id: 'datepicker'
-      = f.label :tournament_type, 'Tournament Type'
+      = f.label :type, 'Tournament Type'
       - Tournament::TYPES.each_with_index do |type, index|
-        = check_box_tag "tournament_#{type}", type, false, name: "tournament[tournament_type]"
+        = check_box_tag "tournament_#{type}", type, false, name: "tournament[type]"
         = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded", id: "label_#{type}"
       %br
       = f.label :tournament_players, 'Tournament Players'

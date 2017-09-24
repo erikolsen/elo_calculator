@@ -13,7 +13,7 @@ describe 'Single Elimination Tournament' do
 
   context 'creating and playing the tournament' do
     let(:tournament_name) { 'Some Tournament' }
-    let(:type) { 'single_elimination' }
+    let(:type) { 'SingleElimination' }
     it 'creates new tournament' do
       visit root_path
 

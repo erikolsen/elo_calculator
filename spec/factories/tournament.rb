@@ -4,6 +4,6 @@ FactoryGirl.define do
     end_date   1.month.from_now
     created_at Date.current
     updated_at Date.current
-    tournament_type Tournament::TYPES.sample
+    type Tournament::TYPES.sample
   end
 end

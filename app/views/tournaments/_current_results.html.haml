@@ -1,7 +1,7 @@
 %table{width: '100%'}
   %caption
     = @tournament.name
-    = "(#{@tournament.tournament_type.titleize})"
+    = "(#{@tournament.type.titleize})"
     Results
     .tournament-subcaption
       - if @tournament.expired?

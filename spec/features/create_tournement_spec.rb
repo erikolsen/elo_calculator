@@ -4,7 +4,7 @@ describe 'creating a new tournament' do
   describe 'round robin' do
     context 'setup tournament' do
       let(:tournament_name) { 'Some Tournament' }
-      let(:type) { 'round_robin' }
+      let(:type) { 'RoundRobin' }
       let!(:club) { FactoryGirl.create :club }
       it 'creates new tournament' do
         visit root_path

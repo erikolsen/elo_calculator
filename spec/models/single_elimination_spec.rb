@@ -9,7 +9,7 @@ RSpec.describe SingleElimination do
     let!(:player_6) { FactoryGirl.create :player, rating: 1500 }
     let!(:player_7) { FactoryGirl.create :player, rating: 1400 }
 
-    let(:tournament) { FactoryGirl.create(:tournament, tournament_type: 'single_elimination') }
+    let(:tournament) { FactoryGirl.create(:tournament, type: 'SingleElimination') }
 
     before do
       tournament.players << Player.all

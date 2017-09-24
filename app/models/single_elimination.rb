@@ -1,4 +1,4 @@
-module SingleElimination
+class SingleElimination < Tournament
   def self.build_matchups_for(tournament)
     gen = BracketGenerator.new(tournament.players)
     counter = gen.first_round.count

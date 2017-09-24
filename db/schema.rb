@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "end_date"
-    t.string "tournament_type"
+    t.string "type"
   end
 
   add_foreign_key "brackets", "matchups"

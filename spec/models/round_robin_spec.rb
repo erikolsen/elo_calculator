@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe RoundRobin do
   describe '.build_matchups_for tournament' do
     let(:players) { (1..4).map { FactoryGirl.create(:player) } }
-    let(:tournament) { FactoryGirl.create(:tournament, tournament_type: 'round_robin') }
+    let(:tournament) { FactoryGirl.create(:tournament, type: 'RoundRobin') }
 
     before do
       tournament.players << players

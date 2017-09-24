@@ -34,7 +34,7 @@ RSpec.describe Bracket, type: :model do
     let(:tournament_params) { { name: 'Some Tourney',
                                 players: club.players.pluck(:id),
                                 end_date: 1.week.from_now,
-                                tournament_type: 'single_elimination' } }
+                                type: 'SingleElimination' } }
 
     context 'updating child nodes' do
       before do

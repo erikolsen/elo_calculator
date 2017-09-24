@@ -2,16 +2,16 @@
 #
 # Table name: tournaments
 #
-#  id              :integer          not null, primary key
-#  name            :string
-#  created_at      :datetime
-#  updated_at      :datetime
-#  end_date        :datetime
-#  tournament_type :string
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
 #
 
 class Tournament < ApplicationRecord
-  TYPES = %w( round_robin single_elimination )
+  TYPES = %w( RoundRobin SingleElimination )
   has_many :entries
   has_many :players, through: :entries
   has_many :matchups
@@ -22,7 +22,7 @@ class Tournament < ApplicationRecord
 
   validates :name, presence: true
   validates :end_date, presence: true
-  validates :tournament_type, presence: true
+  validates :type, presence: true
 
   def single_bracket_by_round
     SingleEliminationPresenter.present winners_bracket

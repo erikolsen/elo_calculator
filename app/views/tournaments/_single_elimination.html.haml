@@ -2,7 +2,7 @@
   .large-12.columns
     %h3
       = @tournament.name
-      = "(#{@tournament.tournament_type.titleize})"
+      = "(#{@tournament.type.titleize})"
       = @tournament.players.count
       Players
 

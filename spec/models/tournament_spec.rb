@@ -2,12 +2,12 @@
 #
 # Table name: tournaments
 #
-#  id              :integer          not null, primary key
-#  name            :string
-#  created_at      :datetime
-#  updated_at      :datetime
-#  end_date        :datetime
-#  tournament_type :string
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
 #
 
 require 'rails_helper'
@@ -19,7 +19,7 @@ RSpec.describe Tournament, :type => :model do
   let(:params) { { name: name,
                    players: players.map(&:id),
                    end_date: end_date,
-                   tournament_type: 'round_robin' }
+                   type: 'RoundRobin' }
   }
 
   before do
