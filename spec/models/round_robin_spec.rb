@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RoundRobin do
-  describe '.build_matchups_for tournament' do
+  describe '#build_matchups!' do
     let(:players) { (1..4).map { FactoryGirl.create(:player) } }
     let(:tournament) { FactoryGirl.create(:round_robin) }
 

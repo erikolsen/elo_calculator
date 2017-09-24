@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe SingleElimination do
-  describe '.build_matchups_for tournament' do
+  describe '#build_matchups!' do
     let!(:player_1) { FactoryGirl.create :player, rating: 2000 }
     let!(:player_2) { FactoryGirl.create :player, rating: 1900 }
     let!(:player_3) { FactoryGirl.create :player, rating: 1800 }
