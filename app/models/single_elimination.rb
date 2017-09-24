@@ -52,7 +52,7 @@ class SingleElimination < Tournament
   end
 
   def places
-    @places ||= [rank_1st, rank_2nd, rank_3d, rank_4th]
+    @places ||= [rank_1st, rank_2nd, rank_3rd, rank_4th]
   end
 
   def rank_for(player)
