@@ -5,9 +5,8 @@
       %h3
         Remaining Matches in #{tournament.name}
       %h4
-        Points #{tournament.match_points_for @player}
       - tournament.matchups_for(@player).each do |matchup|
-        - unless matchup.winner
+        - if matchup.ready?
           = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
   %table{width: '100%'}
     %caption
@@ -17,9 +16,11 @@
         %th
           Name
         %th
-          Total Matches
+          End Date
         %th
-          Points
+          Total Players
+        %th
+          Type
         %th
           Final Rank
     - @tournaments.each do |tournament|
@@ -30,11 +31,13 @@
           - else
             = link_to tournament.name, tournament_path(tournament)
         %td
-          = tournament.matchups_for(@player).count
+          = tournament.end_date.strftime("%I:%M %p %m/%d/%y")
         %td
-          = tournament.match_points_for(@player)
+          = tournament.players.count
         %td
-          = tournament.expired? ? tournament.rank_for(@player) : 'Playing'
+          = tournament.type.titleize
+        %td
+          = tournament.expired? || tournament.complete? ? tournament.rank_for(@player) : 'Playing'
 -else
   = link_to 'Join a Tournament', tournaments_path, class: 'button expanded'
 = paginate @tournaments, param_name: 'tournaments_page'

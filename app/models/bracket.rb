@@ -31,15 +31,11 @@ class Bracket < ApplicationRecord
   belongs_to :matchup
   belongs_to :winner, class_name: 'Player'
 
-  delegate :primary, :secondary, to: :matchup
+  delegate :primary, :secondary, :ready?, to: :matchup
 
   def loser
     return nil if bye
     matchup.opponent_of winner
-  end
-
-  def ready?
-    (primary && secondary) && !winner
   end
 
   def siblings

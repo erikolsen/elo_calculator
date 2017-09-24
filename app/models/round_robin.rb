@@ -30,14 +30,6 @@ class RoundRobin < Tournament
     (players_by_points.find_index(player) + 1).ordinalize
   end
 
-  def match_points_for(player)
-    matchups.where(winner: player).count
-  end
-
-  def matchups_for(player)
-    matchups.where("primary_id = #{player.id} or secondary_id = #{player.id}")
-  end
-
   def add_player(player)
     players.each do |current_player|
       matchups << Matchup.create(primary_id: player.id, secondary_id: current_player.id)

@@ -26,8 +26,12 @@ class Matchup < ApplicationRecord
     where(primary_id: players, secondary_id: players).first
   end
 
+  def ready?
+    (primary && secondary) && !winner
+  end
+
   def bracket_matchup
-    Bracket.where(matchup_id: id).first
+    Bracket.find_by matchup_id: id
   end
 
   def can_undo?
