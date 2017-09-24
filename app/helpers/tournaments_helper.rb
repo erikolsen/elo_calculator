@@ -10,18 +10,18 @@ module TournamentsHelper
   end
 
   def show_primary(bracket)
-    return bracket.winner.name if bracket.bye
-    bracket.primary ? bracket.primary.name : link_for_bracket(bracket.primary_parent)
+    return link_for(bracket.winner) if bracket.bye
+    bracket.primary ? link_for(bracket.primary) : link_for_bracket(bracket.primary_parent)
   end
 
   def show_secondary(bracket)
     return "BYE" if bracket.bye
-    bracket.secondary ? bracket.secondary.name : link_for_bracket(bracket.secondary_parent)
+    bracket.secondary ? link_for(bracket.secondary) : link_for_bracket(bracket.secondary_parent)
   end
 
   def final_round_link(tournament)
     last = tournament.winners_bracket.last
-    last.winner ? last.winner.name : link_for_bracket(last)
+    last.winner ? link_for(last.winner) : link_for_bracket(last)
   end
 
   def link_for_bracket(bracket)

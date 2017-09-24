@@ -17,37 +17,16 @@
             %th
               Rating
         %tbody
-        - if @tournament.winners_bracket.last.winner
-          - player1 = single_elim_winner(@tournament)
-          %tr
-            %td
-              = 1.ordinalize
-            %td.first
-              = link_for player1
-            %td
-              = player1.rating
-          %tr
-            %td
-              = 2.ordinalize
-            %td.second
-              = link_for single_elim_runner_up(@tournament)
-            %td
-              = single_elim_runner_up(@tournament).rating
-        - if @tournament.losers.winner
-          %tr
-            %td
-              = 3.ordinalize
-            %td.third
-              = link_for @tournament.losers.winner
-            %td
-              = @tournament.losers.winner.rating
-          %tr
-            %td
-              = 4.ordinalize
-            %td.fourth
-              = link_for @tournament.losers.loser
-            %td
-              = @tournament.losers.loser.rating
+        - 1.upto(4).map(&:ordinalize).each do |rank|
+          - player = @tournament.send("rank_#{rank}")
+          - if player
+            %tr
+              %td
+                = rank
+              %td{id: "#{rank}" }
+                = link_for player
+              %td
+                = player.rating
     - if @tournament.losers.ready?
       %strong
         Third Place Playoff

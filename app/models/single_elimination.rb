@@ -51,24 +51,27 @@ class SingleElimination < Tournament
     brackets.each(&:update_children!)
   end
 
+  def places
+    @places ||= [rank_1st, rank_2nd, rank_3d, rank_4th]
+  end
+
   def rank_for(player)
-    places = [first_place, second_place, third_place, fourth_place]
     (places.find_index(player) + 1).ordinalize if places.include? player
   end
 
-  def first_place
+  def rank_1st
     winners_bracket.last&.winner
   end
 
-  def second_place
+  def rank_2nd
     winners_bracket.last&.loser
   end
 
-  def third_place
+  def rank_3rd
     losers&.winner
   end
 
-  def fourth_place
+  def rank_4th
     losers&.loser
   end
 

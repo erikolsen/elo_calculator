@@ -35,7 +35,7 @@ class Bracket < ApplicationRecord
   delegate :primary, :secondary, :ready?, to: :matchup
 
   def loser
-    return nil if bye
+    return nil if bye || !winner
     matchup.opponent_of winner
   end
 

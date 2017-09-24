@@ -92,10 +92,10 @@ describe 'Single Elimination Tournament' do
       winner = find(:css, '.winner').text
       expect(winner).to eql player_6.name
 
-      first  = find(:css, '.first').text
-      second = find(:css, '.second').text
-      third = find(:css, '.third').text
-      fourth  = find(:css, '.fourth').text
+      first  = find(:css, '#1st').text
+      second = find(:css, '#2nd').text
+      third = find(:css, '#3rd').text
+      fourth  = find(:css, '#4th').text
 
       expect(first).to include player_6.name
       expect(second).to include player_4.name
