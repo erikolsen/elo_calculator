@@ -9,6 +9,10 @@
 #  end_date   :datetime
 #  type       :string
 #
+# Indexes
+#
+#  index_tournaments_on_type  (type)
+#
 
 class Tournament < ApplicationRecord
   TYPES = %w( RoundRobin SingleElimination )

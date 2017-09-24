@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
+#
+# Indexes
+#
+#  index_tournaments_on_type  (type)
+#
+
 class SingleElimination < Tournament
   has_many :brackets, -> { order 'tournament_sequence asc' }, foreign_key: :tournament_id
 

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
+#
+# Indexes
+#
+#  index_tournaments_on_type  (type)
+#
+
 require 'rails_helper'
 RSpec.describe SingleElimination do
   describe '#build_matchups!' do

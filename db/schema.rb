@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.datetime "updated_at"
     t.datetime "end_date"
     t.string "type"
+    t.index ["type"], name: "index_tournaments_on_type"
   end
 
   add_foreign_key "brackets", "matchups"
