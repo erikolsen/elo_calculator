@@ -16,7 +16,7 @@ class TournamentCreator
     ActiveRecord::Base.transaction do
       @tournament = Tournament.create(name: name, end_date: end_date, type: type)
       @tournament.players << Player.find(players)
-      @type.constantize.build_matchups_for @tournament
+      @tournament.build_matchups!
       true
     end
   end

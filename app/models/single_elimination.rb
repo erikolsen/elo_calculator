@@ -1,6 +1,8 @@
 class SingleElimination < Tournament
-  def self.build_matchups_for(tournament)
-    gen = BracketGenerator.new(tournament.players)
+  has_many :brackets, -> { order 'tournament_sequence asc' }, foreign_key: :tournament_id
+
+  def build_matchups!
+    gen = BracketGenerator.new(players)
     counter = gen.first_round.count
     gen.matches.each_with_index do |match, index|
       seq       = index + 1
@@ -15,22 +17,34 @@ class SingleElimination < Tournament
         bye = true
         winner_id = match.first
       else
-        match_id = tournament.matchups.create(primary_id: primary,
-                                              secondary_id: secondary).id
+        match_id = matchups.create(primary_id: primary,
+                                   secondary_id: secondary).id
       end
 
       bracket_type = seq == gen.total_matches ? 'losers' : 'winners'
 
-      tournament.brackets.create matchup_id: match_id,
-                                 winner_id: winner_id,
-                                 winner_child: winner_child,
-                                 loser_child: loser_child,
-                                 tournament_sequence: seq,
-                                 bracket_type: bracket_type,
-                                 bye: bye
+      brackets.create matchup_id: match_id,
+                      winner_id: winner_id,
+                      winner_child: winner_child,
+                      loser_child: loser_child,
+                      tournament_sequence: seq,
+                      bracket_type: bracket_type,
+                      bye: bye
     end
 
-    tournament.brackets.each(&:update_children!)
+    brackets.each(&:update_children!)
+  end
+
+  def single_bracket_by_round
+    SingleEliminationPresenter.present winners_bracket
+  end
+
+  def winners_bracket
+    brackets.where(bracket_type: 'winners')
+  end
+
+  def losers
+    brackets.where(bracket_type: 'losers').first
   end
 end
 

@@ -6,4 +6,12 @@ FactoryGirl.define do
     updated_at Date.current
     type Tournament::TYPES.sample
   end
+
+  factory :single_elimination, parent: :tournament, class: 'SingleElimination' do
+    type 'SingleElimination'
+  end
+
+  factory :round_robin, parent: :tournament, class: 'RoundRobin' do
+    type 'RoundRobin'
+  end
 end

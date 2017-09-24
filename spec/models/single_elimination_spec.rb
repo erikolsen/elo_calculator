@@ -9,11 +9,11 @@ RSpec.describe SingleElimination do
     let!(:player_6) { FactoryGirl.create :player, rating: 1500 }
     let!(:player_7) { FactoryGirl.create :player, rating: 1400 }
 
-    let(:tournament) { FactoryGirl.create(:tournament, type: 'SingleElimination') }
+    let(:tournament) { FactoryGirl.create(:single_elimination) }
 
     before do
       tournament.players << Player.all
-      SingleElimination.build_matchups_for tournament
+      tournament.build_matchups!
       tournament.reload
     end
 
