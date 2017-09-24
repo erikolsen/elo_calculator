@@ -34,8 +34,9 @@ if Rails.env == 'development'
     desc "Create Tournaments"
       task :create_tournaments => :environment do
         puts "Creating Tournaments"
-        TOURNAMENT_RANGE.each do |num|
-          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6), type: 'RoundRobin')
+        TOURNAMENT_RANGE.each_with_index do |num, idx|
+          type = idx.even? ? 'RoundRobin' : 'SingleElimination'
+          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6), type: type)
           raise 'Failed to create tournament' unless creator.save
         end
     end
