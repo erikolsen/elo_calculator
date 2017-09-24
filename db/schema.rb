@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170820214659) do
     t.integer "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bracket_type"], name: "index_brackets_on_bracket_type"
     t.index ["matchup_id"], name: "index_brackets_on_matchup_id"
     t.index ["tournament_id"], name: "index_brackets_on_tournament_id"
     t.index ["tournament_sequence"], name: "index_brackets_on_tournament_sequence"
