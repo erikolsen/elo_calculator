@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :tournaments, only: [:index, :new, :update, :create, :show]
-  resources :round_robin,        :as => :round_robin, :controller => :tournaments, only: :show
-  resources :single_elimination, :as => :single_elimination, :controller => :tournaments, only: :show
+  #resources :round_robins, as: :round_robin, controller: :tournaments, only: :show
+  #resources :single_eliminations, as: :single_elimination, controller: :tournaments, only: :show
+  resources :round_robins
+  resources :single_eliminations
   resources :clubs, only: [:new, :create, :index] do
     scope module: :clubs do
       resources :memberships, only: [:new, :create]

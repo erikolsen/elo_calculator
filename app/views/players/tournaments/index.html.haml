@@ -27,9 +27,9 @@
       %tr
         %td
           - if tournament.expired?
-            = link_to tournament.name, tournament_path(tournament, player: @player.id)
+            = link_to tournament.name, tournament, {player: @player.id}
           - else
-            = link_to tournament.name, tournament_path(tournament)
+            = link_to tournament.name, tournament
         %td
           = tournament.end_date.strftime("%I:%M %p %m/%d/%y")
         %td

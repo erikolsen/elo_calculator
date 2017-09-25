@@ -13,7 +13,7 @@
       - tournaments.each do |tournament|
         %tr
           %td
-            = link_to tournament.name, tournament_path(tournament)
+            = link_to tournament.name, tournament
           %td
             = tournament.type.titleize
           %td
