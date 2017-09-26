@@ -1,13 +1,11 @@
 = render partial: 'players/profile_topbar'
 -if @tournaments.present?
   - @tournaments.each do |tournament|
-    -if !tournament.expired?
+    -if tournament.has_playable_matches(@player) && !tournament.expired?
       %h3
         Remaining Matches in #{tournament.name}
-      %h4
       - tournament.matchups_for(@player).each do |matchup|
-        - if matchup.ready?
-          = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
+        = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
   %table{width: '100%'}
     %caption
       Tournaments Played (#{@player.tournaments.count})
