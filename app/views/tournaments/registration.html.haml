@@ -1,0 +1,36 @@
+.row
+  .small-12.columns
+    %h1.float-left
+      = @tournament.name
+      = "(#{@tournament.type.titleize})"
+    = link_to 'Start Tournament', close_registration_path(@tournament), method: 'post', class: 'button float-right'
+.row
+  .small-12.columns
+    %table{width: '100%'}
+      %thead
+        %tr
+          %th
+            Seed
+          %th
+            Name
+          %th
+            Rating
+        - @tournament.players.each_with_index do |player, idx|
+          %tr
+            %td
+              = (idx + 1).ordinalize
+            %td
+              = player.name
+            %td
+              = player.rating
+.join-tournament
+  = form_for @tournament.becomes(Tournament) do |f|
+    .row
+      .small-12.large-6.columns
+        = f.label :name, 'Not to late to join!'
+        = f.collection_select(:players, all_players_exclude(@tournament.players), :id, :name, { include_blank: 'Select your Name'})
+    .row
+      .small-12.large-6.columns
+        %p
+          = f.submit 'Add Player', class: 'button expanded secondary'
+

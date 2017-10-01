@@ -30,6 +30,7 @@ RSpec.describe Tournament, :type => :model do
     creator = TournamentCreator.new(params)
     creator.save
     @tournament = creator.tournament
+    @tournament.build_matchups!
   end
 
   describe '#complete?' do

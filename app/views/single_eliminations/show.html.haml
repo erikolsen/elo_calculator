@@ -17,13 +17,13 @@
             %th
               Rating
         %tbody
-        - 1.upto(4).map(&:ordinalize).each do |rank|
+        - 1.upto(4).each do |rank|
           - player = @tournament.send("rank_#{rank}")
           - if player
             %tr
               %td
                 = rank
-              %td{id: "#{rank}" }
+              %td{id: "rank_#{rank}" }
                 = link_for player
               %td
                 = player.rating

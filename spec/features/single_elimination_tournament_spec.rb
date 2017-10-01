@@ -34,9 +34,13 @@ describe 'Single Elimination Tournament' do
       find(:css, "#label_players_6").click
       fill_in 'tournament[end_date]', with: '9999-10-10'
       click_button 'Create Tournament'
+
+      # Registration Page
       expect(page).to have_content(tournament_name)
       expect(page).to have_content(type.titleize)
+      click_link 'Start Tournament'
 
+      # Tournament Page
       click_link("#{player_4.name} vs. #{player_5.name}")
       find(:css, "#label_games_1_#{player_4.id}").click
       find(:css, "#label_games_2_#{player_4.id}").click
@@ -92,10 +96,10 @@ describe 'Single Elimination Tournament' do
       winner = find(:css, '.winner').text
       expect(winner).to eql player_6.name
 
-      first  = find(:css, '#1st').text
-      second = find(:css, '#2nd').text
-      third = find(:css, '#3rd').text
-      fourth  = find(:css, '#4th').text
+      first  = find(:css, '#rank_1').text
+      second = find(:css, '#rank_2').text
+      third = find(:css, '#rank_3').text
+      fourth  = find(:css, '#rank_4').text
 
       expect(first).to include player_6.name
       expect(second).to include player_4.name

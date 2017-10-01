@@ -17,7 +17,7 @@
 class Tournament < ApplicationRecord
   TYPES = %w( RoundRobin SingleElimination )
   has_many :entries
-  has_many :players, through: :entries
+  has_many :players, -> { order('rating desc') }, through: :entries
   has_many :matchups
 
   scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }

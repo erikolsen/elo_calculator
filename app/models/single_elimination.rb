@@ -52,26 +52,26 @@ class SingleElimination < Tournament
   end
 
   def places
-    @places ||= [rank_1st, rank_2nd, rank_3rd, rank_4th]
+    @places ||= [rank_1, rank_2, rank_3, rank_4]
   end
 
   def rank_for(player)
     (places.find_index(player) + 1).ordinalize if places.include? player
   end
 
-  def rank_1st
+  def rank_1
     winners_bracket.last&.winner
   end
 
-  def rank_2nd
+  def rank_2
     winners_bracket.last&.loser
   end
 
-  def rank_3rd
+  def rank_3
     losers&.winner
   end
 
-  def rank_4th
+  def rank_4
     losers&.loser
   end
 

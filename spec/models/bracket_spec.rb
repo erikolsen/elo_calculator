@@ -42,6 +42,7 @@ RSpec.describe Bracket, type: :model do
         creator = TournamentCreator.new(tournament_params)
         creator.save
         @tournament = creator.tournament
+        @tournament.build_matchups!
 
         @first_bracket = @tournament.brackets[0]
         @second_bracket = @tournament.brackets[1]
