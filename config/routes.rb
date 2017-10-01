@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   end
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
-  resources :tournaments, only: [:index, :new, :update, :create, :show]
-  get 'tournaments/:id/registration', to: 'tournaments#registration', as: :tournament_registration
+  resources :tournaments, only: [:index, :new, :update, :create, :show] do
+    scope module: :tournaments do
+      resources :entries, only: [:index, :create]
+    end
+  end
+  #get 'tournaments/:id/registration', to: 'tournaments#registration', as: :tournament_registration
   post 'tournaments/:id/close_registration', to: 'tournaments#close_registration', as: :close_registration
   resources :round_robins
   resources :single_eliminations

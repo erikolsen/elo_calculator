@@ -25,7 +25,7 @@
             %td
               = player.rating
 .join-tournament
-  = form_for @tournament.becomes(Tournament) do |f|
+  = form_for @tournament.becomes(Tournament), url: tournament_entries_path(@tournament), method: :post do |f|
     .row
       .small-12.large-6.columns
         = f.label :name, 'Not to late to join!'
