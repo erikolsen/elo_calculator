@@ -14,10 +14,9 @@ Rails.application.routes.draw do
       resources :entries, only: [:index, :create]
     end
   end
-  #get 'tournaments/:id/registration', to: 'tournaments#registration', as: :tournament_registration
   post 'tournaments/:id/close_registration', to: 'tournaments#close_registration', as: :close_registration
-  resources :round_robins
-  resources :single_eliminations
+  resources :round_robins, only: [:show]
+  resources :single_eliminations, only: [:show]
   resources :clubs, only: [:new, :create, :index] do
     scope module: :clubs do
       resources :memberships, only: [:new, :create]
