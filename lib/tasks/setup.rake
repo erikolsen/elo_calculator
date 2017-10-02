@@ -13,6 +13,7 @@ if Rails.env == 'development'
         Rake::Task['setup:create_players'].execute
         Rake::Task['setup:create_games'].execute
         Rake::Task['setup:create_tournaments'].execute
+        Rake::Task['setup:create_clubs'].execute
     end
 
     desc "db:drop, db:create, db:migrate, setup"
@@ -48,6 +49,15 @@ if Rails.env == 'development'
           winner_id = Player.ids.sample
           loser_id = (Player.ids-[winner_id]).sample
           GameCreator.new(winner_id, loser_id).save
+        end
+    end
+
+    desc "Create Clubs"
+      task :create_clubs => :environment do
+        puts "Creating Clubs"
+        3.times do
+          club = Club.create name: Faker::StarWars.planet
+          club.players << Player.all.sample(8)
         end
     end
   end
