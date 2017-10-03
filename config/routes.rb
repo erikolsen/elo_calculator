@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :single_eliminations, only: [:show]
   resources :clubs, only: [:new, :create, :index] do
     scope module: :clubs do
-      resources :memberships, only: [:new, :create]
+      resources :memberships, only: [:index, :new, :create]
     end
   end
   resources :clubs, only: :show, param: :slug

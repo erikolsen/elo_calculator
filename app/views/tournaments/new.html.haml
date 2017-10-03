@@ -12,8 +12,8 @@
         = check_box_tag "tournament_#{type}", type, false, name: "tournament[type]"
         = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded", id: "label_#{type}"
       %br
-      = label_tag :clubs, 'Clubs'
-      = select_tag 'club', options_from_collection_for_select(Club.all, 'id', 'name', 1), class: 'club-dropdown'
+      = label_tag :clubs, 'Scope Players to Club'
+      = select_tag 'club', options_from_collection_for_select(Club.all, 'slug', 'name', 0), { class: 'club-dropdown',  prompt: 'All Players', onchange: "populateClubMembers()" }
       %br
       = f.label :tournament_players, 'Tournament Players'
       .player-checkboxes
