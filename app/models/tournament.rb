@@ -27,6 +27,10 @@ class Tournament < ApplicationRecord
   validates :end_date, presence: true
   validates :type, presence: true
 
+  def started?
+    matchups.any?
+  end
+
   def has_playable_matches(player)
     matchups.where("primary_id = #{player.id} or secondary_id = #{player.id}")
             .select(&:ready?)
