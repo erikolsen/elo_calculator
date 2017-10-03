@@ -1,0 +1,3 @@
+- players.each_with_index do |player, index|
+  = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"
+  = label_tag "tournament_players_#{index}", player.name, class: "button secondary expanded", id: "label_players_#{index}"

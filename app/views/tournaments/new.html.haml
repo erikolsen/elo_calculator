@@ -1,8 +1,8 @@
-%h3 Setup a New Tournament
+.row
+  .small-12.large-12.columns
+    %h3 Setup a New Tournament
 
-= form_for @tournament do |f|
-  .row
-    .small-12.large-6.columns
+    = form_for @tournament do |f|
       = f.label :name, 'Enter Tournament Name'
       = f.text_field :name, autofocus: true
       = f.label :end_date, 'Tournament End Date'
@@ -12,11 +12,11 @@
         = check_box_tag "tournament_#{type}", type, false, name: "tournament[type]"
         = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded", id: "label_#{type}"
       %br
+      = label_tag :clubs, 'Clubs'
+      = select_tag 'club', options_from_collection_for_select(Club.all, 'id', 'name', 1), class: 'club-dropdown'
+      %br
       = f.label :tournament_players, 'Tournament Players'
-      - all_players.each_with_index do |player, index|
-        = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"
-        = label_tag "tournament_players_#{index}", player.name, class: "button secondary expanded", id: "label_players_#{index}"
-  %br
-    .row
-      .small-12.large-6.columns
-        = f.submit 'Create Tournament', class: 'button expanded'
+      .player-checkboxes
+        = render partial: 'tournament_players_checkboxes', locals: { players: all_players }
+      %br
+      = f.submit 'Create Tournament', class: 'button expanded'
