@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :games, only: [:index, :new, :create, :show, :destroy]
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
-  resources :tournaments, only: [:index, :new, :update, :create, :show] do
+  resources :tournaments, only: [:index, :new, :update, :create] do
     scope module: :tournaments do
       resources :entries, only: [:index, :create]
     end
