@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :matchups, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :tournaments, only: [:index, :new, :update, :create] do
     scope module: :tournaments do
-      resources :entries, only: [:index, :create]
+      resources :entries, only: [:index, :create, :destroy]
     end
   end
   post 'tournaments/:id/close_registration', to: 'tournaments#close_registration', as: :close_registration

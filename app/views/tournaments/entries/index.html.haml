@@ -5,10 +5,10 @@
     = link_to 'Start Tournament', close_registration_path(@tournament), method: 'post', class: 'button float-right'
 .row
   .small-12.columns
-    %table{width: '100%'}
+    %table{class: 'seedTable'}
+      %caption
+        = @tournament.type.titleize
       %thead
-        %caption
-          = @tournament.type.titleize
         %tr
           %th
             Seed
@@ -16,14 +16,18 @@
             Name
           %th
             Rating
+          %th
+            Withdraw
         - @tournament.players.each_with_index do |player, idx|
-          %tr
+          %tr{class: "seed_row_#{idx+1}"}
             %td
               = (idx + 1).ordinalize
             %td
               = player.name
             %td
               = player.rating
+            %td
+              =link_to 'Withdraw', tournament_entry_path(@tournament, player), method: :delete#, data: { confirm: 'Are you sure?' }
 .join-tournament
   = form_for @tournament.becomes(Tournament), url: tournament_entries_path(@tournament), method: :post do |f|
     .row
