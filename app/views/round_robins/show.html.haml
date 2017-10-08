@@ -1,11 +1,67 @@
 .row
   .small-12.columns
-    = render 'current_results'
-- if @tournament.expired? && @player
-  .row
-    .small-12.large-12.columns
-      = render partial: 'matchups_for_player', locals: { tournament: @tournament, player: @player }
-- else
-  .row
-    .small-12.large-12.columns.show-for-medium-up
-      = render partial: 'round_robin_table', locals: { tournament: @tournament, players: @tournament.players }
+    %table{width: '100%'}
+      %caption
+        = @tournament.name
+        = "(#{@tournament.type.titleize})"
+        Results
+        .tournament-subcaption
+          - if @tournament.expired?
+            %p
+              Tournament ended on
+              = @tournament.end_date.strftime('%m/%d/%Y')
+          - else
+            %p
+              Click name to see remaining matches
+            %p
+              Tournament runs until
+              = @tournament.end_date.strftime('%m/%d/%Y')
+      %thead
+        %tr
+          %th
+            Player
+          %th
+            Rating
+          %th
+            Points
+      %tbody
+      - @tournament.players.each do |player|
+        %tr
+          %td
+            = link_to player.name, player_path(player)
+          %td
+            = player.rating
+          %td
+            = @tournament.match_points_for player
+.row
+  .small-12.large-12.columns
+    .add-overflow
+      %table{ 'width' => '100%', 'border' => '1' }
+        %caption
+          = @tournament.name
+          = "(#{@tournament.type.titleize})"
+        %thead
+          %tr
+            %th
+              Player
+            - @tournament.players.each do |player|
+              %th
+                = player.name
+
+        %tbody
+          - @tournament.players.each_with_index do |primary, index|
+            %tr
+              %td
+                = link_to primary.name, player_path(primary)
+              - @tournament.players.each do |secondary|
+                - if primary == secondary
+                  %td.empty-table-data
+                - else
+                  %td.text-center
+                    - matchup = @tournament.matchups.for_players(primary, secondary)
+                    - if matchup && matchup.winner
+                      = link_to "#{matchup.winner  == primary ? '1' : '0'}", matchup
+                    - elsif @tournament.expired?
+                      N.A.
+                    - else
+                      = link_to 'Play', edit_matchup_path(matchup)

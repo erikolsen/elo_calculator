@@ -25,7 +25,7 @@
       %tr
         %td
           - if tournament.expired?
-            = link_to tournament.name, tournament, {player: @player.id}
+            = link_to tournament.name, tournament
           - else
             = link_to tournament.name, tournament
         %td
