@@ -10,34 +10,19 @@ describe 'Single Elimination Tournament' do
   let(:player_5) { players[4] }
   let(:player_6) { players[5] }
   let(:player_7) { players[6] }
+  let(:tournament_data) { { name: 'Some Tournamernt',
+                            players: players.map(&:id),
+                            end_date: 1.week.from_now,
+                            type: 'SingleElimination' } }
 
-  context 'creating and playing the tournament' do
-    let(:tournament_name) { 'Some Tournament' }
-    let(:type) { 'SingleElimination' }
-    it 'creates new tournament' do
-      visit root_path
+  context 'single elimination' do
+    before do
+      creator = TournamentCreator.new(tournament_data)
+      creator.save
+      visit single_elimination_path(creator.tournament)
+    end
 
-      within '.top-bar' do
-        click_link 'Tournaments'
-      end
-
-      click_link 'Setup Tournament'
-      expect(page).to have_content('Setup a New Tournament')
-      fill_in 'Name', with: tournament_name
-      find(:css, "#label_#{type}").click
-      find(:css, "#label_players_0").click
-      find(:css, "#label_players_1").click
-      find(:css, "#label_players_2").click
-      find(:css, "#label_players_3").click
-      find(:css, "#label_players_4").click
-      find(:css, "#label_players_5").click
-      find(:css, "#label_players_6").click
-      fill_in 'tournament[end_date]', with: '9999-10-10'
-      click_button 'Create Tournament'
-
-      # Registration Page
-      expect(page).to have_content(tournament_name)
-      expect(page).to have_content(type.titleize)
+    it 'playing the tournament' do
       click_link 'Start Tournament'
 
       # Tournament Page
