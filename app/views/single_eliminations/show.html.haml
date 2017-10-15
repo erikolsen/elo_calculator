@@ -1,10 +1,14 @@
 .row
   .large-12.columns
-    %h3
+    %h1
       = @tournament.name
       = "(#{@tournament.type.titleize})"
       = @tournament.players.count
       Players
+.row
+  .large-12.columns
+    %p
+      Tournament expected to run from #{tournament_date(@tournament.start_date)} through #{tournament_date(@tournament.end_date)}
 
     - if @tournament.winners_bracket.last.winner || @tournament.losers.winner
       %table{width: '100%'}

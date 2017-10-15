@@ -9,12 +9,10 @@
 #  end_date   :datetime
 #  type       :string
 #  start_date :datetime
-#  club_id    :integer
 #
 # Indexes
 #
-#  index_tournaments_on_club_id  (club_id)
-#  index_tournaments_on_type     (type)
+#  index_tournaments_on_type  (type)
 #
 
 class RoundRobin < Tournament

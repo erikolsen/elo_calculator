@@ -34,6 +34,7 @@ RSpec.describe Bracket, type: :model do
     let(:club) { FactoryGirl.create :club, member_count: 8 }
     let(:tournament_params) { { name: 'Some Tourney',
                                 players: club.players.pluck(:id),
+                                start_date: Time.now,
                                 end_date: 1.week.from_now,
                                 type: 'SingleElimination' } }
 

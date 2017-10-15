@@ -37,7 +37,6 @@ describe 'creating a new tournament' do
       find(:css, "#label_players_1").click
       find(:css, "#label_players_2").click
       find(:css, "#label_players_3").click
-      fill_in 'tournament[end_date]', with: '9999-10-10'
       click_button 'Create Tournament'
 
       # Registration Page
