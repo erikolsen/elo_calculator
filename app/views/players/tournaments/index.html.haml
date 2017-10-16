@@ -24,10 +24,7 @@
     - @tournaments.each do |tournament|
       %tr
         %td
-          - if tournament.expired?
-            = link_to tournament.name, tournament
-          - else
-            = link_to tournament.name, tournament
+          = link_to tournament.name, tournament
         %td
           = tournament.end_date.strftime("%m/%d/%y")
         %td
