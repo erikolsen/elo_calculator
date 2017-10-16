@@ -21,7 +21,7 @@
               Type
             %th
               Final Rank
-        - @tournaments.each do |tournament|
+        - @tournaments.reverse.each do |tournament|
           %tr
             %td
               = link_to tournament.name, tournament
