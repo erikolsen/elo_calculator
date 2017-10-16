@@ -37,7 +37,7 @@ describe 'creating a new tournament' do
       find(:css, "#label_players_1").click
       find(:css, "#label_players_2").click
       find(:css, "#label_players_3").click
-      click_button 'Create Tournament'
+      click_button 'Continue to Registraion Page'
 
       # Registration Page
       expect(page).to have_content('Start Tournament')
