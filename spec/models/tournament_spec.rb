@@ -1,15 +1,36 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
+#
+# Indexes
+#
+#  index_tournaments_on_type  (type)
+#
+
 require 'rails_helper'
 
 RSpec.describe Tournament, :type => :model do
   let(:name) { 'Some Name' }
   let(:end_date) { 1.week.from_now.to_s }
   let(:players) { Array.new(5) { Player.create(name: Faker::Name.first_name) } }
-  let(:params) { { name: name, players: players.map(&:id), end_date: end_date } }
+  let(:params) { { name: name,
+                   players: players.map(&:id),
+                   end_date: end_date,
+                   type: 'RoundRobin' }
+  }
 
   before do
     creator = TournamentCreator.new(params)
     creator.save
     @tournament = creator.tournament
+    @tournament.build_matchups!
   end
 
   describe '#complete?' do

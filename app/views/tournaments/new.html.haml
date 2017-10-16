@@ -1,16 +1,25 @@
-%h3 Setup a New Tournament
+.row
+  .small-12.large-12.columns
+    %h3 Setup a New Tournament
 
-= form_for @tournament do |f|
-  .row
-    .small-12.large-6.columns
+    = form_for @tournament do |f|
       = f.label :name, 'Enter Tournament Name'
       = f.text_field :name, autofocus: true
-      = f.label :end_date, 'Tournament End Date'
-      = f.date_field :end_date, id: 'datepicker'
-      - all_players.each_with_index do |player, index|
-        = check_box_tag "tournament[players][#{index}]", player.id, false, name: "tournament[players][]"
-        = label_tag "tournament_players_#{index}", player.name, class: "button secondary expanded"
-  %br
-    .row
-      .small-12.large-6.columns
-        = f.submit 'Create Tournament', class: 'button expanded'
+      = f.label :end_date, 'Tournament End Time'
+      = f.date_field :end_date, value: 1.week.from_now.strftime('%Y-%m-%d')
+      .row
+        .small-12.columns
+          = f.label :tournament_type, 'Tournament Type'
+        - Tournament::TYPES.each_with_index do |type, index|
+          .small-6.columns
+            = check_box_tag "tournament_#{type}", type, false, name: "tournament[type]"
+            = label_tag "tournament_#{type}", type.titleize, class: "button secondary expanded", id: "label_#{type}"
+      %br
+      = label_tag :clubs, 'Scope Players to Club'
+      = select_tag 'club', options_from_collection_for_select(Club.all, 'slug', 'name', 0), { class: 'club-dropdown',  prompt: 'All Players', onchange: "populateClubMembers()" }
+      %br
+      = f.label :tournament_players, 'Tournament Players'
+      .player-checkboxes
+        = render partial: 'tournament_players_checkboxes', locals: { players: all_players }
+      %br
+      = f.submit 'Create Tournament', class: 'button expanded'

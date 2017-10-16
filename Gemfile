@@ -22,7 +22,7 @@ gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 gem 'chart-js-rails', '= 0.1.2'
 
-gem 'haml-rails'
+gem 'hamlit'
 
 # For heroku
 gem 'rails_12factor', group: :production
@@ -37,6 +37,9 @@ gem 'rails_12factor', group: :production
 # gem 'capistrano-rails', group: :development
 
 gem 'kaminari'
+
+# Adds table information to top of model files
+gem 'annotate'
 
 group :development do
   #gem 'quiet_assets'
@@ -67,7 +70,6 @@ group :test, :development do
 end
 
 group :test do
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'

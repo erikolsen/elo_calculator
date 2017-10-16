@@ -1,0 +1,49 @@
+main{
+  display:flex;
+  flex-direction:row;
+}
+.round{
+  margin: 0px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width: 175px;
+  list-style:none;
+  padding:0;
+}
+  .round .spacer{ flex-grow:1; }
+  .round .spacer:first-child,
+  .round .spacer:last-child{ flex-grow:.5; }
+
+  .round .game-spacer{
+    flex-grow:1;
+  }
+
+#tournament{
+  font-family:sans-serif;
+  font-size:small;
+  line-height:1.4em;
+}
+
+li.game{
+  padding-left:20px;
+}
+
+  li.game.winner{
+    font-weight:bold;
+  }
+  li.game span{
+    float:right;
+    margin-right:5px;
+  }
+
+  li.game-top{ border-bottom:1px solid #aaa; }
+
+  li.game-spacer{
+    border-right:1px solid #aaa;
+    min-height:6em;
+  }
+
+  li.game-bottom{
+    border-top:1px solid #aaa;
+  }

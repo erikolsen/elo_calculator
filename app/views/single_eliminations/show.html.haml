@@ -1,0 +1,54 @@
+.row
+  .large-12.columns
+    %h1
+      = @tournament.name
+      = "(#{@tournament.type.titleize})"
+      = @tournament.players.count
+      Players
+
+    - if @tournament.winners_bracket.last.winner || @tournament.losers.winner
+      %table{width: '100%'}
+        %thead
+          %tr
+            %th
+              Rank
+            %th
+              Player
+            %th
+              Rating
+        %tbody
+        - 1.upto(4).each do |rank|
+          - player = @tournament.send("rank_#{rank}")
+          - if player
+            %tr
+              %td
+                = rank
+              %td{id: "rank_#{rank}" }
+                = link_for player
+              %td
+                = player.rating
+    - if @tournament.losers.ready?
+      %strong
+        Third Place Playoff
+      %p
+        = link_for_bracket(@tournament.losers)
+
+.row
+  .large-12.columns
+    .add-overflow
+      %main#tournament
+        - @tournament.single_bracket_by_round.each do |round|
+          %ul.round
+            %li.spacer  
+            - round.each do |match|
+              %li.game.game-top
+                = show_primary(match)
+              %li.game.game-spacer  
+              %li.game.game-bottom
+                = show_secondary(match)
+              %li.spacer  
+        %ul.round
+          %li.game.game-top
+            .winner
+              = final_round_link(@tournament)
+

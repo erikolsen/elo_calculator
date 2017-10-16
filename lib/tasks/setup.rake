@@ -3,7 +3,7 @@ if Rails.env == 'development'
 
   namespace :setup do
     NUM_OF_PLAYERS = 30
-    NUM_OF_TOURNAMENTS = 15
+    NUM_OF_TOURNAMENTS = 2
     PLAYER_RANGE = (1..NUM_OF_PLAYERS).to_a
     TOURNAMENT_RANGE = (1..NUM_OF_TOURNAMENTS).to_a
     DEFAULT_RATING = 1000
@@ -13,6 +13,7 @@ if Rails.env == 'development'
         Rake::Task['setup:create_players'].execute
         Rake::Task['setup:create_games'].execute
         Rake::Task['setup:create_tournaments'].execute
+        Rake::Task['setup:create_clubs'].execute
     end
 
     desc "db:drop, db:create, db:migrate, setup"
@@ -34,10 +35,10 @@ if Rails.env == 'development'
     desc "Create Tournaments"
       task :create_tournaments => :environment do
         puts "Creating Tournaments"
-        TOURNAMENT_RANGE.each do |num|
-          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6))
-          creator.save
-          creator.tournament.update_column('end_date', 1.week.ago)
+        TOURNAMENT_RANGE.each_with_index do |num, idx|
+          type = idx.even? ? 'RoundRobin' : 'SingleElimination'
+          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6), type: type)
+          raise 'Failed to create tournament' unless creator.save
         end
     end
 
@@ -48,6 +49,15 @@ if Rails.env == 'development'
           winner_id = Player.ids.sample
           loser_id = (Player.ids-[winner_id]).sample
           GameCreator.new(winner_id, loser_id).save
+        end
+    end
+
+    desc "Create Clubs"
+      task :create_clubs => :environment do
+        puts "Creating Clubs"
+        3.times do
+          club = Club.create name: Faker::StarWars.planet
+          club.players << Player.all.sample(8)
         end
     end
   end

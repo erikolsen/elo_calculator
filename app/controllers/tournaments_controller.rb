@@ -8,24 +8,11 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new
   end
 
-  def update
-    @tournament = Tournament.find(params[:id])
-    if tournament_params[:players].present?
-      new_player = Player.find tournament_params[:players]
-      @tournament.add_player new_player
-      redirect_to @tournament
-    else
-      flash.now[:alert] = 'Failed to add player'
-      flash.keep
-      redirect_to @tournament
-    end
-  end
-
   def create
     creator = TournamentCreator.new(tournament_params)
     if creator.save
       @tournament = creator.tournament
-      redirect_to @tournament, notice: 'Tournament created'
+      redirect_to tournament_entries_path(@tournament), notice: 'Tournament created'
     else
       @tournament = Tournament.new
       flash.now[:alert] = creator.errors.full_messages.join('. ')
@@ -38,9 +25,20 @@ class TournamentsController < ApplicationController
     @player = Player.find(params[:player]) if params[:player]
   end
 
+  def close_registration
+    @tournament = Tournament.find(params[:id])
+    if @tournament.build_matchups!
+      redirect_to @tournament, notice: 'Tournament Started'
+    else
+      flash.now[:alert] = 'Failed to start tournament'
+      flash.keep
+      redirect_to tournament_registration_path(@tournament)
+    end
+  end
+
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, :end_date, { players: [] }, :players)
+    params.require(:tournament).permit(:name, :type, :end_date, { players: [] }, :players)
   end
 end

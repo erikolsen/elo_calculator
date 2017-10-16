@@ -1,5 +1,12 @@
 module Clubs
   class MembershipsController < ApplicationController
+    def index
+      @players = Club.find_by(slug: params[:club_id])&.players || Player.all
+      respond_to do |format|
+        format.json { render json: @players}
+      end
+    end
+
     def new
       @club = Club.find params[:club_id]
       @membership = Membership.new

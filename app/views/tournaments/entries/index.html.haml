@@ -1,0 +1,41 @@
+.row
+  .small-12.columns
+    %h1.float-left
+      = @tournament.name
+    = link_to 'Start Tournament', close_registration_path(@tournament), method: 'post', class: 'button float-right'
+.row
+  .small-12.columns
+    %table{class: 'seedTable'}
+      %caption
+        = @tournament.type.titleize
+      %thead
+        %tr
+          %th
+            Seed
+          %th
+            Name
+          %th
+            Rating
+          %th
+            Withdraw
+        - @tournament.players.each_with_index do |player, idx|
+          %tr{class: "seed_row_#{idx+1}"}
+            %td
+              = (idx + 1).ordinalize
+            %td
+              = player.name
+            %td
+              = player.rating
+            %td
+              =link_to 'Withdraw', tournament_entry_path(@tournament, player), method: :delete#, data: { confirm: 'Are you sure?' }
+.join-tournament
+  = form_for @tournament.becomes(Tournament), url: tournament_entries_path(@tournament), method: :post do |f|
+    .row
+      .small-12.large-6.columns
+        = f.label :name, 'Not to late to join!'
+        = f.collection_select(:players, all_players_exclude(@tournament.players), :id, :name, { include_blank: 'Select your Name'})
+    .row
+      .small-12.large-6.columns
+        %p
+          = f.submit 'Add Player', class: 'button expanded secondary'
+

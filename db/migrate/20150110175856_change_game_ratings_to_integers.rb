@@ -1,4 +1,4 @@
-class ChangeGameRatingsToIntegers < ActiveRecord::Migration
+class ChangeGameRatingsToIntegers < ActiveRecord::Migration[4.2]
   def up
     connection.execute(%q{
       alter table games

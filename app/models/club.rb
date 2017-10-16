@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: clubs
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  slug       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_clubs_on_slug  (slug)
+#
+
 class Club < ApplicationRecord
   has_many :memberships
   has_many :players, through: :memberships

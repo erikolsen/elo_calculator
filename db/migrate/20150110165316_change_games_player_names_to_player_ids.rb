@@ -1,4 +1,4 @@
-class ChangeGamesPlayerNamesToPlayerIds < ActiveRecord::Migration
+class ChangeGamesPlayerNamesToPlayerIds < ActiveRecord::Migration[4.2]
   def up
     add_column :games, :winner_id, :integer
     add_column :games, :loser_id, :integer

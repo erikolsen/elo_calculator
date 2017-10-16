@@ -4,16 +4,20 @@
       %tr
         %th
           Name
-          %th
-            End Date
-          %th
-            Entries
+        %th
+          Type
+        %th
+          End Date
+        %th
+          Entries
       - tournaments.each do |tournament|
         %tr
           %td
-            = link_to tournament.name, tournament_path(tournament)
+            = link_to tournament.name, tournament
           %td
-            = tournament.end_date.strftime('%m/%d/%Y')
+            = tournament.type.titleize
+          %td
+            = tournament.end_date.strftime("%m/%d/%y")
           %td
             = tournament.players.count
 - else

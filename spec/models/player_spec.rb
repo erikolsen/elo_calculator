@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: players
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  rating     :integer          default(0), not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+# Indexes
+#
+#  index_players_on_name    (name)
+#  index_players_on_rating  (rating)
+#
+
 require 'rails_helper'
 
 describe Player do

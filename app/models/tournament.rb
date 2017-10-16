@@ -1,30 +1,48 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  end_date   :datetime
+#  type       :string
+#
+# Indexes
+#
+#  index_tournaments_on_type  (type)
+#
+
 class Tournament < ApplicationRecord
+  TYPES = %w( RoundRobin SingleElimination )
   has_many :entries
-  has_many :players, through: :entries
+  has_many :players, -> { order('rating desc') }, through: :entries
   has_many :matchups
 
   scope :active, -> { where('end_date >= ?', Date.current).order(end_date: :desc) }
   scope :expired, -> { where('end_date < ?', Date.current).order(end_date: :desc) }
 
-  def players_by_points
-    players.sort { |x,y|  match_points_for(y) <=> match_points_for(x) }
+  validates :name, presence: true
+  validates :end_date, presence: true
+  validates :type, presence: true
+
+  def started?
+    matchups.any?
   end
 
-  def rank_for(player)
-    (players_by_points.find_index(player) + 1).ordinalize
-  end
-
-  def match_points_for(player)
-    matchups.where(winner: player).count
+  def has_playable_matches(player)
+    matchups.where("primary_id = #{player.id} or secondary_id = #{player.id}")
+            .select(&:ready?)
+            .any?
   end
 
   def matchups_for(player)
     matchups.where("primary_id = #{player.id} or secondary_id = #{player.id}")
   end
 
-  def add_player(player)
-    build_matchups_for player
-    players << player
+  def match_points_for(player)
+    matchups.where(winner: player).count
   end
 
   def complete?
@@ -33,13 +51,5 @@ class Tournament < ApplicationRecord
 
   def expired?
     end_date < Date.current if end_date
-  end
-
-  private
-
-  def build_matchups_for(player)
-    players.each do |current_player|
-      matchups << Matchup.create(primary_id: player.id, secondary_id: current_player.id)
-    end
   end
 end

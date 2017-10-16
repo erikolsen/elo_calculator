@@ -1,8 +1,8 @@
 development:
   adapter: postgresql
   encoding: unicode
-  #database: ping_pong_development
-  database: ace_ping_pong_backup_05_10
+  database: ping_pong_development
+  #database: ace_ping_pong_backup_05_10
   host: localhost
   pool: 5
 
