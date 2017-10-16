@@ -5,10 +5,6 @@
     = link_to 'Start Tournament', close_registration_path(@tournament), method: 'post', class: 'button float-right'
 .row
   .small-12.columns
-    %p
-      Tournament expected to run from #{tournament_date(@tournament.start_date)} through #{tournament_date(@tournament.end_date)}
-.row
-  .small-12.columns
     %table{class: 'seedTable'}
       %caption
         = @tournament.type.titleize

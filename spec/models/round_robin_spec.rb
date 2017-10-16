@@ -8,7 +8,6 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
-#  start_date :datetime
 #
 # Indexes
 #

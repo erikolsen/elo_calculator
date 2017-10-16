@@ -1,21 +1,20 @@
 class TournamentCreator
   include ActiveModel::Model
 
-  attr_accessor :players, :name, :tournament, :start_date, :end_date, :type
+  attr_accessor :players, :name, :tournament, :end_date, :type
   validate :no_duplicate_players, :must_have_two_players, :has_future_date, :has_type
 
   def initialize(params)
     @name = params[:name]
     @players = params[:players]
-    @start_date = params[:start_date].to_date
-    @end_date = params[:end_date].to_date
+    @end_date = params[:end_date].to_datetime
     @type = params[:type]
   end
 
   def save
     return false unless valid?
     ActiveRecord::Base.transaction do
-      @tournament = Tournament.create(name: name, start_date: start_date, end_date: end_date, type: type)
+      @tournament = Tournament.create(name: name, end_date: end_date, type: type)
       @tournament.players << Player.find(players)
       true
     end

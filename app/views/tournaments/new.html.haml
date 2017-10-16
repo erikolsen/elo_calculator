@@ -5,13 +5,8 @@
     = form_for @tournament do |f|
       = f.label :name, 'Enter Tournament Name'
       = f.text_field :name, autofocus: true
-      .row
-        .small-12.medium-6.columns
-          = f.label :start_date, 'Tournament Start Time'
-          = f.datetime_field :start_date, value: Time.now.strftime('%FT%T')
-        .small-12.medium-6.columns
-          = f.label :end_date, 'Tournament End Time'
-          = f.datetime_field :end_date, value: 1.week.from_now.strftime('%FT%T')
+      = f.label :end_date, 'Tournament End Time'
+      = f.date_field :end_date, value: 1.week.from_now.strftime('%Y-%m-%d')
       .row
         .small-12.columns
           = f.label :tournament_type, 'Tournament Type'

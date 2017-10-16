@@ -29,7 +29,7 @@
           - else
             = link_to tournament.name, tournament
         %td
-          = tournament.end_date.strftime("%I:%M %p %m/%d/%y")
+          = tournament.end_date.strftime("%m/%d/%y")
         %td
           = tournament.players.count
         %td

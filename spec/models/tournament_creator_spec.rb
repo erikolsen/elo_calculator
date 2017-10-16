@@ -6,12 +6,10 @@ describe TournamentCreator do
   let(:players_ids) { [player_1.id, player_2.id] }
   let(:tournament_name) { 'Some Name' }
   let(:end_date) { 1.week.from_now }
-  let(:start_date) { Time.now }
   let(:type) { 'RoundRobin' }
   let(:params) { { name: tournament_name,
                    players: players_ids,
                    type: type,
-                   start_date: start_date,
                    end_date: end_date }}
 
 

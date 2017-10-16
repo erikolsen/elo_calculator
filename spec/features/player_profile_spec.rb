@@ -27,11 +27,9 @@ describe 'Player Profile' do
     describe 'tournaments' do
       let(:tournament_name) { 'Some Tournament' }
       let(:end_date) { 1.week.from_now.to_s }
-      let(:start_date) { Time.now }
       let(:tournament_params) { { name: tournament_name,
                                   players: [player1.id, player2.id],
                                   type: 'RoundRobin',
-                                  start_date: start_date,
                                   end_date: end_date } }
 
       before do
