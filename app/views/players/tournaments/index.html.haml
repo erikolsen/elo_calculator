@@ -18,8 +18,6 @@
             %th
               End Date
             %th
-              Total Players
-            %th
               Type
             %th
               Final Rank
@@ -29,8 +27,6 @@
               = link_to tournament.name, tournament
             %td
               = tournament.end_date.strftime("%m/%d/%y")
-            %td
-              = tournament.players.count
             %td
               = tournament.type.titleize
             %td
