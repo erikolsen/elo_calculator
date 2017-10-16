@@ -3,7 +3,7 @@ module Clubs
     def index
       @players = Club.find_by(slug: params[:club_id])&.players || Player.all
       respond_to do |format|
-        format.json { render json: @players}
+        format.json { render json: @players.order('name asc')}
       end
     end
 
