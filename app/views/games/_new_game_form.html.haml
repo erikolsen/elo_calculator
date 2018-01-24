@@ -1,21 +1,21 @@
 .row
-  .small-12.large-12.columns
+  .small-12.columns
     %h3 Add Game or Play Best of Five
 = form_for :game, url: games_path do |f|
   .row
-    .small-12.large-12.columns
+    .small-10.columns
       = f.label :winner_id do
         Humble Victor
-        = f.collection_select :winner_id, optimized_player_list, :id, :name, selected: last_winner_id
-
-  .row
-    .small-12.large-12.columns
+        = f.collection_select :winner_id, all_players, :id, :name, selected: last_winner_id
       = f.label :loser_id do
         Graceful Defeated
-        = f.collection_select :loser_id, optimized_player_list, :id, :name, selected: last_winner_id
-  .row
-    .small-6.large-6.columns
-      = f.submit 'Update Ratings', class: 'button expanded'
-    .small-6.large-6.columns
-      = f.submit 'Best of Five', name: 'match', class: 'button expanded'
+        = f.collection_select :loser_id, all_players , :id, :name, selected: last_loser_id
+    .small-2.columns.vertical-center
+      %a.button.expanded{onClick: "swap()" }
+        %i.fi-shuffle
 
+  .row
+    .small-6.columns
+      = f.submit 'Update Ratings', class: 'button expanded'
+    .small-6.columns
+      = f.submit 'Multi-Game Match', name: 'match', class: 'button expanded'

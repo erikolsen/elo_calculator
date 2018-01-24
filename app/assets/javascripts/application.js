@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/datepicker
 //= require foundation
+//= require game_entry
 //= require google_analytics
 //= require tournaments
 //= require player_profile

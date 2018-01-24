@@ -26,6 +26,10 @@
 
 @import 'foundation-icons';
 @include foundation-progress-element;
+.vertical-center {
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
 
 .with_padding {
   padding-left: 3em;
