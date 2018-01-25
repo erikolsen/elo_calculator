@@ -6,7 +6,12 @@
 }
 
 .gameDetails p {
-  margin: 0;
+  margin-bottom: 0.25em;
+}
+
+.undoGame {
+  margin-top: 1em;
+  font-weight: bold;
 }
 
 input[type=checkbox] {

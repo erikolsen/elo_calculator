@@ -1,17 +1,19 @@
 .row
   .large-6.columns
-    .gameDetails
+    .gameDetails.clearfix
       %h3
         = link_for @game.winner
         defeats
         = link_for @game.loser
-      %p
-        #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
-      %p
-        #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
-    %br
-    - if @game.can_undo?
-      = link_to 'Undo Game', @game, method: :delete, class: 'alert button float-right'
+      .float-left
+        %p
+          #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
+        %p
+          #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
+      .float-right.some-padding
+        - if @game.can_undo?
+          = link_to 'Undo Game', @game, method: :delete, class: 'alert button small undoGame'
+
   .large-6.columns.show-for-large
     %table{width: '100%'}
       %thead
@@ -25,3 +27,8 @@
           %th
             Won / Lost
       = render top_ten_players
+.row
+  .large-12.columns
+    %br
+    %h1 Add Another Game
+    = render 'new_game_form'
