@@ -2,14 +2,26 @@
   .large-6.columns
     .gameDetails.clearfix
       %h3
-        = link_for @game.winner
+        %span.popIt
+          = link_for @game.winner
         defeats
-        = link_for @game.loser
+        %span.popIt
+          = link_for @game.loser
       .float-left
         %p
-          #{@game.winner.name}: #{@game.winner_rating} to #{@game.winner.rating}
+          #{@game.winner.name}:
+          %span.popIt
+            #{@game.winner_rating}
+          to
+          %span.popIt
+            #{@game.winner.rating}
         %p
-          #{@game.loser.name}: #{@game.loser_rating} to #{@game.loser.rating}
+          #{@game.loser.name}:
+          %span.popIt
+            #{@game.loser_rating}
+          to
+          %span.popIt
+            #{@game.loser.rating}
       .float-right.some-padding
         - if @game.can_undo?
           = link_to 'Undo Game', @game, method: :delete, class: 'alert button small undoGame'
