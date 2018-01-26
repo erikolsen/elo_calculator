@@ -1,8 +1,22 @@
 .gameDetails {
   margin-top: 1em;
   border: 1px solid #5FDD5F;
-  padding: .35em;
   background: #D8F9D8;
+  padding: .25em;
+  animation-duration: 0.25s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
 
 .gameDetails p {
@@ -12,6 +26,12 @@
 .undoGame {
   margin-top: 1em;
   font-weight: bold;
+}
+
+.swapButton {
+  text-align: center;
+  border: 2px solid #1779ba;
+  padding: 0.50em;
 }
 
 input[type=checkbox] {

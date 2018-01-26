@@ -8,8 +8,9 @@
         Graceful Defeated
         = f.collection_select :loser_id, all_players , :id, :name, selected: last_loser_id
     .small-2.columns.vertical-center
-      %a.button.expanded{onClick: "swap()" }
-        %i.fi-shuffle
+      .swapButton
+        %a.expanded{onClick: "swap()" }
+          %i.fi-shuffle
 
   .row
     .small-6.columns
