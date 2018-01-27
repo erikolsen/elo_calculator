@@ -7,17 +7,13 @@
 
 .popIt {
   animation-duration: 1.5s;
-  animation-name: slidein;
+  animation-name: pulse;
 }
 
-@keyframes slidein {
-  from {
+@keyframes pulse {
+  50% {
     background-color: #5FDD5F;
     border-radius: 5px;
-  }
-
-  to {
-    font-size: 1em;
   }
 }
 
