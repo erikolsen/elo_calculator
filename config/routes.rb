@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :admin, only: [:index]
   resources :players, only: [:index, :show, :create, :new] do
     scope module: :players do
       resources :clubs, only: [:index]
