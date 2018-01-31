@@ -2,17 +2,18 @@
   .small-6.columns
     .section
       %h3.sectionHeader
-        Games Today
+        Match Games
       .sectionBody
         %p
-          = Game.where(created_at: 1.day.ago..0.days.ago).count
+        %p
+          = Game.played_on(Date.today).where.not(matchup_id: nil).count
   .small-6.columns
     .section
       %h3.sectionHeader
-        Matches Today
+        Non-Match Games
       .sectionBody
         %p
-          = Matchup.where(created_at: 1.day.ago..0.days.ago).count
+          = Game.played_on(Date.today).where(matchup_id: nil).count
 .row
   .small-6.columns
     .section
@@ -52,7 +53,7 @@
   .small-6.columns
     .section
       %h3.sectionHeader
-        Tournament Total
+        Matches Today
       .sectionBody
         %p
-          = Tournament.count
+          = Matchup.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day).count
