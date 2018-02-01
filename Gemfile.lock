@@ -86,9 +86,6 @@ GEM
     fast_stack (0.2.0)
     ffi (1.9.18)
     flamegraph (0.9.5)
-    foundation-icons-sass-rails (3.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     foundation-rails (6.3.1.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -276,7 +273,6 @@ DEPENDENCIES
   faker
   fast_stack
   flamegraph
-  foundation-icons-sass-rails
   foundation-rails
   hamlit
   jquery-rails
@@ -307,4 +303,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.3
+   1.16.0
