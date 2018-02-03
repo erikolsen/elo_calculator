@@ -2,8 +2,12 @@
   background-color: black;
   position: fixed;
   bottom: 0;
-  width: 100%;
   min-height: 10%;
+}
+
+#footer li {
+  padding: 0px;
+  width: 20%;
 }
 
 #footer a {
