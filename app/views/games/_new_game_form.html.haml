@@ -9,8 +9,9 @@
         = f.collection_select :loser_id, all_players , :id, :name, selected: last_loser_id
     .small-2.columns.vertical-center
       .swapButton{onClick: "swap()"}
-        %a.expanded
-          %i.fas.fa-exchange-alt.fa-lg{"data-fa-transform" => "rotate-90"}
+        %i.fas.fa-exchange-alt.fa-lg{"data-fa-transform" => "rotate-90"}
+        %span.swapText
+          swap
 
   .row
     .small-6.columns

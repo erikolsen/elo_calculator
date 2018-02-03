@@ -5,6 +5,10 @@
   padding: .25em;
 }
 
+.gameDetails p {
+  margin-bottom: 0.25em;
+}
+
 .popIt {
   animation-duration: 2.0s;
   animation-name: pulse;
@@ -17,19 +21,22 @@
   }
 }
 
-.gameDetails p {
-  margin-bottom: 0.25em;
-}
-
 .undoGame {
   margin-top: 1em;
   font-weight: bold;
 }
 
 .swapButton {
+  color: #1779ba;
+  line-height: .75;
   text-align: center;
   border: 2px solid #1779ba;
-  padding: 0.50em;
+  padding: .25em;
+}
+
+.swapText {
+  font-weight: bold;
+  font-size: .65em;
 }
 
 input[type=checkbox] {
