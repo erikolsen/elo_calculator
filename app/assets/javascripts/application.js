@@ -21,7 +21,7 @@
 //= require Chart
 //= require_tree .
 
-$(document).foundation();
+$('.top-bar').foundation();
 
 // This is to avoid a flash of unstyled content when
 // foundation is initialized
