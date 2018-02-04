@@ -31,7 +31,12 @@
   line-height: .75;
   text-align: center;
   border: 2px solid #1779ba;
-  padding: .25em;
+  padding-top: .5em;
+  padding-bottom: .25em;
+}
+
+.swapButton i {
+  transform: rotate(90deg);
 }
 
 .swapText {
