@@ -20,8 +20,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'foundation-rails'
 gem 'chart-js-rails', '= 0.1.2'
-
 gem 'hamlit'
+
+gem 'turbolinks'
 
 # For heroku
 gem 'rails_12factor', group: :production

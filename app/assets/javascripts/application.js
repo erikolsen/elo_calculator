@@ -19,10 +19,16 @@
 //= require tournaments
 //= require player_profile
 //= require Chart
+//= require turbolinks
 //= require_tree .
 
-$('.top-bar').foundation();
+$(document).on('turbolinks:load', function() {
+  $(function(){
+    $('.top-bar').foundation();
 
-// This is to avoid a flash of unstyled content when
-// foundation is initialized
-$('ul').removeClass('hamburger-hidden');
+    // This is to avoid a flash of unstyled content when
+    // foundation is initialized
+    $('ul').removeClass('hamburger-hidden');
+  });
+});
+
