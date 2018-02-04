@@ -1,4 +1,6 @@
-setDailyRatingChangeArrow();
+$(document).on('turbolinks:load', function() {
+  setDailyRatingChangeArrow();
+});
 
 function setDailyRatingChangeArrow() {
   var ratingChange = parseInt($('.daily-rating-change').text())
