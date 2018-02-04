@@ -6,6 +6,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'application'
     %link{:href => image_path("manifest.json"), :rel => "manifest"}
+    %link{:href => "https://use.fontawesome.com/releases/v5.0.6/css/all.css", :rel => "stylesheet"}/
     %meta{:content => "initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width", :name => "viewport"}
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
     %meta{:content => "yes", :name => "mobile-web-app-capable"}
@@ -17,6 +18,5 @@
       = yield
 
     = render 'layouts/icon_bar'
-    %script{:src => "https://use.fontawesome.com/releases/v5.0.6/js/all.js"}
 
     = javascript_include_tag 'application'
