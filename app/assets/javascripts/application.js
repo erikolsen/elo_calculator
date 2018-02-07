@@ -25,7 +25,6 @@
 $(document).on('turbolinks:load', function() {
   $(function(){
     $('.top-bar').foundation();
-
     // This is to avoid a flash of unstyled content when
     // foundation is initialized
     $('ul').removeClass('hamburger-hidden');

@@ -1,8 +1,6 @@
 class GameCreator
   include ActiveModel::Model
-
   attr_accessor :winner_id, :loser_id, :game
-
   validate :not_same_player
 
   def initialize(winner_id = nil, loser_id = nil)
