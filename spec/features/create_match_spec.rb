@@ -24,6 +24,13 @@ describe "creating a new match" do
         expect(page).to have_content "#{player1.name}'s new rating is 1066"
         expect(page).to have_content "#{player2.name}'s new rating is 934"
       end
+
+      it 'can undo match' do
+        click_on 'Undo'
+        expect(page).to have_content "Match Destroyed"
+        expect(player1.rating).to eq 1000
+        expect(player2.rating).to eq 1000
+      end
     end
   end
 
@@ -42,6 +49,15 @@ describe "creating a new match" do
         expect(page).to have_content "#{player2.name} won!"
         expect(page).to have_content "#{player2.name}'s new rating is 1066"
         expect(page).to have_content "#{player1.name}'s new rating is 934"
+      end
+
+      it "can rematch from matchup page" do
+        click_on 'Rematch'
+        find(:css, "#label_games_1_#{player1.id}").click
+        find(:css, "#label_games_2_#{player1.id}").click
+        find(:css, "#label_games_3_#{player1.id}").click
+        find(:css, "input[type='submit']").click
+        expect(page).to have_content "#{player1.name} won!"
       end
     end
   end
