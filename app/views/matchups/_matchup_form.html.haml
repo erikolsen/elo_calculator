@@ -1,7 +1,7 @@
 = form_for(matchup) do |f|
   = hidden_field_tag :primary_id, matchup.primary_id
   = hidden_field_tag :secondary_id, matchup.secondary_id
-  - 1.upto(5) do |game_number|
+  - 1.upto(game_count) do |game_number|
     .row
       %p.small-1.columns
         = game_number

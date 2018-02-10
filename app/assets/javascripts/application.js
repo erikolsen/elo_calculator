@@ -31,3 +31,14 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
+'<input type="radio" value="19" name="games[1]" id="games_1_19">'
+'<label class="button secondary expanded" id="label_games_1_19" for="games_1_19">Yoda</label>'
+function populateMatchups(array){
+  var items = [];
+  $.each(array, function( key, val ) {
+    label = '<label class="button secondary expanded" id="label_games_1_19" for="games_1_19">Yoda</label>'
+    input = '<input type="radio" value="19" name="games[1]" id="games_1_19">'
+    items.push(input + label);
+  });
+  $('#matchupForm').html(items);
+};
