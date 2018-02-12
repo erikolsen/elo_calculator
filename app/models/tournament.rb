@@ -8,6 +8,7 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
+#  series_max :integer
 #
 # Indexes
 #
@@ -16,6 +17,7 @@
 
 class Tournament < ApplicationRecord
   TYPES = %w( RoundRobin SingleElimination )
+  SERIES_MAXES = [1, 3, 5, 7, 9]
   has_many :entries
   has_many :players, -> { order('rating desc') }, through: :entries
   has_many :matchups
@@ -26,6 +28,7 @@ class Tournament < ApplicationRecord
   validates :name, presence: true
   validates :end_date, presence: true
   validates :type, presence: true
+  validates :series_max, presence: true
 
   def started?
     matchups.any?

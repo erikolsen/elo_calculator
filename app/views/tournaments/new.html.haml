@@ -9,6 +9,15 @@
       = f.date_field :end_date, value: 1.week.from_now.strftime('%Y-%m-%d')
       .row
         .small-12.columns
+          = f.label :series_max, 'Best of Games Per Match'
+        - Tournament::SERIES_MAXES.each do |game_count|
+          - default = game_count == 5
+          .col5-unit
+            = radio_button("tournament", 'series_max', game_count, checked: default)
+            = label_tag "tournament_series_max_#{game_count}", game_count, {class: 'button secondary expanded', id: "label_tournament_series_max_#{game_count}"}
+      %br
+      .row
+        .small-12.columns
           = f.label :tournament_type, 'Tournament Type'
         - Tournament::TYPES.each_with_index do |type, index|
           .small-6.columns

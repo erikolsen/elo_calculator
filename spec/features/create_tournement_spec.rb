@@ -13,6 +13,7 @@ describe 'creating a new tournament' do
   context 'creating and playing the tournament' do
     let(:tournament_name) { 'Some Tournament' }
     let(:type) { %w(RoundRobin SingleElimination).sample }
+    let(:series_max) { Tournament::SERIES_MAXES.sample }
     before do
       player_1.update_columns(:rating => 1600, name: 'Gamma')
       player_2.update_columns(:rating => 2000, name: 'Alpha')
@@ -32,6 +33,7 @@ describe 'creating a new tournament' do
       click_link 'Setup Tournament'
       expect(page).to have_content('Setup a New Tournament')
       fill_in 'Name', with: tournament_name
+      find(:css, "#label_tournament_series_max_#{series_max}").click
       find(:css, "#label_#{type}").click
       find(:css, "#label_players_0").click
       find(:css, "#label_players_1").click
@@ -43,6 +45,7 @@ describe 'creating a new tournament' do
       expect(page).to have_content('Start Tournament')
       expect(page).to have_content(tournament_name)
       expect(page).to have_content(type.titleize)
+      expect(page).to have_content("Matches will be Best of #{series_max}")
 
       # Add Player
       select new_player.name, from: 'tournament[players]'

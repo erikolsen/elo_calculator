@@ -3,28 +3,7 @@
     %h4.text-center
       Please mark winner of each game in order.
     %h4.text-center
-      Choose Number of Games in Match
-.row
-  .small-12.columns
-    .whee
-      %ul
-        %li{onclick: 'yoyo(this)'}
-          1
-        %li{onclick: 'yoyo(this)'}
-          3
-        %li.active{onclick: 'yoyo(this)'}
-          5
-        %li{onclick: 'yoyo(this)'}
-          7
-        %li{onclick: 'yoyo(this)'}
-          9
-
+      Best of 5
 .row
   .small-12.large-12.columns
-    = render 'matchup_form', matchup: @matchup, game_count: 5
-
-:javascript
-  function yoyo(element){
-    $('.active').removeClass('active')
-    $(element).addClass('active')
-  }
+    = render 'matchup_form', matchup: @matchup

@@ -8,6 +8,7 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
+#  series_max :integer
 #
 # Indexes
 #
@@ -34,7 +35,8 @@ class SingleElimination < Tournament
         winner_id = match.first
       else
         match_id = matchups.create(primary_id: primary,
-                                   secondary_id: secondary).id
+                                   secondary_id: secondary,
+                                   series_max: series_max).id
       end
 
       bracket_type = seq == gen.total_matches ? 'losers' : 'winners'

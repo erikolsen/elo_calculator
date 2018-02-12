@@ -60,8 +60,9 @@ class MatchupCreator
   end
 
   def valid_number_of_games
+    winning_number = matchup.series_max > 1 ? matchup.series_max - 2 : 1
     return false if primary_wins == secondary_wins
-    return false unless primary_wins == 3 || secondary_wins == 3
-    game_results.count <= 5 && game_results.count >= 3
+    return false unless primary_wins == winning_number || secondary_wins == winning_number
+    game_results.count <= matchup.series_max && game_results.count >= winning_number
   end
 end

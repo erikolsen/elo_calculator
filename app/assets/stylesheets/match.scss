@@ -1,49 +1,6 @@
-.whee li {
-  width: 2em;
-  height: 2em;
-  text-align: center;
-  line-height: 2em;
-  border-radius: 1em;
-  background: lightblue;
-  margin: 0 4vw;
-  display: inline-block;
-  color: white;
-  position: relative;
+.col5-unit{
+  @include grid-column(2.4); // (12/5 = 2.4)
 }
-
-.whee li::before{
-  content: '';
-  position: absolute;
-  top: 1em;
-  left: -11vw;
-  width: 11vw;
-  height: .2vh;
-  background: lightblue;
-  z-index: -1;
-}
-
-
-.whee li:first-child::before {
-  display: none;
-}
-
-//.active ~ li {
-  //background: lightblue;
-//}
-
-//.active ~ li::before {
-  //background: lightblue;
-//}
-
-.whee a {
-  color: black;
-}
-
-.active {
-  background: dodgerblue !important;
-}
-
-///////////////////////
 .gameDetails {
   margin-top: 1em;
   border: 1px solid #5FDD5F;

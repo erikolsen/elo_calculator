@@ -8,6 +8,7 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
+#  series_max :integer
 #
 # Indexes
 #
@@ -19,11 +20,16 @@ require 'rails_helper'
 RSpec.describe RoundRobin do
   describe '#build_matchups!' do
     let(:players) { (1..4).map { FactoryGirl.create(:player) } }
-    let(:tournament) { FactoryGirl.create(:round_robin) }
+    let(:series_max) { 5 }
+    let(:tournament) { FactoryGirl.create(:round_robin, series_max: series_max) }
 
     before do
       tournament.players << players
       tournament.build_matchups!
+    end
+
+    it 'creates matches with proper series max' do
+      expect(tournament.matchups.pluck(:series_max).uniq).to eq [series_max]
     end
 
     it 'creates all combinations of matches' do

@@ -1,12 +1,14 @@
 class MatchupsController < ApplicationController
   def new
     @matchup = Matchup.new(primary_id: primary_id,
-                           secondary_id: secondary_id)
+                           secondary_id: secondary_id,
+                           series_max: 5)
   end
 
   def create
     @matchup = Matchup.create(primary_id: primary_id,
-                              secondary_id: secondary_id)
+                              secondary_id: secondary_id,
+                              series_max: series_max)
     if @matchup.add_game_results(games_params)
       redirect_to @matchup
     else
@@ -49,6 +51,10 @@ class MatchupsController < ApplicationController
 
   def games_params
     params.require(:games).permit!.to_h
+  end
+
+  def series_max
+    params[:series_max]
   end
 
   def primary_id
