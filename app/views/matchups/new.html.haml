@@ -1,5 +1,7 @@
 .row
   .small-12.columns
+    %h3.text-center
+      = "#{@matchup.primary.name}(#{@matchup.primary.rating}) vs #{@matchup.secondary.name}(#{@matchup.secondary.rating})"
     %h4.text-center
       Please mark winner of each game in order.
     %h4.text-center
