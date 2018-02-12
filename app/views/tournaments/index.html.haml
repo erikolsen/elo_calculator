@@ -7,7 +7,7 @@
       %a{href: '#expired-tournaments'}
         History
   .tabs-content{'data-tabs-content' => 'tournament_tabs'}
-    .tabs-panel{id: 'active-tournaments'}
+    .tabs-panel.is-active{id: 'active-tournaments'}
       = render partial: 'tournament_data', locals: { tournaments: @active_tournaments }
     .tabs-panel{id: 'expired-tournaments'}
       = render partial: 'tournament_data', locals: { tournaments: @expired_tournaments }
@@ -16,3 +16,7 @@
   .small-12.columns
     %h2
       = link_to 'Setup Tournament', new_tournament_path, { class: 'button expanded' }
+
+:javascript
+  $('.tabs').foundation()
+
