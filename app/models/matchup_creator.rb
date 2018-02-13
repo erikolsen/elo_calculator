@@ -1,5 +1,11 @@
 class MatchupCreator
   include ActiveModel::Model
+  # {series_max => required_wins}
+  REQUIRED_WINS_PER_SERIES_MAX = { 1 => 1,
+                                   3 => 2,
+                                   5 => 3,
+                                   7 => 4,
+                                   9=> 5 }
 
   attr_reader :game_results, :matchup, :primary_wins, :secondary_wins
 
@@ -60,7 +66,7 @@ class MatchupCreator
   end
 
   def valid_number_of_games
-    winning_number = matchup.series_max > 1 ? matchup.series_max - 2 : 1
+    winning_number = REQUIRED_WINS_PER_SERIES_MAX[matchup.series_max]
     return false if primary_wins == secondary_wins
     return false unless primary_wins == winning_number || secondary_wins == winning_number
     game_results.count <= matchup.series_max && game_results.count >= winning_number
