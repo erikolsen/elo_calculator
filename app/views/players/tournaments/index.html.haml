@@ -7,7 +7,8 @@
           %h3
             Remaining Matches in #{tournament.name}
           - tournament.matchups_for(@player).each do |matchup|
-            = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
+            -if matchup.opponent_of(@player)
+              = link_to "#{@player.name} vs #{matchup.opponent_of(@player).name}", edit_matchup_path(matchup), class: 'button secondary expanded'
       %table{width: '100%'}
         %caption
           Tournaments Played (#{@player.tournaments.count})
