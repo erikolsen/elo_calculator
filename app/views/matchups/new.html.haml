@@ -3,9 +3,7 @@
     %h3.text-center
       = "#{@matchup.primary.name}(#{@matchup.primary.rating}) vs #{@matchup.secondary.name}(#{@matchup.secondary.rating})"
     %h4.text-center
-      Please mark winner of each game in order.
-    %h4.text-center
-      Best of 5
+      Please mark winner of each game in order. Best of 5
 .row
   .small-12.large-12.columns
     = render 'matchup_form', matchup: @matchup
