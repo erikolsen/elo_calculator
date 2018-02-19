@@ -41,7 +41,7 @@ class MatchupsController < ApplicationController
   def destroy
     @matchup = Matchup.find(params[:id])
     @matchup.update winner_id: nil
-    @matchup.games.reverse.each do |game|
+    @matchup.games.most_recent.each do |game|
       GameDestroyer.new(game).undo_game!
     end
     redirect_to edit_matchup_path, notice: 'Match Destroyed'
