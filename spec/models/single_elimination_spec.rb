@@ -8,6 +8,7 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
+#  series_max :integer
 #
 # Indexes
 #
@@ -25,12 +26,19 @@ RSpec.describe SingleElimination do
     let!(:player_6) { FactoryGirl.create :player, rating: 1500 }
     let!(:player_7) { FactoryGirl.create :player, rating: 1400 }
 
-    let(:tournament) { FactoryGirl.create(:single_elimination) }
+    let(:series_max) { 3 }
+    let(:tournament) { FactoryGirl.create(:single_elimination, series_max: series_max) }
 
     before do
       tournament.players << Player.all
       tournament.build_matchups!
       tournament.reload
+    end
+
+    describe 'series maxes' do
+      it 'creates matches with proper series max' do
+        expect(tournament.matchups.pluck(:series_max).uniq).to eq [series_max]
+      end
     end
 
     describe 'bracket matchups' do

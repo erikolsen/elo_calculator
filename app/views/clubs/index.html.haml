@@ -1,18 +1,19 @@
 .row
-  .row
-    - @clubs.each do |club|
-      .column.small-12.medium-4.large-4.left
-        = link_to club, class: 'grid text-center' do
-          %p.club-name
-            = club.name
-          %p.member-count
-            Members:
-            = club.players.count
+  .column.small-12.medium-4.large-4
+    = link_to "Add Club", new_club_path, class: 'new-club text-center'
+  - @clubs.each do |club|
     .column.small-12.medium-4.large-4
-      = link_to players_path , class: 'grid text-center' do
+      = link_to club, class: 'grid text-center' do
         %p.club-name
-          All Players
+          = club.name
         %p.member-count
           Members:
-          = @player_count
+          = club.players.count
+  .column.small-12.medium-4.large-4
+    = link_to players_path , class: 'grid text-center' do
+      %p.club-name
+        All Players
+      %p.member-count
+        Members:
+        = @player_count
 

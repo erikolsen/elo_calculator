@@ -9,6 +9,7 @@
 #  tournament_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  series_max    :integer
 #
 # Indexes
 #
@@ -39,7 +40,7 @@ class Matchup < ApplicationRecord
   end
 
   def add_game_results(game_results)
-    return false if game_results.nil? || game_results.count < 3
+    return false if game_results.nil?
     MatchupCreator.new(matchup_id: id, game_results: game_results).save
   end
 

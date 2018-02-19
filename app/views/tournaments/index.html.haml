@@ -1,18 +1,23 @@
-.div
-  %ul.tabs#tournament_tabs{'data-tabs' => ''}
-    %li.tabs-title.is-active
-      %a{href: '#active-tournaments'}
-        Active
-    %li.tabs-title
-      %a{href: '#expired-tournaments'}
-        History
-  .tabs-content{'data-tabs-content' => 'tournament_tabs'}
-    .tabs-panel{id: 'active-tournaments'}
-      = render partial: 'tournament_data', locals: { tournaments: @active_tournaments }
-    .tabs-panel{id: 'expired-tournaments'}
-      = render partial: 'tournament_data', locals: { tournaments: @expired_tournaments }
+.row
+  .small-12.columns
+    %ul.tabs#tournament_tabs{'data-tabs' => ''}
+      %li.tabs-title.is-active
+        %a{href: '#active-tournaments'}
+          Active
+      %li.tabs-title
+        %a{href: '#expired-tournaments'}
+          History
+    .tabs-content{'data-tabs-content' => 'tournament_tabs'}
+      .tabs-panel.is-active{id: 'active-tournaments'}
+        = render partial: 'tournament_data', locals: { tournaments: @active_tournaments }
+      .tabs-panel{id: 'expired-tournaments'}
+        = render partial: 'tournament_data', locals: { tournaments: @expired_tournaments }
 
 .row
   .small-12.columns
     %h2
       = link_to 'Setup Tournament', new_tournament_path, { class: 'button expanded' }
+
+:javascript
+  $('.tabs').foundation()
+

@@ -8,6 +8,7 @@
 #  updated_at :datetime
 #  end_date   :datetime
 #  type       :string
+#  series_max :integer
 #
 # Indexes
 #
@@ -18,7 +19,8 @@ class RoundRobin < Tournament
   def build_matchups!
     players.map(&:id).combination(2).each do |combo|
       matchups << Matchup.create(primary_id: combo.first,
-                                 secondary_id: combo.second)
+                                 secondary_id: combo.second,
+                                 series_max: series_max)
     end
   end
 

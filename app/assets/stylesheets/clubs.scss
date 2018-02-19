@@ -2,6 +2,24 @@
   margin: 1em;
 }
 
+.new-club:hover {
+  color: black;
+  background-color: lightgreen;
+}
+
+.new-club {
+  display: block;
+  height: 13vh;
+  border-radius: 5px;
+  margin: 0.5em;
+  padding: 1em;
+  border: 5px solid black;
+  //
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .grid {
   display: block;
   background-color: lightblue;

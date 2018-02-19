@@ -11,6 +11,7 @@ describe 'Single Elimination Tournament' do
   let(:player_6) { players[5] }
   let(:player_7) { players[6] }
   let(:tournament_data) { { name: 'Some Tournamernt',
+                            series_max: '5',
                             players: players.map(&:id),
                             end_date: 1.week.from_now,
                             type: 'SingleElimination' } }

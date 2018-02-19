@@ -28,6 +28,7 @@ describe 'Player Profile' do
       let(:tournament_name) { 'Some Tournament' }
       let(:end_date) { 1.week.from_now.to_s }
       let(:tournament_params) { { name: tournament_name,
+                                  series_max: '5',
                                   players: [player1.id, player2.id],
                                   type: 'RoundRobin',
                                   end_date: end_date } }

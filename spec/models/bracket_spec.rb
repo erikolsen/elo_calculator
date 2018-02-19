@@ -33,6 +33,7 @@ RSpec.describe Bracket, type: :model do
   describe '#update_child' do
     let(:club) { FactoryGirl.create :club, member_count: 8 }
     let(:tournament_params) { { name: 'Some Tourney',
+                                series_max: '3',
                                 players: club.players.pluck(:id),
                                 end_date: 1.week.from_now,
                                 type: 'SingleElimination' } }

@@ -5,8 +5,6 @@
         %th
           Name
         %th
-          Type
-        %th
           End Date
         %th
           Entries
@@ -14,8 +12,6 @@
         %tr
           %td
             = link_to tournament.name, tournament
-          %td
-            = tournament.type.titleize
           %td
             = tournament.end_date.strftime("%m/%d/%y")
           %td

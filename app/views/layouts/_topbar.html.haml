@@ -12,25 +12,16 @@
           %li
             = link_to "New Club", new_club_path
           %li
-            = link_to "New Player", new_player_path
+            = link_to "Sign Up", new_player_path, class: 'orange-drop-box'
     .show-for-medium.top-bar-right
-      %ul.dropdown.menu{"data-dropdown-menu" => ""}
+      %ul.menu
         %li
-          = link_to "Games", "#"
-          %ul.menu.vertical
-            %li
-              = link_to "Past Games", games_path
-            %li
-              = link_to "New Game", new_game_path
+          = link_to "Games", games_path
         %li
-          = link_to "Clubs", "#"
-          %ul.menu.vertical
-            %li
-              = link_to "All Clubs", clubs_path
-            %li
-              = link_to "New Club", new_club_path
-        %li
-          = link_to "New Player", new_player_path
+          = link_to "Clubs", clubs_path
         %li
           = link_to "Tournaments", tournaments_path
-
+        %li
+          = link_to "Add Game", new_game_path
+        %li
+          = link_to "Sign Up", new_player_path, class: 'orange-drop-box'
