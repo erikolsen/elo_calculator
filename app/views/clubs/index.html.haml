@@ -1,6 +1,4 @@
 .row
-  .column.small-12.medium-4.large-4
-    = link_to "Add Club", new_club_path, class: 'new-club text-center'
   - @clubs.each do |club|
     .column.small-12.medium-4.large-4
       = link_to club, class: 'grid text-center' do
@@ -16,4 +14,6 @@
       %p.member-count
         Members:
         = @player_count
-
+.row
+  .column.small-12
+    = link_to "Add Club", new_club_path, class: 'button expanded'
