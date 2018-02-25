@@ -37,7 +37,7 @@ class Game < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      all.each do |game|
+      order(created_at: :asc).each do |game|
         csv << game.attributes.values_at(*attributes)
       end
     end
