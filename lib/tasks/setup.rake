@@ -37,7 +37,7 @@ if Rails.env == 'development'
         puts "Creating Tournaments"
         TOURNAMENT_RANGE.each_with_index do |num, idx|
           type = idx.even? ? 'RoundRobin' : 'SingleElimination'
-          creator = TournamentCreator.new(name: "Tournament #{num}", end_date: 1.week.from_now, players: Player.pluck(:id).take(6), type: type)
+          creator = TournamentCreator.new(name: "Tournament #{num}", series_max: 5, end_date: 1.week.from_now, players: Player.pluck(:id).take(6), type: type)
           raise 'Failed to create tournament' unless creator.save
         end
     end
