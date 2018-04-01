@@ -4,7 +4,11 @@
     font-size: 1.5em;
   }
 
-  .center-of-circle {
+  .center-of-circle-big {
+    line-height: 3;
+  }
+
+  .center-of-circle-little {
     line-height: 3;
   }
 
@@ -12,6 +16,12 @@
     font-size: 1.5em;
     height: 77px;
     width: 77px;
+  }
+
+  .med-circle {
+    font-size: 1em;
+    height: 70px;
+    width: 70px;
   }
 
   .little-circle {
@@ -27,14 +37,23 @@
     font-size: 1.5em;
   }
 
-  .center-of-circle {
+  .center-of-circle-big {
     line-height: 3;
+  }
+
+  .center-of-circle-little {
+    line-height: 3.3;
   }
 
   .big-circle {
     font-size: 1.5em;
     height: 80px;
     width: 80px;
+  }
+
+  .med-circle {
+    height: 70px;
+    width: 70px;
   }
 
   .little-circle {
@@ -50,14 +69,23 @@
     font-size: 1.5em;
   }
 
-  .center-of-circle {
+  .center-of-circle-big {
     line-height: 3.3;
+  }
+
+  .center-of-circle-little {
+    line-height: 3.6;
   }
 
   .big-circle {
     font-size: 1.5em;
     height: 85px;
     width: 85px;
+  }
+
+  .med-circle {
+    height: 70px;
+    width: 70px;
   }
 
   .little-circle {
@@ -74,9 +102,11 @@
   .player-name {
     font-size: 1.5em;
   }
-
-  .center-of-circle {
+  .center-of-circle-big {
     line-height: 3.3;
+  }
+  .center-of-circle-little {
+    line-height: 3.6;
   }
 
   .big-circle {

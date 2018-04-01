@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20180211180910) do
   end
 
   create_table "players", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255
     t.integer "rating", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

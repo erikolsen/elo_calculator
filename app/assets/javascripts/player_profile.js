@@ -6,10 +6,9 @@ function setDailyRatingChangeArrow() {
   var ratingChange = parseInt($('.daily-rating-change').text())
 
   if (ratingChange > 0) {
-    $('.rating-arrow').addClass('fas fa-sm fa-arrow-up rating-change-up')
+    $('.daily-rating-change').css('border', 'solid green 4px')
   } else if (ratingChange < 0 ){
-    $('.rating-arrow').addClass('fas fa-sm fa-arrow-down rating-change-down')
-
+    $('.daily-rating-change').css('border', 'solid red 4px')
   } else {
     //nothing
   }

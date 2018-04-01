@@ -2,7 +2,7 @@
 .row.profile-circles
   .column.small-12
     .circle.big-circle.float-center
-      %p.center-of-circle
+      %p.center-of-circle-big
         = @player.rating
     %p.text-center.player-name
       = @player.name
@@ -10,24 +10,22 @@
 .row
   .column.small-3
     .circle.little-circle.float-center
-      %p.center-of-circle
+      %p.center-of-circle-little
         = @stats.average_rating
     %p.text-center Average
   .column.small-3
     .circle.little-circle.float-center
-      %p.center-of-circle
+      %p.center-of-circle-little
         = @stats.highest_rating_achieved
     %p.text-center High
   .column.small-3
-    .circle.little-circle.float-center
-      %p.text-center.center-of-circle
-        %span.daily-rating-change
-          = @stats.daily_rating_change
-          %i.rating-arrow
+    .circle.little-circle.float-center.daily-rating-change
+      %p.text-center.center-of-circle-little
+        = @stats.daily_rating_change
     %p.text-center Today
   .column.small-3
     .circle.little-circle.float-center
-      %p.center-of-circle
+      %p.center-of-circle-little
         = number_to_percentage @stats.win_percentage, precision: 0
     %p.text-center Win Rate
 
@@ -50,19 +48,39 @@
               .rating-over-time
                 %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 10 }
 - else
-  .row
-    .column.small-12
-      = link_to player_ratings_path(@player) do
-        .rating-over-time
-          %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 10 }
+  = link_to player_ratings_path(@player) do
+    .rating-over-time
+      %canvas#rating-over-time-graph{'data-player-id' => @player.id, 'data-limit' => 10 }
 
 .row
-  .column
-    %p
-      %strong
-        Play a Rematch
-    - @stats.top_ten_opponents.each do |opp|
-      = player_and_opponent_link(@player, opp)
+  .rematchHeaders
+    .column.small-8
+      %p
+        %strong
+          Play a Rematch
+    .column.small-4
+      %p.text-center
+        %strong
+          Game History
+
+- @stats.rematch_section_data.each do |data|
+  .border-top
+    .row
+      .column.small-8
+        = link_to new_matchup_path(primary_id: @player.id, secondary_id: data[:opp].id), { class: 'rematchLink'} do
+          %p.rematchLinkTitle
+            vs. #{data[:opp].name.upcase}
+          %p.rematchLinkLastPlayed
+            Last played
+            %span
+              = data[:last_played]
+      .column.small-4
+        = link_to player_stats_path(primary: @player, secondary: data[:opp].id) do
+          .circle.med-circle.float-center.gameHistoryCircle{class: data[:circleClass]}
+            %p.gameCountTop
+              = data[:won]
+            %p.gameCountBottom
+              = data[:lost]
 
 :javascript
   $('.accordion').foundation()

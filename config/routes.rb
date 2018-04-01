@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     end
   end
   resources :clubs, only: :show, param: :slug
-  resources :player_stats, only: [:show]
+  resources :player_stats, only: [:show, :index]
+  get '/player-vs-player', to: 'player_stats#player_vs_player'
 
   root 'players#index'
 end

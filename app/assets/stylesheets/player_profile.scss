@@ -1,6 +1,37 @@
-.rematchLink {
-  padding-left: 1em !important;
-  padding-right: 1em !important;
+.gameHistoryCircle {
+  margin-bottom: .5em;
+  margin-top: .5em;
+}
+
+.gameCountTop {
+  color: green;
+  font-size: .9em;
+  padding-top: .5em;
+  margin-bottom: 0;
+  border-bottom: solid lightgrey 1px;
+}
+
+.gameCountBottom {
+  color: red;
+  font-size: .9em;
+  padding-bottom: .25em;
+  margin-top: 0;
+}
+
+.rematchHeaders p {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.rematchLinkTitle {
+  font-size: 1.2em;;
+  font-weight: bold;
+  margin-bottom: .5em;
+  margin-top: .5em;
+}
+
+.rematchLinkLastPlayed {
+  font-size: 1em;
 }
 
 .rating-change-up {
@@ -42,4 +73,13 @@
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.greenCircle {
+  border: solid green 3px;
+}
+
+.redCircle {
+  border: solid red 3px;
+}
+
 

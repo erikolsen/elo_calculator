@@ -66,6 +66,21 @@ class PlayerStatistician
     todays_games.where(winner_id: player.id, loser_id: opponent.id)
   end
 
+  def rematch_section_data
+    opponents_by_games_played.map do |opp|
+      opponent = Player.find(opp)
+      games = Game.for_players(player, opponent).most_recent
+      games_won = games.where('winner_id = ?', player.id).count
+      games_lost = games.count - games_won
+      circleClass = games_won > games_lost ? 'greenCircle' : 'redCircle'
+      { opp: opponent,
+        last_played: games.first.created_at.strftime('%m/%d/%y'),
+        won: games_won,
+        lost: games_lost,
+        circleClass: circleClass
+      }
+    end
+  end
 
   private
 

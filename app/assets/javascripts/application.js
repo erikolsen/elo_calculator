@@ -18,7 +18,7 @@
 //= require google_analytics
 //= require tournaments
 //= require player_profile
-//= require Chart
+//= require Chart.min
 //= require turbolinks
 //= require_tree .
 

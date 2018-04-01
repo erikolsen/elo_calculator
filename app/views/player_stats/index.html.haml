@@ -1,0 +1,26 @@
+.row
+  .columns.small-12
+    %h1.text-center
+      = @primary.name
+      vs.
+      = @secondary.name
+.row
+  .column.small-12
+    #player-vs-player-graph
+      %canvas#player-vs-player{'data-primary-id' => @primary.id, 'data-secondary-id' => @secondary.id }
+
+%table{width: '100%'}
+  %caption
+    Past Games(#{@stat.games.count})
+  %thead
+    %tr
+      %th
+        Humble Victor
+      %th
+        Graceful Defeated
+      %th
+        Date
+  %tbody
+    = render @games
+
+= paginate @games

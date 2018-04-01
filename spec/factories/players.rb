@@ -3,7 +3,7 @@
 # Table name: players
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :string(255)
 #  rating     :integer          default(0), not null
 #  created_at :datetime
 #  updated_at :datetime

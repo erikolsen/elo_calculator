@@ -17,9 +17,8 @@ describe 'Player Profile' do
 
       it 'shows percent won, top played player, game results' do
         within '.rematchLink' do
-          expect(page).to have_content('50%')
-          expect(page).to have_content('Player 1 vs. Player 2')
-          expect(page).to have_content('1 / 1')
+          expect(page).to have_content('vs. PLAYER 2')
+          expect(page).to have_content("Last played " + Date.today.strftime('%m/%d/%y') )
         end
       end
     end
@@ -42,7 +41,7 @@ describe 'Player Profile' do
       context 'active tournaments' do
         it 'shows the matchups for the player' do
           visit player_path(player1.id)
-          expect(page).to have_content("#{player1.name} vs. #{player2.name}")
+          expect(page).to have_content("vs. #{player2.name.upcase}")
         end
       end
 
