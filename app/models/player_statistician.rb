@@ -73,6 +73,7 @@ class PlayerStatistician
       games_won = games.where('winner_id = ?', player.id).count
       games_lost = games.count - games_won
       circleClass = games_won > games_lost ? 'greenCircle' : 'redCircle'
+      circleClass = '' if games_won == games_lost
       { opp: opponent,
         last_played: games.first.created_at.strftime('%m/%d/%y'),
         won: games_won,
