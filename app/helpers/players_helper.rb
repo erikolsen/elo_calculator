@@ -2,19 +2,6 @@ module PlayersHelper
   def link_for(player)
     link_to player.name, player
   end
-  def stat_link(player, opponent)
-    games_played = Game.for_players(player, opponent)
-    player_wins = games_played.where(winner_id: player.id).count
-    loser_wins = games_played.where(winner_id: opponent.id).count
-    percent = (player_wins.to_f / games_played.count.to_f).round(2) * 100.0
-    link_title = "#{player.name} vs. #{opponent.name}"
-    link_to player_stats_path(primary: player, secondary: opponent), class: 'rematchLink' do
-      link = content_tag(:span, number_to_percentage(percent, precision: 0), class: 'float-left')
-      link += content_tag(:span, 'Stats', class: 'center')
-      link += content_tag(:span, "#{player_wins} / #{loser_wins}", class: 'float-right')
-      link
-    end
-  end
 
   def player_and_opponent_link(player, opponent)
     games_played = Game.for_players(player, opponent)
