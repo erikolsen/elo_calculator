@@ -1,5 +1,5 @@
 .container
-  = render partial: 'players/profile_topbar'
+  = render partial: 'players/profile_topbar', locals: { player: @player }
   %table{width: '100%'}
     %caption
       Games Played (#{@player.games.count})

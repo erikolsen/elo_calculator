@@ -23,6 +23,14 @@ class PlayerVsPlayer
     ((games.where('winner_id = ?', secondary.id).count.to_f / games.count.to_f).round(2) * 100).floor.to_s + '%'
   end
 
+  def primary_games
+    games.where(winner_id: primary.id).count
+  end
+
+  def secondary_games
+    games.where(winner_id: secondary.id).count
+  end
+
   def games
     @games ||= Game.for_players(primary, secondary).most_recent
   end

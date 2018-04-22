@@ -1,31 +1,32 @@
 .profile-top-bar
   .row
-    = link_to player_path(@player) do
+    = link_to player_path(player) do
       .column.small-3.with-border.profile-home
         %p.profile-link-text
           Profile
-    = link_to player_games_path(@player) do
+    = link_to player_games_path(player) do
       .column.small-3.with-border.profile-games
         %p.profile-link-text
           Games
-    - if @player.clubs.empty?
+    - if player.clubs.empty?
       = link_to clubs_path do
         .column.small-3.with-border.profile-clubs
           %p.profile-link-text
             Join a Club
     - else
-      = link_to player_clubs_path(@player) do
+      = link_to player_clubs_path(player) do
         .column.small-3.with-border.profile-clubs
           %p.profile-link-text
             Clubs
-    = link_to player_tournaments_path(@player) do
+    = link_to player_tournaments_path(player) do
       .column.small-3.with-border.profile-tournaments
         %p.profile-link-text
           Tournaments
 
 :javascript
   var element;
-  switch(window.location.pathname.split('/')[3]){
+  var page = window.location.pathname.split('/')[3] || window.location.pathname.split('/')[1]
+  switch(page){
     case 'games':
       element = document.getElementsByClassName("profile-games")[0]
       break;
@@ -35,8 +36,11 @@
     case 'tournaments':
       element = document.getElementsByClassName("profile-tournaments")[0]
       break;
-    default:
+    case 'players':
       element = document.getElementsByClassName("profile-home")[0]
+      break;
+    default:
+      // no-opp
   }
-  element.classList.add('shade-background');
+  if (element) { element.classList.add('shade-background') };
 

@@ -1,4 +1,17 @@
+function setPvPChange() {
+  var pvpPercent = parseInt($('.pvp-percent').text())
+
+  if (pvpPercent > 50) {
+    $('.pvp-percent').css('border', 'solid green 4px')
+  } else if (pvpPercent < 50 ){
+    $('.pvp-percent').css('border', 'solid red 4px')
+  } else {
+    //nothing
+  }
+};
+
 $(document).on('turbolinks:load', function() {
+  setPvPChange();
   $(function() {
     var primaryId = $('#player-vs-player').data('primary-id');
     var secondaryId = $('#player-vs-player').data('secondary-id');

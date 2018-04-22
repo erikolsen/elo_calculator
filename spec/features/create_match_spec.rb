@@ -38,7 +38,7 @@ describe "creating a new match" do
     context "entering best of five" do
       before do
         visit player_path(player1)
-        click_on "vs. #{player2.name.upcase}"
+        click_on "#{player1.name} vs. #{player2.name}"
         find(:css, "#label_games_1_#{player2.id}").click
         find(:css, "#label_games_2_#{player2.id}").click
         find(:css, "#label_games_3_#{player2.id}").click

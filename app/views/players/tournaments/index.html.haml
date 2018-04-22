@@ -1,4 +1,4 @@
-= render partial: 'players/profile_topbar'
+= render partial: 'players/profile_topbar', locals: { player: @player }
 .row
   .small-12.columns
     -if @tournaments.present?

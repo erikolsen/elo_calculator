@@ -1,4 +1,4 @@
-= render partial: 'players/profile_topbar'
+= render partial: 'players/profile_topbar', locals: { player: @player }
 .row.profile-circles
   .column.small-12
     .circle.big-circle.float-center
@@ -54,34 +54,23 @@
 
 .row
   .rematchHeaders
-    .column.small-8
+    .column.small-10
       %p
         %strong
           Play a Rematch
-    .column.small-4
+    .column.small-2
       %p.text-center
         %strong
-          Game History
+          Stats
 
-- @stats.rematch_section_data.each do |data|
+- @stats.opponents_by_games_played.each do |opp|
   .border-top
     .row
-      .column.small-8
-        = link_to new_matchup_path(primary_id: @player.id, secondary_id: data[:opp].id), { class: 'rematchLink'} do
-          %p.rematchLinkTitle
-            vs. #{data[:opp].name.upcase}
-          %p.rematchLinkLastPlayed
-            Last played
-            %span
-              = data[:last_played]
-      .column.small-4
-        = link_to player_stats_path(primary: @player, secondary: data[:opp].id) do
-          .circle.med-circle.float-center.gameHistoryCircle{class: data[:circleClass]}
-            %p.gameCountTop
-              = data[:won]
-            %hr.gameCountDivider
-            %p.gameCountBottom
-              = data[:lost]
+      .column.small-10
+        = player_and_opponent_link(@player, opp)
+      .column.small-2
+        = link_to player_stats_path(primary: @player, secondary: opp) do
+          %i.fas.fa-chart-bar.fa-sm.button.expanded
 
 :javascript
   $('.accordion').foundation()

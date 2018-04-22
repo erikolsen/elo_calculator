@@ -1,4 +1,4 @@
-= render partial: 'players/profile_topbar'
+= render partial: 'players/profile_topbar', locals: { player: @player }
 - if @player.clubs.count > 1
   .row
     - @player.clubs.each do |club|

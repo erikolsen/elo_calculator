@@ -38,10 +38,6 @@ class PlayerStatistician
     games.pluck(:created_at).map{|t| t.to_date }.uniq
   end
 
-  def top_ten_opponents
-    opponents_by_games_played.take(10).map{ |id| Player.find id }
-  end
-
   def rating_change_on(day)
     next_rating_from(day) - start_rating_on(day)
   end
@@ -66,21 +62,8 @@ class PlayerStatistician
     todays_games.where(winner_id: player.id, loser_id: opponent.id)
   end
 
-  def rematch_section_data
-    opponents_by_games_played.map do |opp|
-      opponent = Player.find(opp)
-      games = Game.for_players(player, opponent).most_recent
-      games_won = games.where('winner_id = ?', player.id).count
-      games_lost = games.count - games_won
-      circleClass = games_won > games_lost ? 'greenCircle' : 'redCircle'
-      circleClass = '' if games_won == games_lost
-      { opp: opponent,
-        last_played: games.first.created_at.strftime('%m/%d/%y'),
-        won: games_won,
-        lost: games_lost,
-        circleClass: circleClass
-      }
-    end
+  def opponents_by_games_played
+    Player.find opponents.inject(Hash.new(0)){|h, p| h[p] +=1;h }.sort_by{|_, v| v}.reverse.to_h.keys
   end
 
   private
@@ -91,10 +74,6 @@ class PlayerStatistician
 
   def opponents
     games.pluck(:winner_id, :loser_id).flatten - [player.id]
-  end
-
-  def opponents_by_games_played
-    opponents.inject(Hash.new(0)){|h, p| h[p] +=1;h }.sort_by{|_, v| v}.reverse.to_h.keys
   end
 
   def average_rating_change

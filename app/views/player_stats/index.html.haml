@@ -1,9 +1,21 @@
+= render partial: 'players/profile_topbar', locals: { player: @primary }
 .row
-  .columns.small-12
-    %h1.text-center
-      = @primary.name
-      vs.
-      = @secondary.name
+  .columns.small-6
+    .pvp-title
+      %h2.text-center
+        = @primary.name
+      %h2.text-center
+        vs.
+      %h2.text-center
+        = @secondary.name
+  .columns.small-6
+    .profile-circles
+      .circle.big-circle.float-center.pvp-percent
+        %p.center-of-circle-big
+          = @stat.winner_percent
+      %p.text-center
+        = "#{@stat.primary_games}(w) - #{@stat.secondary_games}(L)"
+
 .row
   .column.small-12
     #player-vs-player-graph
