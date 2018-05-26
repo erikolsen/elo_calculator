@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 6.4.1.3'
 gem 'chart-js-rails'
 gem 'hamlit'
 
@@ -66,7 +66,6 @@ end
 group :test, :development do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'site_prism'
   gem 'pry-byebug'
   gem 'faker'
   gem 'factory_girl_rails'
