@@ -76,4 +76,4 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-ruby '2.4.1'
+ruby '2.5.1'
