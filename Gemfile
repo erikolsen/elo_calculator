@@ -41,6 +41,9 @@ gem 'kaminari'
 # Adds table information to top of model files
 gem 'annotate'
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :development do
   #gem 'quiet_assets'
   gem 'better_errors'
