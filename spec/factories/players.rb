@@ -20,7 +20,7 @@
 #  t.datetime "created_at"
 #  t.datetime "updated_at"
 #end
-FactoryGirl.define do
+FactoryBot.define do
   factory :player do
     sequence(:name) { |n| "Player_#{n}" }
     rating 1000

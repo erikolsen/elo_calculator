@@ -2,15 +2,15 @@ require 'rails_helper'
 
 describe PlayerStatistician do
   describe '#days_played' do
-    let(:player_1) { FactoryGirl.create :player }
-    let(:player_2) { FactoryGirl.create :player }
+    let(:player_1) { FactoryBot.create :player }
+    let(:player_2) { FactoryBot.create :player }
     let(:expected_days) { [1.day.ago, 1.week.ago, 1.month.ago ].map(&:to_date) }
     let(:statistician) { described_class.new(player_1) }
 
     before do
-      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
-      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
-      2.times { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
+      2.times { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      2.times { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
+      2.times { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
     end
 
     it 'returns an array of uniq days' do
@@ -20,8 +20,8 @@ describe PlayerStatistician do
 
   describe '#highest_rating_achieved' do
     context 'highest rating was a game you won' do
-      let!(:player_1) { FactoryGirl.create :player  }
-      let!(:player_2) { FactoryGirl.create :player  }
+      let!(:player_1) { FactoryBot.create :player  }
+      let!(:player_2) { FactoryBot.create :player  }
 
       before do
         GameCreator.new(player_1.id, player_2.id).save
@@ -35,8 +35,8 @@ describe PlayerStatistician do
     end
 
     context 'highest rating was a game you lost' do
-      let!(:player_1) { FactoryGirl.create :player  }
-      let!(:player_2) { FactoryGirl.create :player  }
+      let!(:player_1) { FactoryBot.create :player  }
+      let!(:player_2) { FactoryBot.create :player  }
 
       before do
         GameCreator.new(player_2.id, player_1.id).save
@@ -51,8 +51,8 @@ describe PlayerStatistician do
   end
 
   describe '#win_percentage' do
-    let(:player_2) { FactoryGirl.create :player  }
-    let(:player_1) { FactoryGirl.create :player  }
+    let(:player_2) { FactoryBot.create :player  }
+    let(:player_1) { FactoryBot.create :player  }
 
     context 'have not won games' do
       it 'returns 0' do
@@ -81,10 +81,10 @@ describe PlayerStatistician do
   end
 
   describe '#opponents_by_games_played' do
-    let(:player_2) { FactoryGirl.create :player }
-    let(:player_1) { FactoryGirl.create :player }
-    let(:player_3) { FactoryGirl.create :player }
-    let(:player_4) { FactoryGirl.create :player }
+    let(:player_2) { FactoryBot.create :player }
+    let(:player_1) { FactoryBot.create :player }
+    let(:player_3) { FactoryBot.create :player }
+    let(:player_4) { FactoryBot.create :player }
 
     context 'have played no games' do
       it 'returns empty collection' do
@@ -113,15 +113,15 @@ describe PlayerStatistician do
   end
 
   describe '#rating_change_on(day)' do
-    let(:player_1) { FactoryGirl.create :player }
-    let(:player_2) { FactoryGirl.create :player }
+    let(:player_1) { FactoryBot.create :player }
+    let(:player_2) { FactoryBot.create :player }
 
     context 'have played games on day' do
       context 'have played games since' do
         let!(:day) { 1.week.ago }
         let(:expected_difference) { 100 }
-        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: day } }
-        let!(:newer_games) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + expected_difference }
+        let!(:games) { [*1..3].map { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: day } }
+        let!(:newer_games) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + expected_difference }
 
         it 'returns the difference between rating in first game and first game after requested day' do
           statistician = described_class.new(player_1)
@@ -130,8 +130,8 @@ describe PlayerStatistician do
       end
 
       context 'have not played games since' do
-        let!(:player_1) { FactoryGirl.create :player, rating: 1050 }
-        let!(:games) { [*1..3].map { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id } }
+        let!(:player_1) { FactoryBot.create :player, rating: 1050 }
+        let!(:games) { [*1..3].map { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id } }
         let!(:day) { Date.current }
 
         it 'returns the difference between rating in first game and current rating' do
@@ -144,8 +144,8 @@ describe PlayerStatistician do
     context 'have not played games on day' do
       let!(:day) { 1.week.ago }
       let(:expected_difference) { 0 }
-      let!(:prior_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
-      let!(:later_game) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + 100 }
+      let!(:prior_game) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+      let!(:later_game) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, winner_rating: player_1.rating + 100 }
 
       it 'returns zero' do
         statistician =  described_class.new(player_1)
@@ -155,8 +155,8 @@ describe PlayerStatistician do
   end
 
   describe '#daily_rating_change' do
-    let!(:player_1) { FactoryGirl.create :player }
-    let!(:player_2) { FactoryGirl.create :player }
+    let!(:player_1) { FactoryBot.create :player }
+    let!(:player_2) { FactoryBot.create :player }
 
     context 'have played games' do
       before do
@@ -178,8 +178,8 @@ describe PlayerStatistician do
   end
 
   describe '#average_rating' do
-    let(:player_1) { FactoryGirl.create :player }
-    let(:player_2) { FactoryGirl.create :player }
+    let(:player_1) { FactoryBot.create :player }
+    let(:player_2) { FactoryBot.create :player }
 
     context 'with no days played' do
       it 'should return zero' do
@@ -213,12 +213,12 @@ describe PlayerStatistician do
   end
 
   describe '#ratings_over_time' do
-    let(:player_1) { FactoryGirl.create :player }
-    let(:player_2) { FactoryGirl.create :player }
+    let(:player_1) { FactoryBot.create :player }
+    let(:player_2) { FactoryBot.create :player }
 
-    let(:game1) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
-    let(:game2) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
-    let(:game3) { FactoryGirl.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
+    let(:game1) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.month.ago }
+    let(:game2) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.week.ago  }
+    let(:game3) { FactoryBot.create :game, winner_id: player_1.id, loser_id: player_2.id, created_at: 1.day.ago  }
 
     it 'should return back an array of all start ratings for user on the days they played games' do
       expected_data = [

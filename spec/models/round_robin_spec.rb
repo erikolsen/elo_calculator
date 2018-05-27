@@ -19,9 +19,9 @@ require 'rails_helper'
 
 RSpec.describe RoundRobin do
   describe '#build_matchups!' do
-    let(:players) { (1..4).map { FactoryGirl.create(:player) } }
+    let(:players) { (1..4).map { FactoryBot.create(:player) } }
     let(:series_max) { 5 }
-    let(:tournament) { FactoryGirl.create(:round_robin, series_max: series_max) }
+    let(:tournament) { FactoryBot.create(:round_robin, series_max: series_max) }
 
     before do
       tournament.players << players

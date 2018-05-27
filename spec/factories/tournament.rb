@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tournament do
     sequence(:name) { |n| "Tournament#{n}" }
     end_date   1.month.from_now

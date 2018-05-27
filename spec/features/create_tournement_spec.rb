@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'creating a new tournament' do
-  let!(:club) { FactoryGirl.create :club, member_count: 5 }
+  let!(:club) { FactoryBot.create :club, member_count: 5 }
   let(:players) { club.players.sort_by(&:rating).reverse }
   let(:player_1) { players[0] }
   let(:player_2) { players[1] }

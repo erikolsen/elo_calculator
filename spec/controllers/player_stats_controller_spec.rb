@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe PlayerStatsController do
   let(:ratings_data) { [1, 2, 3, 4, 5] }
-  let(:player) { FactoryGirl.create :player }
+  let(:player) { FactoryBot.create :player }
   let(:statistician) { double 'statistician' }
 
   before do

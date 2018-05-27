@@ -27,7 +27,7 @@
 #  fk_rails_...  (tournament_id => tournaments.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :bracket do
 
   end

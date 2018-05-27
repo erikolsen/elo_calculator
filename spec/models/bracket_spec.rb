@@ -31,7 +31,7 @@ require 'rails_helper'
 
 RSpec.describe Bracket, type: :model do
   describe '#update_child' do
-    let(:club) { FactoryGirl.create :club, member_count: 8 }
+    let(:club) { FactoryBot.create :club, member_count: 8 }
     let(:tournament_params) { { name: 'Some Tourney',
                                 series_max: '3',
                                 players: club.players.pluck(:id),

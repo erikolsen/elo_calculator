@@ -27,9 +27,9 @@ RSpec.describe Club, :type => :model do
 
   describe '#players_by_rating' do
     let(:name) { 'Some Name' }
-    let(:player1) { FactoryGirl.create :player, rating: 1000 }
-    let(:player2) { FactoryGirl.create :player, rating: 2000 }
-    let(:player3) { FactoryGirl.create :player, rating: 3000 }
+    let(:player1) { FactoryBot.create :player, rating: 1000 }
+    let(:player2) { FactoryBot.create :player, rating: 2000 }
+    let(:player3) { FactoryBot.create :player, rating: 3000 }
 
     subject { described_class.create!(name: name) }
 

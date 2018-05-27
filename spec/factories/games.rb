@@ -28,7 +28,7 @@
 #  t.integer  "matchup_id"
 #end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :game do
     winner_rating 1000
     loser_rating 1000

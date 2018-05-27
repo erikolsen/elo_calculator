@@ -19,7 +19,7 @@
   #t.datetime "created_at", null: false
   #t.datetime "updated_at", null: false
 #end
-FactoryGirl.define do
+FactoryBot.define do
   factory :club do
     name { Faker::StarWars.planet }
     created_at Date.current
@@ -31,7 +31,7 @@ FactoryGirl.define do
 
     after(:create) do |club, evaluator|
       evaluator.member_count.times do
-        club.players << FactoryGirl.create(:player)
+        club.players << FactoryBot.create(:player)
       end
     end
 

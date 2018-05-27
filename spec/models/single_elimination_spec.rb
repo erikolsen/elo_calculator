@@ -18,16 +18,16 @@
 require 'rails_helper'
 RSpec.describe SingleElimination do
   describe '#build_matchups!' do
-    let!(:player_1) { FactoryGirl.create :player, rating: 2000 }
-    let!(:player_2) { FactoryGirl.create :player, rating: 1900 }
-    let!(:player_3) { FactoryGirl.create :player, rating: 1800 }
-    let!(:player_4) { FactoryGirl.create :player, rating: 1700 }
-    let!(:player_5) { FactoryGirl.create :player, rating: 1600 }
-    let!(:player_6) { FactoryGirl.create :player, rating: 1500 }
-    let!(:player_7) { FactoryGirl.create :player, rating: 1400 }
+    let!(:player_1) { FactoryBot.create :player, rating: 2000 }
+    let!(:player_2) { FactoryBot.create :player, rating: 1900 }
+    let!(:player_3) { FactoryBot.create :player, rating: 1800 }
+    let!(:player_4) { FactoryBot.create :player, rating: 1700 }
+    let!(:player_5) { FactoryBot.create :player, rating: 1600 }
+    let!(:player_6) { FactoryBot.create :player, rating: 1500 }
+    let!(:player_7) { FactoryBot.create :player, rating: 1400 }
 
     let(:series_max) { 3 }
-    let(:tournament) { FactoryGirl.create(:single_elimination, series_max: series_max) }
+    let(:tournament) { FactoryBot.create(:single_elimination, series_max: series_max) }
 
     before do
       tournament.players << Player.all

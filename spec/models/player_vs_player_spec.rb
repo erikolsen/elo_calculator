@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe PlayerVsPlayer do
-  let(:primary) { FactoryGirl.create :player }
-  let(:secondary) { FactoryGirl.create :player }
+  let(:primary) { FactoryBot.create :player }
+  let(:secondary) { FactoryBot.create :player }
   let(:day) { DateTime.now.beginning_of_month.strftime('%m/%d/%y') }
   subject { PlayerVsPlayer.new(primary, secondary) }
 

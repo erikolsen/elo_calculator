@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Single Elimination Tournament' do
-  let!(:club) { FactoryGirl.create :club, member_count: 7 }
+  let!(:club) { FactoryBot.create :club, member_count: 7 }
   let(:players) { club.players.sort_by(&:rating).reverse }
   let(:player_1) { players[0] }
   let(:player_2) { players[1] }
