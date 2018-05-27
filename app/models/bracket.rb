@@ -29,8 +29,8 @@
 
 class Bracket < ApplicationRecord
   belongs_to :tournament
-  belongs_to :matchup
-  belongs_to :winner, class_name: 'Player'
+  belongs_to :matchup, optional: true
+  belongs_to :winner, class_name: 'Player', optional: true
 
   delegate :primary, :secondary, :ready?, to: :matchup
 

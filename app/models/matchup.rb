@@ -17,10 +17,10 @@
 #
 
 class Matchup < ApplicationRecord
-  belongs_to :tournament
-  belongs_to :winner, class_name: 'Player'
-  belongs_to :primary, class_name: 'Player'
-  belongs_to :secondary, class_name: 'Player'
+  belongs_to :tournament, optional: true
+  belongs_to :winner, class_name: 'Player', optional: true
+  belongs_to :primary, class_name: 'Player', optional: true
+  belongs_to :secondary, class_name: 'Player', optional: true
   has_many :games
 
   def self.for_players(*players)

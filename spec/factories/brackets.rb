@@ -29,6 +29,6 @@
 
 FactoryBot.define do
   factory :bracket do
-
+    association :tournament
   end
 end

@@ -23,7 +23,7 @@ require 'csv'
 class Game < ApplicationRecord
   belongs_to :winner, class_name: 'Player'
   belongs_to :loser, class_name: 'Player'
-  belongs_to :matchup
+  belongs_to :matchup, optional: true
 
   validates_presence_of :winner_id, :loser_id, :winner_rating, :loser_rating
 
