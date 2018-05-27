@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/erikolsen/elo_calculator.png?label=ready&title=Ready)](https://waffle.io/erikolsen/elo_calculator)
 [![Code Climate](https://codeclimate.com/github/erikolsen/elo_calculator/badges/gpa.svg)](https://codeclimate.com/github/erikolsen/elo_calculator)
 
-#Record the Results of any two player game
+# Record the Results of any two player game
 
 (It works great for ping pong!)
 
@@ -19,7 +19,7 @@ Enter the results
 
 See your rating change
 
-##What an Elo rating tells you
+## What an Elo rating tells you
 Two players with equal ratings should stand an equal change of winning
 A player with a rating 100 points higher should win 64% of the time.
 A player with a rating 200 points higher should win 76% of the time.
