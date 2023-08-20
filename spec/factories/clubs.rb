@@ -22,11 +22,11 @@
 FactoryBot.define do
   factory :club do
     name { Faker::StarWars.planet }
-    created_at Date.current
-    updated_at Date.current
+    created_at { Date.current }
+    updated_at { Date.current }
 
     transient do
-      member_count 16
+      member_count { 16 }
     end
 
     after(:create) do |club, evaluator|

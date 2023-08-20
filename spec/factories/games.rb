@@ -30,12 +30,12 @@
 
 FactoryBot.define do
   factory :game do
-    winner_rating 1000
-    loser_rating 1000
-    created_at Date.current
-    updated_at Date.current
-    winner_id 1
-    loser_id 2
-    matchup_id nil
+    winner_rating { 1000 }
+    loser_rating { 1000 }
+    created_at { Date.current }
+    updated_at { Date.current }
+    winner_id { 1 }
+    loser_id { 2 }
+    matchup_id { nil }
   end
 end

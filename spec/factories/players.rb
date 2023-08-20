@@ -23,8 +23,8 @@
 FactoryBot.define do
   factory :player do
     sequence(:name) { |n| "Player_#{n}" }
-    rating 1000
-    created_at Date.current
-    updated_at Date.current
+    rating { 1000 }
+    created_at { Date.current }
+    updated_at { Date.current }
   end
 end
