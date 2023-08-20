@@ -121,9 +121,9 @@ GEM
     fast_stack (0.2.0)
     ffi (1.15.5)
     flamegraph (0.9.5)
-    foundation-rails (6.6.2.0)
+    foundation-rails (6.4.1.3)
       railties (>= 3.1.0)
-      sass (>= 3.3.0)
+      sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -263,21 +263,13 @@ GEM
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
     rubyzip (2.3.2)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
+    sass (3.4.25)
+    sass-rails (5.0.8)
+      railties (>= 5.2.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (>= 1.1, < 3)
     selenium-webdriver (4.11.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -288,9 +280,9 @@ GEM
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
-    sprockets (4.2.0)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
+      rack (> 1, < 3)
     sprockets-es6 (0.9.2)
       babel-source (>= 5.8.11)
       babel-transpiler
@@ -340,7 +332,7 @@ DEPENDENCIES
   faker
   fast_stack
   flamegraph
-  foundation-rails
+  foundation-rails (~> 6.4.1.3)
   hamlit
   jquery-rails
   jquery-ui-rails
@@ -356,14 +348,14 @@ DEPENDENCIES
   rails_12factor
   rspec-rails
   sass
-  sass-rails
+  sass-rails (~> 5.0.0)
   selenium-webdriver
   shoulda-matchers
   spring
   spring-watcher-listen
   stackprof
   turbolinks
-  uglifier
+  uglifier (>= 1.3.0)
   web-console
 
 RUBY VERSION
