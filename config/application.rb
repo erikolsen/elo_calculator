@@ -13,6 +13,7 @@ module EloCalculator
     config.time_zone = 'Central Time (US & Canada)'
     config.active_record.legacy_connection_handling = false
     config.assets.initialize_on_precompile = false
+    config.assets.js_compressor = Uglifier.new(harmony: true)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
