@@ -41,10 +41,10 @@ class Player < ApplicationRecord
   end
 
   def add_rating!(change_in_rating)
-    update_attributes!(rating: rating + change_in_rating)
+    update!(rating: rating + change_in_rating)
   end
 
   def subtract_rating!(change_in_rating)
-    update_attributes!(rating: rating - change_in_rating)
+    update!(rating: rating - change_in_rating)
   end
 end

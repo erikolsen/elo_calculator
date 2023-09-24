@@ -28,7 +28,7 @@ if Rails.env == 'development'
       task :create_players => :environment do
         puts "Creating Players"
         PLAYER_RANGE.each do |num|
-          Player.create(name: Faker::StarWars.character, rating: DEFAULT_RATING)
+          Player.create(name: Faker::Movies::StarWars.character, rating: DEFAULT_RATING)
         end
     end
 
@@ -56,7 +56,7 @@ if Rails.env == 'development'
       task :create_clubs => :environment do
         puts "Creating Clubs"
         3.times do
-          club = Club.create name: Faker::StarWars.planet
+          club = Club.create name: Faker::Movies::StarWars.planet
           club.players << Player.all.sample(8)
         end
     end

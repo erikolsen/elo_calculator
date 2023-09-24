@@ -21,7 +21,7 @@
 #end
 FactoryBot.define do
   factory :club do
-    name { Faker::StarWars.planet }
+    name { Faker::Movies::StarWars.planet }
     created_at { Date.current }
     updated_at { Date.current }
 
